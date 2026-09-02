@@ -33,7 +33,11 @@ export async function POST(request: NextRequest) {
     : crypto.randomUUID();
 
   try {
-    const checkout = await createStoreCheckout(body, idempotencyKey);
+    const checkout = await createStoreCheckout(
+      body,
+      idempotencyKey,
+      request.nextUrl.origin,
+    );
     return NextResponse.json(checkout, { status: 201 });
   } catch (error) {
     if (error instanceof FrontdeskApiError) {

@@ -42,13 +42,28 @@ export class FrontdeskApiError extends Error {
   }
 }
 
-function siteOrigin() {
-  const configured = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:6543";
+function toHttpOrigin(value: string | undefined) {
+  if (!value?.trim()) return null;
+
   try {
-    return new URL(configured).origin;
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:"
+      ? url.origin
+      : null;
   } catch {
-    return "http://localhost:6543";
+    return null;
   }
+}
+
+function siteOrigin() {
+  return (
+    toHttpOrigin(process.env.NEXT_PUBLIC_SITE_URL) ?? "http://localhost:6543"
+  );
+}
+
+function checkoutReturnUrl(requestOrigin: string) {
+  const origin = toHttpOrigin(requestOrigin) ?? siteOrigin();
+  return new URL("/checkout/complete", origin).toString();
 }
 
 async function parseResponse<T>(response: Response): Promise<T> {
@@ -167,6 +182,7 @@ export async function getDeliveryZones(): Promise<DeliveryZone[]> {
 export async function createStoreCheckout(
   request: StoreCheckoutRequest,
   idempotencyKey: string,
+  requestOrigin: string,
 ): Promise<CheckoutSession> {
   if (!hasFrontdeskKeys) {
     throw new FrontdeskApiError(
@@ -189,7 +205,7 @@ export async function createStoreCheckout(
         email: request.contact.email,
         ...(request.contact.phone ? { phone: request.contact.phone } : {}),
       },
-      returnUrl: `${siteOrigin()}/checkout/complete`,
+      returnUrl: checkoutReturnUrl(requestOrigin),
       ...(request.currency ? { currency: request.currency } : {}),
       ...(request.deliveryZoneRef
         ? { deliveryZoneRef: request.deliveryZoneRef }
