@@ -32,6 +32,18 @@ In Frontdesk → Developers:
 
 The secret key is read only by server-side route handlers. Never expose it with a `NEXT_PUBLIC_` prefix.
 
+## Frontdesk webhook
+
+The signed receiver is:
+
+```text
+https://ahumma-eight.vercel.app/api/webhooks/frontdesk
+```
+
+In Frontdesk → Developers → Webhooks, add a destination named `Ahumma Website`, use the endpoint above, and subscribe to **Everything, including future event types**. Copy the destination's signing secret into Vercel as `FRONTDESK_WEBHOOK_SECRET` for the Production environment, then redeploy.
+
+The receiver verifies `X-FD-Signature` against the raw request body, rejects stale timestamps, checks `X-FD-Webhook-Id`, and acknowledges valid deliveries quickly. It logs only the event id and type. Frontdesk remains the source of truth; the payment return page still verifies a checkout directly before showing success.
+
 ## Commerce flow
 
 - `GET /v1/store/products` fills the collection.
