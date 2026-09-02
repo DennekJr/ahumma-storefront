@@ -1,0 +1,23 @@
+{
+  "name": "ahumma-storefront",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 6543",
+    "build": "next build",
+    "start": "next start -p 6543",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "1.39.0",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0"
+  }
+}
