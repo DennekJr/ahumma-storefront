@@ -3,6 +3,20 @@ import { CartProvider } from "@/components/cart-provider";
 import { hasFrontdeskKeys } from "@/lib/frontdesk";
 import "./globals.css";
 
+function getMetadataBase() {
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+  if (configuredUrl) {
+    try {
+      return new URL(configuredUrl);
+    } catch {
+      // Fall through to a valid default when deployment configuration is malformed.
+    }
+  }
+
+  return new URL("http://localhost:6543");
+}
+
 export const metadata: Metadata = {
   title: {
     default: "Ahumma — Plant-powered body care",
@@ -10,7 +24,7 @@ export const metadata: Metadata = {
   },
   description:
     "Considered body care made in Lagos with African botanicals for softer, nourished and radiant skin.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:6543"),
+  metadataBase: getMetadataBase(),
   openGraph: {
     title: "Ahumma — At the edge of everything beautiful is you",
     description: "Plant-powered body care, made in Lagos.",
