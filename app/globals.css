@@ -179,6 +179,47 @@ img {
   transform-origin: left;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 16px;
+}
+
+.currency-switcher {
+  display: flex;
+  padding: 2px;
+  border: 1px solid currentColor;
+}
+
+.currency-switcher button {
+  min-width: 39px;
+  height: 24px;
+  padding: 0 7px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  opacity: 0.58;
+}
+
+.currency-switcher button.is-active {
+  background: var(--ink);
+  color: var(--porcelain);
+  opacity: 1;
+}
+
+.site-header--light .currency-switcher button.is-active {
+  background: white;
+  color: var(--deep-forest);
+}
+
+.currency-symbol {
+  display: none;
+}
+
 .header-cart {
   display: inline-flex;
   align-items: center;
@@ -1613,6 +1654,14 @@ img {
   }
   .desktop-nav.is-open { visibility: visible; opacity: 1; transform: translateY(0); }
   .desktop-nav a { width: 100%; padding: 15px 0; border-bottom: 1px solid var(--line); }
+  .header-actions { gap: 7px; }
+  .currency-switcher { padding: 1px; }
+  .currency-switcher button { min-width: 25px; height: 24px; padding: 0 5px; }
+  .currency-long { display: none; }
+  .currency-symbol {
+    display: inline;
+    font-size: 11px;
+  }
   .header-cart > span { display: none; }
   .header-cart { gap: 5px; }
   .home-hero { min-height: 740px; }

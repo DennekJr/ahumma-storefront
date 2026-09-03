@@ -19,8 +19,13 @@ import {
   useMemo,
   useState,
 } from "react";
-import { formatMoney } from "@/lib/format";
-import type { DeliveryZone } from "@/lib/store-types";
+import {
+  formatMoney,
+  isStoreCurrency,
+  resolvePrice,
+  type StoreCurrency,
+} from "@/lib/format";
+import type { DeliveryZone, ProductPrice } from "@/lib/store-types";
 
 export type CartItem = {
   variantRef: string;
@@ -31,6 +36,7 @@ export type CartItem = {
   imageUrl: string;
   priceMinor: number;
   currency: string;
+  prices?: ProductPrice[];
   quantity: number;
   needsDelivery?: boolean;
   maxQuantity?: number | null;
@@ -40,6 +46,8 @@ type CartContextValue = {
   items: CartItem[];
   itemCount: number;
   isOpen: boolean;
+  currency: StoreCurrency;
+  setCurrency: (currency: StoreCurrency) => void;
   openCart: () => void;
   closeCart: () => void;
   addItem: (item: CartItem) => void;
@@ -48,7 +56,8 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "ahumma-cart-v1";
+const STORAGE_KEY = "ahumma-cart-v2";
+const CURRENCY_STORAGE_KEY = "ahumma-currency";
 
 export function CartProvider({
   children,
@@ -60,11 +69,14 @@ export function CartProvider({
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [currency, setCurrency] = useState<StoreCurrency>("NGN");
 
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
+      const storedCurrency = window.localStorage.getItem(CURRENCY_STORAGE_KEY);
       if (stored) setItems(JSON.parse(stored) as CartItem[]);
+      if (isStoreCurrency(storedCurrency)) setCurrency(storedCurrency);
     } catch {
       window.localStorage.removeItem(STORAGE_KEY);
     } finally {
@@ -75,7 +87,8 @@ export function CartProvider({
   useEffect(() => {
     if (!hydrated) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [hydrated, items]);
+    window.localStorage.setItem(CURRENCY_STORAGE_KEY, currency);
+  }, [currency, hydrated, items]);
 
   useEffect(() => {
     document.body.classList.toggle("cart-is-open", isOpen);
@@ -126,13 +139,15 @@ export function CartProvider({
       items,
       itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
       isOpen,
+      currency,
+      setCurrency,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
       addItem,
       removeItem,
       setQuantity,
     }),
-    [addItem, isOpen, items, removeItem, setQuantity],
+    [addItem, currency, isOpen, items, removeItem, setQuantity],
   );
 
   return (
@@ -150,7 +165,7 @@ export function useCart() {
 }
 
 function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
-  const { items, isOpen, closeCart, removeItem, setQuantity } = useCart();
+  const { items, isOpen, closeCart, removeItem, setQuantity, currency } = useCart();
   const [zones, setZones] = useState<DeliveryZone[]>([]);
   const [zoneRef, setZoneRef] = useState("");
   const [loadingZones, setLoadingZones] = useState(false);
@@ -159,16 +174,33 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   const [contact, setContact] = useState({ name: "", email: "", phone: "" });
 
   const needsDelivery = items.some((item) => item.needsDelivery);
-  const currency = items[0]?.currency ?? "NGN";
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.priceMinor * item.quantity,
+  const pricedItems = items.map((item) => ({
+    item,
+    displayPrice: resolvePrice(
+      item.priceMinor,
+      item.currency,
+      item.prices,
+      currency,
+    ),
+  }));
+  const subtotal = pricedItems.reduce(
+    (sum, { item, displayPrice }) =>
+      sum + displayPrice.priceMinor * item.quantity,
     0,
   );
   const selectedZone = zones.find((zone) => zone.ref === zoneRef);
-  const zoneFee = selectedZone
-    ? selectedZone.prices?.find((price) => price.currency === currency)?.feeMinor ??
-      selectedZone.feeMinor
-    : 0;
+  const selectedZonePrice = selectedZone
+    ? resolvePrice(
+        selectedZone.feeMinor,
+        selectedZone.currency,
+        selectedZone.prices?.map((price) => ({
+          currency: price.currency,
+          priceMinor: price.feeMinor,
+        })),
+        currency,
+      )
+    : null;
+  const zoneFee = selectedZonePrice?.priceMinor ?? 0;
 
   useEffect(() => {
     if (!isOpen || !needsDelivery || !checkoutEnabled || zones.length) return;
@@ -265,7 +297,7 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         ) : (
           <form className="cart-checkout" onSubmit={beginCheckout}>
             <div className="cart-lines">
-              {items.map((item) => (
+              {pricedItems.map(({ item, displayPrice }) => (
                 <article className="cart-line" key={item.variantRef}>
                   <div className="cart-line__image">
                     <Image src={item.imageUrl} alt="" fill sizes="96px" />
@@ -273,7 +305,7 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                   <div className="cart-line__content">
                     <h3>{item.name}</h3>
                     <p>{item.variantName}</p>
-                    <span>{formatMoney(item.priceMinor, item.currency)}</span>
+                    <span>{formatMoney(displayPrice.priceMinor, displayPrice.currency)}</span>
                     <div className="quantity-control" aria-label={`Quantity for ${item.name}`}>
                       <button type="button" onClick={() => setQuantity(item.variantRef, item.quantity - 1)} aria-label="Decrease quantity">
                         <Minus size={13} />
@@ -307,16 +339,28 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                 <span>Phone <small>optional</small></span>
                 <input type="tel" autoComplete="tel" value={contact.phone} onChange={(event) => setContact((value) => ({ ...value, phone: event.target.value }))} />
               </label>
-              {needsDelivery && checkoutEnabled ? (
+              {needsDelivery && checkoutEnabled && zones.length > 0 ? (
                 <label>
                   <span>Delivery area</span>
                   <select required={zones.length > 0} disabled={loadingZones || !zones.length} value={zoneRef} onChange={(event) => setZoneRef(event.target.value)}>
                     <option value="">{loadingZones ? "Loading delivery areas…" : "Choose an area"}</option>
-                    {zones.map((zone) => (
-                      <option key={zone.ref} value={zone.ref}>
-                        {zone.name} · {formatMoney(zone.prices?.find((price) => price.currency === currency)?.feeMinor ?? zone.feeMinor, currency)}
-                      </option>
-                    ))}
+                    {zones.map((zone) => {
+                      const deliveryPrice = resolvePrice(
+                        zone.feeMinor,
+                        zone.currency,
+                        zone.prices?.map((price) => ({
+                          currency: price.currency,
+                          priceMinor: price.feeMinor,
+                        })),
+                        currency,
+                      );
+
+                      return (
+                        <option key={zone.ref} value={zone.ref}>
+                          {zone.name} · {formatMoney(deliveryPrice.priceMinor, deliveryPrice.currency)}
+                        </option>
+                      );
+                    })}
                   </select>
                 </label>
               ) : null}

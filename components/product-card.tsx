@@ -4,12 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import type { ProductSummary } from "@/lib/store-types";
 
 export function ProductCard({ product, index }: { product: ProductSummary; index: number }) {
-  const { addItem } = useCart();
+  const { addItem, currency } = useCart();
   const status = product.preorderable ? "Small-batch preorder" : product.soldOut ? "Sold out" : "Available now";
+  const displayPrice = resolveSummaryPrice(product, currency);
+  const alternatePrices = Object.entries(product.pricesFrom ?? {}).map(
+    ([priceCurrency, priceMinor]) => ({
+      currency: priceCurrency,
+      priceMinor,
+      compareAtMinor: product.compareAtFrom?.[priceCurrency] ?? null,
+    }),
+  );
 
   function quickAdd() {
     if (!product.previewVariantRef || !product.coverUrl) return;
@@ -22,6 +30,7 @@ export function ProductCard({ product, index }: { product: ProductSummary; index
       imageUrl: product.coverUrl,
       priceMinor: product.priceMinorFrom,
       currency: product.currency,
+      prices: alternatePrices,
       quantity: 1,
       needsDelivery: true,
     });
@@ -43,7 +52,7 @@ export function ProductCard({ product, index }: { product: ProductSummary; index
           <Link href={`/products/${product.slug}`}><h3>{product.name}</h3></Link>
           <p>{product.previewTagline ?? "Considered care for the body"}</p>
         </div>
-        <strong>{formatMoney(product.priceMinorFrom, product.currency)}</strong>
+        <strong>{formatMoney(displayPrice.priceMinor, displayPrice.currency)}</strong>
       </div>
       {product.previewVariantRef && !product.soldOut ? (
         <button type="button" className="product-card__action" onClick={quickAdd}>

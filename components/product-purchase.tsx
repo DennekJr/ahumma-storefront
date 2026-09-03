@@ -3,7 +3,7 @@
 import { Check, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useCart } from "@/components/cart-provider";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, resolvePrice } from "@/lib/format";
 import type { ProductDetail } from "@/lib/store-types";
 
 export function ProductPurchase({ product }: { product: ProductDetail }) {
@@ -11,12 +11,15 @@ export function ProductPurchase({ product }: { product: ProductDetail }) {
   const [variantRef, setVariantRef] = useState((available[0] ?? product.variants[0])?.ref ?? "");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-  const { addItem } = useCart();
+  const { addItem, currency } = useCart();
 
   const variant = useMemo(
     () => product.variants.find((item) => item.ref === variantRef),
     [product.variants, variantRef],
   );
+  const displayPrice = variant
+    ? resolvePrice(variant.priceMinor, variant.currency, variant.prices, currency)
+    : null;
   const maxQuantity = variant?.availableQty ?? product.preorderRemaining ?? null;
   const canAdd = Boolean(variant && (!variant.soldOut || product.preorderable));
 
@@ -32,6 +35,7 @@ export function ProductPurchase({ product }: { product: ProductDetail }) {
       imageUrl,
       priceMinor: variant.priceMinor,
       currency: variant.currency,
+      prices: variant.prices,
       quantity,
       needsDelivery: product.needsDelivery,
       maxQuantity,
@@ -40,16 +44,16 @@ export function ProductPurchase({ product }: { product: ProductDetail }) {
     window.setTimeout(() => setAdded(false), 1800);
   }
 
-  if (!variant) {
+  if (!variant || !displayPrice) {
     return <p className="product-unavailable">This formulation is not currently available.</p>;
   }
 
   return (
     <div className="purchase-panel">
       <div className="purchase-price">
-        <strong>{formatMoney(variant.priceMinor, variant.currency)}</strong>
-        {variant.compareAtMinor && variant.compareAtMinor > variant.priceMinor ? (
-          <s>{formatMoney(variant.compareAtMinor, variant.currency)}</s>
+        <strong>{formatMoney(displayPrice.priceMinor, displayPrice.currency)}</strong>
+        {displayPrice.compareAtMinor && displayPrice.compareAtMinor > displayPrice.priceMinor ? (
+          <s>{formatMoney(displayPrice.compareAtMinor, displayPrice.currency)}</s>
         ) : null}
       </div>
 
@@ -57,19 +61,28 @@ export function ProductPurchase({ product }: { product: ProductDetail }) {
         <fieldset className="variant-fieldset">
           <legend>Choose an option</legend>
           <div className="variant-grid">
-            {product.variants.map((item) => (
-              <button
-                type="button"
-                key={item.ref}
-                className={item.ref === variantRef ? "is-selected" : ""}
-                onClick={() => { setVariantRef(item.ref); setQuantity(1); }}
-                aria-pressed={item.ref === variantRef}
-              >
-                {item.swatchHex ? <span style={{ backgroundColor: item.swatchHex }} /> : null}
-                <b>{item.name}</b>
-                <small>{item.soldOut && !product.preorderable ? "Sold out" : formatMoney(item.priceMinor, item.currency)}</small>
-              </button>
-            ))}
+            {product.variants.map((item) => {
+              const itemPrice = resolvePrice(
+                item.priceMinor,
+                item.currency,
+                item.prices,
+                currency,
+              );
+
+              return (
+                <button
+                  type="button"
+                  key={item.ref}
+                  className={item.ref === variantRef ? "is-selected" : ""}
+                  onClick={() => { setVariantRef(item.ref); setQuantity(1); }}
+                  aria-pressed={item.ref === variantRef}
+                >
+                  {item.swatchHex ? <span style={{ backgroundColor: item.swatchHex }} /> : null}
+                  <b>{item.name}</b>
+                  <small>{item.soldOut && !product.preorderable ? "Sold out" : formatMoney(itemPrice.priceMinor, itemPrice.currency)}</small>
+                </button>
+              );
+            })}
           </div>
         </fieldset>
       ) : (

@@ -53,3 +53,15 @@ The receiver verifies `X-FD-Signature` against the raw request body, rejects sta
 - `GET /v1/store/checkouts/:ref` verifies payment when the buyer returns.
 
 The return redirect is never treated as proof of payment; the confirmation page checks the checkout state directly with Frontdesk.
+
+## NGN and USD pricing
+
+Frontdesk already supports multi-currency storefronts. Ahumma keeps NGN as the base currency and stores an explicit USD price on every published variant. The header selector reads those API-provided amounts; it never calculates an exchange rate in the browser. The selected currency persists for the customer, updates product and bag totals, and is sent to Frontdesk when checkout is created.
+
+In Frontdesk, keep both price entries complete:
+
+1. Add NGN and USD prices to every active product variant.
+2. If delivery zones are created, add delivery fees in both NGN and USD.
+3. Publish the changes and verify both currencies on the storefront before accepting orders.
+
+The delivery-area field appears only when the workspace returns at least one delivery zone.
