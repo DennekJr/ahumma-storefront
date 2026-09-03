@@ -1720,7 +1720,13 @@ img {
   .product-breadcrumb { padding-inline: 18px; }
   .product-intro { grid-template-columns: 1fr; }
   .product-gallery { border-right: 0; }
-  .product-gallery__item:first-child { min-height: 570px; }
+  .product-gallery__item:first-child,
+  .product-gallery--1 .product-gallery__item:first-child,
+  .product-gallery--2 .product-gallery__item:first-child {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+  .product-gallery__item img { object-fit: contain; object-position: center; }
   .product-summary { position: static; padding: 72px 22px 85px; }
   .product-summary h1 { font-size: 56px; }
   .product-story { gap: 47px; padding: 95px 22px; }
