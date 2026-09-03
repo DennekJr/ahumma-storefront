@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Check, Leaf, PackageCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
+import { ProductCard } from "@/components/product-card";
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getProduct } from "@/lib/frontdesk";
+import { getProduct, getProducts } from "@/lib/frontdesk";
 
 type ProductPageProps = { params: Promise<{ slug: string }> };
 
@@ -23,11 +24,17 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const [product, products] = await Promise.all([
+    getProduct(slug),
+    getProducts(),
+  ]);
   if (!product) notFound();
 
   const media = (product.media?.length ? product.media : product.coverUrl ? [product.coverUrl] : []).slice(0, 4);
   const info = product.info;
+  const relatedProducts = products
+    .filter((candidate) => candidate.ref !== product.ref)
+    .slice(0, 3);
 
   return (
     <main className="product-page">
@@ -96,6 +103,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {info?.sku ? <div><dt>SKU</dt><dd>{info.sku}</dd></div> : null}
         </dl>
       </section>
+
+      {relatedProducts.length ? (
+        <section className="shop-section related-products">
+          <div className="section-heading related-products__heading">
+            <div>
+              <span className="eyebrow">Continue the ritual</span>
+              <h2>You may also<br />love.</h2>
+            </div>
+            <Link href="/#shop" className="underlined-link related-products__link">
+              Shop all essentials <ArrowRight size={17} />
+            </Link>
+          </div>
+          <div className="product-grid">
+            {relatedProducts.map((relatedProduct, index) => (
+              <ProductCard product={relatedProduct} index={index} key={relatedProduct.ref} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="product-closing">
         <span className="eyebrow eyebrow--light">Ahumma</span>
