@@ -25,7 +25,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:6543
 
 In Frontdesk → Developers:
 
-1. Register `http://localhost:6543` as an allowed origin for the test publishable key.
+1. Register `http://localhost:6543` for the test publishable key and `https://www.ahumma.net` for the live publishable key.
 2. Enable Store API secret keys for the workspace.
 3. Publish Ahumma's products and delivery zones.
 4. Use test keys first, then replace them with live keys for production.
@@ -37,10 +37,10 @@ The secret key is read only by server-side route handlers. Never expose it with 
 The signed receiver is:
 
 ```text
-https://ahumma-eight.vercel.app/api/webhooks/frontdesk
+https://www.ahumma.net/api/webhooks/frontdesk
 ```
 
-In Frontdesk → Developers → Webhooks, add a destination named `Ahumma Website`, use the endpoint above, and subscribe to **Everything, including future event types**. Copy the destination's signing secret into Vercel as `FRONTDESK_WEBHOOK_SECRET` for the Production environment, then redeploy.
+In Frontdesk → Developers → Webhooks, add a destination named `Ahumma Website`, use the endpoint above, and subscribe to **Everything, including future event types**. Copy the destination's signing secret into Vercel as `FRONTDESK_WEBHOOK_SECRET`, set `NEXT_PUBLIC_SITE_URL=https://www.ahumma.net` for the Production environment, then redeploy.
 
 The receiver verifies `X-FD-Signature` against the raw request body, rejects stale timestamps, checks `X-FD-Webhook-Id`, and acknowledges valid deliveries quickly. It logs only the event id and type. Frontdesk remains the source of truth; the payment return page still verifies a checkout directly before showing success.
 
