@@ -66,7 +66,6 @@ export default async function HomePage() {
       </section>
 
       <section className="philosophy-section" id="philosophy">
-        <div className="section-number">01</div>
         <div className="philosophy-heading">
           <span className="eyebrow">The Ahumma philosophy</span>
           <h2>Skin care, as<br />an act of return.</h2>
@@ -119,7 +118,6 @@ export default async function HomePage() {
 
       <section className="concerns-section" id="concerns">
         <div className="concerns-intro">
-          <span className="section-number">02</span>
           <span className="eyebrow">Shop by concern</span>
           <h2>What does your skin<br />need today?</h2>
         </div>
