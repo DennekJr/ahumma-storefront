@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className={`product-gallery product-gallery--${Math.min(media.length, 4)}`}>
           {media.map((image, index) => (
             <div className={`product-gallery__item product-gallery__item--${index + 1}`} key={`${image}-${index}`}>
-              <Image src={image} alt={index === 0 ? product.name : `${product.name}, view ${index + 1}`} fill loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} sizes="(max-width: 850px) 100vw, 38vw" />
+              <Image src={image} alt={index === 0 ? product.name : `${product.name}, view ${index + 1}`} fill loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} sizes="(max-width: 850px) 100vw, 50vw" />
               {index === 0 ? <span>{product.preorderable ? "Small-batch preorder" : "Ahumma essential"}</span> : null}
             </div>
           ))}
