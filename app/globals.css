@@ -1077,7 +1077,6 @@ img {
 
 .product-summary {
   --product-summary-gutter: 5vw;
-  --product-summary-bleed: -5vw;
   position: sticky;
   top: 0;
   align-self: start;
@@ -1103,9 +1102,7 @@ img {
 }
 
 .purchase-panel {
-  margin-inline: var(--product-summary-bleed);
-  padding: 27px var(--product-summary-gutter) 0;
-  border-top: 1px solid var(--line);
+  padding-top: 27px;
 }
 
 .purchase-price {
@@ -1128,10 +1125,7 @@ img {
 .single-variant {
   display: flex;
   justify-content: space-between;
-  margin-inline: var(--product-summary-bleed);
-  padding: 15px var(--product-summary-gutter);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding: 15px 0;
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1257,9 +1251,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 15px 21px;
-  margin: 30px var(--product-summary-bleed) 0;
-  padding: 18px var(--product-summary-gutter) 0;
-  border-top: 1px solid var(--line);
+  margin-top: 30px;
   color: rgba(24, 32, 25, 0.58);
   font-size: 8px;
   font-weight: 620;
@@ -1931,7 +1923,6 @@ img {
   .product-gallery__item img { object-fit: contain; object-position: center; }
   .product-summary {
     --product-summary-gutter: 22px;
-    --product-summary-bleed: -22px;
     position: static;
     padding: 72px var(--product-summary-gutter) 85px;
   }
