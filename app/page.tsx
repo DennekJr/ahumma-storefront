@@ -28,9 +28,21 @@ export default async function HomePage() {
       <section className="home-hero">
         <SiteHeader light />
         <Image className="hero-sky" src="/images/hero-sky.jpeg" alt="" fill loading="eager" fetchPriority="high" sizes="100vw" />
+        <div className="hero-clouds hero-clouds--far" aria-hidden="true" />
+        <div className="hero-clouds hero-clouds--near" aria-hidden="true" />
         <div className="hero-haze" />
         <Image className="hero-wordmark" src="/images/hero-wordmark.png" alt="Ahumma" width={2560} height={547} loading="eager" />
-        <Image className="hero-woman" src="/images/hero-woman.png" alt="A woman pausing in a moment of calm" width={1411} height={1800} loading="eager" />
+        <div className="hero-woman-shell">
+          <Image
+            className="hero-woman"
+            src="/images/hero-woman.png"
+            alt="A woman pausing in a moment of calm"
+            width={1411}
+            height={1800}
+            loading="eager"
+            sizes="(max-width: 780px) 100vw, (max-width: 1050px) 72vw, 760px"
+          />
+        </div>
         <div className="hero-copy">
           <span className="eyebrow eyebrow--light">Made for the skin you live in</span>
           <h1>At the edge of everything beautiful is you.</h1>

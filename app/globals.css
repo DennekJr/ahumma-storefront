@@ -264,7 +264,57 @@ img {
   z-index: 0;
   object-fit: cover;
   object-position: center;
-  transform: scale(1.02);
+  transform: translate3d(-1.2%, -0.4%, 0) scale(1.08);
+  animation: hero-sky-drift 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-sky-drift {
+  from { transform: translate3d(-1.2%, -0.4%, 0) scale(1.08); }
+  to { transform: translate3d(1.2%, 0.6%, 0) scale(1.11); }
+}
+
+.hero-clouds {
+  position: absolute;
+  z-index: 1;
+  width: 76vw;
+  min-width: 720px;
+  height: 32vw;
+  min-height: 310px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 18% 54%, rgba(255, 255, 255, 0.34) 0 7%, rgba(250, 242, 239, 0.18) 18%, transparent 38%),
+    radial-gradient(ellipse at 43% 44%, rgba(255, 255, 255, 0.3) 0 9%, rgba(247, 237, 235, 0.16) 22%, transparent 43%),
+    radial-gradient(ellipse at 72% 58%, rgba(255, 251, 249, 0.28) 0 8%, rgba(255, 241, 237, 0.12) 20%, transparent 42%);
+  filter: blur(19px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.hero-clouds--far {
+  top: -7%;
+  left: -31%;
+  opacity: 0.46;
+  animation: hero-cloud-drift-far 38s ease-in-out infinite alternate;
+}
+
+.hero-clouds--near {
+  top: 37%;
+  right: -37%;
+  opacity: 0.3;
+  transform: scale(1.08);
+  animation: hero-cloud-drift-near 44s ease-in-out infinite alternate;
+}
+
+@keyframes hero-cloud-drift-far {
+  from { transform: translate3d(-5vw, -1vh, 0) scale(0.96); }
+  to { transform: translate3d(17vw, 2vh, 0) scale(1.07); }
+}
+
+@keyframes hero-cloud-drift-near {
+  from { transform: translate3d(7vw, 1vh, 0) scale(1.08); }
+  to { transform: translate3d(-15vw, -1vh, 0) scale(0.98); }
 }
 
 .hero-haze {
@@ -287,22 +337,37 @@ img {
   transform: translate(-50%, -50%);
 }
 
-.hero-woman {
+.hero-woman-shell {
   position: absolute;
   z-index: 3;
   bottom: -23%;
   left: 50%;
   width: min(56vw, 760px);
+  line-height: 0;
+  transform: translateX(-50%);
+  animation: hero-arrive 1.4s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+  will-change: opacity, transform;
+}
+
+.hero-woman {
+  display: block;
+  width: 100%;
   max-width: none;
   height: auto;
   filter: saturate(0.8) contrast(0.96);
-  transform: translateX(-50%);
-  animation: hero-arrive 1.4s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+  transform-origin: 50% 64%;
+  animation: hero-float 7.4s ease-in-out 1.4s infinite;
+  will-change: transform;
 }
 
 @keyframes hero-arrive {
   from { opacity: 0; transform: translate(-50%, 24px); }
   to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.1deg); }
+  50% { transform: translate3d(0, -13px, 0) rotate(0.12deg); }
 }
 
 .hero-copy {
@@ -1688,7 +1753,7 @@ img {
 }
 
 @media (max-width: 1050px) {
-  .hero-woman { bottom: -14%; width: min(72vw, 700px); }
+  .hero-woman-shell { bottom: -14%; width: min(72vw, 700px); }
   .hero-wordmark { width: 92vw; }
   .philosophy-section { grid-template-columns: 0.25fr 1.2fr 0.8fr; }
   .product-card__details { grid-template-columns: 1fr; gap: 8px; }
@@ -1738,7 +1803,8 @@ img {
   .header-cart { gap: 5px; }
   .home-hero { min-height: 740px; }
   .hero-wordmark { top: 34%; width: 132vw; }
-  .hero-woman { bottom: -3%; width: 104vw; }
+  .hero-woman-shell { bottom: -3%; width: 104vw; }
+  .hero-woman { animation-duration: 8.2s; }
   .hero-copy { bottom: 31px; left: 19px; width: 235px; }
   .hero-copy h1 { margin: 11px 0 15px; font-size: 27px; }
   .hero-link { gap: 11px; font-size: 9px; }
@@ -1820,6 +1886,14 @@ img {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .hero-sky,
+  .hero-clouds,
+  .hero-woman,
+  .hero-woman-shell {
+    animation: none !important;
+  }
+  .hero-sky { transform: scale(1.02); }
+  .hero-woman-shell { opacity: 1; transform: translateX(-50%); }
   *, *::before, *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
