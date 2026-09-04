@@ -66,6 +66,23 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="love-skin-section" id="love-your-skin" aria-labelledby="love-your-skin-title">
+        <Image
+          className="love-skin__image"
+          src="/images/love-your-skin.jpg"
+          alt="A woman enjoying an Ahumma body-care ritual"
+          fill
+          sizes="100vw"
+        />
+        <div className="love-skin__overlay" aria-hidden="true" />
+        <div className="love-skin__content">
+          <h2 id="love-your-skin-title">Love your skin</h2>
+          <p className="love-skin__lead">Your skin tells your story — nourish it, honor it, and let it glow.</p>
+          <p className="love-skin__body">Indulge in rich, plant-powered body butters designed to deeply hydrate, smooth, and restore your natural radiance. From softening rough patches to enhancing your glow, every application is an act of self-love.</p>
+          <Link href="#shop" className="love-skin__cta">Shop now <ArrowRight size={17} /></Link>
+        </div>
+      </section>
+
       <section className="shop-section" id="shop">
         <div className="section-heading shop-heading">
           <div>

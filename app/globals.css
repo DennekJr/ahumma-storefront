@@ -495,6 +495,89 @@ img {
   letter-spacing: 0.07em;
 }
 
+.love-skin-section {
+  position: relative;
+  display: flex;
+  min-height: clamp(650px, 68vw, 900px);
+  align-items: flex-end;
+  overflow: hidden;
+  background: #6a3728;
+  color: white;
+  isolation: isolate;
+}
+
+.love-skin__image {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.005);
+}
+
+.love-skin__overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(31, 17, 12, 0.05) 18%, rgba(45, 15, 13, 0.22) 52%, rgba(48, 10, 12, 0.88) 100%),
+    linear-gradient(90deg, rgba(30, 12, 10, 0.14), transparent 45%, rgba(30, 12, 10, 0.08));
+}
+
+.love-skin__content {
+  position: relative;
+  z-index: 2;
+  width: min(1120px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 0 0 50px;
+  text-align: center;
+}
+
+.love-skin__content h2 {
+  margin: 0 0 28px;
+  font-size: clamp(58px, 7.3vw, 112px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.love-skin__lead,
+.love-skin__body {
+  margin: 0 auto;
+}
+
+.love-skin__lead {
+  font-size: clamp(17px, 1.55vw, 22px);
+  font-weight: 650;
+  letter-spacing: -0.018em;
+}
+
+.love-skin__body {
+  max-width: 1020px;
+  margin-top: 8px;
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 520;
+  line-height: 1.5;
+}
+
+.love-skin__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 38px;
+  padding: 13px 18px 13px 21px;
+  background: var(--porcelain);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  transition: gap 220ms ease, background 220ms ease;
+}
+
+.love-skin__cta:hover {
+  gap: 40px;
+  background: white;
+}
+
 .shop-section {
   padding: 145px 3vw 155px;
   background: var(--porcelain);
@@ -1827,6 +1910,16 @@ img {
   .made-copy h2 { font-size: 53px; }
   .philosophy-copy { padding-top: 17px; }
   .philosophy-copy p { font-size: 21px; }
+  .love-skin-section { min-height: 730px; }
+  .love-skin__image { object-position: 43% center; }
+  .love-skin__overlay {
+    background: linear-gradient(180deg, rgba(31, 17, 12, 0.08) 10%, rgba(45, 15, 13, 0.24) 46%, rgba(48, 10, 12, 0.94) 100%);
+  }
+  .love-skin__content { width: calc(100% - 38px); padding-bottom: 38px; }
+  .love-skin__content h2 { margin-bottom: 22px; font-size: clamp(48px, 15vw, 64px); }
+  .love-skin__lead { max-width: 330px; font-size: 16px; line-height: 1.35; }
+  .love-skin__body { max-width: 350px; margin-top: 11px; font-size: 13px; line-height: 1.5; }
+  .love-skin__cta { margin-top: 28px; }
   .shop-section { padding: 92px 13px 100px; }
   .related-products__link { justify-self: start; }
   .section-heading { gap: 30px; margin-bottom: 42px; padding: 0 9px; }
