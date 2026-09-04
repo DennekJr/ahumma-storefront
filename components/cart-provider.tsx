@@ -7,6 +7,7 @@ import {
   Minus,
   Plus,
   ShoppingBag,
+  Trash2,
   X,
 } from "lucide-react";
 import {
@@ -316,8 +317,14 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                       </button>
                     </div>
                   </div>
-                  <button type="button" className="line-remove" onClick={() => removeItem(item.variantRef)}>
-                    Remove
+                  <button
+                    type="button"
+                    className="line-remove"
+                    onClick={() => removeItem(item.variantRef)}
+                    aria-label={`Remove ${item.name} from bag`}
+                    title={`Remove ${item.name}`}
+                  >
+                    <Trash2 size={15} strokeWidth={1.5} />
                   </button>
                 </article>
               ))}

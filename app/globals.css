@@ -1535,16 +1535,25 @@ img {
 
 .line-remove {
   position: absolute;
-  top: 24px;
+  top: 22px;
   right: 0;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
   padding: 0;
-  border-bottom: 1px solid currentColor;
+  border: 1px solid var(--line);
+  border-radius: 50%;
   background: transparent;
   cursor: pointer;
-  color: rgba(24, 32, 25, 0.5);
-  font-size: 8px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: rgba(24, 32, 25, 0.62);
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.line-remove:hover {
+  border-color: var(--forest);
+  background: var(--forest);
+  color: white;
 }
 
 .cart-form { padding: 26px 0; }
@@ -1585,18 +1594,20 @@ img {
 }
 
 .cart-totals {
-  padding: 19px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  padding: 20px 18px;
+  border: 1px solid var(--line);
+  background: rgba(230, 223, 210, 0.28);
 }
 .cart-totals > div {
   display: flex;
   justify-content: space-between;
-  margin: 6px 0;
+  margin: 0;
   font-size: 10px;
 }
 .cart-totals strong { font-weight: 600; }
-.cart-totals .cart-total { margin-top: 15px; font-size: 13px; }
+.cart-totals .cart-total { margin-top: 6px; font-size: 13px; }
 
 .cart-error {
   margin: 13px 0 0;
