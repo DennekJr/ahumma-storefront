@@ -19,7 +19,7 @@ const KNOWN_EVENTS = new Set([
 
 type FrontdeskWebhookPayload = {
   id?: unknown;
-  type?: unknown;
+  event?: unknown;
   data?: unknown;
 };
 
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
 
   if (
     typeof payload.id !== "string" ||
-    typeof payload.type !== "string" ||
+    typeof payload.event !== "string" ||
     payload.id !== webhookId
   ) {
     return errorResponse(
@@ -106,8 +106,8 @@ export async function POST(request: Request) {
   // remains the source of truth, so duplicate retries are safe to acknowledge.
   console.info("Frontdesk webhook received", {
     id: payload.id,
-    type: payload.type,
-    known: KNOWN_EVENTS.has(payload.type),
+    event: payload.event,
+    known: KNOWN_EVENTS.has(payload.event),
   });
 
   return NextResponse.json({ received: true });
