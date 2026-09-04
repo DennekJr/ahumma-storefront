@@ -28,8 +28,19 @@ export default async function HomePage() {
       <section className="home-hero">
         <SiteHeader light />
         <Image className="hero-sky" src="/images/hero-sky.jpeg" alt="" fill loading="eager" fetchPriority="high" sizes="100vw" />
-        <div className="hero-clouds hero-clouds--far" aria-hidden="true" />
-        <div className="hero-clouds hero-clouds--near" aria-hidden="true" />
+        <video
+          className="hero-sky-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/hero-sky.jpeg"
+          aria-hidden="true"
+          tabIndex={-1}
+        >
+          <source src="/videos/hero-clouds.mp4" type="video/mp4" />
+        </video>
         <div className="hero-haze" />
         <Image className="hero-wordmark" src="/images/hero-wordmark.png" alt="Ahumma" width={2560} height={547} loading="eager" />
         <div className="hero-woman-shell">
