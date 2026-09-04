@@ -573,7 +573,7 @@ img {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
-  background: var(--line);
+  background: transparent;
   border: 1px solid var(--line);
 }
 
