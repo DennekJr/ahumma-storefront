@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { hasFrontdeskKeys } from "@/lib/frontdesk";
 import "./globals.css";
@@ -37,6 +38,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <CartProvider checkoutEnabled={hasFrontdeskKeys}>{children}</CartProvider>
+        <Script
+          id="frontdesk-chat-widget"
+          src="https://widget.frontdesk.africa/widget.js"
+          data-key="fd_w_ToVEk9AiYdvvrndUGXLfZ5LC"
+          strategy="afterInteractive"
+          async
+        />
       </body>
     </html>
   );
