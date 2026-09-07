@@ -263,7 +263,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can Ahumma help with uneven-looking skin tone?",
         answer: [
-          "Every Ahumma product is made with plant butters and oils traditionally used in African body care to nourish skin and support a healthy, even-looking appearance.",
+          "Our body butters and Ara liquid African black soap are made with plant butters and oils traditionally used in African body care to nourish skin and support a healthy, even-looking appearance.",
+          "Baby Bloom is the exception. It is made only to nourish and protect delicate skin, and we make no claims for it beyond gentle everyday care.",
           "Ahumma is a premium, non-clinical body-care brand rather than a medical treatment for hyperpigmentation.",
           "We do not promise to erase, cure or “fix” your natural skin.",
         ],
