@@ -6,7 +6,7 @@ import { ProductCard } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import { getProducts, hasFrontdeskKeys } from "@/lib/frontdesk";
+import { getProducts, hasFrontdeskReads } from "@/lib/frontdesk";
 import { organizationSchema } from "@/lib/structured-data";
 
 export default async function HomePage() {
@@ -105,7 +105,7 @@ export default async function HomePage() {
           <p>A considered collection. Each formula is made to work deeply, feel beautiful and earn its place in your daily ritual.</p>
         </div>
 
-        {!hasFrontdeskKeys ? (
+        {!hasFrontdeskReads ? (
           <div className="api-preview-note">
             <Sparkles size={15} />
             <span><strong>Store preview</strong> — Ahumma&apos;s current collection is shown while the Frontdesk keys are pending.</span>

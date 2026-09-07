@@ -41,6 +41,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((candidate) => candidate.ref !== product.ref)
     .slice(0, 3);
   const detailRows = buildDetailRows(info);
+  const descriptionParagraphs = (product.description ?? "")
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
   const descriptionBlocks = info?.descriptionBlocks ?? [];
 
   return (
@@ -78,7 +82,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <aside className="product-summary">
           <span className="eyebrow">{info?.infoCategory ?? "Ahumma body care"}</span>
           <h1>{product.name}</h1>
-          <p className="product-lede">{product.description}</p>
+          {descriptionParagraphs.length ? (
+            <div className="product-lede">
+              {descriptionParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          ) : null}
           <ProductPurchase product={product} />
         </aside>
       </section>

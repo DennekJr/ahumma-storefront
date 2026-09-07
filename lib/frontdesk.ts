@@ -16,10 +16,16 @@ function isConfiguredKey(value: string | undefined, prefix: string) {
   return Boolean(value?.startsWith(prefix) && !value.includes("replace_me"));
 }
 
-export const hasFrontdeskKeys = Boolean(
-  process.env.FRONTDESK_PREVIEW_ONLY !== "true" &&
-  isConfiguredKey(process.env.FRONTDESK_PUBLISHABLE_KEY, "fd_pk_") &&
-  isConfiguredKey(process.env.FRONTDESK_SECRET_KEY, "fd_sk_"),
+const previewOnly = process.env.FRONTDESK_PREVIEW_ONLY === "true";
+
+/** Live catalogue reads. The publishable key is all the store endpoints need. */
+export const hasFrontdeskReads = Boolean(
+  !previewOnly && isConfiguredKey(process.env.FRONTDESK_PUBLISHABLE_KEY, "fd_pk_"),
+);
+
+/** Opening a checkout. Only the secret key can take payments. */
+export const hasFrontdeskCheckout = Boolean(
+  hasFrontdeskReads && isConfiguredKey(process.env.FRONTDESK_SECRET_KEY, "fd_sk_"),
 );
 
 export class FrontdeskApiError extends Error {
@@ -146,7 +152,7 @@ export async function getCheckout(ref: string): Promise<CheckoutSession> {
 }
 
 export async function getProducts(): Promise<ProductSummary[]> {
-  if (!hasFrontdeskKeys) return demoProductSummaries;
+  if (!hasFrontdeskReads) return demoProductSummaries;
 
   try {
     return await publicRequest<ProductSummary[]>("/store/products");
@@ -160,7 +166,7 @@ export async function getProducts(): Promise<ProductSummary[]> {
 }
 
 export async function getProduct(slug: string): Promise<ProductDetail | null> {
-  if (!hasFrontdeskKeys) {
+  if (!hasFrontdeskReads) {
     return demoProducts.find((product) => product.slug === slug) ?? null;
   }
 
@@ -175,7 +181,7 @@ export async function getProduct(slug: string): Promise<ProductDetail | null> {
 }
 
 export async function getDeliveryZones(): Promise<DeliveryZone[]> {
-  if (!hasFrontdeskKeys) return [];
+  if (!hasFrontdeskReads) return [];
   return publicRequest<DeliveryZone[]>("/store/delivery-zones");
 }
 
@@ -184,9 +190,9 @@ export async function createStoreCheckout(
   idempotencyKey: string,
   requestOrigin: string,
 ): Promise<CheckoutSession> {
-  if (!hasFrontdeskKeys) {
+  if (!hasFrontdeskCheckout) {
     throw new FrontdeskApiError(
-      "Live checkout will be available as soon as the Frontdesk API keys are added.",
+      "Live checkout will be available as soon as the Frontdesk secret key is added.",
       503,
       { code: "NOT_CONFIGURED" },
     );

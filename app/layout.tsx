@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
-import { hasFrontdeskKeys } from "@/lib/frontdesk";
+import { hasFrontdeskCheckout } from "@/lib/frontdesk";
 import "./globals.css";
 
 function getMetadataBase() {
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <CartProvider checkoutEnabled={hasFrontdeskKeys}>{children}</CartProvider>
+        <CartProvider checkoutEnabled={hasFrontdeskCheckout}>{children}</CartProvider>
         <Script
           id="frontdesk-chat-widget"
           src="https://widget.frontdesk.africa/widget.js"

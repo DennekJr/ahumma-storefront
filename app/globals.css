@@ -1092,6 +1092,14 @@ img {
   line-height: 0.94;
 }
 
+.product-lede > p {
+  margin: 0 0 13px;
+}
+
+.product-lede > p:last-child {
+  margin-bottom: 0;
+}
+
 .product-lede {
   max-width: 500px;
   margin: 0 0 35px;
