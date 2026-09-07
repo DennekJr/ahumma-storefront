@@ -9,12 +9,13 @@
   --rose: #d25c88;
   --line: rgba(24, 32, 25, 0.2);
   --line-light: rgba(255, 255, 255, 0.25);
-  /* Page frame. --gutter has a floor so mobile does not collapse to an 11px
-     margin, and a ceiling so ultra-wide screens do not push content to the
-     edges. --content-max keeps the 3-up grid in proportion; expressed in rem so
-     it grows with the fluid root rather than fighting it. */
-  --gutter: clamp(1.125rem, 3vw, 4rem);
-  --content-max: 110rem;
+  /* Page frame. The gutter alone defines it: under proportional scaling the
+     composition never balloons, so a content cap has nothing to protect
+     against — any rem value would simply bind at a fixed ratio and hold the
+     grid narrower than designed. Kept as a token so the max-width rules that
+     keep the homepage and shop grids identical stay in one place. */
+  --gutter: 2.8125rem;
+  --content-max: none;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville, "Times New Roman", serif;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -24,14 +25,102 @@
 }
 
 /* Fluid root: every rem in this file scales from here.
-   Deliberately flat at 16px up to 1440px, so mobile and laptop rendering is
-   unchanged, then grows to 24px by 3800px — which is the range where type had
-   stopped scaling while imagery kept filling the width.
-   The rem terms are load-bearing: they keep a reader's own font-size setting
-   effective, which a pure vw expression would override. */
+   1rem resolves to 16px at each tier's design width and scales purely with the
+   viewport, so a composition keeps its exact proportions at any size — the
+   1512px layout at 3024px is the same page at 2x, not a wider one.
+
+   One basis per layout tier, and the switches sit exactly on the tier
+   boundaries. That matters: a basis change is a step change in scale, and it
+   is only invisible where the layout changes with it. Switching at 780px
+   instead — mid-way through the 2-up range — put an 8.3px root next to a 29px
+   one in the same composition.
+
+   Trade-off worth knowing: this overrides a reader's own font-size setting.
+   That is inherent to proportional scaling; a clamp carrying rem terms keeps
+   the setting effective but will not hold proportions. */
 html {
-  font-size: clamp(1rem, 0.695rem + 0.339vw, 1.5rem);
+  font-size: calc(100vw / 1512 * 16);
   scroll-behavior: smooth;
+}
+
+/* 2-up tier, drawn at 834 */
+@media (max-width: 900px) {
+  html {
+    font-size: calc(100vw / 834 * 16);
+  }
+}
+
+/* 1-up tier, drawn at 430 */
+@media (max-width: 600px) {
+  html {
+    font-size: calc(100vw / 430 * 16);
+  }
+}
+
+/* Lucide sets its size as width/height ATTRIBUTES, which sit outside this
+   stylesheet and so did not follow the px-to-rem conversion — icons stayed at
+   their literal pixel size while the type around them scaled, leaving arrows
+   visibly undersized. A CSS rule outranks a presentation attribute, so each
+   size is restated in rem here and every icon scales with the root. Keep this
+   list in step with the sizes the components pass. */
+svg.lucide[width="13"] {
+  width: 0.8125rem;
+  height: 0.8125rem;
+}
+
+svg.lucide[width="14"] {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+svg.lucide[width="15"] {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+svg.lucide[width="16"] {
+  width: 1rem;
+  height: 1rem;
+}
+
+svg.lucide[width="17"] {
+  width: 1.0625rem;
+  height: 1.0625rem;
+}
+
+svg.lucide[width="18"] {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+svg.lucide[width="20"] {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+svg.lucide[width="21"] {
+  width: 1.3125rem;
+  height: 1.3125rem;
+}
+
+svg.lucide[width="22"] {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+svg.lucide[width="30"] {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+svg.lucide[width="31"] {
+  width: 1.9375rem;
+  height: 1.9375rem;
+}
+
+svg.lucide[width="34"] {
+  width: 2.125rem;
+  height: 2.125rem;
 }
 
 body {
