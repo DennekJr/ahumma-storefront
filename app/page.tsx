@@ -12,6 +12,7 @@ import { organizationSchema } from "@/lib/structured-data";
 export default async function HomePage() {
   await connection();
   const products = await getProducts();
+  const featuredProducts = products.slice(0, 3);
   const productHref = (...names: string[]) => {
     const match = products.find((product) =>
       names.some((name) => product.name.toLowerCase().includes(name)),
@@ -103,6 +104,9 @@ export default async function HomePage() {
             <h2>Care you&apos;ll<br />return to.</h2>
           </div>
           <p>A considered collection. Each formula is made to work deeply, feel beautiful and earn its place in your daily ritual.</p>
+          <Link href="/shop" className="underlined-link shop-heading__link">
+            Shop all <ArrowRight size={17} />
+          </Link>
         </div>
 
         {!hasFrontdeskReads ? (
@@ -113,10 +117,16 @@ export default async function HomePage() {
         ) : null}
 
         <div className="product-grid">
-          {products.map((product, index) => (
+          {featuredProducts.map((product, index) => (
             <ProductCard product={product} index={index} key={product.ref} />
           ))}
         </div>
+
+        {products.length > featuredProducts.length ? (
+          <Link href="/shop" className="shop-view-more">
+            View all {products.length} products <ArrowRight size={17} />
+          </Link>
+        ) : null}
       </section>
 
       <section className="concerns-section" id="concerns">

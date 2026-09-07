@@ -263,8 +263,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can Ahumma help with uneven-looking skin tone?",
         answer: [
-          "Some Ahumma products contain ingredients traditionally used in skincare formulations that support a more even-looking complexion.",
-          "However, Ahumma is currently positioned primarily as a premium, non-clinical body-care brand, not a medical treatment for hyperpigmentation.",
+          "Every Ahumma product is made with plant butters and oils traditionally used in African body care to nourish skin and support a healthy, even-looking appearance.",
+          "Ahumma is a premium, non-clinical body-care brand rather than a medical treatment for hyperpigmentation.",
           "We do not promise to erase, cure or “fix” your natural skin.",
         ],
       },
@@ -301,13 +301,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
         question: "What does Sika smell like?",
         answer: [
           "Sika has a brighter, softer fragrance profile inspired by lemon, vanilla and rose.",
-        ],
-      },
-      {
-        question: "Does Ahumma use essential oils?",
-        answer: [
-          "This depends on the individual product formulation.",
-          "Always check the ingredient list on the specific product you're purchasing for the most accurate information.",
         ],
       },
     ],
@@ -353,8 +346,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can I buy Ahumma in New York?",
         answer: [
-          "Ahumma is expanding its U.S. retail presence, beginning with New York.",
-          "For the latest stockist information, please visit our Stockists page.",
+          "Yes. Ahumma is expanding its U.S. retail presence, beginning with New York.",
+          "A full stockist list is coming soon. In the meantime, email us and we will point you to your nearest retailer.",
         ],
       },
       {
@@ -384,13 +377,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
         answer: [
           "Our products are formulated with skin comfort in mind, but individual skin can react differently.",
           "If you have sensitive or reactive skin, we recommend reviewing the complete ingredient list and performing a patch test before extensive use.",
-        ],
-      },
-      {
-        question: "Are Ahumma products pregnancy-safe?",
-        answer: [
-          "We do not currently position the entire Ahumma range as universally pregnancy-safe.",
-          "If you are pregnant or breastfeeding and have concerns about a particular ingredient, please consult your doctor or qualified healthcare professional before use.",
         ],
       },
     ],

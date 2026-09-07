@@ -3,6 +3,26 @@ import type { ProductInfo } from "@/lib/store-types";
 export type DetailRow = { label: string; value: string };
 
 /**
+ * FrontDesk stores origin as an ISO 3166-1 alpha-2 code ("NG"), which is
+ * correct for schema.org but reads as a typo on the page. Intl resolves it to
+ * a country name without shipping a lookup table; anything that is not a
+ * two-letter code is already a name and passes through untouched.
+ */
+function countryName(value: string) {
+  if (!/^[A-Za-z]{2}$/.test(value)) return value;
+
+  try {
+    return (
+      new Intl.DisplayNames(["en"], { type: "region" }).of(
+        value.toUpperCase(),
+      ) ?? value
+    );
+  } catch {
+    return value;
+  }
+}
+
+/**
  * Builds the product Details table.
  *
  * The FrontDesk docs specify this table as `info.specs` ({label, value}[])
@@ -38,7 +58,10 @@ export function buildDetailRows(info: ProductInfo | null | undefined) {
     { label: "Brand", value: info.brand ?? "" },
     { label: "Model", value: info.modelName ?? "" },
     { label: "Net weight", value: weight },
-    { label: "Origin", value: info.countryOfOrigin ?? "" },
+    {
+      label: "Origin",
+      value: info.countryOfOrigin ? countryName(info.countryOfOrigin) : "",
+    },
     { label: "Made by", value: info.manufacturer ?? "" },
     { label: "Warranty", value: warranty },
     { label: "SKU", value: info.sku ?? "" },

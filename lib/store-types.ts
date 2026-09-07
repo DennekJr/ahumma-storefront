@@ -111,6 +111,19 @@ export type ProductDetail = ProductSummary & {
   info?: ProductInfo | null;
 };
 
+export type ProductCollection = {
+  ref: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  coverUrl?: string | null;
+  /** Refs of the products in this collection; empty while it is being filled. */
+  productRefs: string[];
+  itemCount: number;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+};
+
 export type DeliveryZone = {
   ref: string;
   name: string;

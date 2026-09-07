@@ -3,6 +3,7 @@ import "server-only";
 import { demoProducts, demoProductSummaries } from "@/lib/demo-products";
 import type {
   DeliveryZone,
+  ProductCollection,
   ProductDetail,
   ProductSummary,
   StoreCheckoutRequest,
@@ -177,6 +178,22 @@ export async function getProduct(slug: string): Promise<ProductDetail | null> {
   } catch (error) {
     if (error instanceof FrontdeskApiError && error.status === 404) return null;
     throw error;
+  }
+}
+
+/**
+ * Merchant-curated groupings, used to lay out the shop page. An empty
+ * collection is still returned: the shop shows it as coming soon rather than
+ * hiding a group the merchant has deliberately created.
+ */
+export async function getCollections(): Promise<ProductCollection[]> {
+  if (!hasFrontdeskReads) return [];
+
+  try {
+    return await publicRequest<ProductCollection[]>("/store/collections");
+  } catch {
+    // The shop still works without collections — everything falls into one grid.
+    return [];
   }
 }
 
