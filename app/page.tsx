@@ -5,7 +5,9 @@ import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { StructuredData } from "@/components/structured-data";
 import { getProducts, hasFrontdeskKeys } from "@/lib/frontdesk";
+import { organizationSchema } from "@/lib/structured-data";
 
 export default async function HomePage() {
   await connection();
@@ -20,6 +22,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      <StructuredData data={organizationSchema()} />
       <div className="announcement-bar">
         <span>Complimentary Lagos delivery on orders over ₦60,000</span>
         <span className="announcement-desktop">Made in Lagos · Shipping worldwide</span>

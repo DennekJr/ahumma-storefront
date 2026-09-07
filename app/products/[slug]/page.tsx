@@ -7,7 +7,9 @@ import { ProductCard } from "@/components/product-card";
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
+import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
 type ProductPageProps = { params: Promise<{ slug: string }> };
 
@@ -18,6 +20,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: product.name,
     description: product.description ?? product.info?.longDescription ?? "Considered body care by Ahumma.",
+    alternates: { canonical: `/products/${product.slug}` },
     openGraph: product.coverUrl ? { images: [product.coverUrl] } : undefined,
   };
 }
@@ -38,6 +41,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <main className="product-page">
+      <StructuredData data={productSchema(product)} />
+      <StructuredData
+        data={breadcrumbSchema([
+          { name: "Ahumma", path: "/" },
+          { name: info?.infoCategory ?? "Body care", path: "/#shop" },
+          { name: product.name, path: `/products/${product.slug}` },
+        ])}
+      />
       <div className="announcement-bar">
         <span>Complimentary Lagos delivery on orders over ₦60,000</span>
         <span className="announcement-desktop">Made in Lagos · Shipping worldwide</span>
