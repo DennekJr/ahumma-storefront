@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { hasFrontdeskCheckout } from "@/lib/frontdesk";
+import { indexingAllowed } from "@/lib/seo";
 import "./globals.css";
 
 function getMetadataBase() {
@@ -26,6 +27,9 @@ export const metadata: Metadata = {
   description:
     "Considered body care made in Lagos with African botanicals for softer, nourished and radiant skin.",
   metadataBase: getMetadataBase(),
+  ...(indexingAllowed()
+    ? {}
+    : { robots: { index: false, follow: false } }),
   openGraph: {
     title: "Ahumma — At the edge of everything beautiful is you",
     description: "Plant-powered body care, made in Lagos.",

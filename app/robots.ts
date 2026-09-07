@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/structured-data";
+import { indexingAllowed } from "@/lib/seo";
 
 /**
  * Crawling is deliberately open, including to AI crawlers such as GPTBot,
@@ -13,6 +14,12 @@ import { siteUrl } from "@/lib/structured-data";
  */
 export default function robots(): MetadataRoute.Robots {
   const base = siteUrl();
+
+  // Test deployments must not be crawled: ahumma.com is the live site, and a
+  // second copy of the same brand copy would compete with it.
+  if (!indexingAllowed()) {
+    return { rules: [{ userAgent: "*", disallow: "/" }] };
+  }
 
   return {
     rules: [
