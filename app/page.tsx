@@ -104,9 +104,6 @@ export default async function HomePage() {
             <h2>Care you&apos;ll<br />return to.</h2>
           </div>
           <p>A considered collection. Each formula is made to work deeply, feel beautiful and earn its place in your daily ritual.</p>
-          <Link href="/shop" className="underlined-link shop-heading__link">
-            Shop all <ArrowRight size={17} />
-          </Link>
         </div>
 
         {!hasFrontdeskReads ? (
@@ -123,9 +120,11 @@ export default async function HomePage() {
         </div>
 
         {products.length > featuredProducts.length ? (
-          <Link href="/shop" className="shop-view-more">
-            View all {products.length} products <ArrowRight size={17} />
-          </Link>
+          <div className="shop-view-more-row">
+            <Link href="/shop" className="shop-view-more">
+              View all {products.length} products <ArrowRight size={17} />
+            </Link>
+          </div>
         ) : null}
       </section>
 

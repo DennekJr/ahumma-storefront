@@ -9,6 +9,12 @@
   --rose: #d25c88;
   --line: rgba(24, 32, 25, 0.2);
   --line-light: rgba(255, 255, 255, 0.25);
+  /* Page frame. --gutter has a floor so mobile does not collapse to ~11px,
+     and a ceiling so ultra-wide screens do not push content to the edges.
+     --content-max stops the 3-up grid ballooning past ~586px per card; it only
+     engages above ~1830px, so common laptop and desktop sizes are untouched. */
+  --gutter: clamp(18px, 3vw, 64px);
+  --content-max: 1760px;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville, "Times New Roman", serif;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -535,12 +541,13 @@ img {
 }
 
 .shop-section {
-  padding: 145px 3vw 155px;
+  padding: 145px var(--gutter) 155px;
   background: var(--porcelain);
 }
 
 .section-heading {
   display: grid;
+  max-width: var(--content-max);
   grid-template-columns: 1.4fr 0.6fr;
   align-items: end;
   gap: 60px;
@@ -571,6 +578,8 @@ img {
 
 .product-grid {
   display: grid;
+  max-width: var(--content-max);
+  margin-inline: auto;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
   background: transparent;
@@ -1449,15 +1458,19 @@ img {
 }
 
 .shop-preview-note {
-  margin: 0 3vw 40px;
+  max-width: var(--content-max);
+  margin: 0 auto 40px;
+  padding: 0 var(--gutter);
 }
 
 .shop-group {
-  padding: 0 3vw 96px;
+  padding: 0 var(--gutter) 96px;
   scroll-margin-top: 90px;
 }
 
 .shop-group__heading {
+  max-width: var(--content-max);
+  margin-inline: auto;
   padding: 0 2.5vw;
   display: flex;
   flex-wrap: wrap;
@@ -1501,21 +1514,25 @@ img {
   line-height: 1.45;
 }
 
+/* An inline-flex box ignores auto margins, so the cap lives on a block-level
+   wrapper and the link sits at its leading edge — lining up with the section
+   heading rather than the page gutter. */
+.shop-view-more-row {
+  max-width: var(--content-max);
+  margin: 54px auto 0;
+  padding: 0 2.5vw;
+}
+
 .shop-view-more {
   display: inline-flex;
   align-items: center;
   gap: 18px;
-  margin: 54px 2.5vw 0;
   padding-bottom: 9px;
   border-bottom: 1px solid currentColor;
   font-size: 11px;
   font-weight: 650;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-}
-
-.shop-heading__link {
-  margin-top: 18px;
 }
 
 .shop-closing {
@@ -2235,6 +2252,22 @@ img {
   margin-bottom: 4px;
 }
 
+/* Product grid tiers, chosen from measured card widths rather than round
+   numbers: 3-up down to 900px, 2-up to 600px, then 1-up. Previously the grid
+   held 3 columns all the way to 780px — 244px cards at 800px — then snapped to
+   a single 730px card, a 3x jump across one pixel. */
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 1050px) {
   .hero-woman-shell { bottom: -14%; width: min(72vw, 700px); }
   .hero-wordmark { width: 92vw; }
@@ -2324,7 +2357,7 @@ img {
   .section-heading { gap: 30px; margin-bottom: 42px; padding: 0 9px; }
   .section-heading p { margin: 0; font-size: 18px; }
   .api-preview-note { align-items: flex-start; margin: -12px 9px 26px; line-height: 1.4; }
-  .product-grid { grid-template-columns: 1fr; gap: 1px; }
+  .product-grid { gap: 1px; }
   .product-card { padding: 12px; }
   .product-card__details { grid-template-columns: 1fr auto; }
   .concerns-section { padding: 95px 13px; }
