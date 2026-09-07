@@ -41,6 +41,12 @@
 html {
   font-size: calc(100vw / 1512 * 16);
   scroll-behavior: smooth;
+  /* Opening the cart sets overflow:hidden on the body, which removes the
+     scrollbar and hands its ~15px back to the content box — percentage-sized
+     elements widen while the vw-based gutter does not, so the page twitches
+     sideways as the drawer slides in. Reserving the gutter permanently keeps
+     the layout still. */
+  scrollbar-gutter: stable;
 }
 
 /* 2-up tier, drawn at 834 */
