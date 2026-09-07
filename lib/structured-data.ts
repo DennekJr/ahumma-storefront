@@ -142,15 +142,34 @@ export function productSchema(product: ProductDetail) {
           },
         }
       : {}),
-    ...(info?.highlights?.length
+    ...(info?.warrantyMonths
       ? {
-          additionalProperty: info.highlights.map((highlight) => ({
-            "@type": "PropertyValue",
-            name: "Highlight",
-            value: highlight,
-          })),
+          warranty: {
+            "@type": "WarrantyPromise",
+            durationOfWarranty: {
+              "@type": "QuantitativeValue",
+              value: info.warrantyMonths,
+              unitCode: "MON",
+            },
+          },
         }
       : {}),
+    ...(() => {
+      const properties = [
+        ...(info?.specs ?? []).map((spec) => ({
+          "@type": "PropertyValue",
+          name: spec.label,
+          value: [spec.value, spec.unit].filter(Boolean).join(" ").trim(),
+        })),
+        ...(info?.highlights ?? []).map((highlight) => ({
+          "@type": "PropertyValue",
+          name: "Highlight",
+          value: highlight,
+        })),
+      ].filter((property) => property.name && property.value);
+
+      return properties.length ? { additionalProperty: properties } : {};
+    })(),
     ...(offers.length ? { offers } : {}),
     // Only emit ratings the store actually has. Google penalises review markup
     // that is not visible on the page.

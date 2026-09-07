@@ -4,11 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
+import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
+import { buildDetailRows } from "@/lib/product-details";
 import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
 type ProductPageProps = { params: Promise<{ slug: string }> };
@@ -38,6 +40,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const relatedProducts = products
     .filter((candidate) => candidate.ref !== product.ref)
     .slice(0, 3);
+  const detailRows = buildDetailRows(info);
+  const descriptionBlocks = info?.descriptionBlocks ?? [];
 
   return (
     <main className="product-page">
@@ -91,6 +95,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {info.highlights.map((highlight) => <span key={highlight}><Check size={15} /> {highlight}</span>)}
             </div>
           ) : null}
+          {descriptionBlocks.length ? (
+            <ProductDescriptionBlocks blocks={descriptionBlocks} />
+          ) : null}
         </div>
       </section>
 
@@ -107,12 +114,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <h3>Rooted in Lagos.</h3>
           <p>{info?.sustainabilityText ?? "Considered body care made with high-performing African botanicals."}</p>
         </article>
-        <dl>
-          {info?.weightValue ? <div><dt>Net weight</dt><dd>{info.weightValue} {info.weightUnit}</dd></div> : null}
-          {info?.countryOfOrigin ? <div><dt>Origin</dt><dd>{info.countryOfOrigin}</dd></div> : null}
-          {info?.manufacturer ? <div><dt>Made by</dt><dd>{info.manufacturer}</dd></div> : null}
-          {info?.sku ? <div><dt>SKU</dt><dd>{info.sku}</dd></div> : null}
-        </dl>
+        {detailRows.length ? (
+          <dl>
+            {detailRows.map((row) => (
+              <div key={`${row.label}-${row.value}`}>
+                <dt>{row.label}</dt>
+                <dd>{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
       </section>
 
       {relatedProducts.length ? (
