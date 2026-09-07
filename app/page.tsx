@@ -122,7 +122,7 @@ export default async function HomePage() {
         {products.length > featuredProducts.length ? (
           <div className="shop-view-more-row">
             <Link href="/shop" className="shop-view-more">
-              View all {products.length} products <ArrowRight size={17} />
+              View all products <ArrowRight size={17} />
             </Link>
           </div>
         ) : null}
