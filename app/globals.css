@@ -2226,18 +2226,38 @@ img {
 
 .partner-apply-section {
   scroll-margin-top: 5rem;
+  padding-bottom: 7rem !important;
+  border-top: 1px solid var(--line);
 }
 
 .partner-form {
   display: grid;
-  gap: 1.5rem;
-  max-width: 52rem;
+  gap: 2rem;
 }
 
 .partner-form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem;
+}
+
+.partner-form-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* The textarea keeps a readable measure; the consents sit beside it rather
+   than leaving a column of empty space. */
+.partner-form-split {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.partner-form-split__aside {
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
 }
 
 .partner-field {
@@ -2456,8 +2476,24 @@ img {
   white-space: nowrap;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .partner-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partner-form-grid--three,
+  .partner-form-split {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-form-split {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .partner-form-grid,
+  .partner-form-grid--three {
     grid-template-columns: 1fr;
   }
 }

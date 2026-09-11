@@ -179,94 +179,100 @@ export function PartnerApplicationForm() {
         </div>
       </fieldset>
 
-      <label className="partner-field partner-field--wide">
-        <span>Primary platform, handle and follower count</span>
-        <input
-          value={form.primaryPlatform}
-          onChange={(event) => set("primaryPlatform", event.target.value)}
-          name="primaryPlatform"
-          type="text"
-          placeholder="e.g. Instagram, @yourhandle, 12k"
-          required
-        />
-      </label>
-
-      <label className="partner-field partner-field--wide">
-        <span>Links to your top 2 platforms</span>
-        <input
-          value={form.platformLinks}
-          onChange={(event) => set("platformLinks", event.target.value)}
-          name="platformLinks"
-          type="text"
-          required
-        />
-      </label>
-
-      <label className="partner-field partner-field--wide">
-        <span>Links to 2 pieces of content you're most proud of</span>
-        <input
-          value={form.contentLinks}
-          onChange={(event) => set("contentLinks", event.target.value)}
-          name="contentLinks"
-          type="text"
-          required
-        />
-      </label>
-
-      <label className="partner-field partner-field--wide">
-        <span>Why do you want to join the Ahumma Creator Partner Network?</span>
-        <textarea
-          value={form.motivation}
-          onChange={(event) => set("motivation", event.target.value)}
-          name="motivation"
-          rows={5}
-          required
-        />
-      </label>
-
-      <label className="partner-field partner-field--wide partner-select">
-        <span>Are you currently working with any other skincare brands?</span>
-        <select
-          value={form.otherBrands}
-          onChange={(event) => set("otherBrands", event.target.value)}
-          name="otherBrands"
-        >
-          <option value="">Prefer not to say</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </label>
-
-      <div className="partner-agreements">
-        <label className="partner-checkbox">
+      <div className="partner-form-grid partner-form-grid--three">
+        <label className="partner-field">
+          <span>Primary platform, handle and follower count</span>
           <input
-            type="checkbox"
-            name="disclosureAgreement"
-            checked={form.disclosureAgreement}
-            onChange={(event) => set("disclosureAgreement", event.target.checked)}
+            value={form.primaryPlatform}
+            onChange={(event) => set("primaryPlatform", event.target.value)}
+            name="primaryPlatform"
+            type="text"
+            placeholder="e.g. Instagram, @yourhandle, 12k"
             required
           />
-          <span className="partner-checkbox__box" aria-hidden="true">
-            <Check size={13} />
-          </span>
-          <span>
-            I agree to disclose gifted and paid partnerships in line with FTC
-            (US) and Nigerian guidelines.
-          </span>
         </label>
-        <label className="partner-checkbox">
+        <label className="partner-field">
+          <span>Links to your top 2 platforms</span>
           <input
-            type="checkbox"
-            name="codeOfConduct"
-            checked={form.codeOfConduct}
-            onChange={(event) => set("codeOfConduct", event.target.checked)}
+            value={form.platformLinks}
+            onChange={(event) => set("platformLinks", event.target.value)}
+            name="platformLinks"
+            type="text"
             required
           />
-          <span className="partner-checkbox__box" aria-hidden="true">
-            <Check size={13} />
-          </span>
-          <span>I agree to the Partner Code of Conduct.</span>
         </label>
+        <label className="partner-field">
+          <span>Links to 2 pieces of content you're most proud of</span>
+          <input
+            value={form.contentLinks}
+            onChange={(event) => set("contentLinks", event.target.value)}
+            name="contentLinks"
+            type="text"
+            required
+          />
+        </label>
+      </div>
+
+      {/* Paired so the textarea keeps a readable measure instead of running
+          the full width of the page. */}
+      <div className="partner-form-split">
+        <label className="partner-field">
+          <span>Why do you want to join the Ahumma Creator Partner Network?</span>
+          <textarea
+            value={form.motivation}
+            onChange={(event) => set("motivation", event.target.value)}
+            name="motivation"
+            rows={7}
+            required
+          />
+        </label>
+
+        <div className="partner-form-split__aside">
+          <label className="partner-field partner-select">
+            <span>Are you currently working with any other skincare brands?</span>
+            <select
+              value={form.otherBrands}
+              onChange={(event) => set("otherBrands", event.target.value)}
+              name="otherBrands"
+            >
+              <option value="">Prefer not to say</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <div className="partner-agreements">
+            <label className="partner-checkbox">
+              <input
+                type="checkbox"
+                name="disclosureAgreement"
+                checked={form.disclosureAgreement}
+                onChange={(event) => set("disclosureAgreement", event.target.checked)}
+                required
+              />
+              <span className="partner-checkbox__box" aria-hidden="true">
+                <Check size={13} />
+              </span>
+              <span>
+                I agree to disclose gifted and paid partnerships in line with
+                FTC (US) and Nigerian guidelines.
+              </span>
+            </label>
+            <label className="partner-checkbox">
+              <input
+                type="checkbox"
+                name="codeOfConduct"
+                checked={form.codeOfConduct}
+                onChange={(event) => set("codeOfConduct", event.target.checked)}
+                required
+              />
+              <span className="partner-checkbox__box" aria-hidden="true">
+                <Check size={13} />
+              </span>
+              <span>I agree to the Partner Code of Conduct.</span>
+            </label>
+          </div>
+        </div>
       </div>
 
       <div className="partner-hidden-field" aria-hidden="true">
