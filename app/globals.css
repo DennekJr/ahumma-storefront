@@ -71,6 +71,7 @@ html {
   overscroll-behavior: none;
   scrollbar-color: rgba(29, 44, 34, 0.58) transparent;
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
 }
 
 /* 2-up tier, drawn at 834 */
@@ -299,6 +300,10 @@ img {
   .announcement-track {
     animation: none;
   }
+  .home-hero .site-header,
+  .home-hero .site-header .wordmark {
+    transition: none;
+  }
 }
 
 /* Header */
@@ -321,14 +326,27 @@ img {
   top: 0;
   right: 0;
   left: 0;
+  transition:
+    min-height 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 220ms ease,
+    color 220ms ease;
 }
 
 .home-hero .site-header.is-scrolled {
   position: fixed;
+  min-height: 3.2rem;
   background: rgba(250, 248, 243, 0.94);
   color: var(--ink);
   border-color: var(--line);
   backdrop-filter: blur(0.875rem);
+}
+
+.home-hero .site-header .wordmark {
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.home-hero .site-header.is-scrolled .wordmark {
+  transform: translateX(-50%) scale(0.8);
 }
 
 .home-hero .site-header.is-scrolled .wordmark img {
@@ -450,6 +468,7 @@ img {
 }
 
 .header-cart {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-self: end;
@@ -462,14 +481,41 @@ img {
   letter-spacing: 0.08em;
 }
 
-.header-cart small {
+.header-cart__visual {
+  position: relative;
+  display: inline-flex;
+}
+
+.header-cart__icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  flex: none;
+  fill: currentColor;
+}
+
+.header-cart__label {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 0.85;
+}
+
+.header-cart__count {
+  position: absolute;
+  top: 50%;
+  right: 0;
   display: grid;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.8rem;
+  height: 1.8rem;
   place-items: center;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  font-size: 0.5625rem;
+  color: currentColor;
+  font-family: var(--sans);
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 0.85;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .mobile-menu {
@@ -1276,6 +1322,7 @@ img {
   bottom: 1rem;
   z-index: 100;
   display: flex;
+  min-height: 3.2rem;
   align-items: center;
   gap: 2.5rem;
   max-width: calc(100vw - 2rem);
@@ -4006,6 +4053,9 @@ img {
       transform 180ms ease,
       visibility 180ms;
   }
+  .home-hero .site-header.is-scrolled .desktop-nav {
+    top: 3.2rem;
+  }
   .desktop-nav.is-open {
     visibility: visible;
     opacity: 1;
@@ -4038,7 +4088,7 @@ img {
     display: inline;
     font-size: 0.6875rem;
   }
-  .header-cart > span {
+  .header-cart__label {
     display: none;
   }
   .header-cart {
