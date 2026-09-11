@@ -104,9 +104,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // The SLA gate. FrontDesk has no field for this, so acceptance is enforced
-    // here but cannot be stored against the submission — an SLA field on the
-    // form would give it an audit trail.
+    // Enforced here as well as in the form, so a direct POST cannot skip it.
     if (body.slaAgreed !== true) {
       throw new ApplicationError(
         "You must accept the Service Level Agreement before applying",
@@ -130,6 +128,8 @@ export async function POST(request: Request) {
       [PARTNER_FIELDS.monthlyCommitment]: monthlyCommitment,
       [PARTNER_FIELDS.disclosureAgreement]: AGREED_VALUE,
       [PARTNER_FIELDS.codeOfConduct]: AGREED_VALUE,
+      // A checkbox field, so it takes a boolean rather than a choice id.
+      [PARTNER_FIELDS.slaAgreed]: true,
       ...(otherBrands ? { [PARTNER_FIELDS.otherBrands]: otherBrands } : {}),
     };
 
