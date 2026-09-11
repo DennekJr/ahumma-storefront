@@ -4,26 +4,101 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScrollLink } from "@/components/scroll-link";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useCart } from "@/components/cart-provider";
-import { STORE_CURRENCIES } from "@/lib/format";
 
 export function SiteHeader({ light = false }: { light?: boolean }) {
-  const { itemCount, openCart, currency, setCurrency } = useCart();
+  const { itemCount, openCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const updateScrollState = () => setIsScrolled(window.scrollY > 8);
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    const hero = header?.closest<HTMLElement>(".home-hero");
 
-    updateScrollState();
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrollState);
+    if (!header || !hero) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const mediaQuery = gsap.matchMedia();
+    mediaQuery.add("(prefers-reduced-motion: no-preference)", () => {
+      const wordmark = header.querySelector<HTMLElement>(".wordmark");
+      const logo = header.querySelector<HTMLElement>(".wordmark img");
+      const rootStyles = getComputedStyle(document.documentElement);
+      const ink = rootStyles.getPropertyValue("--ink").trim();
+      const line = rootStyles.getPropertyValue("--line").trim();
+      const lineLight = rootStyles.getPropertyValue("--line-light").trim();
+      const initialHeaderHeight = getComputedStyle(header)
+        .getPropertyValue("--header-height")
+        .trim();
+      const announcementBar = hero.previousElementSibling;
+      const initialHeaderTop =
+        announcementBar instanceof HTMLElement &&
+        announcementBar.classList.contains("announcement-bar")
+          ? announcementBar.getBoundingClientRect().height
+          : 0;
+      const context = gsap.context(() => {
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            start: "top top",
+            end: "+=40",
+            scrub: true,
+          },
+        });
+
+        timeline.fromTo(
+          header,
+          {
+            top: `${initialHeaderTop}px`,
+            "--header-height": initialHeaderHeight,
+            backgroundColor: "transparent",
+            color: "white",
+            borderColor: lineLight,
+            backdropFilter: "blur(0px)",
+          },
+          {
+            top: "0px",
+            "--header-height": "3.2rem",
+            backgroundColor: "rgba(250, 248, 243, 0.94)",
+            color: ink,
+            borderColor: line,
+            backdropFilter: "blur(0.875rem)",
+            ease: "none",
+          },
+          0,
+        );
+
+        if (wordmark) {
+          timeline.fromTo(
+            wordmark,
+            { scale: 1 },
+            { scale: 0.8, ease: "none" },
+            0,
+          );
+        }
+
+        if (logo) {
+          timeline.fromTo(
+            logo,
+            { filter: "invert(1) brightness(2)" },
+            { filter: "invert(0) brightness(1)", ease: "none" },
+            0,
+          );
+        }
+      }, header);
+
+      return () => context.revert();
+    });
+
+    return () => mediaQuery.revert();
   }, []);
 
   return (
     <header
-      className={`site-header ${light ? "site-header--light" : ""} ${isScrolled ? "is-scrolled" : ""}`}
+      ref={headerRef}
+      className={`site-header ${light ? "site-header--light" : ""}`}
     >
       <button
         type="button"
@@ -58,23 +133,6 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
         />
       </Link>
       <div className="header-actions">
-        <div className="currency-switcher" aria-label="Shopping currency">
-          {STORE_CURRENCIES.map((option) => (
-            <button
-              type="button"
-              key={option}
-              className={currency === option ? "is-active" : ""}
-              aria-pressed={currency === option}
-              aria-label={`Show prices in ${option}`}
-              onClick={() => setCurrency(option)}
-            >
-              <span className="currency-long">{option}</span>
-              <span className="currency-symbol" aria-hidden="true">
-                {option === "NGN" ? "₦" : "$"}
-              </span>
-            </button>
-          ))}
-        </div>
         <button
           type="button"
           className="header-cart"

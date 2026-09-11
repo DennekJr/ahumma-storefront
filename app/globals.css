@@ -308,13 +308,14 @@ img {
 
 /* Header */
 .site-header {
+  --header-height: 4.875rem;
   position: sticky;
   top: 0;
   z-index: 30;
   display: grid;
   grid-template-columns: 1fr 8.875rem 1fr;
   align-items: center;
-  min-height: 4.875rem;
+  min-height: var(--header-height);
   padding: 0 2.4rem;
   border-bottom: 1px solid var(--line);
   background: rgba(250, 248, 243, 0.92);
@@ -322,35 +323,15 @@ img {
 }
 
 .home-hero .site-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  transition:
-    min-height 220ms cubic-bezier(0.23, 1, 0.32, 1),
-    border-color 220ms ease,
-    color 220ms ease;
-}
-
-.home-hero .site-header.is-scrolled {
-  position: fixed;
-  min-height: 3.2rem;
-  background: rgba(250, 248, 243, 0.94);
-  color: var(--ink);
-  border-color: var(--line);
-  backdrop-filter: blur(0.875rem);
+  transition: none;
 }
 
 .home-hero .site-header .wordmark {
-  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.home-hero .site-header.is-scrolled .wordmark {
-  transform: translateX(-50%) scale(0.8);
-}
-
-.home-hero .site-header.is-scrolled .wordmark img {
-  filter: none;
+  transition: none;
 }
 
 .site-header--light {
@@ -4022,7 +4003,7 @@ img {
   }
   .site-header {
     grid-template-columns: 1fr 7.25rem 1fr;
-    min-height: 4.1875rem;
+    --header-height: 4.1875rem;
     padding: 0 1.0625rem;
   }
   .wordmark {
@@ -4034,7 +4015,7 @@ img {
   }
   .desktop-nav {
     position: absolute;
-    top: 4.1875rem;
+    top: var(--header-height);
     right: 0;
     left: 0;
     display: flex;
@@ -4053,9 +4034,7 @@ img {
       transform 180ms ease,
       visibility 180ms;
   }
-  .home-hero .site-header.is-scrolled .desktop-nav {
-    top: 3.2rem;
-  }
+
   .desktop-nav.is-open {
     visibility: visible;
     opacity: 1;
