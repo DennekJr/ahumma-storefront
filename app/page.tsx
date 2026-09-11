@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, MoveRight, Sparkles } from "lucide-react";
 import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
+import { ScrollLink } from "@/components/scroll-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
@@ -63,9 +64,9 @@ export default async function HomePage() {
           <h1>At the edge of everything beautiful is you.</h1>
           <Link href="/shop" className="hero-link">Explore the collection <ArrowRight size={17} /></Link>
         </div>
-        <Link href="#philosophy" className="hero-scroll" aria-label="Read the Ahumma philosophy">
+        <ScrollLink href="#philosophy" className="hero-scroll" aria-label="Read the Ahumma philosophy">
           <ArrowDown size={20} />
-        </Link>
+        </ScrollLink>
         <div className="hero-note">Premium body butters &amp; liquid African black soap<br />rooted in Africa, made for the world</div>
       </section>
 
@@ -76,7 +77,7 @@ export default async function HomePage() {
         </div>
         <div className="philosophy-copy">
           <p>We don&apos;t believe in fixing you. We believe in caring for you — body care rooted in African heritage, made to nourish the skin you already have.</p>
-          <Link href="#ritual" className="underlined-link">Discover our approach <MoveRight size={18} /></Link>
+          <ScrollLink href="#ritual" className="underlined-link">Discover our approach <MoveRight size={18} /></ScrollLink>
         </div>
       </section>
 
@@ -93,7 +94,7 @@ export default async function HomePage() {
           <h2 id="love-your-skin-title">Love your skin</h2>
           <p className="love-skin__lead">Your skin tells your story — nourish it, honor it, and let it glow.</p>
           <p className="love-skin__body">Rich, whipped body butters made with shea, mango and cocoa to deeply nourish Black and brown skin. Not to correct it, not to change it — to care for it. Every application is five quiet minutes that belong entirely to you.</p>
-          <Link href="#shop" className="love-skin__cta">Shop now <ArrowRight size={17} /></Link>
+          <ScrollLink href="#shop" className="love-skin__cta">Shop now <ArrowRight size={17} /></ScrollLink>
         </div>
       </section>
 
@@ -163,7 +164,7 @@ export default async function HomePage() {
             <div><span>02</span><strong>Nourish</strong><small>Seal in lasting comfort</small></div>
             <div><span>03</span><strong>Glow</strong><small>Return to your radiance</small></div>
           </div>
-          <Link href="#shop" className="light-link">Build your ritual <ArrowRight size={17} /></Link>
+          <ScrollLink href="#shop" className="light-link">Build your ritual <ArrowRight size={17} /></ScrollLink>
         </div>
       </section>
 

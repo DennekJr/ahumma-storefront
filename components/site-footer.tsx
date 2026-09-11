@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollLink } from "@/components/scroll-link";
 import { ArrowRight, AtSign } from "lucide-react";
 
 export function SiteFooter() {
@@ -21,8 +22,8 @@ export function SiteFooter() {
         <div className="footer-links-column">
           <span>Explore</span>
           <Link href="/shop">Shop all</Link>
-          <Link href="/#concerns">Shop by concern</Link>
-          <Link href="/#ritual">Our ritual</Link>
+          <ScrollLink href="/#concerns">Shop by concern</ScrollLink>
+          <ScrollLink href="/#ritual">Our ritual</ScrollLink>
         </div>
         <div className="footer-links-column">
           <span>Care</span>

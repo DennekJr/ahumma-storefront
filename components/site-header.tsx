@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollLink } from "@/components/scroll-link";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
@@ -18,8 +19,8 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
       </button>
       <nav className={`desktop-nav ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">
         <Link href="/shop" onClick={() => setMenuOpen(false)}>Shop</Link>
-        <Link href="/#concerns" onClick={() => setMenuOpen(false)}>By concern</Link>
-        <Link href="/#ritual" onClick={() => setMenuOpen(false)}>The ritual</Link>
+        <ScrollLink href="/#concerns" onClick={() => setMenuOpen(false)}>By concern</ScrollLink>
+        <ScrollLink href="/#ritual" onClick={() => setMenuOpen(false)}>The ritual</ScrollLink>
       </nav>
       <Link href="/" className="wordmark" aria-label="Ahumma home">
         <Image src="/images/ahumma-logo.png" alt="Ahumma" width={158} height={44} loading="eager" />
