@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
+import { AnnouncementBar } from "@/components/announcement-bar";
 import { PartnerApplicationForm } from "@/components/partner-application-form";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
@@ -36,10 +37,7 @@ export default function PartnerNetworkPage() {
         ])}
       />
 
-      <div className="announcement-bar">
-        <span>Complimentary Lagos delivery on orders over ₦60,000</span>
-        <span className="announcement-desktop">Made in Lagos · Shipping worldwide</span>
-      </div>
+      <AnnouncementBar />
       <SiteHeader />
 
       <header className="partner-hero">
@@ -152,12 +150,15 @@ export default function PartnerNetworkPage() {
         <p>
           Refer a creator, and once they reach Standard Partner you earn
           <strong> 1% of what they sell</strong> for the following three months.
-          The boost only starts once they have proven themselves at Standard, and
-          it stacks with every creator you bring who gets there.
+          The boost only starts once they have proven themselves at Standard,
+          and it stacks with every creator you bring who gets there.
         </p>
       </section>
 
-      <section className="partner-onboarding" aria-labelledby="onboarding-heading">
+      <section
+        className="partner-onboarding"
+        aria-labelledby="onboarding-heading"
+      >
         <div className="partner-section-heading">
           <span className="eyebrow">Getting started</span>
           <h2 id="onboarding-heading">
@@ -196,7 +197,11 @@ export default function PartnerNetworkPage() {
         </div>
       </section>
 
-      <section className="partner-apply-section" id="apply" aria-labelledby="apply-heading">
+      <section
+        className="partner-apply-section"
+        id="apply"
+        aria-labelledby="apply-heading"
+      >
         <div className="partner-section-heading">
           <span className="eyebrow">Apply</span>
           <h2 id="apply-heading">Tell us about your work.</h2>

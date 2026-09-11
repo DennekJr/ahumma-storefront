@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
@@ -30,10 +31,7 @@ export default function FaqPage() {
         ])}
       />
 
-      <div className="announcement-bar">
-        <span>Complimentary Lagos delivery on orders over ₦60,000</span>
-        <span className="announcement-desktop">Made in Lagos · Shipping worldwide</span>
-      </div>
+      <AnnouncementBar />
       <SiteHeader />
 
       <header className="faq-hero">

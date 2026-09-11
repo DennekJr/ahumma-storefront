@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { AnnouncementBar } from "@/components/announcement-bar";
 import { ProductCard } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import { getCollections, getProducts, hasFrontdeskReads } from "@/lib/frontdesk";
+import {
+  getCollections,
+  getProducts,
+  hasFrontdeskReads,
+} from "@/lib/frontdesk";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -15,7 +20,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/shop" },
   openGraph: {
     title: "Ahumma — Shop all",
-    description: "Whipped body butters and liquid African black soap, made in Nigeria.",
+    description:
+      "Whipped body butters and liquid African black soap, made in Nigeria.",
   },
 };
 
@@ -30,7 +36,9 @@ export default async function ShopPage() {
   const collectedRefs = new Set(
     collections.flatMap((collection) => collection.productRefs),
   );
-  const bodyCare = products.filter((product) => !collectedRefs.has(product.ref));
+  const bodyCare = products.filter(
+    (product) => !collectedRefs.has(product.ref),
+  );
 
   const groups = [
     {
@@ -73,10 +81,7 @@ export default async function ShopPage() {
         ])}
       />
 
-      <div className="announcement-bar">
-        <span>Complimentary Lagos delivery on orders over ₦60,000</span>
-        <span className="announcement-desktop">Made in Lagos · Shipping worldwide</span>
-      </div>
+      <AnnouncementBar />
       <SiteHeader />
 
       <header className="shop-hero">
@@ -112,15 +117,19 @@ export default async function ShopPage() {
           {group.products.length ? (
             <div className="product-grid">
               {group.products.map((product, index) => (
-                <ProductCard product={product} index={index} key={product.ref} />
+                <ProductCard
+                  product={product}
+                  index={index}
+                  key={product.ref}
+                />
               ))}
             </div>
           ) : (
             <div className="shop-group__empty">
               <span className="eyebrow">Coming soon</span>
               <p>
-                {group.title} is on its way. Join the Ahumma Circle and you&apos;ll
-                hear first.
+                {group.title} is on its way. Join the Ahumma Circle and
+                you&apos;ll hear first.
               </p>
             </div>
           )}
