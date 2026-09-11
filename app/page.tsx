@@ -211,8 +211,10 @@ export default async function HomePage() {
 
       <section className="made-for-section" id="made-for">
         <div className="made-for-intro">
-          <span className="eyebrow">Made for Black &amp; brown skin</span>
-          <h2>Your skin. Your ritual.<br />Your beauty.</h2>
+          <div>
+            <span className="eyebrow">Made for Black &amp; brown skin</span>
+            <h2>Your skin. Your ritual.<br />Your beauty.</h2>
+          </div>
           <p className="made-for-lede">
             Ahumma was created with Black and brown skin at the heart of the brand.
             From the richness of deep melanin to every shade in between, our products

@@ -796,9 +796,9 @@ img {
 
 .made-for-intro {
   display: grid;
-  grid-template-columns: 0.65fr 2fr;
-  gap: 2.125rem;
-  align-items: start;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 3.75rem;
+  align-items: end;
   margin-bottom: 4.375rem;
 }
 
@@ -1996,8 +1996,8 @@ img {
 }
 
 .made-for-lede {
-  max-width: 34rem;
-  margin: 1.375rem 0 0;
+  max-width: 26.25rem;
+  margin: 0 0 0.25rem auto;
   font-size: 0.9375rem;
   line-height: 1.65;
 }
@@ -2279,6 +2279,19 @@ img {
 
   .ingredient-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .made-for-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .made-for-lede {
+    max-width: 34rem;
+    margin: 0;
   }
 }
 
