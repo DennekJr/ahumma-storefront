@@ -73,6 +73,22 @@ function checkoutReturnUrl(requestOrigin: string) {
   return new URL("/checkout/complete", origin).toString();
 }
 
+/**
+ * fetch rejects with a bare TypeError when the network is unavailable. Wrapping
+ * it gives callers something they can branch on instead of an unhandled crash.
+ */
+async function requestWithNetworkGuard(url: string, init: RequestInit) {
+  try {
+    return await fetch(url, init);
+  } catch (error) {
+    throw new FrontdeskApiError(
+      "Could not reach FrontDesk.",
+      503,
+      { code: "NETWORK_ERROR", details: error },
+    );
+  }
+}
+
 async function parseResponse<T>(response: Response): Promise<T> {
   const payload = await response.json().catch(() => null);
 
@@ -100,7 +116,7 @@ async function publicRequest<T>(path: string): Promise<T> {
     });
   }
 
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await requestWithNetworkGuard(`${API_BASE}${path}`, {
     headers: {
       Authorization: `Bearer ${key}`,
       Origin: siteOrigin(),
@@ -133,7 +149,7 @@ async function secretRequest<T>(
     });
   }
 
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await requestWithNetworkGuard(`${API_BASE}${path}`, {
     ...init,
     headers: {
       Authorization: `Bearer ${key}`,
@@ -162,6 +178,15 @@ export async function getProducts(): Promise<ProductSummary[]> {
     if (error instanceof FrontdeskApiError && error.code === "NOT_CONFIGURED") {
       return demoProductSummaries;
     }
+
+    // A dropped connection should not take the page down with it. Render an
+    // empty collection rather than demo data, whose slugs and prices would be
+    // wrong for a live store.
+    if (error instanceof FrontdeskApiError && error.code === "NETWORK_ERROR") {
+      console.error("FrontDesk unreachable while loading products", error);
+      return [];
+    }
+
     throw error;
   }
 }

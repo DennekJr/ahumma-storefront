@@ -59,14 +59,14 @@ export default async function HomePage() {
           />
         </div>
         <div className="hero-copy">
-          <span className="eyebrow eyebrow--light">Made for the skin you live in</span>
+          <span className="eyebrow eyebrow--light">Beautiful skin. Beautiful rituals. Beautifully you.</span>
           <h1>At the edge of everything beautiful is you.</h1>
-          <Link href="#shop" className="hero-link">Explore the collection <ArrowRight size={17} /></Link>
+          <Link href="/shop" className="hero-link">Explore the collection <ArrowRight size={17} /></Link>
         </div>
         <Link href="#philosophy" className="hero-scroll" aria-label="Read the Ahumma philosophy">
           <ArrowDown size={20} />
         </Link>
-        <div className="hero-note">Plant-powered care<br />for every body</div>
+        <div className="hero-note">Premium body butters &amp; liquid African black soap<br />rooted in Africa, made for the world</div>
       </section>
 
       <section className="philosophy-section" id="philosophy">
@@ -75,7 +75,7 @@ export default async function HomePage() {
           <h2>Skin care, as<br />an act of return.</h2>
         </div>
         <div className="philosophy-copy">
-          <p>We make high-performance body care with African botanicals—designed to bring you back to softness, back to radiance, back to yourself.</p>
+          <p>We don&apos;t believe in fixing you. We believe in caring for you — body care rooted in African heritage, made to nourish the skin you already have.</p>
           <Link href="#ritual" className="underlined-link">Discover our approach <MoveRight size={18} /></Link>
         </div>
       </section>
@@ -92,7 +92,7 @@ export default async function HomePage() {
         <div className="love-skin__content">
           <h2 id="love-your-skin-title">Love your skin</h2>
           <p className="love-skin__lead">Your skin tells your story — nourish it, honor it, and let it glow.</p>
-          <p className="love-skin__body">Indulge in rich, plant-powered body butters designed to deeply hydrate, smooth, and restore your natural radiance. From softening rough patches to enhancing your glow, every application is an act of self-love.</p>
+          <p className="love-skin__body">Rich, whipped body butters made with shea, mango and cocoa to deeply nourish Black and brown skin. Not to correct it, not to change it — to care for it. Every application is five quiet minutes that belong entirely to you.</p>
           <Link href="#shop" className="love-skin__cta">Shop now <ArrowRight size={17} /></Link>
         </div>
       </section>

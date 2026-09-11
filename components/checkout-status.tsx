@@ -92,7 +92,7 @@ export function CheckoutStatus({ checkoutRef }: { checkoutRef?: string }) {
             <RefreshCw size={15} /> Check again
           </button>
         ) : null}
-        <Link href="/#shop" className="filled">Continue shopping <ArrowRight size={15} /></Link>
+        <Link href="/shop" className="filled">Continue shopping <ArrowRight size={15} /></Link>
       </div>
     </div>
   );

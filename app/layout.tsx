@@ -21,18 +21,18 @@ function getMetadataBase() {
 
 export const metadata: Metadata = {
   title: {
-    default: "Ahumma — Plant-powered body care",
+    default: "Ahumma — Body care for Black and brown skin",
     template: "%s — Ahumma",
   },
   description:
-    "Considered body care made in Lagos with African botanicals for softer, nourished and radiant skin.",
+    "A Nigerian-born premium body-care brand for Black and brown skin. Whipped body butters and liquid African black soap, rooted in African heritage.",
   metadataBase: getMetadataBase(),
   ...(indexingAllowed()
     ? {}
     : { robots: { index: false, follow: false } }),
   openGraph: {
     title: "Ahumma — At the edge of everything beautiful is you",
-    description: "Plant-powered body care, made in Lagos.",
+    description: "Premium body butters and liquid African black soap, rooted in Africa and made for the world.",
     images: ["/images/skin-closeup.jpg"],
   },
 };

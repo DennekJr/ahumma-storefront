@@ -6,7 +6,7 @@ export const demoProducts: ProductDetail[] = [
     name: "Ara Refined African Black Soap",
     slug: "ahumma-ara-refined-african-black-soap",
     description:
-      "A gentle, plant-powered cleanse that helps clarify the skin without taking its comfort with it.",
+      "A gentle liquid African black soap that cleanses without taking your skin's comfort with it.",
     coverUrl: "/images/ara-soap.jpg",
     media: [
       "/images/ara-soap.jpg",

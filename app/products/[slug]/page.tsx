@@ -64,7 +64,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <SiteHeader />
 
       <div className="product-breadcrumb">
-        <Link href="/#shop"><ArrowLeft size={15} /> The collection</Link>
+        <Link href="/shop"><ArrowLeft size={15} /> The collection</Link>
         <span>/</span>
         <span>{info?.infoCategory ?? "Body care"}</span>
       </div>
@@ -143,7 +143,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <span className="eyebrow">Continue the ritual</span>
               <h2>You may also<br />love.</h2>
             </div>
-            <Link href="/#shop" className="underlined-link related-products__link">
+            <Link href="/shop" className="underlined-link related-products__link">
               Shop all essentials <ArrowRight size={17} />
             </Link>
           </div>
@@ -158,7 +158,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="product-closing">
         <span className="eyebrow eyebrow--light">Ahumma</span>
         <p>Care for the body.<br />A return to the self.</p>
-        <Link href="/#shop">Explore every essential <ArrowLeft size={16} /></Link>
+        <Link href="/shop">Explore every essential <ArrowLeft size={16} /></Link>
       </section>
       <SiteFooter />
     </main>

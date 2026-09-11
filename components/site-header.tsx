@@ -17,7 +17,7 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
         {menuOpen ? <X size={21} /> : <Menu size={21} />}
       </button>
       <nav className={`desktop-nav ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">
-        <Link href="/#shop" onClick={() => setMenuOpen(false)}>Shop</Link>
+        <Link href="/shop" onClick={() => setMenuOpen(false)}>Shop</Link>
         <Link href="/#concerns" onClick={() => setMenuOpen(false)}>By concern</Link>
         <Link href="/#ritual" onClick={() => setMenuOpen(false)}>The ritual</Link>
       </nav>

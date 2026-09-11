@@ -16,7 +16,7 @@ export function SiteFooter() {
       <div className="footer-directory">
         <div className="footer-logo">
           <Image src="/images/ahumma-logo.png" alt="Ahumma" width={190} height={53} />
-          <p>Plant-powered body care, made in Lagos.</p>
+          <p>Born in Nigeria. Made for the world.</p>
         </div>
         <div className="footer-links-column">
           <span>Explore</span>
@@ -32,7 +32,7 @@ export function SiteFooter() {
           <a href="https://ahumma.com/return-cancellations/" target="_blank" rel="noreferrer">Returns</a>
           <a href="https://ahumma.com/contact/" target="_blank" rel="noreferrer">Contact</a>
         </div>
-        <Link className="footer-shop-link" href="/#shop">
+        <Link className="footer-shop-link" href="/shop">
           Find your ritual <ArrowRight size={18} />
         </Link>
       </div>

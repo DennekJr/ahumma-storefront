@@ -106,7 +106,7 @@ export default function FaqPage() {
           <br />
           everything beautiful is you.
         </p>
-        <Link href="/#shop">
+        <Link href="/shop">
           Shop Ahumma <ArrowRight size={16} />
         </Link>
       </section>
