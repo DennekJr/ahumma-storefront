@@ -135,3 +135,45 @@ export const PARTNER_BENEFITS = [
     body: "Early, high-performing partners are best placed for larger campaigns and paid ambassador roles as Ahumma grows.",
   },
 ];
+
+/**
+ * Field ids on the published FrontDesk form. Stable per field, regenerated if
+ * the form is rebuilt, so this is the one place to update when that happens:
+ * GET /v1/storefront/by-handle/ahumma/forms/ahumma-creator-partner-network
+ */
+export const PARTNER_FORM_SLUG = "ahumma-creator-partner-network";
+
+export const PARTNER_FIELDS = {
+  fullName: "f01a0340a3741718fa3dabe150be3dba7",
+  email: "f01a0340a3742700c83d77c12cdd2583c",
+  phone: "nf_1787579535935_0",
+  categories: "nf_1787598872093_0",
+  primaryPlatform: "nf_1787598950858_1",
+  platformLinks: "nf_1787598986915_2",
+  contentLinks: "nf_1787599014073_3",
+  motivation: "nf_1787599030005_4",
+  otherBrands: "nf_1787599053104_5",
+  monthlyCommitment: "nf_1787599089982_6",
+  disclosureAgreement: "nf_1787599116362_7",
+  codeOfConduct: "nf_1787599160741_8",
+} as const;
+
+export const CONTENT_CATEGORIES = [
+  { id: "beauty", label: "Beauty" },
+  { id: "ugc", label: "UGC" },
+  { id: "mother-family", label: "Mother & Family" },
+  { id: "lifestyle", label: "Lifestyle" },
+  { id: "male-skincare", label: "Male Skincare" },
+] as const;
+
+/** Widened from the const-asserted literals so runtime input can be checked. */
+export const CATEGORY_IDS: string[] = CONTENT_CATEGORIES.map((c) => c.id);
+
+/**
+ * The two consent fields are authored as selects rather than checkboxes, and
+ * the disclosure field offers a single choice literally labelled "Yes/No".
+ * Both are rendered here as the agreements they are; these are the values
+ * FrontDesk validates against.
+ */
+export const DISCLOSURE_AGREED_VALUE = "yes-no";
+export const CONDUCT_AGREED_VALUE = "yes";

@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
+import { PartnerApplicationForm } from "@/components/partner-application-form";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import {
   ONBOARDING_STEPS,
   PARTNER_BENEFITS,
-  PARTNER_FORM_URL,
   PARTNER_GOALS,
   PARTNER_TIERS,
   QUALITY_CONTENT,
@@ -54,12 +54,7 @@ export default function PartnerNetworkPage() {
           from a Nigerian favourite to a globally recognised, melanin-first
           body-care name.
         </p>
-        <a
-          className="partner-apply"
-          href={PARTNER_FORM_URL}
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a className="partner-apply" href="#apply">
           Apply to join <ArrowRight size={17} />
         </a>
       </header>
@@ -201,18 +196,27 @@ export default function PartnerNetworkPage() {
         </div>
       </section>
 
+      <section className="partner-apply-section" id="apply" aria-labelledby="apply-heading">
+        <div className="partner-section-heading">
+          <span className="eyebrow">Apply</span>
+          <h2 id="apply-heading">Tell us about your work.</h2>
+          <p>
+            Applications are reviewed by the Partner Network Manager. Everyone
+            starts as a Founding Partner.
+          </p>
+        </div>
+        <PartnerApplicationForm />
+      </section>
+
       <section className="partner-closing">
-        <span className="eyebrow eyebrow--light">Join us</span>
+        <span className="eyebrow eyebrow--light">Ahumma</span>
         <p>
           At the edge of
           <br />
           everything beautiful is you.
         </p>
-        <a href={PARTNER_FORM_URL} target="_blank" rel="noreferrer">
-          Apply to the Partner Network <ArrowRight size={16} />
-        </a>
-        <Link className="partner-closing__secondary" href="/shop">
-          Explore the collection
+        <Link href="/shop">
+          Explore the collection <ArrowRight size={16} />
         </Link>
       </section>
 
