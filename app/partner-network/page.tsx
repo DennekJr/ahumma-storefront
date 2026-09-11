@@ -12,6 +12,12 @@ import {
   PARTNER_GOALS,
   PARTNER_TIERS,
   QUALITY_CONTENT,
+  SLA_BRAND_COMMITMENTS,
+  SLA_ESCALATION,
+  SLA_PARTNER_COMMITMENTS,
+  SLA_PURPOSE,
+  SLA_REVIEW,
+  SLA_TURNAROUND,
 } from "@/lib/partner-network";
 import { breadcrumbSchema } from "@/lib/structured-data";
 
@@ -190,11 +196,66 @@ export default function PartnerNetworkPage() {
         </div>
       </section>
 
-      <section
-        className="partner-apply-section"
-        id="apply"
-        aria-labelledby="apply-heading"
-      >
+      <section className="partner-sla" id="sla" aria-labelledby="sla-heading">
+        <div className="partner-section-heading">
+          <span className="eyebrow">Service level agreement</span>
+          <h2 id="sla-heading">What we owe each other.</h2>
+          <p>{SLA_PURPOSE}</p>
+        </div>
+
+        <div className="sla-columns">
+          <div className="sla-column">
+            <h3>Ahumma commits to</h3>
+            <dl>
+              {SLA_BRAND_COMMITMENTS.map((item) => (
+                <div key={item.title}>
+                  <dt>{item.title}</dt>
+                  <dd>{item.body}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="sla-column">
+            <h3>You commit to</h3>
+            <dl>
+              {SLA_PARTNER_COMMITMENTS.map((item) => (
+                <div key={item.title}>
+                  <dt>{item.title}</dt>
+                  <dd>{item.body}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+
+        <div className="sla-lower">
+          <div className="sla-turnaround">
+            <h3>Turnaround at a glance</h3>
+            <table>
+              <tbody>
+                {SLA_TURNAROUND.map((row) => (
+                  <tr key={row.service}>
+                    <th scope="row">{row.service}</th>
+                    <td>{row.commitment}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="sla-escalation">
+            <h3>If something goes wrong</h3>
+            <ol>
+              {SLA_ESCALATION.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <p className="sla-review">{SLA_REVIEW}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="partner-apply-section" id="apply" aria-labelledby="apply-heading">
         <div className="partner-section-heading">
           <h2 id="apply-heading">Tell us about your work.</h2>
           <p>
