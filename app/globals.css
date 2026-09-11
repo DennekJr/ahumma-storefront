@@ -518,7 +518,7 @@ img {
 
 .philosophy-heading h2,
 .section-heading h2,
-.concerns-intro h2,
+.made-for-intro h2,
 .ritual-copy h2,
 .made-copy h2,
 .product-story h2,
@@ -538,6 +538,10 @@ img {
   justify-content: flex-end;
   max-width: 29.375rem;
   padding-bottom: 0.4375rem;
+}
+
+.philosophy-copy p {
+  margin: 0 0 1.5rem;
 }
 
 .philosophy-copy p {
@@ -786,11 +790,11 @@ img {
   transform: rotate(90deg);
 }
 
-.concerns-section {
+.made-for-section {
   padding: 9.375rem 5.5vw;
 }
 
-.concerns-intro {
+.made-for-intro {
   display: grid;
   grid-template-columns: 0.65fr 2fr;
   gap: 2.125rem;
@@ -798,18 +802,18 @@ img {
   margin-bottom: 4.375rem;
 }
 
-.concerns-intro h2 {
+.made-for-intro h2 {
   margin: -0.5625rem 0 0;
   font-size: clamp(3rem, 5.4vw, 5.125rem);
 }
 
-.concern-grid {
+.made-for-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 0.9375rem;
 }
 
-.concern-card {
+.made-for-card {
   position: relative;
   display: block;
   min-height: 33.125rem;
@@ -817,25 +821,25 @@ img {
   background: var(--sand);
 }
 
-.concern-card img {
+.made-for-card img {
   object-fit: cover;
   filter: saturate(0.85);
   transition: transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 300ms ease;
 }
 
-.concern-card:hover img {
+.made-for-card:hover img {
   filter: saturate(1);
   transform: scale(1.035);
 }
 
-.concern-card::after {
+.made-for-card::after {
   position: absolute;
   inset: 50% 0 0;
   background: linear-gradient(transparent, rgba(12, 20, 15, 0.58));
   content: "";
 }
 
-.concern-card > span {
+.made-for-card > span {
   position: absolute;
   z-index: 2;
   right: 1.375rem;
@@ -850,7 +854,7 @@ img {
   letter-spacing: -0.025em;
 }
 
-.concern-card > span small {
+.made-for-card > span small {
   margin-right: auto;
   font-family: var(--sans);
   font-size: 0.5625rem;
@@ -1919,6 +1923,395 @@ img {
 
   .faq-closing {
     padding: 6.5rem 8vw;
+  }
+}
+
+/* Homepage build-out */
+.story-section,
+.global-section {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 5rem;
+  padding: 8.75rem var(--gutter);
+  background: var(--porcelain);
+}
+
+.global-section {
+  background: var(--forest);
+  color: white;
+}
+
+.story-copy h2 {
+  margin: 1.375rem 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.story-body {
+  align-self: center;
+  max-width: 38rem;
+}
+
+.story-body p {
+  margin: 0 0 1.25rem;
+  font-size: 1.0625rem;
+  line-height: 1.68;
+}
+
+.story-body p:last-child {
+  margin-bottom: 0;
+}
+
+.story-body__close {
+  font-family: var(--serif);
+  font-size: 1.3125rem !important;
+  letter-spacing: -0.018em;
+}
+
+.global-copy h2 {
+  margin: 1.375rem 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.global-body {
+  align-self: center;
+  max-width: 38rem;
+}
+
+.global-body p {
+  margin: 0 0 1.25rem;
+  font-size: 1.0625rem;
+  line-height: 1.68;
+}
+
+.global-body p:last-child {
+  margin-bottom: 0;
+}
+
+.made-for-lede {
+  max-width: 34rem;
+  margin: 1.375rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.ritual-intro-section {
+  padding: 8.75rem var(--gutter) 0;
+  background: var(--porcelain);
+}
+
+.ritual-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3.5rem;
+  max-width: var(--content-max);
+  margin: 0 auto 5rem;
+}
+
+.ritual-category h3 {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ritual-category__tagline {
+  margin: 0.875rem 0 0.75rem !important;
+  font-family: var(--serif);
+  font-size: 1.4375rem;
+  letter-spacing: -0.02em;
+}
+
+.ritual-category p {
+  margin: 0;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.9375rem;
+  line-height: 1.62;
+}
+
+.ritual-product-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--line);
+}
+
+.ritual-product {
+  display: grid;
+  align-content: start;
+  gap: 0.625rem;
+  padding: 2.25rem 1.5rem 2.5rem;
+  background: var(--porcelain);
+  transition: background 240ms ease;
+}
+
+.ritual-product:hover {
+  background: var(--sand);
+}
+
+.ritual-product__name {
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ritual-product__tagline {
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.ritual-product__body {
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.875rem;
+  line-height: 1.58;
+}
+
+.ritual-product__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.why-section,
+.ingredient-section {
+  padding: 8.75rem var(--gutter);
+  background: var(--porcelain);
+}
+
+.ingredient-section {
+  background: var(--paper);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3rem;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem 3.5rem;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.why-grid h3,
+.ingredient-grid h3 {
+  margin: 0 0 0.75rem;
+  padding-top: 1.125rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.why-grid p,
+.ingredient-grid p {
+  margin: 0;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.9375rem;
+  line-height: 1.62;
+}
+
+.circle-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  padding: 8.75rem var(--gutter);
+  background: var(--sand);
+}
+
+.circle-copy h2 {
+  margin: 1.375rem 0 1.25rem;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.circle-copy p {
+  margin: 0 0 1.5rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.circle-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.circle-benefits li {
+  padding-top: 0.625rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+}
+
+.circle-signup {
+  align-self: center;
+}
+
+.circle-signup__lede {
+  margin: 0 0 1.75rem;
+  font-family: var(--serif);
+  font-size: 1.3125rem;
+  letter-spacing: -0.018em;
+  line-height: 1.45;
+}
+
+.circle-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.circle-form__field {
+  flex: 1 1 16rem;
+}
+
+.circle-form input {
+  width: 100%;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--line);
+  border-radius: 0.375rem;
+  background: white;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+}
+
+.circle-form input:focus {
+  border-color: var(--ink);
+  outline: none;
+}
+
+.circle-form button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.75rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: var(--ink);
+  color: var(--porcelain);
+  cursor: pointer;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.circle-form button:disabled {
+  background: rgba(24, 32, 25, 0.35);
+  cursor: default;
+}
+
+.circle-form__error {
+  flex: 1 0 100%;
+  margin: 0;
+  color: #b3261e;
+  font-size: 0.8125rem;
+}
+
+.circle-form__done {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.3125rem;
+  letter-spacing: -0.018em;
+}
+
+.circle-form__hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 1050px) {
+  .ritual-product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ingredient-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+    .story-section,
+  .global-section,
+  .circle-section {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 5.5rem var(--gutter);
+  }
+
+  .ritual-intro-section,
+  .why-section,
+  .ingredient-section {
+    padding: 5.5rem var(--gutter);
+  }
+
+  .ritual-intro-section {
+    padding-bottom: 0;
+  }
+
+  .ritual-category-grid,
+  .ritual-product-list,
+  .why-grid,
+  .ingredient-grid,
+  .circle-benefits {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .circle-benefits {
+    gap: 0.625rem;
   }
 }
 
@@ -3005,8 +3398,8 @@ img {
   .hero-wordmark { width: 92vw; }
   .philosophy-section { grid-template-columns: 1.2fr 0.8fr; }
   .product-card__details { grid-template-columns: 1fr; gap: 0.5rem; }
-  .concern-grid { grid-template-columns: 1.6fr 1fr; }
-  .concern-card:last-child { display: none; }
+  .made-for-grid { grid-template-columns: 1.6fr 1fr; }
+  .made-for-card:last-child { display: none; }
   .product-gallery { grid-template-columns: 1fr; }
   .product-gallery__item:first-child { grid-row: auto; min-height: 38.75rem; }
   .product-gallery__item:not(:first-child) { display: none; }
@@ -3059,7 +3452,7 @@ img {
   .hero-note { right: 1.1875rem; bottom: 2rem; font-size: 0.8125rem; }
   .philosophy-section,
   .section-heading,
-  .concerns-intro,
+  .made-for-intro,
   .made-section,
   .footer-invitation,
   .footer-directory,
@@ -3070,7 +3463,7 @@ img {
   .philosophy-section { gap: 1.75rem; padding: 5.625rem 1.375rem 6.25rem; }
   .philosophy-heading h2,
   .section-heading h2,
-  .concerns-intro h2,
+  .made-for-intro h2,
   .made-copy h2 { font-size: 3.3125rem; }
   .philosophy-copy { padding-top: 1.0625rem; }
   .philosophy-copy p { font-size: 1.3125rem; }
@@ -3092,12 +3485,12 @@ img {
   .product-grid { gap: 1px; }
   .product-card { padding: 0.75rem; }
   .product-card__details { grid-template-columns: 1fr auto; }
-  .concerns-section { padding: 5.9375rem 0.8125rem; }
-  .concerns-intro { gap: 1.0625rem; margin: 0 0.5625rem 2.6875rem; }
-  .concerns-intro h2 { margin-top: 0.4375rem; }
-  .concern-grid { grid-template-columns: 1fr; gap: 0.5625rem; }
-  .concern-card { min-height: 26.875rem; }
-  .concern-card:last-child { display: block; }
+  .made-for-section { padding: 5.9375rem 0.8125rem; }
+  .made-for-intro { gap: 1.0625rem; margin: 0 0.5625rem 2.6875rem; }
+  .made-for-intro h2 { margin-top: 0.4375rem; }
+  .made-for-grid { grid-template-columns: 1fr; gap: 0.5625rem; }
+  .made-for-card { min-height: 26.875rem; }
+  .made-for-card:last-child { display: block; }
   .ritual-section { grid-template-columns: 1fr; }
   .ritual-image { min-height: 36.25rem; }
   .ritual-copy { padding: 5.3125rem 1.375rem 5.9375rem; }

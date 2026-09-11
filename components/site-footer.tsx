@@ -22,7 +22,7 @@ export function SiteFooter() {
         <div className="footer-links-column">
           <span>Explore</span>
           <Link href="/shop">Shop all</Link>
-          <ScrollLink href="/#concerns">Shop by concern</ScrollLink>
+          <ScrollLink href="/#made-for">Made for your skin</ScrollLink>
           <ScrollLink href="/#ritual">Our ritual</ScrollLink>
         </div>
         <div className="footer-links-column">

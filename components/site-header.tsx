@@ -19,7 +19,7 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
       </button>
       <nav className={`desktop-nav ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">
         <Link href="/shop" onClick={() => setMenuOpen(false)}>Shop</Link>
-        <ScrollLink href="/#concerns" onClick={() => setMenuOpen(false)}>By concern</ScrollLink>
+        <ScrollLink href="/#made-for" onClick={() => setMenuOpen(false)}>Made for your skin</ScrollLink>
         <ScrollLink href="/#ritual" onClick={() => setMenuOpen(false)}>The ritual</ScrollLink>
       </nav>
       <Link href="/" className="wordmark" aria-label="Ahumma home">
