@@ -162,6 +162,7 @@ export const PARTNER_FIELDS = {
   monthlyCommitment: "nf_1789157775362_6",
   disclosureAgreement: "nf_1789157790312_7",
   codeOfConduct: "nf_1789157805436_8",
+  slaAgreed: "nf_1789158571952_9",
 } as const;
 
 export const CONTENT_CATEGORIES = [
