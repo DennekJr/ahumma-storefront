@@ -3,7 +3,17 @@
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
-export function CircleSignup() {
+type CircleSignupProps = {
+  className?: string;
+  buttonLabel?: string;
+  showArrow?: boolean;
+};
+
+export function CircleSignup({
+  className = "",
+  buttonLabel = "Join us",
+  showArrow = true,
+}: CircleSignupProps) {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -45,7 +55,10 @@ export function CircleSignup() {
   }
 
   return (
-    <form className="circle-form" onSubmit={handleSubmit}>
+    <form
+      className={`circle-form${className ? ` ${className}` : ""}`}
+      onSubmit={handleSubmit}
+    >
       <label className="circle-form__field">
         <span className="visually-hidden">Email address</span>
         <input
@@ -74,7 +87,8 @@ export function CircleSignup() {
       </div>
 
       <button type="submit" disabled={submitting}>
-        {submitting ? "Joining…" : "Join us"} <ArrowRight size={16} />
+        {submitting ? "Submitting…" : buttonLabel}
+        {showArrow ? <ArrowRight size={16} /> : null}
       </button>
 
       {error ? (

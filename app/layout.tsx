@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
+import { CookieNotice } from "@/components/cookie-notice";
 import { hasFrontdeskCheckout } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
 import "./globals.css";
@@ -27,21 +28,25 @@ export const metadata: Metadata = {
   description:
     "A Nigerian-born premium body-care brand for Black and brown skin. Whipped body butters and liquid African black soap, rooted in African heritage.",
   metadataBase: getMetadataBase(),
-  ...(indexingAllowed()
-    ? {}
-    : { robots: { index: false, follow: false } }),
+  ...(indexingAllowed() ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
     title: "Ahumma — At the edge of everything beautiful is you",
-    description: "Premium body butters and liquid African black soap, rooted in Africa and made for the world.",
+    description:
+      "Premium body butters and liquid African black soap, rooted in Africa and made for the world.",
     images: ["/images/skin-closeup.jpg"],
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <CartProvider checkoutEnabled={hasFrontdeskCheckout}>{children}</CartProvider>
+        <CartProvider checkoutEnabled={hasFrontdeskCheckout}>
+          {children}
+        </CartProvider>
+        <CookieNotice />
         <Script
           id="frontdesk-chat-widget"
           src="https://widget.frontdesk.africa/widget.js"

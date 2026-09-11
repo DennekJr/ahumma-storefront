@@ -4,26 +4,58 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScrollLink } from "@/components/scroll-link";
 import { Menu, ShoppingBag, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { STORE_CURRENCIES } from "@/lib/format";
 
 export function SiteHeader({ light = false }: { light?: boolean }) {
   const { itemCount, openCart, currency, setCurrency } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => setIsScrolled(window.scrollY > 8);
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
 
   return (
-    <header className={`site-header ${light ? "site-header--light" : ""}`}>
-      <button type="button" className="mobile-menu" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"}>
+    <header
+      className={`site-header ${light ? "site-header--light" : ""} ${isScrolled ? "is-scrolled" : ""}`}
+    >
+      <button
+        type="button"
+        className="mobile-menu"
+        onClick={() => setMenuOpen((open) => !open)}
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+      >
         {menuOpen ? <X size={21} /> : <Menu size={21} />}
       </button>
-      <nav className={`desktop-nav ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">
-        <Link href="/shop" onClick={() => setMenuOpen(false)}>Shop</Link>
-        <ScrollLink href="/#made-for" onClick={() => setMenuOpen(false)}>Made for your skin</ScrollLink>
-        <ScrollLink href="/#ritual" onClick={() => setMenuOpen(false)}>The ritual</ScrollLink>
+      <nav
+        className={`desktop-nav ${menuOpen ? "is-open" : ""}`}
+        aria-label="Main navigation"
+      >
+        <span className="desktop-menu-label">MENU</span>
+        <Link href="/shop" onClick={() => setMenuOpen(false)}>
+          Shop
+        </Link>
+        <ScrollLink href="/#made-for" onClick={() => setMenuOpen(false)}>
+          Made for your skin
+        </ScrollLink>
+        <ScrollLink href="/#ritual" onClick={() => setMenuOpen(false)}>
+          The ritual
+        </ScrollLink>
       </nav>
       <Link href="/" className="wordmark" aria-label="Ahumma home">
-        <Image src="/images/ahumma-logo.png" alt="Ahumma" width={158} height={44} loading="eager" />
+        <Image
+          src="/images/ahumma-logo.png"
+          alt="Ahumma"
+          width={158}
+          height={44}
+          loading="eager"
+        />
       </Link>
       <div className="header-actions">
         <div className="currency-switcher" aria-label="Shopping currency">
@@ -43,7 +75,12 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
             </button>
           ))}
         </div>
-        <button type="button" className="header-cart" onClick={openCart} aria-label={`Open shopping bag with ${itemCount} items`}>
+        <button
+          type="button"
+          className="header-cart"
+          onClick={openCart}
+          aria-label={`Open shopping bag with ${itemCount} items`}
+        >
           <span>Bag</span>
           <ShoppingBag size={18} strokeWidth={1.6} />
           <small>{itemCount}</small>
