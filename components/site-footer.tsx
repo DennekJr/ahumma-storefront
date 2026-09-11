@@ -27,6 +27,7 @@ export function SiteFooter() {
         <div className="footer-links-column">
           <span>Care</span>
           <Link href="/faq">FAQs</Link>
+          <Link href="/partner-network">Partner Network</Link>
           <a href="https://ahumma.com/delivery/" target="_blank" rel="noreferrer">Delivery</a>
           <a href="https://ahumma.com/return-cancellations/" target="_blank" rel="noreferrer">Returns</a>
           <a href="https://ahumma.com/contact/" target="_blank" rel="noreferrer">Contact</a>
