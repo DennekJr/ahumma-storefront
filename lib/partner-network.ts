@@ -137,25 +137,31 @@ export const PARTNER_BENEFITS = [
 ];
 
 /**
- * Field ids on the published FrontDesk form. Stable per field, regenerated if
- * the form is rebuilt, so this is the one place to update when that happens:
- * GET /v1/storefront/by-handle/ahumma/forms/ahumma-creator-partner-network
+ * Field ids on the published FrontDesk form.
+ *
+ * This targets `become-an-ambassador`, which is the form the brand actually
+ * links to. A second form, `ahumma-creator-partner-network`, is also published
+ * with near-identical fields — it is the older draft, and submissions sent
+ * there would not reach the live inbox.
+ *
+ * Read the current ids with:
+ * GET /v1/storefront/by-handle/ahumma/forms/become-an-ambassador
  */
-export const PARTNER_FORM_SLUG = "ahumma-creator-partner-network";
+export const PARTNER_FORM_SLUG = "become-an-ambassador";
 
 export const PARTNER_FIELDS = {
-  fullName: "f01a0340a3741718fa3dabe150be3dba7",
-  email: "f01a0340a3742700c83d77c12cdd2583c",
-  phone: "nf_1787579535935_0",
-  categories: "nf_1787598872093_0",
-  primaryPlatform: "nf_1787598950858_1",
-  platformLinks: "nf_1787598986915_2",
-  contentLinks: "nf_1787599014073_3",
-  motivation: "nf_1787599030005_4",
-  otherBrands: "nf_1787599053104_5",
-  monthlyCommitment: "nf_1787599089982_6",
-  disclosureAgreement: "nf_1787599116362_7",
-  codeOfConduct: "nf_1787599160741_8",
+  firstName: "f01a090018af874df9eb7d134d51ac9ab",
+  lastName: "nf_1789157673173_0",
+  email: "f01a090018af874df9eb7d4aa0d00fa79",
+  phone: "f01a090018af874df9eb7da4b2d5e858c",
+  categories: "nf_1789157703569_1",
+  platformLinks: "nf_1789157714843_2",
+  contentLinks: "nf_1789157731169_3",
+  motivation: "nf_1789157740499_4",
+  otherBrands: "nf_1789157747883_5",
+  monthlyCommitment: "nf_1789157775362_6",
+  disclosureAgreement: "nf_1789157790312_7",
+  codeOfConduct: "nf_1789157805436_8",
 } as const;
 
 export const CONTENT_CATEGORIES = [
@@ -169,11 +175,100 @@ export const CONTENT_CATEGORIES = [
 /** Widened from the const-asserted literals so runtime input can be checked. */
 export const CATEGORY_IDS: string[] = CONTENT_CATEGORIES.map((c) => c.id);
 
+/** Both consent fields are plain yes/no selects on this form. */
+export const AGREED_VALUE = "yes";
+
 /**
- * The two consent fields are authored as selects rather than checkboxes, and
- * the disclosure field offers a single choice literally labelled "Yes/No".
- * Both are rendered here as the agreements they are; these are the values
- * FrontDesk validates against.
+ * Service Level Agreement.
+ *
+ * Partners must accept this before an application can be submitted. FrontDesk
+ * has no field for it, so acceptance is enforced here and in the API route but
+ * is NOT recorded against the submission — see the note in the API route.
  */
-export const DISCLOSURE_AGREED_VALUE = "yes-no";
-export const CONDUCT_AGREED_VALUE = "yes";
+export const SLA_PURPOSE =
+  "This agreement sets out what Ahumma and its Creator Partners each commit to, so both sides know what to expect and by when.";
+
+export const SLA_BRAND_COMMITMENTS = [
+  {
+    title: "Enquiry response",
+    body: "Questions raised in the community channel or to the Partner Network Manager are answered within 24 hours.",
+  },
+  {
+    title: "Content feedback",
+    body: "Feedback on submitted content comes within 48 hours, so you are never left waiting to post.",
+  },
+  {
+    title: "Product seeding",
+    body: "Products for active campaigns are dispatched within 3 working days of onboarding or campaign kickoff.",
+  },
+  {
+    title: "Payment",
+    body: "Commission is processed monthly, within 7 working days of month-end. The minimum payout is ₦10,000 or its USD equivalent; anything below rolls into the next month.",
+  },
+  {
+    title: "Performance transparency",
+    body: "A monthly summary — sales through your code, content count, current tier — reaches you by the 5th working day of the following month.",
+  },
+  {
+    title: "Campaign briefs",
+    body: "Briefs, discount codes and content pillars are shared at least 5 working days before a campaign starts.",
+  },
+  {
+    title: "Community",
+    body: "The partner channel is actively monitored, with monthly live sessions and regular content prompts.",
+  },
+];
+
+export const SLA_PARTNER_COMMITMENTS = [
+  {
+    title: "Content delivery",
+    body: "Meet your tier's monthly quota — Founding 3+, Standard 4–5+, Elite 6+ — posted inside the campaign window.",
+  },
+  {
+    title: "Quality standard",
+    body: "Follow the brief and brand guidelines, include your discount code or tag, and keep audio and visuals clear.",
+  },
+  {
+    title: "Disclosure",
+    body: "Clearly disclose all sponsored or gifted content in line with FTC (US) and applicable Nigerian guidelines.",
+  },
+  {
+    title: "Responsiveness",
+    body: "Reply to briefs, feedback and scheduling within 48 hours.",
+  },
+  {
+    title: "Authenticity & conduct",
+    body: "Content reflects your own voice and complies with the Partner Code of Conduct.",
+  },
+  {
+    title: "Reporting issues",
+    body: "Flag product, payment or content problems to the Partner Network Manager promptly rather than letting them sit.",
+  },
+];
+
+export const SLA_TURNAROUND = [
+  { service: "Partner enquiry response", commitment: "Within 24 hours" },
+  { service: "Content feedback", commitment: "Within 48 hours" },
+  { service: "Product seeding dispatch", commitment: "Within 5 working days" },
+  {
+    service: "Commission payout",
+    commitment: "Monthly, within 7 working days of month-end",
+  },
+  {
+    service: "Performance summary",
+    commitment: "By the 5th working day of the following month",
+  },
+  {
+    service: "Campaign brief delivery",
+    commitment: "At least 5 working days before a campaign starts",
+  },
+];
+
+export const SLA_ESCALATION = [
+  "Raise the issue with the Partner Network Manager, in the community channel or by direct message.",
+  "If it is unresolved after 3–4 working days, it escalates to the Ahumma founder for review.",
+  "Resolution or next steps are communicated within 5 working days of escalation.",
+];
+
+export const SLA_REVIEW =
+  "This agreement is reviewed quarterly and may change as the network grows beyond the first 21 Founding Partners. Partners are notified of any change at least 14 days before it takes effect.";
