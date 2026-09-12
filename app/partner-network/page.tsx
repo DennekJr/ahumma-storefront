@@ -41,7 +41,6 @@ export default function PartnerNetworkPage() {
       <SiteHeader />
 
       <header className="partner-hero">
-        <span className="eyebrow">Creator Partner Network</span>
         <h1>
           Be the voice
           <br />
@@ -59,7 +58,6 @@ export default function PartnerNetworkPage() {
 
       <section className="partner-goals" aria-labelledby="goals-heading">
         <div className="partner-section-heading">
-          <span className="eyebrow">Why it exists</span>
           <h2 id="goals-heading">Three things at once.</h2>
         </div>
         <div className="partner-goal-grid">
@@ -74,7 +72,6 @@ export default function PartnerNetworkPage() {
 
       <section className="partner-tiers" aria-labelledby="tiers-heading">
         <div className="partner-section-heading">
-          <span className="eyebrow">Tiers &amp; commission</span>
           <h2 id="tiers-heading">
             Everyone starts
             <br />
@@ -132,7 +129,6 @@ export default function PartnerNetworkPage() {
 
       <section className="partner-quality" aria-labelledby="quality-heading">
         <div className="partner-section-heading">
-          <span className="eyebrow">The standard</span>
           <h2 id="quality-heading">What counts as quality.</h2>
         </div>
         <ul className="partner-quality-list">
@@ -144,7 +140,6 @@ export default function PartnerNetworkPage() {
 
       <section className="partner-referral" aria-labelledby="referral-heading">
         <div>
-          <span className="eyebrow eyebrow--light">Referrals</span>
           <h2 id="referral-heading">Bring someone with you.</h2>
         </div>
         <p>
@@ -160,7 +155,6 @@ export default function PartnerNetworkPage() {
         aria-labelledby="onboarding-heading"
       >
         <div className="partner-section-heading">
-          <span className="eyebrow">Getting started</span>
           <h2 id="onboarding-heading">
             From application
             <br />
@@ -184,7 +178,6 @@ export default function PartnerNetworkPage() {
 
       <section className="partner-benefits" aria-labelledby="benefits-heading">
         <div className="partner-section-heading">
-          <span className="eyebrow">What you gain</span>
           <h2 id="benefits-heading">More than a commission.</h2>
         </div>
         <div className="partner-benefit-grid">
@@ -203,7 +196,6 @@ export default function PartnerNetworkPage() {
         aria-labelledby="apply-heading"
       >
         <div className="partner-section-heading">
-          <span className="eyebrow">Apply</span>
           <h2 id="apply-heading">Tell us about your work.</h2>
           <p>
             Applications are reviewed by the Partner Network Manager. Everyone
@@ -214,7 +206,6 @@ export default function PartnerNetworkPage() {
       </section>
 
       <section className="partner-closing">
-        <span className="eyebrow eyebrow--light">Ahumma</span>
         <p>
           At the edge of
           <br />

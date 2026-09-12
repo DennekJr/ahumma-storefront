@@ -49,18 +49,27 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
         });
 
         timeline.fromTo(
+          document.documentElement,
+          {
+            "--header-height": initialHeaderHeight,
+            "--header-top": `${initialHeaderTop}px`,
+          },
+          {
+            "--header-height": "3.2rem",
+            "--header-top": "0px",
+            ease: "none",
+          },
+        );
+
+        timeline.fromTo(
           header,
           {
-            top: `${initialHeaderTop}px`,
-            "--header-height": initialHeaderHeight,
             backgroundColor: "transparent",
             color: "white",
             borderColor: lineLight,
             backdropFilter: "blur(0px)",
           },
           {
-            top: "0px",
-            "--header-height": "3.2rem",
             backgroundColor: "rgba(250, 248, 243, 0.94)",
             color: ink,
             borderColor: line,

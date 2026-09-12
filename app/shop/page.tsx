@@ -85,7 +85,6 @@ export default async function ShopPage() {
       <SiteHeader />
 
       <header className="shop-hero">
-        <span className="eyebrow">The collection</span>
         <h1>
           Everything we
           <br />
@@ -126,7 +125,6 @@ export default async function ShopPage() {
             </div>
           ) : (
             <div className="shop-group__empty">
-              <span className="eyebrow">Coming soon</span>
               <p>
                 {group.title} is on its way. Join the Ahumma Circle and
                 you&apos;ll hear first.
@@ -137,7 +135,6 @@ export default async function ShopPage() {
       ))}
 
       <section className="shop-closing">
-        <span className="eyebrow eyebrow--light">Ahumma</span>
         <p>
           At the edge of
           <br />

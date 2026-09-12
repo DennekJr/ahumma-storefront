@@ -85,9 +85,6 @@ export default async function HomePage() {
           />
         </div>
         <div className="hero-copy">
-          <span className="eyebrow eyebrow--light">
-            Beautiful skin. Beautiful rituals. Beautifully you.
-          </span>
           <h1>At the edge of everything beautiful is you.</h1>
           <Link href="/shop" className="hero-link">
             Explore the collection <ArrowRight size={17} />
@@ -110,7 +107,6 @@ export default async function HomePage() {
       {SHOW_STORY_SECTION ? (
         <section className="story-section" id="story">
           <div className="story-copy">
-            <span className="eyebrow">The Ahumma story</span>
             <h2>
               We started
               <br />
@@ -141,7 +137,6 @@ export default async function HomePage() {
 
       <section className="philosophy-section" id="philosophy">
         <div className="philosophy-heading">
-          <span className="eyebrow">The Ahumma philosophy</span>
           <h2>
             We don&apos;t believe
             <br />
@@ -193,7 +188,6 @@ export default async function HomePage() {
       <section className="ritual-intro-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">Shop the Ahumma ritual</span>
             <h2>
               A little care
               <br />
@@ -237,7 +231,6 @@ export default async function HomePage() {
       <section className="shop-section" id="shop">
         <div className="section-heading shop-heading">
           <div>
-            <span className="eyebrow">The essentials</span>
             <h2>
               Care you&apos;ll
               <br />
@@ -277,7 +270,6 @@ export default async function HomePage() {
 
       <section className="made-for-section" id="made-for">
         <div className="made-for-intro">
-          <span className="eyebrow">Made for Black &amp; brown skin</span>
           <h2>
             Your skin. Your ritual.
             <br />
@@ -345,7 +337,6 @@ export default async function HomePage() {
           <span className="image-caption">Ahumma / Lagos, Nigeria</span>
         </div>
         <div className="ritual-copy">
-          <span className="eyebrow eyebrow--light">Your body is a home</span>
           <h2>
             Make a ritual
             <br />
@@ -381,7 +372,6 @@ export default async function HomePage() {
 
       <section className="made-section">
         <div className="made-copy">
-          <span className="eyebrow">Rooted here</span>
           <h2>
             African botanicals.
             <br />
@@ -407,7 +397,6 @@ export default async function HomePage() {
       <section className="why-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">Why Ahumma</span>
             <h2>
               Care should
               <br />
@@ -428,7 +417,6 @@ export default async function HomePage() {
       <section className="ingredient-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">The ingredient story</span>
             <h2>
               Good things grow from
               <br />
@@ -449,9 +437,6 @@ export default async function HomePage() {
 
       <section className="global-section">
         <div className="global-copy">
-          <span className="eyebrow eyebrow--light">
-            From Nigeria to the world
-          </span>
           <h2>
             Born in Nigeria.
             <br />
@@ -475,7 +460,6 @@ export default async function HomePage() {
 
       <section className="circle-section" id="circle">
         <div className="circle-copy">
-          <span className="eyebrow">The Ahumma Circle</span>
           <h2>
             Caring for yourself
             <br />

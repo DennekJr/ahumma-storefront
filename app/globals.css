@@ -33,6 +33,9 @@
   --rose: #d25c88;
   --line: rgba(24, 32, 25, 0.2);
   --line-light: rgba(255, 255, 255, 0.25);
+  --header-height: 4.875rem;
+  --header-top: 0px;
+  --header-top: 0px;
   /* Page frame. The gutter alone defines it: under proportional scaling the
      composition never balloons, so a content cap has nothing to protect
      against — any rem value would simply bind at a fixed ratio and hold the
@@ -308,7 +311,6 @@ img {
 
 /* Header */
 .site-header {
-  --header-height: 4.875rem;
   position: sticky;
   top: 0;
   z-index: 30;
@@ -324,7 +326,7 @@ img {
 
 .home-hero .site-header {
   position: fixed;
-  top: 0;
+  top: var(--header-top);
   right: 0;
   left: 0;
   transition: none;
@@ -3475,9 +3477,12 @@ img {
 
 .cart-drawer__header {
   display: flex;
+  height: var(--header-height);
+  margin-top: var(--header-top);
+  flex: 0 0 var(--header-height);
   align-items: center;
   justify-content: space-between;
-  padding: 1.75rem 1.875rem;
+  padding: 0 1.875rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -4001,9 +4006,11 @@ img {
     gap: 1rem;
     padding-right: 1rem;
   }
+  :root {
+    --header-height: 4.1875rem;
+  }
   .site-header {
     grid-template-columns: 1fr 7.25rem 1fr;
-    --header-height: 4.1875rem;
     padding: 0 1.0625rem;
   }
   .wordmark {

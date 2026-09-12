@@ -19,7 +19,6 @@ export function RouteLoading() {
       <div className="route-loading__content">
         <span className="route-loading__wordmark">Ahumma</span>
         <span className="route-loading__pulse" aria-hidden="true" />
-        <span className="eyebrow">Preparing your ritual</span>
       </div>
     </div>
   );

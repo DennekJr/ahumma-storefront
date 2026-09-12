@@ -35,7 +35,6 @@ export default function FaqPage() {
       <SiteHeader />
 
       <header className="faq-hero">
-        <span className="eyebrow">Ahumma answered</span>
         <h1>
           Everything you
           <br />
@@ -98,7 +97,6 @@ export default function FaqPage() {
       </div>
 
       <section className="faq-closing">
-        <span className="eyebrow eyebrow--light">Still wondering</span>
         <p>
           At the edge of
           <br />

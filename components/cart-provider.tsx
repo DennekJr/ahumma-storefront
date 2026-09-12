@@ -98,7 +98,9 @@ export function CartProvider({
 
   const addItem = useCallback((item: CartItem) => {
     setItems((current) => {
-      const existing = current.find((line) => line.variantRef === item.variantRef);
+      const existing = current.find(
+        (line) => line.variantRef === item.variantRef,
+      );
       if (!existing) return [...current, item];
       return current.map((line) => {
         if (line.variantRef !== item.variantRef) return line;
@@ -115,7 +117,9 @@ export function CartProvider({
   }, []);
 
   const removeItem = useCallback((variantRef: string) => {
-    setItems((current) => current.filter((item) => item.variantRef !== variantRef));
+    setItems((current) =>
+      current.filter((item) => item.variantRef !== variantRef),
+    );
   }, []);
 
   const setQuantity = useCallback((variantRef: string, quantity: number) => {
@@ -166,7 +170,8 @@ export function useCart() {
 }
 
 function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
-  const { items, isOpen, closeCart, removeItem, setQuantity, currency } = useCart();
+  const { items, isOpen, closeCart, removeItem, setQuantity, currency } =
+    useCart();
   const [zones, setZones] = useState<DeliveryZone[]>([]);
   const [zoneRef, setZoneRef] = useState("");
   const [loadingZones, setLoadingZones] = useState(false);
@@ -211,13 +216,20 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       .then(async (response) => {
         const payload = await response.json();
         if (!response.ok) {
-          throw new Error(payload.error?.message ?? "Delivery options are unavailable.");
+          throw new Error(
+            payload.error?.message ?? "Delivery options are unavailable.",
+          );
         }
         setZones(payload as DeliveryZone[]);
       })
       .catch((reason: unknown) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") return;
-        setError(reason instanceof Error ? reason.message : "Delivery options are unavailable.");
+        if (reason instanceof DOMException && reason.name === "AbortError")
+          return;
+        setError(
+          reason instanceof Error
+            ? reason.message
+            : "Delivery options are unavailable.",
+        );
       })
       .finally(() => setLoadingZones(false));
     return () => controller.abort();
@@ -228,7 +240,9 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     setError("");
 
     if (!checkoutEnabled) {
-      setError("This preview is ready for your Frontdesk keys. Live payment will activate once they are added.");
+      setError(
+        "This preview is ready for your Frontdesk keys. Live payment will activate once they are added.",
+      );
       return;
     }
     if (!items.length) return;
@@ -246,18 +260,29 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           "Idempotency-Key": crypto.randomUUID(),
         },
         body: JSON.stringify({
-          items: items.map(({ variantRef, quantity }) => ({ variantRef, quantity })),
+          items: items.map(({ variantRef, quantity }) => ({
+            variantRef,
+            quantity,
+          })),
           contact,
           currency,
           ...(zoneRef ? { deliveryZoneRef: zoneRef } : {}),
         }),
       });
       const payload = await response.json();
-      if (!response.ok) throw new Error(payload.error?.message ?? "Checkout could not be started.");
-      if (!payload.hostedUrl) throw new Error("Frontdesk did not return a secure checkout link.");
+      if (!response.ok)
+        throw new Error(
+          payload.error?.message ?? "Checkout could not be started.",
+        );
+      if (!payload.hostedUrl)
+        throw new Error("Frontdesk did not return a secure checkout link.");
       window.location.assign(payload.hostedUrl as string);
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Checkout could not be started.");
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : "Checkout could not be started.",
+      );
       setCheckingOut(false);
     }
   }
@@ -278,10 +303,14 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       >
         <div className="cart-drawer__header">
           <div>
-            <span className="eyebrow">Your ritual</span>
             <h2>Shopping bag</h2>
           </div>
-          <button type="button" className="icon-button" onClick={closeCart} aria-label="Close bag">
+          <button
+            type="button"
+            className="icon-button"
+            onClick={closeCart}
+            aria-label="Close bag"
+          >
             <X size={20} />
           </button>
         </div>
@@ -290,7 +319,9 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           <div className="empty-cart">
             <ShoppingBag size={31} strokeWidth={1.35} />
             <h3>Your bag is quiet.</h3>
-            <p>Explore considered care for cleansing, renewal and everyday glow.</p>
+            <p>
+              Explore considered care for cleansing, renewal and everyday glow.
+            </p>
             <button type="button" className="text-button" onClick={closeCart}>
               Continue shopping <ArrowRight size={15} />
             </button>
@@ -306,13 +337,33 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                   <div className="cart-line__content">
                     <h3>{item.name}</h3>
                     <p>{item.variantName}</p>
-                    <span>{formatMoney(displayPrice.priceMinor, displayPrice.currency)}</span>
-                    <div className="quantity-control" aria-label={`Quantity for ${item.name}`}>
-                      <button type="button" onClick={() => setQuantity(item.variantRef, item.quantity - 1)} aria-label="Decrease quantity">
+                    <span>
+                      {formatMoney(
+                        displayPrice.priceMinor,
+                        displayPrice.currency,
+                      )}
+                    </span>
+                    <div
+                      className="quantity-control"
+                      aria-label={`Quantity for ${item.name}`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setQuantity(item.variantRef, item.quantity - 1)
+                        }
+                        aria-label="Decrease quantity"
+                      >
                         <Minus size={13} />
                       </button>
                       <span>{item.quantity}</span>
-                      <button type="button" onClick={() => setQuantity(item.variantRef, item.quantity + 1)} aria-label="Increase quantity">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setQuantity(item.variantRef, item.quantity + 1)
+                        }
+                        aria-label="Increase quantity"
+                      >
                         <Plus size={13} />
                       </button>
                     </div>
@@ -335,22 +386,64 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
               <div className="field-pair">
                 <label>
                   <span>Name</span>
-                  <input required autoComplete="name" value={contact.name} onChange={(event) => setContact((value) => ({ ...value, name: event.target.value }))} />
+                  <input
+                    required
+                    autoComplete="name"
+                    value={contact.name}
+                    onChange={(event) =>
+                      setContact((value) => ({
+                        ...value,
+                        name: event.target.value,
+                      }))
+                    }
+                  />
                 </label>
                 <label>
                   <span>Email</span>
-                  <input required type="email" autoComplete="email" value={contact.email} onChange={(event) => setContact((value) => ({ ...value, email: event.target.value }))} />
+                  <input
+                    required
+                    type="email"
+                    autoComplete="email"
+                    value={contact.email}
+                    onChange={(event) =>
+                      setContact((value) => ({
+                        ...value,
+                        email: event.target.value,
+                      }))
+                    }
+                  />
                 </label>
               </div>
               <label>
-                <span>Phone <small>optional</small></span>
-                <input type="tel" autoComplete="tel" value={contact.phone} onChange={(event) => setContact((value) => ({ ...value, phone: event.target.value }))} />
+                <span>
+                  Phone <small>optional</small>
+                </span>
+                <input
+                  type="tel"
+                  autoComplete="tel"
+                  value={contact.phone}
+                  onChange={(event) =>
+                    setContact((value) => ({
+                      ...value,
+                      phone: event.target.value,
+                    }))
+                  }
+                />
               </label>
               {needsDelivery && checkoutEnabled && zones.length > 0 ? (
                 <label>
                   <span>Delivery area</span>
-                  <select required={zones.length > 0} disabled={loadingZones || !zones.length} value={zoneRef} onChange={(event) => setZoneRef(event.target.value)}>
-                    <option value="">{loadingZones ? "Loading delivery areas…" : "Choose an area"}</option>
+                  <select
+                    required={zones.length > 0}
+                    disabled={loadingZones || !zones.length}
+                    value={zoneRef}
+                    onChange={(event) => setZoneRef(event.target.value)}
+                  >
+                    <option value="">
+                      {loadingZones
+                        ? "Loading delivery areas…"
+                        : "Choose an area"}
+                    </option>
                     {zones.map((zone) => {
                       const deliveryPrice = resolvePrice(
                         zone.feeMinor,
@@ -364,7 +457,11 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
                       return (
                         <option key={zone.ref} value={zone.ref}>
-                          {zone.name} · {formatMoney(deliveryPrice.priceMinor, deliveryPrice.currency)}
+                          {zone.name} ·{" "}
+                          {formatMoney(
+                            deliveryPrice.priceMinor,
+                            deliveryPrice.currency,
+                          )}
                         </option>
                       );
                     })}
@@ -374,20 +471,45 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             </div>
 
             <div className="cart-totals">
-              <div><span>Subtotal</span><strong>{formatMoney(subtotal, currency)}</strong></div>
-              {selectedZone ? <div><span>Delivery</span><strong>{formatMoney(zoneFee, currency)}</strong></div> : null}
-              <div className="cart-total"><span>Total</span><strong>{formatMoney(subtotal + zoneFee, currency)}</strong></div>
+              <div>
+                <span>Subtotal</span>
+                <strong>{formatMoney(subtotal, currency)}</strong>
+              </div>
+              {selectedZone ? (
+                <div>
+                  <span>Delivery</span>
+                  <strong>{formatMoney(zoneFee, currency)}</strong>
+                </div>
+              ) : null}
+              <div className="cart-total">
+                <span>Total</span>
+                <strong>{formatMoney(subtotal + zoneFee, currency)}</strong>
+              </div>
             </div>
 
             {error ? <p className="cart-error">{error}</p> : null}
             {!checkoutEnabled ? (
-              <p className="preview-checkout-note"><Check size={14} /> Cart and checkout flow are ready for the API keys.</p>
+              <p className="preview-checkout-note">
+                <Check size={14} /> Cart and checkout flow are ready for the API
+                keys.
+              </p>
             ) : null}
-            <button className="checkout-button" type="submit" disabled={checkingOut || loadingZones}>
-              {checkingOut ? "Opening secure checkout…" : checkoutEnabled ? "Continue to secure payment" : "Preview checkout"}
+            <button
+              className="checkout-button"
+              type="submit"
+              disabled={checkingOut || loadingZones}
+            >
+              {checkingOut
+                ? "Opening secure checkout…"
+                : checkoutEnabled
+                  ? "Continue to secure payment"
+                  : "Preview checkout"}
               <ArrowRight size={17} />
             </button>
-            <p className="secure-note">Payment is completed securely on Frontdesk. Ahumma never handles your card details.</p>
+            <p className="secure-note">
+              Payment is completed securely on Frontdesk. Ahumma never handles
+              your card details.
+            </p>
           </form>
         )}
       </aside>

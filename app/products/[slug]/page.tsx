@@ -113,9 +113,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
 
         <aside className="product-summary">
-          <span className="eyebrow">
-            {info?.infoCategory ?? "Ahumma body care"}
-          </span>
           <h1>{product.name}</h1>
           {descriptionParagraphs.length ? (
             <div className="product-lede">
@@ -130,7 +127,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <section className="product-story">
         <div className="product-story__heading">
-          <span className="eyebrow">The formulation</span>
           <h2>
             {product.slug.includes("dream")
               ? "To your most desirable dreams."
@@ -159,7 +155,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="product-details-grid">
         <article>
           <Leaf size={22} strokeWidth={1.4} />
-          <span className="eyebrow">How to use</span>
+
           <h3>Make room for the ritual.</h3>
           <p>
             {info?.careInstructions ??
@@ -168,7 +164,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </article>
         <article>
           <PackageCheck size={22} strokeWidth={1.4} />
-          <span className="eyebrow">Made with care</span>
+
           <h3>Rooted in Lagos.</h3>
           <p>
             {info?.sustainabilityText ??
@@ -191,7 +187,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <section className="shop-section related-products">
           <div className="section-heading related-products__heading">
             <div>
-              <span className="eyebrow">Continue the ritual</span>
               <h2>
                 You may also
                 <br />
@@ -218,7 +213,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
       ) : null}
 
       <section className="product-closing">
-        <span className="eyebrow eyebrow--light">Ahumma</span>
         <p>
           Care for the body.
           <br />A return to the self.
