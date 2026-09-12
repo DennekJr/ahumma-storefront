@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, Send, X } from "lucide-react";
 import { SOCIALS } from "@/lib/socials";
 
 type Props = {
@@ -109,15 +109,23 @@ export function PartnerWelcomeDialog({ communityUrl, onClose }: Props) {
         </p>
 
         {communityUrl ? (
-          <a
-            className="partner-dialog__cta"
-            href={communityUrl}
-            target="_blank"
-            rel="noreferrer"
-            data-autofocus
-          >
-            Join the partner community <ArrowRight size={17} />
-          </a>
+          <>
+            <p className="partner-dialog__message">
+              And our partner community lives on{" "}
+              <strong>Telegram</strong> — it&apos;s where briefs, prompts and
+              monthly sessions happen.
+            </p>
+            <a
+              className="partner-dialog__cta"
+              href={communityUrl}
+              target="_blank"
+              rel="noreferrer"
+              data-autofocus
+            >
+              <Send size={15} /> Join the community on Telegram
+              <ArrowRight size={17} />
+            </a>
+          </>
         ) : null}
 
         <p className="partner-dialog__signoff">
