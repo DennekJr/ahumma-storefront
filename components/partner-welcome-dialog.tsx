@@ -90,30 +90,24 @@ export function PartnerWelcomeDialog({ communityUrl, onClose }: Props) {
         <h2 id="partner-dialog-title">Thanks for applying.</h2>
 
         <p className="partner-dialog__lede">
-          Hey! Thanks for applying to the Ahumma Creator Partner Network.
-        </p>
-        <p className="partner-dialog__message">
-          We&apos;ve got your application, and our team is reviewing it now.
-          You&apos;ll hear back from us within a few days with next steps.
-        </p>
-        <p className="partner-dialog__message">
-          In the meantime, follow us on{" "}
-          <a href={SOCIALS.instagram} target="_blank" rel="noreferrer">
-            Instagram
-          </a>{" "}
-          and{" "}
-          <a href={SOCIALS.tiktok} target="_blank" rel="noreferrer">
-            TikTok
-          </a>{" "}
-          to get a feel for the brand.
+          We&apos;ve got your application and the team is reviewing it now —
+          you&apos;ll hear back within a few days with next steps.
         </p>
 
         {communityUrl ? (
           <>
             <p className="partner-dialog__message">
-              And our partner community lives on{" "}
-              <strong>Telegram</strong> — it&apos;s where briefs, prompts and
-              monthly sessions happen.
+              In the meantime, follow us on{" "}
+              <a href={SOCIALS.instagram} target="_blank" rel="noreferrer">
+                Instagram
+              </a>{" "}
+              and{" "}
+              <a href={SOCIALS.tiktok} target="_blank" rel="noreferrer">
+                TikTok
+              </a>
+              . The partner community itself lives on{" "}
+              <strong>Telegram</strong>, where briefs, prompts and monthly
+              sessions happen.
             </p>
             <a
               className="partner-dialog__cta"
@@ -126,7 +120,19 @@ export function PartnerWelcomeDialog({ communityUrl, onClose }: Props) {
               <ArrowRight size={17} />
             </a>
           </>
-        ) : null}
+        ) : (
+          <p className="partner-dialog__message">
+            In the meantime, follow us on{" "}
+            <a href={SOCIALS.instagram} target="_blank" rel="noreferrer">
+              Instagram
+            </a>{" "}
+            and{" "}
+            <a href={SOCIALS.tiktok} target="_blank" rel="noreferrer">
+              TikTok
+            </a>{" "}
+            to get a feel for the brand.
+          </p>
+        )}
 
         <p className="partner-dialog__signoff">
           Talk soon,
