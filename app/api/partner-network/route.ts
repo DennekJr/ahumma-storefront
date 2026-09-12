@@ -167,9 +167,15 @@ export async function POST(request: Request) {
       );
     }
 
+    // The community invite is released only here, on a confirmed submission.
+    // Holding it server-side keeps it out of the JS bundle, where it would be
+    // readable by anyone who opened devtools without applying.
+    const communityUrl = process.env.PARTNER_COMMUNITY_URL?.trim() || null;
+
     return NextResponse.json({
       submitted: true,
       thankYouMessage: result?.data?.thankYouMessage ?? null,
+      communityUrl,
     });
   } catch (error) {
     if (error instanceof ApplicationError) {

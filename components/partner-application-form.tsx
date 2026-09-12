@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { CONTENT_CATEGORIES } from "@/lib/partner-network";
+import { PartnerWelcomeDialog } from "@/components/partner-welcome-dialog";
 
 type FormState = {
   firstName: string;
@@ -43,6 +44,8 @@ export function PartnerApplicationForm() {
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [communityUrl, setCommunityUrl] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const openedAt = useRef(0);
 
@@ -102,10 +105,12 @@ export function PartnerApplicationForm() {
         return;
       }
 
+      setCommunityUrl(result?.communityUrl ?? null);
       setSuccessMessage(
         result?.thankYouMessage ||
           "Thanks for applying. We'll be in touch about next steps.",
       );
+      setDialogOpen(true);
     } catch {
       setErrorMessage("We couldn't send your application. Please try again.");
     } finally {
@@ -115,20 +120,39 @@ export function PartnerApplicationForm() {
 
   if (successMessage) {
     return (
-      <div
-        className="partner-form partner-form--success"
-        role="status"
-        aria-live="polite"
-      >
-        <span className="partner-form__tick" aria-hidden="true">
-          <Check size={26} />
-        </span>
-        <p>{successMessage}</p>
-        <p className="partner-form__aside">
-          Applications are reviewed by the Partner Network Manager. Keep an eye
-          on your inbox.
-        </p>
-      </div>
+      <>
+        {dialogOpen ? (
+          <PartnerWelcomeDialog
+            message={successMessage}
+            communityUrl={communityUrl}
+            onClose={() => setDialogOpen(false)}
+          />
+        ) : null}
+        <div
+          className="partner-form partner-form--success"
+          role="status"
+          aria-live="polite"
+        >
+          <span className="partner-form__tick" aria-hidden="true">
+            <Check size={26} />
+          </span>
+          <p>{successMessage}</p>
+          <p className="partner-form__aside">
+            Applications are reviewed by the Partner Network Manager. Keep an eye
+            on your inbox.
+          </p>
+          {communityUrl ? (
+            <a
+              className="partner-form__community"
+              href={communityUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Join the partner community <ArrowRight size={15} />
+            </a>
+          ) : null}
+        </div>
+      </>
     );
   }
 
