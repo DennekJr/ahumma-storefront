@@ -3398,17 +3398,34 @@ img {
 }
 
 .partner-dialog__message {
-  margin: 0 0 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--line);
+  margin: 0 0 1rem;
   color: rgba(24, 32, 25, 0.72);
   font-size: 0.9375rem;
-  line-height: 1.6;
-  white-space: pre-line;
+  line-height: 1.65;
+}
+
+.partner-dialog__message a {
+  border-bottom: 1px solid currentColor;
+  color: var(--ink);
+  text-underline-offset: 0.1875rem;
+}
+
+.partner-dialog__message a:hover {
+  color: var(--clay);
+}
+
+.partner-dialog__signoff {
+  margin: 1.75rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: rgba(24, 32, 25, 0.6);
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .partner-dialog__lede {
-  margin: 0 0 1.75rem;
+  margin: 0 0 1rem;
   font-family: var(--serif);
   font-size: 1.1875rem;
   letter-spacing: -0.015em;
@@ -3416,6 +3433,7 @@ img {
 }
 
 .partner-dialog__cta {
+  margin-top: 0.75rem;
   display: inline-flex;
   align-items: center;
   gap: 0.875rem;
@@ -3440,7 +3458,7 @@ img {
 
 .partner-dialog__dismiss {
   display: block;
-  margin: 1.125rem auto 0;
+  margin: 1.25rem auto 0;
   padding: 0;
   border: 0;
   background: none;

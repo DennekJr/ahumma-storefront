@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SOCIALS } from "@/lib/socials";
 import { ScrollLink } from "@/components/scroll-link";
 import { ArrowRight, AtSign } from "lucide-react";
 
@@ -10,7 +11,7 @@ export function SiteFooter() {
         <span className="eyebrow eyebrow--light">Stay close</span>
         <h2>A slower ritual,<br />sent occasionally.</h2>
         <p>Notes on African botanicals, body care and the quiet art of tending to yourself.</p>
-        <a className="footer-social" href="https://www.instagram.com/ahummabeauty" target="_blank" rel="noreferrer">
+        <a className="footer-social" href={SOCIALS.instagram} target="_blank" rel="noreferrer">
           Follow @ahummabeauty <AtSign size={16} />
         </a>
       </div>

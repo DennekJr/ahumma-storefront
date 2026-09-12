@@ -123,7 +123,6 @@ export function PartnerApplicationForm() {
       <>
         {dialogOpen ? (
           <PartnerWelcomeDialog
-            message={successMessage}
             communityUrl={communityUrl}
             onClose={() => setDialogOpen(false)}
           />
