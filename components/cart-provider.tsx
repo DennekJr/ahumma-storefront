@@ -8,7 +8,6 @@ import {
   Plus,
   ShoppingBag,
   Trash2,
-  X,
 } from "lucide-react";
 import {
   createContext,
@@ -170,8 +169,15 @@ export function useCart() {
 }
 
 function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
-  const { items, isOpen, closeCart, removeItem, setQuantity, currency } =
-    useCart();
+  const {
+    items,
+    itemCount,
+    isOpen,
+    closeCart,
+    removeItem,
+    setQuantity,
+    currency,
+  } = useCart();
   const [zones, setZones] = useState<DeliveryZone[]>([]);
   const [zoneRef, setZoneRef] = useState("");
   const [loadingZones, setLoadingZones] = useState(false);
@@ -303,15 +309,15 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       >
         <div className="cart-drawer__header">
           <div>
-            <h2>Shopping bag</h2>
+            <h2>SHOPPING BAG ({itemCount})</h2>
           </div>
           <button
             type="button"
-            className="icon-button"
+            className="cart-drawer__close"
             onClick={closeCart}
             aria-label="Close bag"
           >
-            <X size={20} />
+            CLOSE
           </button>
         </div>
 
