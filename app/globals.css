@@ -3520,6 +3520,12 @@ img {
   cursor: pointer;
 }
 
+.cart-empty__icon {
+  width: 2rem;
+  height: 2rem;
+  fill: currentColor;
+}
+
 .empty-cart {
   display: flex;
   flex: 1;
