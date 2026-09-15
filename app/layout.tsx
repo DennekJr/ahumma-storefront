@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
-import { hasFrontdeskCheckout } from "@/lib/frontdesk";
+import { PreviewNotice } from "@/components/preview-notice";
+import { hasFrontdeskCheckout, hasFrontdeskReads } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
 import "./globals.css";
 
@@ -47,6 +48,7 @@ export default function RootLayout({
           {children}
         </CartProvider>
         <CookieNotice />
+        <PreviewNotice visible={!hasFrontdeskReads} />
         <Script
           id="frontdesk-chat-widget"
           src="https://widget.frontdesk.africa/widget.js"

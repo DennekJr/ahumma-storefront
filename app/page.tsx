@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MoveRight, Sparkles } from "lucide-react";
+import { ArrowRight, MoveRight } from "lucide-react";
 import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -9,7 +9,7 @@ import { ScrollLink } from "@/components/scroll-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import { getProducts, hasFrontdeskReads } from "@/lib/frontdesk";
+import { getProducts } from "@/lib/frontdesk";
 import {
   CIRCLE_BENEFITS,
   INGREDIENT_STORY,
@@ -200,16 +200,6 @@ export default async function HomePage() {
             beautiful and earn its place in your daily ritual.
           </p>
         </div>
-
-        {!hasFrontdeskReads ? (
-          <div className="api-preview-note">
-            <Sparkles size={15} />
-            <span>
-              <strong>Store preview</strong> — Ahumma&apos;s current collection
-              is shown while the Frontdesk keys are pending.
-            </span>
-          </div>
-        ) : null}
 
         <div className="product-grid">
           {featuredProducts.map((product, index) => (

@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { ProductCard } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import {
-  getCollections,
-  getProducts,
-  hasFrontdeskReads,
-} from "@/lib/frontdesk";
+import { getCollections, getProducts } from "@/lib/frontdesk";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -95,16 +91,6 @@ export default async function ShopPage() {
           beautiful and earn its place in your ritual.
         </p>
       </header>
-
-      {!hasFrontdeskReads ? (
-        <div className="api-preview-note shop-preview-note">
-          <Sparkles size={15} />
-          <span>
-            <strong>Store preview</strong> — Ahumma&apos;s current collection is
-            shown while the Frontdesk keys are pending.
-          </span>
-        </div>
-      ) : null}
 
       {groups.map((group) => (
         <section className="shop-group" id={group.key} key={group.key}>
