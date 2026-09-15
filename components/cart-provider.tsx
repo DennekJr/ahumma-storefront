@@ -497,7 +497,7 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                   </div>
                   <div className="cart-line__content">
                     <h3>{item.name}</h3>
-                    <p>{item.variantName}</p>
+
                     <span>
                       {formatMoney(
                         displayPrice.priceMinor,
