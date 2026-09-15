@@ -1162,6 +1162,10 @@ img {
   background: var(--porcelain);
 }
 
+.product-carousel {
+  width: 100%;
+}
+
 .product-grid.top-products-grid {
   display: grid;
   grid-auto-flow: column;
@@ -1176,6 +1180,51 @@ img {
 
 .product-grid.top-products-grid::-webkit-scrollbar {
   display: none;
+}
+
+.product-carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.product-carousel__controls button {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--deep-forest);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--deep-forest);
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.product-carousel__controls button:hover:not(:disabled),
+.product-carousel__controls button:focus-visible {
+  background: var(--deep-forest);
+  color: var(--porcelain);
+}
+
+.product-carousel__controls button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.product-carousel__controls svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
 }
 
 .product-grid.top-products-grid .product-card {
