@@ -25,11 +25,11 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
     const mediaQuery = gsap.matchMedia();
     mediaQuery.add("(prefers-reduced-motion: no-preference)", () => {
       const wordmark = header.querySelector<HTMLElement>(".wordmark");
-      const logo = header.querySelector<HTMLElement>(".wordmark img");
+
       const rootStyles = getComputedStyle(document.documentElement);
       const ink = rootStyles.getPropertyValue("--ink").trim();
       const line = rootStyles.getPropertyValue("--line").trim();
-      const lineLight = rootStyles.getPropertyValue("--line-light").trim();
+
       const initialHeaderHeight = getComputedStyle(header)
         .getPropertyValue("--header-height")
         .trim();
@@ -65,15 +65,15 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           header,
           {
             backgroundColor: "transparent",
-            color: "white",
-            borderColor: lineLight,
-            backdropFilter: "blur(0px)",
+            color: ink,
+            borderColor: line,
+            backdropFilter: "blur(0.25rem)",
           },
           {
             backgroundColor: "rgba(250, 248, 243, 0.94)",
             color: ink,
             borderColor: line,
-            backdropFilter: "blur(0.875rem)",
+            backdropFilter: "blur(0.25rem)",
             ease: "none",
           },
           0,
@@ -84,15 +84,6 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
             wordmark,
             { scale: 1 },
             { scale: 0.8, ease: "none" },
-            0,
-          );
-        }
-
-        if (logo) {
-          timeline.fromTo(
-            logo,
-            { filter: "invert(1) brightness(2)" },
-            { filter: "invert(0) brightness(1)", ease: "none" },
             0,
           );
         }

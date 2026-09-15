@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, MoveRight, Sparkles } from "lucide-react";
+import { ArrowRight, MoveRight, Sparkles } from "lucide-react";
 import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -41,66 +41,24 @@ export default async function HomePage() {
       <AnnouncementBar />
 
       <section className="home-hero">
-        <SiteHeader light />
+        <SiteHeader />
         <Image
           className="hero-sky"
-          src="/images/hero-sky.jpeg"
-          alt=""
+          src="/images/hero-ahumma.avif"
+          alt="Ahumma body care ritual"
           fill
           loading="eager"
           fetchPriority="high"
           sizes="100vw"
         />
-        <video
-          className="hero-sky-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/images/hero-sky.jpeg"
-          aria-hidden="true"
-          tabIndex={-1}
-        >
-          <source src="/videos/hero-clouds.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-haze" />
-        <Image
-          className="hero-wordmark"
-          src="/images/hero-wordmark.png"
-          alt="Ahumma"
-          width={2560}
-          height={547}
-          loading="eager"
-        />
-        <div className="hero-woman-shell">
-          <Image
-            className="hero-woman"
-            src="/images/hero-woman.png"
-            alt="A woman pausing in a moment of calm"
-            width={1411}
-            height={1800}
-            loading="eager"
-            sizes="(max-width: 780px) 100vw, (max-width: 1050px) 72vw, 760px"
-          />
-        </div>
+        <div className="hero-light-overlay" aria-hidden="true" />
         <div className="hero-copy">
-          <h1>At the edge of everything beautiful is you.</h1>
+          <h1>
+            We create beautiful, natural body care rooted in African heritage
+          </h1>
           <Link href="/shop" className="hero-link">
-            Explore the collection <ArrowRight size={17} />
+            Shop now
           </Link>
-        </div>
-        <ScrollLink
-          href="#philosophy"
-          className="hero-scroll"
-          aria-label="Read the Ahumma philosophy"
-        >
-          <ArrowDown size={20} />
-        </ScrollLink>
-        <div className="hero-note">
-          Premium body butters &amp; liquid African black soap
-          <br />
-          rooted in Africa, made for the world
         </div>
       </section>
 
