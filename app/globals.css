@@ -600,6 +600,29 @@ img {
   font-size: clamp(2rem, 4vw, 3.5rem);
   letter-spacing: -0.04em;
   line-height: 0.95;
+  opacity: 0.8;
+  transition: opacity 180ms ease;
+}
+
+.menu-drawer__nav:has(a:hover) a:not(:hover),
+.menu-drawer__nav:has(a:focus-visible) a:not(:focus-visible) {
+  opacity: 0.6;
+}
+
+.menu-drawer__nav a:hover,
+.menu-drawer__nav a:focus-visible {
+  opacity: 1;
+}
+
+.menu-drawer__nav a > span {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.menu-drawer__nav a:hover > span,
+.menu-drawer__nav a:focus-visible > span {
+  transform: translateX(0.6rem);
 }
 
 .menu-drawer__currency {
@@ -814,7 +837,7 @@ img {
 }
 
 .hero-link:hover {
-  background: var(--cream);
+  background: var(--porcelain);
   color: var(--rose);
   /*transform: translateY(-0.125rem);*/
 }
