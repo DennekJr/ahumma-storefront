@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MoveRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -96,20 +96,36 @@ export default async function HomePage() {
       <section className="philosophy-section" id="philosophy">
         <div className="philosophy-heading">
           <h2>
-            We don&apos;t believe
-            <br />
-            in fixing you.
+            Ahumma is a Nigerian-born premium body-care brand for Black and
+            brown skin, created from a simple belief: you are enough, and you
+            are beautiful by design.
           </h2>
         </div>
-        <div className="philosophy-copy">
-          <p>
-            We believe in caring for you. Your skin doesn&apos;t need to become
-            something else to be beautiful — it needs care, rooted in African
-            heritage and made for the skin you already have.
-          </p>
-          <ScrollLink href="#ritual" className="underlined-link">
-            Discover our approach <MoveRight size={18} />
-          </ScrollLink>
+        <div className="philosophy-image-grid">
+          <div className="philosophy-image-grid__item">
+            <Image
+              src="/images/ara-ritual.jpg"
+              alt="Ahumma Ara body-care ritual"
+              fill
+              sizes="(max-width: 780px) 100vw, 33vw"
+            />
+          </div>
+          <div className="philosophy-image-grid__item">
+            <Image
+              src="/images/dream-ritual.jpg"
+              alt="Ahumma Dream Whip body-care ritual"
+              fill
+              sizes="(max-width: 780px) 100vw, 33vw"
+            />
+          </div>
+          <div className="philosophy-image-grid__item">
+            <Image
+              src="/images/sika-ritual.jpg"
+              alt="Ahumma Sika body-care ritual"
+              fill
+              sizes="(max-width: 780px) 100vw, 33vw"
+            />
+          </div>
         </div>
       </section>
 
