@@ -992,7 +992,7 @@ img {
   min-height: auto;
   align-items: center;
   overflow: hidden;
-  padding: 4.8rem var(--gutter);
+  padding: 4.8rem 2.4rem;
   background: var(--porcelain);
   color: var(--deep-forest);
   border: 0;
@@ -1028,7 +1028,7 @@ img {
 .love-skin__content {
   position: relative;
   z-index: 2;
-  width: min(70rem, 100%);
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -1160,6 +1160,27 @@ img {
   flex-direction: column;
   padding: 1.125rem;
   background: var(--porcelain);
+}
+
+.product-grid.top-products-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 1.875rem) / 3.5);
+  grid-template-columns: none;
+  gap: 0.75rem;
+  overflow-x: auto;
+  border: 0;
+  scrollbar-width: none;
+}
+
+.product-grid.top-products-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.product-grid.top-products-grid .product-card {
+  overflow: hidden;
+  border-radius: 1.2rem;
+  background: var(--paper);
 }
 
 .product-card__image {

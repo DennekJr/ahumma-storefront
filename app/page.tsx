@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
+import { ProductCarousel } from "@/components/product-carousel";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CircleSignup } from "@/components/circle-signup";
 import { ScrollLink } from "@/components/scroll-link";
@@ -27,6 +28,9 @@ export default async function HomePage() {
   await connection();
   const products = await getProducts();
   const featuredProducts = products.slice(0, 3);
+  const topProducts = products.length
+    ? Array.from({ length: 6 }, (_, index) => products[index % products.length])
+    : [];
   const productHref = (...names: string[]) => {
     const match = products.find((product) =>
       names.some((name) => product.name.toLowerCase().includes(name)),
@@ -136,6 +140,15 @@ export default async function HomePage() {
       >
         <div className="love-skin__content">
           <h2 id="love-your-skin-title">Explore some of our top products</h2>
+          <ProductCarousel>
+            {topProducts.map((product, index) => (
+              <ProductCard
+                product={product}
+                index={index}
+                key={`${product.ref}-${index}`}
+              />
+            ))}
+          </ProductCarousel>
         </div>
       </section>
 

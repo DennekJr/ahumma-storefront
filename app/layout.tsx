@@ -5,6 +5,7 @@ import { CookieNotice } from "@/components/cookie-notice";
 import { PreviewNotice } from "@/components/preview-notice";
 import { hasFrontdeskCheckout, hasFrontdeskReads } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
+import "@blossom-carousel/core/style.css";
 import "./globals.css";
 
 function getMetadataBase() {
