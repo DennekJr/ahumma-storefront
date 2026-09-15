@@ -1171,6 +1171,7 @@ img {
   overflow-x: auto;
   border: 0;
   scrollbar-width: none;
+  margin-top: 3.6rem;
 }
 
 .product-grid.top-products-grid::-webkit-scrollbar {
@@ -1181,6 +1182,11 @@ img {
   overflow: hidden;
   border-radius: 1.2rem;
   background: var(--paper);
+}
+
+.product-grid.top-products-grid .product-card__image {
+  aspect-ratio: 1;
+  border-radius: 0.4rem;
 }
 
 .product-card__image {
