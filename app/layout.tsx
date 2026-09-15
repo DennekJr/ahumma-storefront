@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
+import { MetaPixel } from "@/components/meta-pixel";
 import { hasFrontdeskCheckout } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
 import "./globals.css";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>{children}</CartProvider>
+        <MetaPixel />
         <Script
           id="frontdesk-chat-widget"
           src="https://widget.frontdesk.africa/widget.js"
