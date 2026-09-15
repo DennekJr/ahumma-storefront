@@ -134,28 +134,8 @@ export default async function HomePage() {
         id="love-your-skin"
         aria-labelledby="love-your-skin-title"
       >
-        <Image
-          className="love-skin__image"
-          src="/images/love-your-skin.jpg"
-          alt="A woman enjoying an Ahumma body-care ritual"
-          fill
-          sizes="100vw"
-        />
-        <div className="love-skin__overlay" aria-hidden="true" />
         <div className="love-skin__content">
-          <h2 id="love-your-skin-title">Love your skin</h2>
-          <p className="love-skin__lead">
-            Your skin tells your story — nourish it, honor it, and let it glow.
-          </p>
-          <p className="love-skin__body">
-            Rich, whipped body butters made with shea, mango and cocoa to deeply
-            nourish Black and brown skin. Not to correct it, not to change it —
-            to care for it. Every application is five quiet minutes that belong
-            entirely to you.
-          </p>
-          <ScrollLink href="#shop" className="love-skin__cta">
-            Shop now <ArrowRight size={17} />
-          </ScrollLink>
+          <h2 id="love-your-skin-title">Explore some of our top products</h2>
         </div>
       </section>
 
