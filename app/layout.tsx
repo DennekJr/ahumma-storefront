@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MetaPixel } from "@/components/meta-pixel";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
@@ -48,6 +49,7 @@ export default function RootLayout({
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>
           {children}
         </CartProvider>
+        <MetaPixel />
         <CookieNotice />
         <PreviewNotice visible={!hasFrontdeskReads} />
         <Script
