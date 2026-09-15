@@ -3572,14 +3572,14 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3.75rem 2.5rem;
+  padding: 3rem 2.5rem 3.75rem;
   text-align: center;
 }
 
 .empty-cart h3 {
-  margin: 1.6875rem 0 0.625rem;
+  margin: 0.84375rem 0 0.625rem;
   font-family: var(--serif);
-  font-size: 2.25rem;
+  font-size: 1.575rem;
   font-weight: 400;
   letter-spacing: -0.04em;
 }

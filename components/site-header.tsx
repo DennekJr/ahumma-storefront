@@ -5,12 +5,14 @@ import Link from "next/link";
 import { ScrollLink } from "@/components/scroll-link";
 import { Menu, X } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useCart } from "@/components/cart-provider";
 
 export function SiteHeader({ light = false }: { light?: boolean }) {
   const { itemCount, openCart } = useCart();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -123,7 +125,16 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           The ritual
         </ScrollLink>
       </nav>
-      <Link href="/" className="wordmark" aria-label="Ahumma home">
+      <Link
+        href="/"
+        className="wordmark"
+        aria-label="Ahumma home"
+        onClick={(event) => {
+          if (pathname !== "/") return;
+          event.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
         <Image
           src="/images/ahumma-logo.png"
           alt="Ahumma"

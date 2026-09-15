@@ -327,12 +327,6 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
               />
             </svg>
             <h3>Your bag is quiet.</h3>
-            <p>
-              Explore considered care for cleansing, renewal and everyday glow.
-            </p>
-            <button type="button" className="text-button" onClick={closeCart}>
-              Continue shopping <ArrowRight size={15} />
-            </button>
           </div>
         ) : (
           <form className="cart-checkout" onSubmit={beginCheckout}>
