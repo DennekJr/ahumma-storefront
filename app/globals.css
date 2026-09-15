@@ -1216,27 +1216,22 @@ img {
   margin-top: auto;
   text-transform: none;
   transition:
-    gap 220ms ease,
     background 220ms ease,
     color 220ms ease;
 }
 
 .product-grid.top-products-grid .product-card__action svg {
   width: 1rem;
-  transition:
-    width 220ms ease,
-    transform 220ms ease;
+  transition: none;
 }
 
 .product-grid.top-products-grid .product-card__action:hover {
-  gap: 0;
   background: var(--deep-forest);
   color: var(--porcelain);
 }
 
 .product-grid.top-products-grid .product-card__action:hover svg {
-  width: 0;
-  transform: scale(0);
+  transform: none;
 }
 
 .product-card__image {
@@ -4167,47 +4162,40 @@ img {
   right: 0;
   bottom: 1.375rem;
   display: grid;
-  grid-template-columns: 1.75rem 1.75rem 1.75rem;
+  grid-template-columns: 2rem 2rem 2rem;
   width: fit-content;
-  border: 1px solid var(--line);
+  overflow: hidden;
+  border: 1px solid #1820191a;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--deep-forest);
 }
 
 .quantity-control button,
 .quantity-control span {
   display: grid;
-  height: 1.75rem;
+  height: 2rem;
   place-items: center;
   background: transparent;
-  font-size: 0.5625rem;
-}
-.quantity-control button {
-  cursor: pointer;
+  color: inherit;
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.05;
 }
 
-.line-remove {
-  position: absolute;
-  top: 1.375rem;
-  right: 0;
-  display: grid;
-  width: 2.125rem;
-  height: 2.125rem;
-  place-items: center;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: transparent;
+.quantity-control button {
+  border: 0;
   cursor: pointer;
-  color: rgba(24, 32, 25, 0.62);
   transition:
-    border-color 180ms ease,
     background 180ms ease,
     color 180ms ease;
 }
 
-.line-remove:hover {
-  border-color: var(--forest);
-  background: var(--forest);
-  color: white;
+.quantity-control button:hover,
+.quantity-control button:focus-visible {
+  background: var(--deep-forest);
+  color: var(--porcelain);
 }
 
 .cart-form {

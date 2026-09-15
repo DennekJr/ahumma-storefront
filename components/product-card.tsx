@@ -89,7 +89,7 @@ export function ProductCard({
           className="product-card__action"
           onClick={quickAdd}
         >
-          <Plus size={16} /> <span>Add to Bag</span>
+          <span>Add to Bag</span> <Plus size={16} />
         </button>
       ) : (
         <Link

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Minus, Plus, Trash2 } from "lucide-react";
+import { ArrowRight, Check, Minus, Plus } from "lucide-react";
 import {
   createContext,
   type FormEvent,
@@ -173,7 +173,6 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     itemCount,
     isOpen,
     closeCart,
-    removeItem,
     setQuantity,
     addItem,
     currency,
@@ -529,15 +528,6 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                       </button>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="line-remove"
-                    onClick={() => removeItem(item.variantRef)}
-                    aria-label={`Remove ${item.name} from bag`}
-                    title={`Remove ${item.name}`}
-                  >
-                    <Trash2 size={15} strokeWidth={1.5} />
-                  </button>
                 </article>
               ))}
             </div>
