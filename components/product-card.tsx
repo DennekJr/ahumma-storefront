@@ -78,7 +78,6 @@ export function ProductCard({
           <Link href={`/products/${product.slug}`}>
             <h3>{product.name}</h3>
           </Link>
-          <p>{product.previewTagline ?? "Considered care for the body"}</p>
         </div>
         <strong>
           {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
@@ -90,7 +89,7 @@ export function ProductCard({
           className="product-card__action"
           onClick={quickAdd}
         >
-          Add to bag <Plus size={16} />
+          <Plus size={16} /> <span>Add to Bag</span>
         </button>
       ) : (
         <Link
