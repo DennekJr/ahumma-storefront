@@ -1189,6 +1189,17 @@ img {
   border-radius: 0.4rem;
 }
 
+.product-grid.top-products-grid .product-card__status {
+  border-radius: 1.4rem;
+  background: var(--rose);
+  color: var(--porcelain);
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  letter-spacing: -0.035em;
+  text-transform: none;
+  padding-inline: 1rem;
+}
+
 .product-card__image {
   position: relative;
   display: block;

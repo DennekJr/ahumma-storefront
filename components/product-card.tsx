@@ -7,9 +7,21 @@ import { useCart } from "@/components/cart-provider";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import type { ProductSummary } from "@/lib/store-types";
 
-export function ProductCard({ product, index }: { product: ProductSummary; index: number }) {
+export function ProductCard({
+  product,
+  index,
+  showIndex = true,
+}: {
+  product: ProductSummary;
+  index: number;
+  showIndex?: boolean;
+}) {
   const { addItem, currency } = useCart();
-  const status = product.preorderable ? "Small-batch preorder" : product.soldOut ? "Sold out" : "Available now";
+  const status = product.preorderable
+    ? "Small-batch preorder"
+    : product.soldOut
+      ? "Sold out"
+      : "Available now";
   const displayPrice = resolveSummaryPrice(product, currency);
   const alternatePrices = Object.entries(product.pricesFrom ?? {}).map(
     ([priceCurrency, priceMinor]) => ({
@@ -37,29 +49,54 @@ export function ProductCard({ product, index }: { product: ProductSummary; index
   }
 
   return (
-    <article className="product-card" style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties}>
-      <Link className="product-card__image" href={`/products/${product.slug}`} aria-label={`View ${product.name}`}>
+    <article
+      className="product-card"
+      style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties}
+    >
+      <Link
+        className="product-card__image"
+        href={`/products/${product.slug}`}
+        aria-label={`View ${product.name}`}
+      >
         {product.coverUrl ? (
-          <Image src={product.coverUrl} alt={product.name} fill sizes="(max-width: 720px) 92vw, 33vw" />
+          <Image
+            src={product.coverUrl}
+            alt={product.name}
+            fill
+            sizes="(max-width: 720px) 92vw, 33vw"
+          />
         ) : (
           <span className="product-image-placeholder">Ahumma</span>
         )}
         <span className="product-card__status">{status}</span>
-        <span className="product-card__index">0{index + 1}</span>
+        {showIndex ? (
+          <span className="product-card__index">0{index + 1}</span>
+        ) : null}
       </Link>
       <div className="product-card__details">
         <div>
-          <Link href={`/products/${product.slug}`}><h3>{product.name}</h3></Link>
+          <Link href={`/products/${product.slug}`}>
+            <h3>{product.name}</h3>
+          </Link>
           <p>{product.previewTagline ?? "Considered care for the body"}</p>
         </div>
-        <strong>{formatMoney(displayPrice.priceMinor, displayPrice.currency)}</strong>
+        <strong>
+          {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
+        </strong>
       </div>
       {product.previewVariantRef && !product.soldOut ? (
-        <button type="button" className="product-card__action" onClick={quickAdd}>
+        <button
+          type="button"
+          className="product-card__action"
+          onClick={quickAdd}
+        >
           Add to bag <Plus size={16} />
         </button>
       ) : (
-        <Link className="product-card__action" href={`/products/${product.slug}`}>
+        <Link
+          className="product-card__action"
+          href={`/products/${product.slug}`}
+        >
           Discover <ArrowRight size={16} />
         </Link>
       )}
