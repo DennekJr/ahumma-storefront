@@ -30,9 +30,9 @@ export function SiteFooter() {
           <span>Care</span>
           <Link href="/faq">FAQs</Link>
           <Link href="/partner-network">Partner Network</Link>
-          <a href="https://ahumma.com/delivery/" target="_blank" rel="noreferrer">Delivery</a>
-          <a href="https://ahumma.com/return-cancellations/" target="_blank" rel="noreferrer">Returns</a>
-          <a href="https://ahumma.com/contact/" target="_blank" rel="noreferrer">Contact</a>
+          <Link href="/faq#shipping">Delivery</Link>
+          <Link href="/faq#shipping">Returns</Link>
+          <Link href="/faq#shipping">Contact</Link>
         </div>
         <Link className="footer-shop-link" href="/shop">
           Find your ritual <ArrowRight size={18} />
