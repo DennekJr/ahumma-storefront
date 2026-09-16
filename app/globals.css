@@ -3208,6 +3208,54 @@ img {
   font-style: normal;
 }
 
+/* SLA consent — checkbox plus the trigger that opens the agreement */
+.partner-sla-consent {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--porcelain);
+  overflow: hidden;
+  transition: border-color 220ms ease;
+}
+
+.partner-sla-consent.is-signed {
+  border-color: var(--ink);
+}
+
+.partner-sla-consent .partner-checkbox--sla {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.partner-sla-consent.is-signed .partner-checkbox--sla {
+  background: var(--sand);
+}
+
+.partner-sla-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.375rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 200ms ease;
+}
+
+.partner-sla-open:hover {
+  background: var(--sand);
+}
+
 .partner-form__actions {
   display: flex;
   flex-wrap: wrap;
@@ -3504,6 +3552,112 @@ img {
 @media (max-width: 600px) {
   .partner-dialog__panel {
     padding: 2.5rem 1.5rem 2rem;
+  }
+}
+
+/* The agreement rendered inside a dialog */
+.partner-dialog__panel--sla {
+  width: min(46rem, 100%);
+  padding: 3rem 2.75rem 2.25rem;
+  text-align: left;
+}
+
+.sla-doc h2 {
+  margin: 0 0 0.875rem;
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.sla-doc__purpose {
+  margin: 0 0 2rem;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.sla-doc h3 {
+  margin: 2rem 0 0.875rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sla-doc dl {
+  display: grid;
+  gap: 0.875rem;
+  margin: 0;
+}
+
+.sla-doc dt {
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.sla-doc dd {
+  margin: 0.1875rem 0 0;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.sla-doc__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.sla-doc__table th,
+.sla-doc__table td {
+  padding: 0.6875rem 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.sla-doc__table th {
+  width: 52%;
+  padding-right: 1rem;
+  font-weight: 500;
+}
+
+.sla-doc__table td {
+  color: rgba(24, 32, 25, 0.72);
+}
+
+.sla-doc__steps {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding-left: 1.125rem;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.sla-doc__review {
+  margin: 0;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.partner-dialog__panel--sla .partner-dialog__dismiss {
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .partner-dialog__panel--sla {
+    padding: 2.5rem 1.375rem 1.75rem;
+  }
+
+  .sla-doc__table th {
+    width: 58%;
   }
 }
 

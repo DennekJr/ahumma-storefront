@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, FileText, ShieldCheck } from "lucide-react";
 import { CONTENT_CATEGORIES } from "@/lib/partner-network";
+import { PartnerSlaDialog } from "@/components/partner-sla-dialog";
 import { PartnerWelcomeDialog } from "@/components/partner-welcome-dialog";
 
 type FormState = {
@@ -46,6 +47,7 @@ export function PartnerApplicationForm() {
   const [successMessage, setSuccessMessage] = useState("");
   const [communityUrl, setCommunityUrl] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [slaOpen, setSlaOpen] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const openedAt = useRef(0);
 
@@ -157,6 +159,7 @@ export function PartnerApplicationForm() {
 
   return (
     <form className="partner-form" onSubmit={handleSubmit}>
+      {slaOpen ? <PartnerSlaDialog onClose={() => setSlaOpen(false)} /> : null}
       <fieldset className="partner-step">
         <legend>
           <span className="partner-step__index">01</span> About you
@@ -361,30 +364,41 @@ export function PartnerApplicationForm() {
             <span>I agree to the Partner Code of Conduct.</span>
           </label>
 
-          <label
-            className={`partner-checkbox partner-checkbox--sla${form.slaAgreed ? " is-signed" : ""}`}
+          <div
+            className={`partner-sla-consent${form.slaAgreed ? " is-signed" : ""}`}
           >
-            <input
-              type="checkbox"
-              name="slaAgreed"
-              checked={form.slaAgreed}
-              onChange={(event) => set("slaAgreed", event.target.checked)}
-              required
-            />
-            <span className="partner-checkbox__box" aria-hidden="true">
-              <Check size={13} />
-            </span>
-            <span>
-              <strong>
-                <ShieldCheck size={14} /> I have read and accept the Service
-                Level Agreement
-              </strong>
-              <em>
-                Both sides&apos; commitments, above. Applications cannot be sent
-                without it.
-              </em>
-            </span>
-          </label>
+            <label className="partner-checkbox partner-checkbox--sla">
+              <input
+                type="checkbox"
+                name="slaAgreed"
+                checked={form.slaAgreed}
+                onChange={(event) => set("slaAgreed", event.target.checked)}
+                required
+              />
+              <span className="partner-checkbox__box" aria-hidden="true">
+                <Check size={13} />
+              </span>
+              <span>
+                <strong>
+                  <ShieldCheck size={14} /> I have read and accept the Service
+                  Level Agreement
+                </strong>
+                <em>
+                  Both sides&apos; commitments in full. Applications cannot be
+                  sent without it.
+                </em>
+              </span>
+            </label>
+            {/* Sibling, not child: a button inside the label would be
+                activated by the label and silently tick the consent. */}
+            <button
+              className="partner-sla-open"
+              type="button"
+              onClick={() => setSlaOpen(true)}
+            >
+              <FileText size={14} /> Read the full SLA
+            </button>
+          </div>
         </div>
       </fieldset>
 
