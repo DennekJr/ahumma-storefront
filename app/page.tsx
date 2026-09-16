@@ -166,7 +166,6 @@ export default async function HomePage() {
               <ProductCard
                 product={product}
                 index={index}
-                showIndex={false}
                 key={`${product.ref}-${index}`}
               />
             ))}

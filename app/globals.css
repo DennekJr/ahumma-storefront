@@ -1359,11 +1359,11 @@ img {
   transform: scale(1.035);
 }
 
-.product-card__status,
-.product-card__index {
+.product-card__status {
   position: absolute;
   z-index: 2;
   top: 0.9375rem;
+  left: 0.9375rem;
   padding: 0.4375rem 0.625rem;
   background: rgba(250, 248, 243, 0.88);
   backdrop-filter: blur(0.5rem);
@@ -1381,13 +1381,6 @@ img {
   font-size: 14px;
   letter-spacing: -0.035em;
   text-transform: none;
-}
-
-.product-card__status {
-  left: 0.9375rem;
-}
-.product-card__index {
-  right: 0.9375rem;
 }
 
 .product-card__details {

@@ -10,11 +10,9 @@ import type { ProductSummary } from "@/lib/store-types";
 export function ProductCard({
   product,
   index,
-  showIndex = true,
 }: {
   product: ProductSummary;
   index: number;
-  showIndex?: boolean;
 }) {
   const { addItem, currency } = useCart();
   const status = product.preorderable
@@ -69,9 +67,6 @@ export function ProductCard({
           <span className="product-image-placeholder">Ahumma</span>
         )}
         <span className="product-card__status">{status}</span>
-        {showIndex ? (
-          <span className="product-card__index">0{index + 1}</span>
-        ) : null}
       </Link>
       <div className="product-card__details">
         <div>
