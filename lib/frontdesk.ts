@@ -168,27 +168,47 @@ export async function getCheckout(ref: string): Promise<CheckoutSession> {
   );
 }
 
-export async function getProducts(): Promise<ProductSummary[]> {
-  if (!hasFrontdeskReads) return demoProductSummaries;
+export type Catalogue = {
+  products: ProductSummary[];
+  /**
+   * The catalogue could not be loaded, as distinct from being empty. Callers
+   * that render a storefront must tell the two apart: "nothing here" reads to a
+   * shopper as sold out, when in fact the shop never heard back from Frontdesk.
+   */
+  unavailable: boolean;
+};
+
+export async function getCatalogue(): Promise<Catalogue> {
+  if (!hasFrontdeskReads) {
+    return { products: demoProductSummaries, unavailable: false };
+  }
 
   try {
-    return await publicRequest<ProductSummary[]>("/store/products");
+    return {
+      products: await publicRequest<ProductSummary[]>("/store/products"),
+      unavailable: false,
+    };
   } catch (error) {
     // The preview remains usable while a newly issued key is being configured.
     if (error instanceof FrontdeskApiError && error.code === "NOT_CONFIGURED") {
-      return demoProductSummaries;
+      return { products: demoProductSummaries, unavailable: false };
     }
 
-    // A dropped connection should not take the page down with it. Render an
-    // empty collection rather than demo data, whose slugs and prices would be
-    // wrong for a live store.
+    // A dropped connection should not take the page down with it. Demo data is
+    // not a substitute either — its slugs and prices would be wrong for a live
+    // store — so the page renders nothing and says why.
     if (error instanceof FrontdeskApiError && error.code === "NETWORK_ERROR") {
       console.error("FrontDesk unreachable while loading products", error);
-      return [];
+      return { products: [], unavailable: true };
     }
 
     throw error;
   }
+}
+
+/** The product list alone, for callers with nothing to show a shopper. */
+export async function getProducts(): Promise<ProductSummary[]> {
+  return (await getCatalogue()).products;
 }
 
 export async function getProduct(slug: string): Promise<ProductDetail | null> {

@@ -5,7 +5,8 @@ import { ProductCard } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import { getCollections, getProducts, hasFrontdeskReads } from "@/lib/frontdesk";
+import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
+import { getCatalogue, getCollections, hasFrontdeskReads } from "@/lib/frontdesk";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -20,10 +21,11 @@ export const metadata: Metadata = {
 };
 
 export default async function ShopPage() {
-  const [products, collections] = await Promise.all([
-    getProducts(),
+  const [catalogue, collections] = await Promise.all([
+    getCatalogue(),
     getCollections(),
   ]);
+  const { products, unavailable } = catalogue;
 
   // A product belongs under its collection; anything the merchant has not
   // grouped is part of the core body-care range.
@@ -102,7 +104,9 @@ export default async function ShopPage() {
         </div>
       ) : null}
 
-      {groups.map((group) => (
+      {unavailable ? <CatalogueUnavailable /> : null}
+
+      {(unavailable ? [] : groups).map((group) => (
         <section className="shop-group" id={group.key} key={group.key}>
           <div className="shop-group__heading">
             <h2>{group.title}</h2>

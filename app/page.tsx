@@ -8,7 +8,8 @@ import { ScrollLink } from "@/components/scroll-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import { getProducts, hasFrontdeskReads } from "@/lib/frontdesk";
+import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
+import { getCatalogue, hasFrontdeskReads } from "@/lib/frontdesk";
 import {
   CIRCLE_BENEFITS,
   INGREDIENT_STORY,
@@ -24,7 +25,7 @@ const SHOW_STORY_SECTION = false;
 
 export default async function HomePage() {
   await connection();
-  const products = await getProducts();
+  const { products, unavailable } = await getCatalogue();
   const featuredProducts = products.slice(0, 3);
   const productHref = (...names: string[]) => {
     const match = products.find((product) =>
@@ -194,11 +195,15 @@ export default async function HomePage() {
           </div>
         ) : null}
 
-        <div className="product-grid">
-          {featuredProducts.map((product, index) => (
-            <ProductCard product={product} index={index} key={product.ref} />
-          ))}
-        </div>
+        {unavailable ? (
+          <CatalogueUnavailable variant="compact" />
+        ) : (
+          <div className="product-grid">
+            {featuredProducts.map((product, index) => (
+              <ProductCard product={product} index={index} key={product.ref} />
+            ))}
+          </div>
+        )}
 
         {products.length > featuredProducts.length ? (
           <div className="shop-view-more-row">
