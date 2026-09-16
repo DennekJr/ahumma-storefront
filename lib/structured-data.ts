@@ -23,7 +23,7 @@ export function siteUrl() {
     }
   }
 
-  return "https://www.ahumma.net";
+  return "https://www.ahumma.com";
 }
 
 function absolute(path: string | null | undefined) {
