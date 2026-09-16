@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { ArrowRight, Check } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -203,17 +203,6 @@ export default function PartnerNetworkPage() {
           </p>
         </div>
         <PartnerApplicationForm />
-      </section>
-
-      <section className="partner-closing">
-        <p>
-          At the edge of
-          <br />
-          everything beautiful is you.
-        </p>
-        <Link href="/shop">
-          Explore the collection <ArrowRight size={16} />
-        </Link>
       </section>
 
       <SiteFooter />

@@ -263,9 +263,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can Ahumma help with uneven-looking skin tone?",
         answer: [
-          "Our body butters and Ara liquid African black soap are made with plant butters and oils traditionally used in African body care to nourish skin and support a healthy, even-looking appearance.",
-          "Baby Bloom is the exception. It is made only to nourish and protect delicate skin, and we make no claims for it beyond gentle everyday care.",
-          "Ahumma is a premium, non-clinical body-care brand rather than a medical treatment for hyperpigmentation.",
+          "Some Ahumma products contain ingredients traditionally used in skincare formulations that support a more even-looking complexion.",
+          "However, Ahumma is currently positioned primarily as a premium, non-clinical body-care brand, not a medical treatment for hyperpigmentation.",
           "We do not promise to erase, cure or “fix” your natural skin.",
         ],
       },
@@ -302,6 +301,15 @@ export const FAQ_GROUPS: FaqGroup[] = [
         question: "What does Sika smell like?",
         answer: [
           "Sika has a brighter, softer fragrance profile inspired by lemon, vanilla and rose.",
+        ],
+      },
+      {
+        question: "Does Ahumma use essential oils?",
+        answer: [
+          "Yes, some Ahumma products contain essential oils, depending on the individual formulation and what we want the product to offer.",
+          "We’re thoughtful about what goes into every formula and don’t believe that every ingredient belongs in every product. Each product is formulated with its intended use and the needs of its customers in mind.",
+          "For example, Baby Bloom is completely free from essential oils. We intentionally kept the formula gentle and uncomplicated for the delicate skin of babies and children under 5.",
+          "If you have a particular sensitivity or ingredient you prefer to avoid, we always recommend checking the full ingredient list on the specific product before purchasing. And if you're ever unsure about an ingredient, our team is happy to help.",
         ],
       },
     ],
@@ -347,12 +355,13 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can I buy Ahumma in New York?",
         answer: [
-          "Yes. Ahumma is expanding its U.S. retail presence, beginning with New York.",
-          "A full stockist list is coming soon. In the meantime, email us and we will point you to your nearest retailer.",
+          "Ahumma is expanding its U.S. retail presence, beginning with New York.",
+          "For the latest stockist information, please visit our Stockists page.",
         ],
       },
       {
-        question: "Are Ahumma products suitable for Black and brown skin in the U.S.?",
+        question:
+          "Are Ahumma products suitable for Black and brown skin in the U.S.?",
         answer: [
           "Yes.",
           "Ahumma was created with melanin-rich skin at the heart of its product philosophy, while being designed for anyone who enjoys our formulations and sensory experience.",
@@ -378,6 +387,13 @@ export const FAQ_GROUPS: FaqGroup[] = [
         answer: [
           "Our products are formulated with skin comfort in mind, but individual skin can react differently.",
           "If you have sensitive or reactive skin, we recommend reviewing the complete ingredient list and performing a patch test before extensive use.",
+        ],
+      },
+      {
+        question: "Are Ahumma products pregnancy-safe?",
+        answer: [
+          "We do not currently position the entire Ahumma range as universally pregnancy-safe.",
+          "If you are pregnant or breastfeeding and have concerns about a particular ingredient, please consult your doctor or qualified healthcare professional before use.",
         ],
       },
     ],
@@ -420,7 +436,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
     title: "Ahumma philosophy",
     entries: [
       {
-        question: "Why does Ahumma talk so much about beauty and self-acceptance?",
+        question:
+          "Why does Ahumma talk so much about beauty and self-acceptance?",
         answer: [
           "Because we don't believe skincare should begin with the idea that something is wrong with you.",
           "For generations, Black and brown people have been encouraged to change, lighten, hide or “fix” aspects of their appearance.",
@@ -437,7 +454,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
         ],
       },
       {
-        question: "What makes Ahumma different from other African skincare brands?",
+        question:
+          "What makes Ahumma different from other African skincare brands?",
         answer: [
           "Ahumma sits at the intersection of African heritage, modern body care, sensory luxury, melanin-rich skin and intentional simplicity.",
           "We aren't trying to recreate the past.",
@@ -481,7 +499,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
   },
   {
     id: "why-ahumma",
-    title: "The final question",
+    title: "The final FAQ",
     entries: [
       {
         question: "Why should I try Ahumma?",
@@ -506,7 +524,7 @@ export function faqAnswerText(entry: FaqEntry) {
 
   if (entry.steps?.length) {
     parts.push(
-      entry.steps.map((step, index) => `${index + 1}. ${step}`).join(" ")
+      entry.steps.map((step, index) => `${index + 1}. ${step}`).join(" "),
     );
   }
 

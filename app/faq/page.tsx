@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -35,11 +34,7 @@ export default function FaqPage() {
       <SiteHeader />
 
       <header className="faq-hero">
-        <h1>
-          Everything you
-          <br />
-          wanted to ask.
-        </h1>
+        <h1>AHUMMA FAQs</h1>
         <p>{FAQ_INTRO}</p>
       </header>
 
@@ -95,17 +90,6 @@ export default function FaqPage() {
           </section>
         ))}
       </div>
-
-      <section className="faq-closing">
-        <p>
-          At the edge of
-          <br />
-          everything beautiful is you.
-        </p>
-        <Link href="/shop">
-          Shop Ahumma <ArrowRight size={16} />
-        </Link>
-      </section>
 
       <SiteFooter />
     </main>
