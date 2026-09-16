@@ -57,7 +57,7 @@ export const WHY_AHUMMA = [
   },
   {
     title: "African heritage",
-    body: "Inspired by the ingredients, rituals and beauty traditions of Africa, reimagined for modern everyday life.",
+    body: "Inspired by the ingredients, rituals and beauty traditions of Africa and reimagined for modern everyday life.",
   },
   {
     title: "Beautiful simplicity",
