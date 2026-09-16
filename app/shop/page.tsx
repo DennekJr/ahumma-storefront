@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { ProductCard } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
@@ -40,14 +39,11 @@ export default async function ShopPage() {
     {
       key: "body-care",
       title: "Body care",
-      description:
-        "The everyday ritual — whipped body butters and liquid African black soap.",
       products: bodyCare,
     },
     ...collections.map((collection) => ({
       key: collection.slug,
       title: collection.name,
-      description: collection.description ?? "",
       products: products.filter((product) =>
         collection.productRefs.includes(product.ref),
       ),
@@ -92,7 +88,6 @@ export default async function ShopPage() {
         <section className="shop-group" id={group.key} key={group.key}>
           <div className="shop-group__heading">
             <h2>{group.title}</h2>
-            {group.description ? <p>{group.description}</p> : null}
           </div>
 
           {group.products.length ? (
@@ -115,17 +110,6 @@ export default async function ShopPage() {
           )}
         </section>
       ))}
-
-      <section className="shop-closing">
-        <p>
-          At the edge of
-          <br />
-          everything beautiful is you.
-        </p>
-        <Link href="/faq">
-          Read the FAQs <ArrowRight size={16} />
-        </Link>
-      </section>
 
       <SiteFooter />
     </main>

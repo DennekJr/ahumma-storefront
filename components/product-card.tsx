@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import type { ProductSummary } from "@/lib/store-types";
@@ -96,7 +96,7 @@ export function ProductCard({
           className="product-card__action"
           href={`/products/${product.slug}`}
         >
-          Discover <ArrowRight size={16} />
+          Discover
         </Link>
       )}
     </article>
