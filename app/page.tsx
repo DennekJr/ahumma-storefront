@@ -196,6 +196,9 @@ export default async function HomePage() {
             There is beauty in where we come from. There is beauty in who we
             are. And there is beauty in becoming more of ourselves.
           </p>
+          <Link className="global-section__cta" href="/about">
+            See more
+          </Link>
         </div>
       </section>
 
