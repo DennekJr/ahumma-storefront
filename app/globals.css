@@ -2834,6 +2834,93 @@ img {
   background: var(--paper);
 }
 
+.testimonial-section {
+  padding: 7rem var(--gutter) 8rem;
+  background: var(--forest);
+  color: var(--porcelain);
+}
+
+.testimonial-section__intro {
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.testimonial-section__intro h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.testimonial-section__intro p {
+  margin: 1.25rem 0 0;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 74rem;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  display: flex;
+  min-height: 13.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  color: var(--deep-forest);
+}
+
+.testimonial-card p {
+  max-width: 26rem;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.testimonial-card span {
+  margin-top: 2rem;
+  font-size: 0.5625rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.testimonial-card--blue {
+  background: #c8d8f5;
+}
+
+.testimonial-card--cream {
+  background: #f8d7b0;
+}
+
+.testimonial-card--lilac {
+  background: #dfd2f5;
+}
+
+.testimonial-card--green {
+  background: #bfe3c8;
+}
+
+.testimonial-card--yellow {
+  background: #e4e59b;
+}
+
+.testimonial-card--pink {
+  background: #f3bdd4;
+}
+
 .ritual-intro-section {
   padding: 8.75rem var(--gutter) 0;
   background: var(--porcelain);
@@ -4774,6 +4861,20 @@ img {
   .footer-signup-popup__backdrop,
   .footer-signup-popup__dialog {
     animation: none;
+  }
+}
+
+@media (max-width: 780px) {
+  .testimonial-section {
+    padding: 5.5rem var(--gutter) 6rem;
+  }
+
+  .testimonial-section__intro {
+    margin-bottom: 2.75rem;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr;
   }
 }
 

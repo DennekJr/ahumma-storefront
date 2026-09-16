@@ -197,8 +197,48 @@ export default async function HomePage() {
             are. And there is beauty in becoming more of ourselves.
           </p>
           <Link className="global-section__cta" href="/about">
-            See more
+            About us
           </Link>
+        </div>
+      </section>
+
+      <section
+        className="testimonial-section"
+        aria-labelledby="testimonial-title"
+      >
+        <div className="testimonial-section__intro">
+          <h2 id="testimonial-title">Loved by our customers</h2>
+          <p>Real care, beautifully shared.</p>
+        </div>
+        <div className="testimonial-grid">
+          <article className="testimonial-card testimonial-card--blue">
+            <p>“A beautiful ritual I look forward to every day.”</p>
+            <span>Adaeze · Lagos</span>
+          </article>
+          <article className="testimonial-card testimonial-card--cream">
+            <p>
+              “Thoughtful body care that makes my skin feel deeply nourished.”
+            </p>
+            <span>Customer story coming soon</span>
+          </article>
+          <article className="testimonial-card testimonial-card--lilac">
+            <p>
+              “The texture, the scent and the feeling are all so considered.”
+            </p>
+            <span>Customer story coming soon</span>
+          </article>
+          <article className="testimonial-card testimonial-card--green">
+            <p>“Finally, body care that feels made with my skin in mind.”</p>
+            <span>Customer story coming soon</span>
+          </article>
+          <article className="testimonial-card testimonial-card--yellow">
+            <p>“A small moment of care that changes how I feel.”</p>
+            <span>Customer story coming soon</span>
+          </article>
+          <article className="testimonial-card testimonial-card--pink">
+            <p>“Beautiful products for a ritual that feels entirely my own.”</p>
+            <span>Customer story coming soon</span>
+          </article>
         </div>
       </section>
 
