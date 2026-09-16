@@ -2008,7 +2008,7 @@ img {
 }
 
 .product-lede {
-  max-width: 31.25rem;
+  max-width: 40rem;
   margin: 0 0 2.1875rem;
   color: rgba(24, 32, 25, 0.72);
   font-family: var(--serif);
@@ -2369,7 +2369,7 @@ img {
 }
 
 .shop-hero p {
-  max-width: 31.25rem;
+  max-width: 40rem;
   margin: 1.875rem auto 0;
   font-family: var(--serif);
   font-size: 1.3125rem;

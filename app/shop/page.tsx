@@ -81,11 +81,7 @@ export default async function ShopPage() {
       <SiteHeader />
 
       <header className="shop-hero">
-        <h1>
-          Everything we
-          <br />
-          make.
-        </h1>
+        <h1>Everything we make.</h1>
         <p>
           Fewer, intentional products. Each formula is made to work deeply, feel
           beautiful and earn its place in your ritual.
