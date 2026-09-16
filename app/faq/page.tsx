@@ -66,9 +66,9 @@ export default function FaqPage() {
                     <span className="faq-entry__marker" aria-hidden="true" />
                   </summary>
                   <div className="faq-entry__answer">
-                    {entry.answer.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
+                    {entry.answer.length ? (
+                      <p>{entry.answer.join(" ")}</p>
+                    ) : null}
                     {entry.points?.length ? (
                       <ul>
                         {entry.points.map((point) => (

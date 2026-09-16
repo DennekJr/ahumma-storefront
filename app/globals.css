@@ -3700,41 +3700,6 @@ img {
   }
 }
 
-.partner-closing {
-  max-width: none !important;
-  padding: 9.375rem 8vw !important;
-  background: var(--deep-forest);
-  color: white;
-  text-align: center;
-}
-
-.partner-closing p {
-  margin: 1.75rem 0 2.5rem;
-  font-family: var(--serif);
-  font-size: clamp(3.25rem, 6.5vw, 6.125rem);
-  letter-spacing: -0.06em;
-  line-height: 0.91;
-}
-
-.partner-closing a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding-bottom: 0.5625rem;
-  border-bottom: 1px solid white;
-  font-size: 0.625rem;
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.partner-closing__secondary {
-  margin-top: 1.75rem;
-  display: block;
-  border: 0 !important;
-  color: rgba(255, 255, 255, 0.7);
-}
-
 @media (max-width: 900px) {
   .partner-goal-grid,
   .partner-benefit-grid,
