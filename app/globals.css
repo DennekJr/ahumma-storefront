@@ -902,9 +902,6 @@ img {
 }
 
 .section-heading h2,
-.made-for-intro h2,
-.ritual-copy h2,
-.made-copy h2,
 .product-story h2,
 .footer-invitation h2 {
   margin: 1.375rem 0 0;
@@ -948,6 +945,29 @@ img {
 .philosophy-image-grid__item img {
   object-fit: cover;
   transition: transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.philosophy-image-grid__item::after {
+  position: absolute;
+  inset: 50% 0 0;
+  background: linear-gradient(transparent, rgba(12, 20, 15, 0.62));
+  content: "";
+}
+
+.philosophy-image-grid__label {
+  position: absolute;
+  z-index: 1;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: white;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.05;
 }
 
 .philosophy-image-grid__item:hover img {
@@ -1372,224 +1392,6 @@ img {
 
 .product-card__action:hover svg {
   transform: rotate(90deg);
-}
-
-.made-for-section {
-  padding: 9.375rem 5.5vw;
-}
-
-.made-for-intro {
-  display: grid;
-  grid-template-columns: 0.65fr 2fr;
-  gap: 2.125rem;
-  align-items: start;
-  margin-bottom: 4.375rem;
-}
-
-.made-for-intro h2 {
-  margin: -0.5625rem 0 0;
-  font-size: clamp(3rem, 5.4vw, 5.125rem);
-}
-
-.made-for-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 0.9375rem;
-}
-
-.made-for-card {
-  position: relative;
-  display: block;
-  min-height: 33.125rem;
-  overflow: hidden;
-  background: var(--sand);
-}
-
-.made-for-card img {
-  object-fit: cover;
-  filter: saturate(0.85);
-  transition:
-    transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    filter 300ms ease;
-}
-
-.made-for-card:hover img {
-  filter: saturate(1);
-  transform: scale(1.035);
-}
-
-.made-for-card::after {
-  position: absolute;
-  inset: 50% 0 0;
-  background: linear-gradient(transparent, rgba(12, 20, 15, 0.58));
-  content: "";
-}
-
-.made-for-card > span {
-  position: absolute;
-  z-index: 2;
-  right: 1.375rem;
-  bottom: 1.375rem;
-  left: 1.375rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: white;
-  font-family: var(--serif);
-  font-size: 1.6875rem;
-  letter-spacing: -0.025em;
-}
-
-.made-for-card > span small {
-  margin-right: auto;
-  font-family: var(--sans);
-  font-size: 0.5625rem;
-  letter-spacing: 0.1em;
-}
-
-.ritual-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 51.25rem;
-  background: var(--forest);
-  color: white;
-}
-
-.ritual-image {
-  position: relative;
-  min-height: 51.25rem;
-  overflow: hidden;
-}
-
-.ritual-image img {
-  object-fit: cover;
-  object-position: center 35%;
-  filter: saturate(0.72) contrast(0.95);
-}
-
-.image-caption {
-  position: absolute;
-  z-index: 2;
-  bottom: 1.125rem;
-  left: 1.25rem;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.5rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.ritual-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 5rem 7vw;
-}
-
-.ritual-copy h2 {
-  font-size: clamp(3.25rem, 5.5vw, 5.25rem);
-}
-
-.ritual-copy > p {
-  max-width: 30.625rem;
-  margin: 2.375rem 0 3rem;
-  color: rgba(255, 255, 255, 0.76);
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  line-height: 1.45;
-}
-
-.ritual-steps {
-  margin-bottom: 2.8125rem;
-  border-top: 1px solid var(--line-light);
-}
-
-.ritual-steps > div {
-  display: grid;
-  grid-template-columns: 2.625rem 0.65fr 1fr;
-  gap: 0.9375rem;
-  align-items: center;
-  padding: 1.0625rem 0;
-  border-bottom: 1px solid var(--line-light);
-}
-
-.ritual-steps span,
-.ritual-steps small {
-  color: rgba(255, 255, 255, 0.57);
-  font-size: 0.5625rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.ritual-steps strong {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 400;
-}
-
-.made-section {
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 11vw;
-  padding: 10rem 5.5vw;
-  background: var(--sand);
-}
-
-.made-copy h2 {
-  font-size: clamp(3.1875rem, 5.7vw, 5.5rem);
-}
-
-.made-principles {
-  align-self: end;
-}
-
-.made-principles > p {
-  margin: 0 0 2.625rem;
-  font-family: var(--serif);
-  font-size: 1.4375rem;
-  line-height: 1.38;
-}
-
-.principle-list {
-  border-top: 1px solid var(--line);
-}
-
-.principle-list span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.875rem 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.625rem;
-  font-weight: 620;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.principle-list span::after {
-  content: "✦";
-  font-size: 0.5625rem;
-}
-
-.closing-quote {
-  padding: 8.4375rem 8vw;
-  background: var(--porcelain);
-  text-align: center;
-}
-
-.closing-quote p {
-  max-width: 68.75rem;
-  margin: 0 auto 1.5625rem;
-  font-family: var(--serif);
-  font-size: clamp(2.6875rem, 5.8vw, 5.5625rem);
-  letter-spacing: -0.055em;
-  line-height: 0.98;
-}
-
-.closing-quote span {
-  font-size: 0.5625rem;
-  font-weight: 650;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
 }
 
 /* Footer signup */
@@ -2969,13 +2771,6 @@ img {
   margin-bottom: 0;
 }
 
-.made-for-lede {
-  max-width: 34rem;
-  margin: 1.375rem 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-}
-
 .ritual-intro-section {
   padding: 8.75rem var(--gutter) 0;
   background: var(--porcelain);
@@ -3111,56 +2906,6 @@ img {
   line-height: 1.62;
 }
 
-.circle-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  padding: 8.75rem var(--gutter);
-  background: var(--sand);
-}
-
-.circle-copy h2 {
-  margin: 1.375rem 0 1.25rem;
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 4.5vw, 4rem);
-  font-weight: 400;
-  letter-spacing: -0.06em;
-  line-height: 0.98;
-}
-
-.circle-copy p {
-  margin: 0 0 1.5rem;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-}
-
-.circle-benefits {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.625rem 1.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.circle-benefits li {
-  padding-top: 0.625rem;
-  border-top: 1px solid var(--line);
-  font-size: 0.875rem;
-}
-
-.circle-signup {
-  align-self: center;
-}
-
-.circle-signup__lede {
-  margin: 0 0 1.75rem;
-  font-family: var(--serif);
-  font-size: 1.3125rem;
-  letter-spacing: -0.018em;
-  line-height: 1.45;
-}
-
 .circle-form {
   display: flex;
   flex-wrap: wrap;
@@ -3201,8 +2946,7 @@ img {
 
 @media (max-width: 780px) {
   .story-section,
-  .global-section,
-  .circle-section {
+  .global-section {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     padding: 5.5rem var(--gutter);
@@ -3221,14 +2965,9 @@ img {
   .ritual-category-grid,
   .ritual-product-list,
   .why-grid,
-  .ingredient-grid,
-  .circle-benefits {
+  .ingredient-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
-
-  .circle-benefits {
-    gap: 0.625rem;
   }
 }
 
@@ -4636,12 +4375,7 @@ img {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
-  .made-for-grid {
-    grid-template-columns: 1.6fr 1fr;
-  }
-  .made-for-card:last-child {
-    display: none;
-  }
+
   .product-gallery {
     grid-template-columns: 1fr;
   }
@@ -4784,8 +4518,6 @@ img {
   }
   .philosophy-section,
   .section-heading,
-  .made-for-intro,
-  .made-section,
   .footer-invitation,
   .footer-directory,
   .product-story,
@@ -4799,9 +4531,7 @@ img {
   .philosophy-image-grid {
     grid-template-columns: 1fr;
   }
-  .section-heading h2,
-  .made-for-intro h2,
-  .made-copy h2 {
+  .section-heading h2 {
     font-size: 3.3125rem;
   }
   .philosophy-heading h2 {
@@ -4882,54 +4612,7 @@ img {
   .product-card__details {
     grid-template-columns: 1fr auto;
   }
-  .made-for-section {
-    padding: 5.9375rem 0.8125rem;
-  }
-  .made-for-intro {
-    gap: 1.0625rem;
-    margin: 0 0.5625rem 2.6875rem;
-  }
-  .made-for-intro h2 {
-    margin-top: 0.4375rem;
-  }
-  .made-for-grid {
-    grid-template-columns: 1fr;
-    gap: 0.5625rem;
-  }
-  .made-for-card {
-    min-height: 26.875rem;
-  }
-  .made-for-card:last-child {
-    display: block;
-  }
-  .ritual-section {
-    grid-template-columns: 1fr;
-  }
-  .ritual-image {
-    min-height: 36.25rem;
-  }
-  .ritual-copy {
-    padding: 5.3125rem 1.375rem 5.9375rem;
-  }
-  .ritual-copy h2 {
-    font-size: 3.4375rem;
-  }
-  .ritual-copy > p {
-    font-size: 1.125rem;
-  }
-  .ritual-steps > div {
-    grid-template-columns: 2.125rem 0.6fr 1fr;
-  }
-  .made-section {
-    gap: 3.75rem;
-    padding: 5.9375rem 1.375rem;
-  }
-  .closing-quote {
-    padding: 5.9375rem 1.375rem;
-  }
-  .closing-quote p {
-    font-size: 2.9375rem;
-  }
+
   .footer-invitation {
     gap: 2.1875rem;
     padding: 5.3125rem 1.375rem;

@@ -12,6 +12,7 @@ export function FooterSignupPopup({
   const [isOpen, setIsOpen] = useState(false);
   const [suppressed, setSuppressed] = useState(false);
   const suppressionKey = "ahumma-footer-signup-suppressed";
+  const sessionKey = "ahumma-footer-signup-shown";
 
   useEffect(() => {
     setSuppressed(window.localStorage.getItem(suppressionKey) === "true");
@@ -23,7 +24,14 @@ export function FooterSignupPopup({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !suppressed) setIsOpen(true);
+        if (
+          entry.isIntersecting &&
+          !suppressed &&
+          window.sessionStorage.getItem(sessionKey) !== "true"
+        ) {
+          window.sessionStorage.setItem(sessionKey, "true");
+          setIsOpen(true);
+        }
       },
       { threshold: 0 },
     );
@@ -46,11 +54,13 @@ export function FooterSignupPopup({
   }, [isOpen]);
 
   function close() {
+    window.sessionStorage.setItem(sessionKey, "true");
     setIsOpen(false);
   }
 
   function suppress() {
     window.localStorage.setItem(suppressionKey, "true");
+    window.sessionStorage.setItem(sessionKey, "true");
     setSuppressed(true);
     setIsOpen(false);
   }

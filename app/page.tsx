@@ -5,19 +5,13 @@ import { connection } from "next/server";
 import { ProductCard } from "@/components/product-card";
 import { ProductCarousel } from "@/components/product-carousel";
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { CircleSignup } from "@/components/circle-signup";
+
 import { ScrollLink } from "@/components/scroll-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProducts } from "@/lib/frontdesk";
-import {
-  CIRCLE_BENEFITS,
-  INGREDIENT_STORY,
-  RITUAL_CATEGORIES,
-  RITUAL_PRODUCTS,
-  WHY_AHUMMA,
-} from "@/lib/homepage";
+import { INGREDIENT_STORY, WHY_AHUMMA } from "@/lib/homepage";
 import { organizationSchema } from "@/lib/structured-data";
 
 /** The Ahumma story reads long beside the philosophy, so it is held back for
@@ -27,7 +21,7 @@ const SHOW_STORY_SECTION = false;
 export default async function HomePage() {
   await connection();
   const products = await getProducts();
-  const featuredProducts = products.slice(0, 3);
+
   const topProducts = products.length
     ? Array.from({ length: 6 }, (_, index) => products[index % products.length])
     : [];
@@ -105,31 +99,57 @@ export default async function HomePage() {
             are beautiful by design.
           </h2>
         </div>
+        <div className="philosophy-copy">
+          <p>
+            Ahumma was created with Black and brown skin at the heart of the
+            brand. From the richness of deep melanin to every shade in between,
+            our products celebrate the skin you&apos;re in — not ask you to
+            become something else.
+          </p>
+        </div>
         <div className="philosophy-image-grid">
-          <div className="philosophy-image-grid__item">
+          <Link
+            href={productHref("ara")}
+            className="philosophy-image-grid__item"
+          >
             <Image
               src="/images/ara-ritual.jpg"
               alt="Ahumma Ara body-care ritual"
               fill
               sizes="(max-width: 780px) 100vw, 33vw"
             />
-          </div>
-          <div className="philosophy-image-grid__item">
+            <span className="philosophy-image-grid__label">
+              For Black skin. <ArrowRight size={17} />
+            </span>
+          </Link>
+          <Link
+            href={productHref("dream whip", "dream")}
+            className="philosophy-image-grid__item"
+          >
             <Image
               src="/images/dream-ritual.jpg"
               alt="Ahumma Dream Whip body-care ritual"
               fill
               sizes="(max-width: 780px) 100vw, 33vw"
             />
-          </div>
-          <div className="philosophy-image-grid__item">
+            <span className="philosophy-image-grid__label">
+              For brown skin. <ArrowRight size={17} />
+            </span>
+          </Link>
+          <Link
+            href={productHref("sika", "sike")}
+            className="philosophy-image-grid__item"
+          >
             <Image
               src="/images/sika-ritual.jpg"
               alt="Ahumma Sika body-care ritual"
               fill
               sizes="(max-width: 780px) 100vw, 33vw"
             />
-          </div>
+            <span className="philosophy-image-grid__label">
+              For every shade that knows its beauty. <ArrowRight size={17} />
+            </span>
+          </Link>
         </div>
       </section>
 
@@ -150,205 +170,6 @@ export default async function HomePage() {
               />
             ))}
           </ProductCarousel>
-        </div>
-      </section>
-
-      <section className="ritual-intro-section">
-        <div className="section-heading">
-          <div>
-            <h2>
-              A little care
-              <br />
-              goes a long way.
-            </h2>
-          </div>
-          <p>
-            Two ways into the ritual, and four beautiful ways to care for your
-            skin.
-          </p>
-        </div>
-
-        <div className="ritual-category-grid">
-          {RITUAL_CATEGORIES.map((category) => (
-            <article className="ritual-category" key={category.title}>
-              <h3>{category.title}</h3>
-              <p className="ritual-category__tagline">{category.tagline}</p>
-              <p>{category.body}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="ritual-product-list">
-          {RITUAL_PRODUCTS.map((product) => (
-            <Link
-              className="ritual-product"
-              href={productHref(...product.match)}
-              key={product.name}
-            >
-              <span className="ritual-product__name">{product.name}</span>
-              <span className="ritual-product__tagline">{product.tagline}</span>
-              <span className="ritual-product__body">{product.body}</span>
-              <span className="ritual-product__cta">
-                Shop {product.name} <ArrowRight size={15} />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="shop-section" id="shop">
-        <div className="section-heading shop-heading">
-          <div>
-            <h2>
-              Care you&apos;ll
-              <br />
-              return to.
-            </h2>
-          </div>
-          <p>
-            A considered collection. Each formula is made to work deeply, feel
-            beautiful and earn its place in your daily ritual.
-          </p>
-        </div>
-
-        <div className="product-grid">
-          {featuredProducts.map((product, index) => (
-            <ProductCard product={product} index={index} key={product.ref} />
-          ))}
-        </div>
-
-        {products.length > featuredProducts.length ? (
-          <div className="shop-view-more-row">
-            <Link href="/shop" className="shop-view-more">
-              View all products <ArrowRight size={17} />
-            </Link>
-          </div>
-        ) : null}
-      </section>
-
-      <section className="made-for-section" id="made-for">
-        <div className="made-for-intro">
-          <h2>
-            Your skin. Your ritual.
-            <br />
-            Your beauty.
-          </h2>
-          <p className="made-for-lede">
-            Ahumma was created with Black and brown skin at the heart of the
-            brand. From the richness of deep melanin to every shade in between,
-            our products celebrate the skin you&apos;re in — not ask you to
-            become something else.
-          </p>
-        </div>
-        <div className="made-for-grid">
-          <Link
-            href={productHref("ara")}
-            className="made-for-card made-for-card--wide"
-          >
-            <Image
-              src="/images/ara-ritual.jpg"
-              alt="Ahumma body-care ritual"
-              fill
-              sizes="(max-width: 800px) 100vw, 50vw"
-            />
-            <span>
-              <small>01</small> For Black skin <ArrowRight size={17} />
-            </span>
-          </Link>
-          <Link
-            href={productHref("dream whip", "dream")}
-            className="made-for-card"
-          >
-            <Image
-              src="/images/dream-ritual.jpg"
-              alt="Dream Whip body butter ritual"
-              fill
-              sizes="(max-width: 800px) 100vw, 25vw"
-            />
-            <span>
-              <small>02</small> For brown skin <ArrowRight size={17} />
-            </span>
-          </Link>
-          <Link href={productHref("sika", "sike")} className="made-for-card">
-            <Image
-              src="/images/sika-ritual.jpg"
-              alt="Sika body butter ritual"
-              fill
-              sizes="(max-width: 800px) 100vw, 25vw"
-            />
-            <span>
-              <small>03</small> For every shade that knows its beauty{" "}
-              <ArrowRight size={17} />
-            </span>
-          </Link>
-        </div>
-      </section>
-
-      <section className="ritual-section" id="ritual">
-        <div className="ritual-image">
-          <Image
-            src="/images/skin-closeup.jpg"
-            alt="Healthy, luminous skin"
-            fill
-            sizes="(max-width: 800px) 100vw, 50vw"
-          />
-          <span className="image-caption">Ahumma / Lagos, Nigeria</span>
-        </div>
-        <div className="ritual-copy">
-          <h2>
-            Make a ritual
-            <br />
-            of coming back.
-          </h2>
-          <p>
-            Begin with a gentle cleanse. Press moisture into damp skin. Take
-            your time. Our formulas are concentrated, sensorial and made to meet
-            your body where it is.
-          </p>
-          <div className="ritual-steps">
-            <div>
-              <span>01</span>
-              <strong>Cleanse</strong>
-              <small>Clarify without stripping</small>
-            </div>
-            <div>
-              <span>02</span>
-              <strong>Nourish</strong>
-              <small>Seal in lasting comfort</small>
-            </div>
-            <div>
-              <span>03</span>
-              <strong>Glow</strong>
-              <small>Return to your radiance</small>
-            </div>
-          </div>
-          <ScrollLink href="#shop" className="light-link">
-            Build your ritual <ArrowRight size={17} />
-          </ScrollLink>
-        </div>
-      </section>
-
-      <section className="made-section">
-        <div className="made-copy">
-          <h2>
-            African botanicals.
-            <br />
-            Modern formulation.
-            <br />
-            Made in Lagos.
-          </h2>
-        </div>
-        <div className="made-principles">
-          <p>
-            We choose hardworking plant oils and butters for what they do, not
-            only where they come from.
-          </p>
-          <div className="principle-list">
-            <span>Shea butter</span>
-            <span>Jojoba oil</span>
-            <span>Cocoa pod ash</span>
-            <span>Mango butter</span>
-          </div>
         </div>
       </section>
 
@@ -414,36 +235,6 @@ export default async function HomePage() {
             and the simple pleasure of caring for their skin.
           </p>
         </div>
-      </section>
-
-      <section className="circle-section" id="circle">
-        <div className="circle-copy">
-          <h2>
-            Caring for yourself
-            <br />
-            is not indulgence.
-          </h2>
-          <p>It&apos;s necessary. Come closer for:</p>
-          <ul className="circle-benefits">
-            {CIRCLE_BENEFITS.map((benefit) => (
-              <li key={benefit}>{benefit}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="circle-signup">
-          <p className="circle-signup__lede">
-            Join the Ahumma Circle for first access to new rituals, limited
-            releases, stories and everything we&apos;re creating next.
-          </p>
-          <CircleSignup />
-        </div>
-      </section>
-
-      <section className="closing-quote">
-        <p>
-          “Your skin tells your story—nourish it, honour it, and let it glow.”
-        </p>
-        <span>Ahumma</span>
       </section>
 
       <SiteFooter />
