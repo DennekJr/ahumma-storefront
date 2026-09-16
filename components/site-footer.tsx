@@ -1,32 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { CircleSignup } from "@/components/circle-signup";
+import { useRef } from "react";
+import { FooterSignupPopup } from "@/components/footer-signup-popup";
 import { ScrollLink } from "@/components/scroll-link";
 
 export function SiteFooter() {
+  const footerRef = useRef<HTMLElement>(null);
+
   return (
     <>
-      <section className="footer-signup" aria-labelledby="footer-signup-title">
-        <h2 id="footer-signup-title">Subscribe to get 10% off.</h2>
-        <CircleSignup
-          className="footer-signup__form"
-          buttonLabel="Subscribe"
-          showArrow={false}
-        />
-        <p className="footer-signup__privacy">
-          By subscribing, you agree to Ahumma&apos;s{" "}
-          <a
-            href="https://ahumma.com/privacy-policy/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            privacy policy
-          </a>
-          . We&apos;ll always treat your information responsibly.
-        </p>
-      </section>
+      <FooterSignupPopup footerRef={footerRef} />
 
-      <footer className="site-footer">
+      <footer ref={footerRef} className="site-footer">
         <div
           className="footer-wordmark"
           aria-label="At the edge of everything beautiful is you."

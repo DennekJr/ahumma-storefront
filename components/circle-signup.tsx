@@ -7,12 +7,14 @@ type CircleSignupProps = {
   className?: string;
   buttonLabel?: string;
   showArrow?: boolean;
+  onSuccess?: () => void;
 };
 
 export function CircleSignup({
   className = "",
   buttonLabel = "Join us",
   showArrow = true,
+  onSuccess,
 }: CircleSignupProps) {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
@@ -38,6 +40,7 @@ export function CircleSignup({
         return;
       }
 
+      onSuccess?.();
       setDone(true);
     } catch {
       setError("We couldn't add you just now. Please try again.");
@@ -71,20 +74,6 @@ export function CircleSignup({
           required
         />
       </label>
-
-      <div className="circle-form__hidden" aria-hidden="true">
-        <input
-          value={honeypot}
-          onChange={(event) => setHoneypot(event.target.value)}
-          type="text"
-          name="fd_ref_code"
-          tabIndex={-1}
-          autoComplete="off"
-          data-lpignore="true"
-          data-1p-ignore=""
-          data-form-type="other"
-        />
-      </div>
 
       <button type="submit" disabled={submitting}>
         {submitting ? "Submitting…" : buttonLabel}
