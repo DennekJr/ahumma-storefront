@@ -34,36 +34,29 @@ export default function AboutPage() {
 
       <section className="story-section" id="story">
         <div className="story-copy">
-          <h2>
-            We started
-            <br />
-            with a belief.
-          </h2>
+          <h2>We started with a belief.</h2>
         </div>
         <div className="story-body">
           <p>
             Ahumma was born from a desire to remind Africans around the world of
             something we should never have had to forget:
           </p>
-          <p className="about-mantra">
+          <p>
             You are enough.
             <br />
             You are beautiful by design.
           </p>
           <p>
             For too long, beauty has been presented as something to achieve —
-            something to alter, correct or become.
-          </p>
-          <p>We wanted to create something different.</p>
-          <p>
-            A brand that celebrates Black and brown skin as it is.
+            something to alter, correct or become. We wanted to create something
+            different. A brand that celebrates Black and brown skin as it is.
             <br />A brand that draws from the richness of African ingredients
             and beauty traditions.
             <br />A brand that makes caring for yourself feel less like a chore
             and more like a ritual.
           </p>
           <p>So we created Ahumma.</p>
-          <p className="story-body__close">
+          <p>
             Beautiful, thoughtfully made body care for skin that deserves to be
             nourished, softened, enjoyed and celebrated.
           </p>

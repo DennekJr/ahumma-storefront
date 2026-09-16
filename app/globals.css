@@ -42,7 +42,7 @@
      against — any rem value would simply bind at a fixed ratio and hold the
      grid narrower than designed. Kept as a token so the max-width rules that
      keep the homepage and shop grids identical stay in one place. */
-  --gutter: 2.8125rem;
+  --gutter: 2.4rem;
   --content-max: none;
   --serif:
     "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville,
@@ -2767,7 +2767,7 @@ img {
 }
 
 .story-body p {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.5ch;
   font-size: 1.0625rem;
   line-height: 1.68;
 }
@@ -2835,7 +2835,7 @@ img {
 }
 
 .testimonial-section {
-  padding: 7rem var(--gutter) 8rem;
+  padding: var(--gutter);
   background: var(--forest);
   color: var(--porcelain);
 }
@@ -2852,6 +2852,7 @@ img {
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.95;
+  text-align: left;
 }
 
 .testimonial-section__intro p {
@@ -2864,9 +2865,8 @@ img {
 
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem;
-  max-width: 74rem;
   margin: 0 auto;
 }
 
@@ -2898,27 +2898,35 @@ img {
 }
 
 .testimonial-card--blue {
-  background: #c8d8f5;
+  background: #e0e9fa;
 }
 
 .testimonial-card--cream {
-  background: #f8d7b0;
+  background: #fbe8d2;
 }
 
 .testimonial-card--lilac {
-  background: #dfd2f5;
+  background: #eee8fb;
 }
 
 .testimonial-card--green {
-  background: #bfe3c8;
+  background: #d9f0dd;
 }
 
 .testimonial-card--yellow {
-  background: #e4e59b;
+  background: #f1f2c5;
 }
 
 .testimonial-card--pink {
-  background: #f3bdd4;
+  background: #f9dce9;
+}
+
+.testimonial-card--orange {
+  background: #fbe0c4;
+}
+
+.testimonial-card--teal {
+  background: #d7eeeb;
 }
 
 .ritual-intro-section {

@@ -208,7 +208,6 @@ export default async function HomePage() {
       >
         <div className="testimonial-section__intro">
           <h2 id="testimonial-title">Loved by our customers</h2>
-          <p>Real care, beautifully shared.</p>
         </div>
         <div className="testimonial-grid">
           <article className="testimonial-card testimonial-card--blue">
@@ -238,6 +237,16 @@ export default async function HomePage() {
           <article className="testimonial-card testimonial-card--pink">
             <p>“Beautiful products for a ritual that feels entirely my own.”</p>
             <span>Nia · New York</span>
+          </article>
+          <article className="testimonial-card testimonial-card--orange">
+            <p>“My skin has never felt so soft, calm and cared for.”</p>
+            <span>Tomi · Toronto</span>
+          </article>
+          <article className="testimonial-card testimonial-card--teal">
+            <p>
+              “Every product turns an everyday routine into something special.”
+            </p>
+            <span>Zainab · Accra</span>
           </article>
         </div>
       </section>
