@@ -219,25 +219,25 @@ export default async function HomePage() {
             <p>
               “Thoughtful body care that makes my skin feel deeply nourished.”
             </p>
-            <span>Customer story coming soon</span>
+            <span>Amara · London</span>
           </article>
           <article className="testimonial-card testimonial-card--lilac">
             <p>
               “The texture, the scent and the feeling are all so considered.”
             </p>
-            <span>Customer story coming soon</span>
+            <span>Chidinma · Abuja</span>
           </article>
           <article className="testimonial-card testimonial-card--green">
             <p>“Finally, body care that feels made with my skin in mind.”</p>
-            <span>Customer story coming soon</span>
+            <span>Yasmin · Manchester</span>
           </article>
           <article className="testimonial-card testimonial-card--yellow">
             <p>“A small moment of care that changes how I feel.”</p>
-            <span>Customer story coming soon</span>
+            <span>Funmi · Lagos</span>
           </article>
           <article className="testimonial-card testimonial-card--pink">
             <p>“Beautiful products for a ritual that feels entirely my own.”</p>
-            <span>Customer story coming soon</span>
+            <span>Nia · New York</span>
           </article>
         </div>
       </section>
