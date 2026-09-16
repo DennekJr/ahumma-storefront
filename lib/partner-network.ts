@@ -8,9 +8,6 @@
  * when partners get paid would undermine the offer rather than explain it.
  */
 
-export const PARTNER_FORM_URL =
-  "https://store.ahumma.net/forms/ahumma-creator-partner-network";
-
 export const PARTNER_GOALS = [
   {
     title: "Content at scale",
