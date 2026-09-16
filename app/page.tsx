@@ -11,7 +11,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProducts } from "@/lib/frontdesk";
-import { INGREDIENT_STORY, WHY_AHUMMA } from "@/lib/homepage";
+
 import { organizationSchema } from "@/lib/structured-data";
 
 /** The Ahumma story reads long beside the philosophy, so it is held back for
@@ -170,47 +170,6 @@ export default async function HomePage() {
               />
             ))}
           </ProductCarousel>
-        </div>
-      </section>
-
-      <section className="why-section">
-        <div className="section-heading">
-          <div>
-            <h2>
-              Care should
-              <br />
-              feel this good.
-            </h2>
-          </div>
-        </div>
-        <div className="why-grid">
-          {WHY_AHUMMA.map((reason) => (
-            <article key={reason.title}>
-              <h3>{reason.title}</h3>
-              <p>{reason.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="ingredient-section">
-        <div className="section-heading">
-          <div>
-            <h2>
-              Good things grow from
-              <br />
-              the right ingredients.
-            </h2>
-          </div>
-          <p>Every ingredient has a role. Every formula has a reason.</p>
-        </div>
-        <div className="ingredient-grid">
-          {INGREDIENT_STORY.map((ingredient) => (
-            <article key={ingredient.name}>
-              <h3>{ingredient.name}</h3>
-              <p>{ingredient.body}</p>
-            </article>
-          ))}
         </div>
       </section>
 
