@@ -93,18 +93,19 @@ export default async function HomePage() {
 
       <section className="philosophy-section" id="philosophy">
         <div className="philosophy-heading">
-          <h2>
-            Ahumma is a Nigerian-born premium body-care brand for Black and
-            brown skin, created from a simple belief: you are enough, and you
-            are beautiful by design.
-          </h2>
-        </div>
-        <div className="philosophy-copy">
           <p>
-            Ahumma was created with Black and brown skin at the heart of the
-            brand. From the richness of deep melanin to every shade in between,
-            our products celebrate the skin you&apos;re in — not ask you to
-            become something else.
+            <span>
+              Ahumma is a Nigerian-born premium body-care brand for Black and
+              brown skin, created from a simple belief: you are enough, and you
+              are beautiful by design.
+            </span>
+            <i />
+            <span>
+              Ahumma was created with Black and brown skin at the heart of the
+              brand. From the richness of deep melanin to every shade in
+              between, our products celebrate the skin you&apos;re in — not ask
+              you to become something else.
+            </span>
           </p>
         </div>
         <div className="philosophy-image-grid">
@@ -187,11 +188,13 @@ export default async function HomePage() {
             alone. We are building a new generation of African beauty brands —
             brands that carry our heritage confidently while speaking to a
             global customer.
-          </p>
-          <p>
+            <i />
             From Lagos to New York, London, Paris and beyond, Ahumma is for
             anyone who sees beauty in African heritage, beautiful ingredients
             and the simple pleasure of caring for their skin.
+            <i />
+            There is beauty in where we come from. There is beauty in who we
+            are. And there is beauty in becoming more of ourselves.
           </p>
         </div>
       </section>

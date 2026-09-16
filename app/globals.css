@@ -897,7 +897,7 @@ img {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   gap: 0.8rem;
-  padding: 3.6rem 4.8rem;
+  padding: 3.6rem 2.4rem;
   border: 0;
 }
 
@@ -918,14 +918,19 @@ img {
   width: 100%;
 }
 
-.philosophy-heading h2 {
-  margin: 0;
+.philosophy-heading p {
+  margin: 0 4.8rem;
   font-family: var(--serif);
   font-size: clamp(2.4rem, 1.5vw, 5.75rem);
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
   max-width: 82.5%;
+
+  i {
+    height: 1ch;
+    display: block;
+  }
 }
 
 .philosophy-image-grid {
@@ -1205,9 +1210,37 @@ img {
 
 .product-carousel__controls {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
   margin-top: 1.25rem;
+}
+
+.product-carousel__view-all {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.25rem;
+  border-radius: 999px;
+  background: var(--deep-forest);
+  color: var(--porcelain);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 0.8;
+  text-transform: none;
+  transition: background 220ms ease;
+}
+
+.product-carousel__view-all:hover,
+.product-carousel__view-all:focus-visible {
+  background: var(--forest);
+}
+
+.product-carousel__arrows {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .product-carousel__controls button {
@@ -2707,9 +2740,10 @@ img {
 .story-section,
 .global-section {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
+  grid-template-columns: 1fr 1.35fr;
+  align-items: flex-start;
   gap: 5rem;
-  padding: 8.75rem var(--gutter);
+  padding: 3.6rem 2.4rem;
   background: var(--porcelain);
 }
 
@@ -2749,7 +2783,7 @@ img {
 }
 
 .global-copy h2 {
-  margin: 1.375rem 0 0;
+  margin: 0;
   font-family: var(--serif);
   font-size: clamp(2.75rem, 5vw, 4.5rem);
   font-weight: 400;
@@ -2759,13 +2793,19 @@ img {
 
 .global-body {
   align-self: center;
-  max-width: 38rem;
+  max-width: 90%;
+  text-wrap: pretty;
 }
 
 .global-body p {
   margin: 0 0 1.25rem;
   font-size: 1.0625rem;
   line-height: 1.68;
+
+  i {
+    display: block;
+    height: 1ch;
+  }
 }
 
 .global-body p:last-child {

@@ -202,14 +202,14 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           <Link href="/" onClick={() => setMenuOpen(false)}>
             <span>Home</span>
           </Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>
-            <span>About Us</span>
-          </Link>
           <Link href="/shop" onClick={() => setMenuOpen(false)}>
-            <span>Shop Products</span>
+            <span>Shop</span>
+          </Link>
+          <Link href="/about" onClick={() => setMenuOpen(false)}>
+            <span>About</span>
           </Link>
           <Link href="/faq" onClick={() => setMenuOpen(false)}>
-            <span>Frequently Asked Questions</span>
+            <span>FAQs</span>
           </Link>
         </nav>
         <div className="menu-drawer__currency" aria-label="Shopping currency">

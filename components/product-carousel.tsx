@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
@@ -69,26 +70,31 @@ export function ProductCarousel({ children }: { children: ReactNode }) {
         {children}
       </div>
       <div className="product-carousel__controls">
-        <button
-          type="button"
-          aria-label="Previous products"
-          disabled={!canScrollPrev}
-          onClick={() => scrollBySlide(-1)}
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m15 5-7 7 7 7" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          aria-label="Next products"
-          disabled={!canScrollNext}
-          onClick={() => scrollBySlide(1)}
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m9 5 7 7-7 7" />
-          </svg>
-        </button>
+        <Link className="product-carousel__view-all" href="/shop">
+          View all
+        </Link>
+        <div className="product-carousel__arrows">
+          <button
+            type="button"
+            aria-label="Previous products"
+            disabled={!canScrollPrev}
+            onClick={() => scrollBySlide(-1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 5-7 7 7 7" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Next products"
+            disabled={!canScrollNext}
+            onClick={() => scrollBySlide(1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
