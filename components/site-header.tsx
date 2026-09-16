@@ -198,31 +198,18 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           </button>
           <span>MENU</span>
         </div>
-        <nav className="menu-drawer__nav" aria-label="Shop categories">
+        <nav className="menu-drawer__nav" aria-label="Primary navigation">
+          <Link href="/" onClick={() => setMenuOpen(false)}>
+            <span>Home</span>
+          </Link>
+          <Link href="/about" onClick={() => setMenuOpen(false)}>
+            <span>About Us</span>
+          </Link>
           <Link href="/shop" onClick={() => setMenuOpen(false)}>
-            <span>All</span>
+            <span>Shop Products</span>
           </Link>
-          <Link href="/shop/bodycare" onClick={() => setMenuOpen(false)}>
-            <span>Body Butters</span>
-          </Link>
-          <Link href="/shop/sika" onClick={() => setMenuOpen(false)}>
-            <span>Sika</span>
-          </Link>
-          <Link href="/shop/dream-whip" onClick={() => setMenuOpen(false)}>
-            <span>Dream Whip</span>
-          </Link>
-          <Link href="/shop/baby-bloom" onClick={() => setMenuOpen(false)}>
-            <span>Baby Bloom</span>
-          </Link>
-          <Link
-            href="/shop/ara-liquid-african-black-soap"
-            onClick={() => setMenuOpen(false)}
-          >
-            <span>
-              Ara Liquid
-              <br />
-              African Black Soap
-            </span>
+          <Link href="/faq" onClick={() => setMenuOpen(false)}>
+            <span>Frequently Asked Questions</span>
           </Link>
         </nav>
         <div className="menu-drawer__currency" aria-label="Shopping currency">
