@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/google-tag-manager";
 import { MetaPixel } from "@/components/meta-pixel";
 import { hasFrontdeskCheckout } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
@@ -42,7 +46,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <GoogleTagManagerNoScript />
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>{children}</CartProvider>
+        <GoogleTagManager />
         <MetaPixel />
         <Script
           id="frontdesk-chat-widget"
