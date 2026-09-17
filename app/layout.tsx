@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MetaPixel } from "@/components/meta-pixel";
+import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/google-tag-manager";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
@@ -46,9 +47,11 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <GoogleTagManagerNoScript />
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>
           {children}
         </CartProvider>
+        <GoogleTagManager />
         <MetaPixel />
         <CookieNotice />
         <PreviewNotice visible={!hasFrontdeskReads} />
