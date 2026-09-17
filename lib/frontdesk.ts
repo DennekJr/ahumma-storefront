@@ -1,5 +1,7 @@
 import "server-only";
 
+import { cache } from "react";
+
 import { demoProducts, demoProductSummaries } from "@/lib/demo-products";
 import type {
   DeliveryZone,
@@ -178,7 +180,7 @@ export type Catalogue = {
   unavailable: boolean;
 };
 
-export async function getCatalogue(): Promise<Catalogue> {
+export const getCatalogue = cache(async function getCatalogue(): Promise<Catalogue> {
   if (!hasFrontdeskReads) {
     return { products: demoProductSummaries, unavailable: false };
   }
@@ -204,7 +206,7 @@ export async function getCatalogue(): Promise<Catalogue> {
 
     throw error;
   }
-}
+});
 
 /** The product list alone, for callers with nothing to show a shopper. */
 export async function getProducts(): Promise<ProductSummary[]> {

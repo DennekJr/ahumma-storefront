@@ -9,7 +9,7 @@ import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
 import { getCatalogue, getCollections, hasFrontdeskReads } from "@/lib/frontdesk";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: "Shop all",
   description:
     "Every Ahumma essential — whipped body butters, Ara liquid African black soap and Baby Bloom for delicate skin. Premium body care for Black and brown skin, made in Nigeria.",
@@ -19,6 +19,20 @@ export const metadata: Metadata = {
     description: "Whipped body butters and liquid African black soap, made in Nigeria.",
   },
 };
+
+/**
+ * A catalogue that failed to load leaves this page with nothing to offer. Left
+ * indexable, a crawl during an outage banks "Ahumma sells nothing" against the
+ * shop's most valuable URL, and that result outlives the outage by however long
+ * it takes to be recrawled. noindex asks the crawler to come back instead.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const { unavailable } = await getCatalogue();
+
+  return unavailable
+    ? { ...baseMetadata, robots: { index: false, follow: true } }
+    : baseMetadata;
+}
 
 export default async function ShopPage() {
   const [catalogue, collections] = await Promise.all([
