@@ -4431,6 +4431,111 @@ img {
   }
 }
 
+/* Cloud backdrop — decorative video band behind a section */
+.cloud-backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  background: var(--sand);
+  pointer-events: none;
+}
+
+.cloud-backdrop__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* Hides the letterbox edge some encoders leave on a scaled frame. */
+  transform: scale(1.02);
+}
+
+/* Lifts contrast under the copy without flattening the sky behind the art. */
+.cloud-backdrop__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(250, 248, 243, 0.55), rgba(250, 248, 243, 0.2) 45%, rgba(250, 248, 243, 0.7));
+}
+
+/* Product intro sitting over the sky */
+/*
+ * Content is inset so the sky frames the whole composition rather than showing
+ * only through the seams. Without the padding the two columns cover the band
+ * edge to edge and the backdrop may as well not be there.
+ */
+.product-intro--sky {
+  position: relative;
+  isolation: isolate;
+  gap: 1.5rem;
+  padding: 2.5rem var(--gutter) 4rem;
+  border-bottom: 0;
+}
+
+.product-intro--sky > .product-gallery,
+.product-intro--sky > .product-summary {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+ * Over the sky the gallery drops its own ground and insets, so the packshots
+ * float on cloud instead of sitting on a slab that hides it. The 1px seam grid
+ * becomes a real gap for the same reason — it is now sky showing through.
+ */
+.product-intro--sky > .product-gallery {
+  gap: 1.25rem;
+  padding: 0;
+  background: transparent;
+  border-right: 0;
+}
+
+.product-intro--sky .product-gallery__item {
+  overflow: hidden;
+}
+
+/*
+ * The purchase panel carries small type — price, size, the trust line — which
+ * cannot be read against moving cloud. A translucent porcelain surface keeps
+ * the sky visible while holding the text on a stable ground.
+ */
+.product-intro--sky > .product-summary {
+  top: 1.5rem;
+  padding: 3rem 2.5rem;
+  background: rgba(250, 248, 243, 0.82);
+  -webkit-backdrop-filter: blur(0.75rem);
+  backdrop-filter: blur(0.75rem);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .product-intro--sky > .product-summary {
+    background: rgba(250, 248, 243, 0.94);
+  }
+}
+
+@media (max-width: 850px) {
+  /* Stacked, the panel covers the band entirely, so the sky would only ever be
+     a sliver behind the gallery. Solid ground reads better than a hint of it. */
+  .product-intro--sky > .product-summary {
+    background: var(--porcelain);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The poster stays visible underneath, so the band keeps its backdrop. */
+  .cloud-backdrop__video {
+    display: none;
+  }
+
+  .cloud-backdrop {
+    background-image: url("/images/hero-sky.jpeg");
+    background-position: center;
+    background-size: cover;
+  }
+}
+
 /* Cart */
 .cart-backdrop {
   position: fixed;
