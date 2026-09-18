@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
 import { EditorialRow } from "@/components/editorial-row";
+import { FilterBar } from "@/components/filter-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
@@ -15,6 +16,12 @@ import {
   findConcern,
   firstEditorialProduct,
 } from "@/lib/concerns";
+import {
+  applyFilters,
+  applySort,
+  buildFacets,
+  toList,
+} from "@/lib/shop-filters";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
 const baseMetadata: Metadata = {
@@ -34,7 +41,13 @@ const baseMetadata: Metadata = {
  * shop's most valuable URL, and that result outlives the outage by however long
  * it takes to be recrawled. noindex asks the crawler to come back instead.
  */
-type SearchParams = Promise<{ concern?: string }>;
+type SearchParams = Promise<{
+  concern?: string;
+  size?: string | string[];
+  type?: string | string[];
+  price?: string | string[];
+  sort?: string;
+}>;
 
 export async function generateMetadata({
   searchParams,
@@ -77,13 +90,21 @@ export default async function ShopPage({
 }: {
   searchParams: SearchParams;
 }) {
-  const [catalogue, { concern: concernId }] = await Promise.all([
-    getCatalogue(),
-    searchParams,
-  ]);
+  const [catalogue, query] = await Promise.all([getCatalogue(), searchParams]);
   const { products, unavailable } = catalogue;
+  const concernId = query.concern;
   const concern = findConcern(concernId);
-  const shown = filterByConcern(products, concern);
+
+  // Facets are built from the concern-scoped set, so a count next to an option
+  // is the number of products that option would actually leave on screen.
+  const inConcern = filterByConcern(products, concern);
+  const filters = {
+    size: toList(query.size),
+    type: toList(query.type),
+    price: toList(query.price),
+  };
+  const facets = buildFacets(inConcern, filters);
+  const shown = applySort(applyFilters(inConcern, filters), query.sort);
 
   // The grid runs three-up, broken after the first row by a pair of editorial
   // images. With four products that leaves a single card on the last row, so
@@ -143,7 +164,12 @@ export default async function ShopPage({
         </p>
       </header>
 
-      {unavailable ? null : <ConcernRail selected={concernId ?? ALL_CONCERN} products={products} />}
+      {unavailable ? null : (
+        <>
+          <ConcernRail selected={concernId ?? ALL_CONCERN} products={products} />
+          <FilterBar facets={facets} total={shown.length} />
+        </>
+      )}
 
       {!hasFrontdeskReads ? (
         <div className="api-preview-note shop-preview-note">
@@ -188,8 +214,17 @@ export default async function ShopPage({
         </div>
       ) : (
         <div className="collection-empty">
-          <p>Nothing in this edit yet.</p>
-          <Link href="/shop">See everything <ArrowRight size={15} /></Link>
+          <p>
+            {filters.size.length || filters.type.length || filters.price.length
+              ? "Nothing matches those filters."
+              : "Nothing in this edit yet."}
+          </p>
+          <Link href={concern ? `/shop?concern=${concern.id}` : "/shop"}>
+            {filters.size.length || filters.type.length || filters.price.length
+              ? "Clear the filters"
+              : "See everything"}{" "}
+            <ArrowRight size={15} />
+          </Link>
         </div>
       )}
 

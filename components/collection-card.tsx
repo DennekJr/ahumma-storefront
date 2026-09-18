@@ -2,22 +2,25 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Bookmark, Plus } from "lucide-react";
+import { Bookmark, Pause, Play, Plus } from "lucide-react";
+import { useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
+import { isNew } from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
 
 /**
- * The collection-grid card.
+ * The collection-grid card, following the reference's anatomy: media, then
+ * name, save, price, then the variant row.
  *
- * Follows the Aritzia anatomy — full-bleed image, then name, save, price — with
- * two deliberate omissions. Colour swatches are absent because every Ahumma
- * product has a single variant, and a swatch row of one is noise. A price range
- * is shown only when variants actually differ.
+ * Video plays muted and looping with a pause control, exactly as the reference
+ * does. Frontdesk currently returns only stills, so the control appears when a
+ * product's cover is a video file and stays out of the way otherwise — the
+ * behaviour is here waiting for the footage rather than added after it lands.
  *
- * Quick-add stays because a four-product range is a browse-and-buy page, not a
- * filter-down-from-182 page; making the shopper open a product to add it costs
- * more than it clarifies.
+ * The variant row renders whatever variants exist, overflowing to "+N" past
+ * five. Today every product has one variant, so it renders nothing; that is a
+ * property of the catalogue, not a missing feature.
  */
 export function CollectionCard({
   product,
@@ -29,7 +32,24 @@ export function CollectionCard({
   priority?: boolean;
 }) {
   const { addItem, currency } = useCart();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [paused, setPaused] = useState(false);
   const displayPrice = resolveSummaryPrice(product, currency);
+  const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(product.coverUrl ?? "");
+  const variants = product.variantCount ?? 0;
+  const showNew = isNew(product);
+
+  function toggleVideo() {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      void video.play();
+      setPaused(false);
+    } else {
+      video.pause();
+      setPaused(true);
+    }
+  }
   const alternatePrices = Object.entries(product.pricesFrom ?? {}).map(
     ([priceCurrency, priceMinor]) => ({
       currency: priceCurrency,
@@ -65,7 +85,19 @@ export function CollectionCard({
         href={`/products/${product.slug}`}
         aria-label={`View ${product.name}`}
       >
-        {product.coverUrl ? (
+        {!product.coverUrl ? (
+          <span className="product-image-placeholder">Ahumma</span>
+        ) : isVideo ? (
+          <video
+            ref={videoRef}
+            src={product.coverUrl}
+            muted
+            loop
+            playsInline
+            autoPlay
+            aria-label={product.name}
+          />
+        ) : (
           <Image
             src={product.coverUrl}
             alt={product.name}
@@ -73,31 +105,53 @@ export function CollectionCard({
             sizes="(max-width: 700px) 50vw, 33vw"
             priority={priority}
           />
-        ) : (
-          <span className="product-image-placeholder">Ahumma</span>
         )}
         {product.soldOut ? (
           <span className="collection-card__badge">Sold out</span>
         ) : product.preorderable ? (
           <span className="collection-card__badge">Preorder</span>
+        ) : showNew ? (
+          <span className="collection-card__badge collection-card__badge--new">New</span>
         ) : null}
       </Link>
 
+      {isVideo ? (
+        <button
+          type="button"
+          className="collection-card__playback"
+          onClick={toggleVideo}
+          aria-label={paused ? `Play ${product.name} video` : `Pause ${product.name} video`}
+        >
+          {paused ? <Play size={13} /> : <Pause size={13} />}
+        </button>
+      ) : null}
+
       <div className="collection-card__meta">
         <Link href={`/products/${product.slug}`}>{product.name}</Link>
-        {product.previewVariantRef && !product.soldOut ? (
-          <button type="button" onClick={quickAdd} aria-label={`Add ${product.name} to bag`}>
-            <Plus size={15} />
-          </button>
-        ) : (
-          <span className="collection-card__save" aria-hidden="true">
+        <span className="collection-card__actions">
+          {product.previewVariantRef && !product.soldOut ? (
+            <button type="button" onClick={quickAdd} aria-label={`Add ${product.name} to bag`}>
+              <Plus size={15} />
+            </button>
+          ) : null}
+          <Link
+            href={`/products/${product.slug}`}
+            className="collection-card__save"
+            aria-label={`View ${product.name}`}
+          >
             <Bookmark size={15} />
-          </span>
-        )}
+          </Link>
+        </span>
       </div>
       <p className="collection-card__price">
         {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
       </p>
+      {variants > 1 ? (
+        <p className="collection-card__variants">
+          <span>{Math.min(variants, 5)} sizes</span>
+          {variants > 5 ? <em>+{variants - 5}</em> : null}
+        </p>
+      ) : null}
     </article>
   );
 }
