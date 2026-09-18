@@ -3,13 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
-import { ProductCard } from "@/components/product-card";
+import { CollectionCard } from "@/components/collection-card";
+import { EditorialRow } from "@/components/editorial-row";
 import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
+import { editorialFor } from "@/lib/concerns";
 import { buildDetailRows } from "@/lib/product-details";
 import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
@@ -41,6 +43,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((candidate) => candidate.ref !== product.ref)
     .slice(0, 3);
   const detailRows = buildDetailRows(info);
+  // EditorialRow matches on name, so the catalogue summary is what it needs.
+  const summary = products.find((candidate) => candidate.ref === product.ref);
   const descriptionParagraphs = (product.description ?? "")
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
@@ -63,11 +67,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </div>
       <SiteHeader />
 
-      <div className="product-breadcrumb">
-        <Link href="/shop"><ArrowLeft size={15} /> The collection</Link>
-        <span>/</span>
-        <span>{info?.infoCategory ?? "Body care"}</span>
-      </div>
+      <nav className="collection-crumbs product-crumbs" aria-label="Breadcrumb">
+        <Link href="/">Ahumma</Link>
+        <span aria-hidden="true">—</span>
+        <Link href="/shop">Shop all</Link>
+        <span aria-hidden="true">—</span>
+        <span className="is-current">{product.name}</span>
+      </nav>
 
       <section className="product-intro">
         <div className={`product-gallery product-gallery--${Math.min(media.length, 4)}`}>
@@ -111,6 +117,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
+      {editorialFor(summary) ? (
+        <div className="product-editorial">
+          <EditorialRow product={summary} />
+        </div>
+      ) : null}
+
       <section className="product-details-grid">
         <article>
           <Leaf size={22} strokeWidth={1.4} />
@@ -147,9 +159,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
               Shop all essentials <ArrowRight size={17} />
             </Link>
           </div>
-          <div className="product-grid">
+          <div className="collection-grid">
             {relatedProducts.map((relatedProduct, index) => (
-              <ProductCard product={relatedProduct} index={index} key={relatedProduct.ref} />
+              <CollectionCard product={relatedProduct} index={index} key={relatedProduct.ref} />
             ))}
           </div>
         </section>

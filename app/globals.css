@@ -4104,6 +4104,35 @@ img {
   }
 }
 
+/* Product page, sharing the collection page's language */
+.product-crumbs {
+  padding: 3rem var(--gutter) 0;
+}
+
+.product-crumbs .is-current {
+  color: rgba(24, 32, 25, 0.62);
+}
+
+.product-page .product-summary h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.product-editorial {
+  padding: 0 var(--gutter);
+}
+
+.product-editorial .editorial-row {
+  margin-top: 0;
+}
+
+.related-products .collection-grid {
+  margin-top: 2.5rem;
+}
+
 /* Cart */
 .cart-backdrop {
   position: fixed;
