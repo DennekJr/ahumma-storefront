@@ -11,7 +11,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
-import { editorialFor } from "@/lib/concerns";
+import { nextEditorialProduct } from "@/lib/concerns";
 import { buildDetailRows } from "@/lib/product-details";
 import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
@@ -43,8 +43,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((candidate) => candidate.ref !== product.ref)
     .slice(0, 3);
   const detailRows = buildDetailRows(info);
-  // EditorialRow matches on name, so the catalogue summary is what it needs.
-  const summary = products.find((candidate) => candidate.ref === product.ref);
+  // The break row cross-sells: it shows a different product with editorial art,
+  // never the one being viewed, whose own gallery is already above.
+  const editorialPick = nextEditorialProduct(products, product.ref);
   const descriptionParagraphs = (product.description ?? "")
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
@@ -117,9 +118,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
-      {editorialFor(summary) ? (
+      {editorialPick ? (
         <div className="product-editorial">
-          <EditorialRow product={summary} />
+          <EditorialRow product={editorialPick} />
         </div>
       ) : null}
 

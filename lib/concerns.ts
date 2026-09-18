@@ -123,9 +123,32 @@ export function editorialFor(product: ProductSummary | undefined) {
   );
 }
 
-/** The first product with editorial art, for the grid's break row. */
+/** The first product with editorial art, for the collection grid's break row. */
 export function firstEditorialProduct(products: ProductSummary[]) {
   return products.find((product) => editorialFor(product)) ?? undefined;
+}
+
+/**
+ * The next product with editorial art after `currentRef`, wrapping around.
+ *
+ * A product page's break row is a way out to something else, so it never shows
+ * the product already on screen. Walking from the current product rather than
+ * taking the first match also stops every page cross-selling the same one:
+ * each lands on a different neighbour, and products without art are skipped.
+ */
+export function nextEditorialProduct(
+  products: ProductSummary[],
+  currentRef: string,
+) {
+  const start = products.findIndex((product) => product.ref === currentRef);
+  if (start < 0) return firstEditorialProduct(products);
+
+  for (let step = 1; step <= products.length; step += 1) {
+    const candidate = products[(start + step) % products.length];
+    if (candidate.ref !== currentRef && editorialFor(candidate)) return candidate;
+  }
+
+  return undefined;
 }
 
 /** Tile art, falling back to the cover of whichever product the concern matches. */

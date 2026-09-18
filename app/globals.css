@@ -3825,7 +3825,8 @@ img {
 
 .concern-tile {
   display: block;
-  width: 8.75rem;
+  /* 11rem is 11.5% of the 1512 design width, matching the reference. */
+  width: 11rem;
   text-decoration: none;
 }
 
@@ -4079,7 +4080,7 @@ img {
   }
 
   .concern-tile {
-    width: 7rem;
+    width: 8.5rem;
   }
 
   .editorial-row {
