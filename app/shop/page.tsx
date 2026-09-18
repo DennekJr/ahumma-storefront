@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { ProductCard } from "@/components/product-card";
+import { CollectionCard } from "@/components/collection-card";
+import { ConcernRail } from "@/components/concern-rail";
+import { EditorialRow } from "@/components/editorial-row";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
-import { getCatalogue, getCollections, hasFrontdeskReads } from "@/lib/frontdesk";
+import { getCatalogue, hasFrontdeskReads } from "@/lib/frontdesk";
+import {
+  ALL_CONCERN,
+  filterByConcern,
+  findConcern,
+  firstEditorialProduct,
+} from "@/lib/concerns";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
 const baseMetadata: Metadata = {
@@ -26,52 +34,76 @@ const baseMetadata: Metadata = {
  * shop's most valuable URL, and that result outlives the outage by however long
  * it takes to be recrawled. noindex asks the crawler to come back instead.
  */
-export async function generateMetadata(): Promise<Metadata> {
-  const { unavailable } = await getCatalogue();
+type SearchParams = Promise<{ concern?: string }>;
 
-  return unavailable
-    ? { ...baseMetadata, robots: { index: false, follow: true } }
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}): Promise<Metadata> {
+  const [{ unavailable }, { concern: concernId }] = await Promise.all([
+    getCatalogue(),
+    searchParams,
+  ]);
+  const concern = findConcern(concernId);
+
+  // A filtered view is a slice of /shop, not a page of its own — without this
+  // every concern would compete with the collection for the same terms.
+  const scoped: Metadata = concern
+    ? {
+        ...baseMetadata,
+        title: `${concern.label} — Shop all`,
+        alternates: { canonical: "/shop" },
+      }
     : baseMetadata;
+
+  return unavailable ? { ...scoped, robots: { index: false, follow: true } } : scoped;
 }
 
-export default async function ShopPage() {
-  const [catalogue, collections] = await Promise.all([
+/** Closes a short last row with brand imagery instead of empty cells. */
+function CollectionFiller() {
+  return (
+    <Link className="collection-filler" href="/#ritual" aria-label="The Ahumma ritual">
+      <span>
+        At the edge of everything beautiful is you
+        <ArrowRight size={16} />
+      </span>
+    </Link>
+  );
+}
+
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const [catalogue, { concern: concernId }] = await Promise.all([
     getCatalogue(),
-    getCollections(),
+    searchParams,
   ]);
   const { products, unavailable } = catalogue;
+  const concern = findConcern(concernId);
+  const shown = filterByConcern(products, concern);
 
-  // A product belongs under its collection; anything the merchant has not
-  // grouped is part of the core body-care range.
-  const collectedRefs = new Set(
-    collections.flatMap((collection) => collection.productRefs),
-  );
-  const bodyCare = products.filter((product) => !collectedRefs.has(product.ref));
-
-  const groups = [
-    {
-      key: "body-care",
-      title: "Body care",
-      description:
-        "The everyday ritual — whipped body butters and liquid African black soap.",
-      products: bodyCare,
-    },
-    ...collections.map((collection) => ({
-      key: collection.slug,
-      title: collection.name,
-      description: collection.description ?? "",
-      products: products.filter((product) =>
-        collection.productRefs.includes(product.ref),
-      ),
-    })),
-  ].filter((group) => group.products.length || group.key !== "body-care");
+  // The grid runs three-up, broken after the first row by a pair of editorial
+  // images. With four products that leaves a single card on the last row, so
+  // the remaining span is filled with editorial art rather than whitespace.
+  const breakAfter = shown.length > 3 ? 3 : shown.length;
+  const leading = shown.slice(0, breakAfter);
+  const trailing = shown.slice(breakAfter);
+  const breakProduct = firstEditorialProduct(shown);
+  // Whichever grid ends on a short row gets the filler, so a narrow result
+  // (one product under a concern) never leaves dead cells beside it.
+  const shortGrid = trailing.length
+    ? trailing.length % 3 && "tail"
+    : leading.length % 3 && "lead";
 
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Ahumma products",
-    numberOfItems: products.length,
-    itemListElement: products.map((product, index) => ({
+    numberOfItems: shown.length,
+    itemListElement: shown.map((product, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: product.name,
@@ -95,18 +127,23 @@ export default async function ShopPage() {
       </div>
       <SiteHeader />
 
-      <header className="shop-hero">
-        <span className="eyebrow">The collection</span>
+      <header className="collection-head">
+        <nav className="collection-crumbs" aria-label="Breadcrumb">
+          <Link href="/">Ahumma</Link>
+          <span aria-hidden="true">—</span>
+          <Link href="/shop">Shop all</Link>
+        </nav>
         <h1>
-          Everything we
-          <br />
-          make.
+          {concern ? concern.label : "Everything we make"}
+          {unavailable ? null : <sup>{shown.length}</sup>}
         </h1>
         <p>
           Fewer, intentional products. Each formula is made to work deeply, feel
           beautiful and earn its place in your ritual.
         </p>
       </header>
+
+      {unavailable ? null : <ConcernRail selected={concernId ?? ALL_CONCERN} products={products} />}
 
       {!hasFrontdeskReads ? (
         <div className="api-preview-note shop-preview-note">
@@ -120,30 +157,41 @@ export default async function ShopPage() {
 
       {unavailable ? <CatalogueUnavailable /> : null}
 
-      {(unavailable ? [] : groups).map((group) => (
-        <section className="shop-group" id={group.key} key={group.key}>
-          <div className="shop-group__heading">
-            <h2>{group.title}</h2>
-            {group.description ? <p>{group.description}</p> : null}
+      {unavailable ? null : shown.length ? (
+        <div className="collection-body">
+          <div className="collection-grid">
+            {leading.map((product, index) => (
+              <CollectionCard
+                product={product}
+                index={index}
+                priority={index < 3}
+                key={product.ref}
+              />
+            ))}
+            {shortGrid === "lead" ? <CollectionFiller /> : null}
           </div>
 
-          {group.products.length ? (
-            <div className="product-grid">
-              {group.products.map((product, index) => (
-                <ProductCard product={product} index={index} key={product.ref} />
+          <EditorialRow product={breakProduct} />
+
+          {trailing.length ? (
+            <div className="collection-grid collection-grid--tail">
+              {trailing.map((product, index) => (
+                <CollectionCard
+                  product={product}
+                  index={index}
+                  key={product.ref}
+                />
               ))}
+              {shortGrid === "tail" ? <CollectionFiller /> : null}
             </div>
-          ) : (
-            <div className="shop-group__empty">
-              <span className="eyebrow">Coming soon</span>
-              <p>
-                {group.title} is on its way. Join the Ahumma Circle and you&apos;ll
-                hear first.
-              </p>
-            </div>
-          )}
-        </section>
-      ))}
+          ) : null}
+        </div>
+      ) : (
+        <div className="collection-empty">
+          <p>Nothing in this edit yet.</p>
+          <Link href="/shop">See everything <ArrowRight size={15} /></Link>
+        </div>
+      )}
 
       <section className="shop-closing">
         <span className="eyebrow eyebrow--light">Ahumma</span>
