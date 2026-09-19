@@ -6,12 +6,18 @@
  * grey box. `preload="metadata"` because unlike the homepage this is never the
  * first thing a visitor sees — the frames can arrive a moment late.
  *
+ * `fixed` pins it to the viewport so a scrolling page moves over a still sky
+ * rather than dragging it along.
+ *
  * Under prefers-reduced-motion the CSS hides the video and leaves the poster
  * showing, so the section keeps its backdrop without the movement.
  */
-export function CloudBackdrop() {
+export function CloudBackdrop({ fixed = false }: { fixed?: boolean } = {}) {
   return (
-    <div className="cloud-backdrop" aria-hidden="true">
+    <div
+      className={`cloud-backdrop${fixed ? " cloud-backdrop--fixed" : ""}`}
+      aria-hidden="true"
+    >
       <video
         className="cloud-backdrop__video"
         autoPlay

@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
+import { CloudBackdrop } from "@/components/cloud-backdrop";
 import { getCatalogue, hasFrontdeskReads } from "@/lib/frontdesk";
 import {
   ALL_CONCERN,
@@ -133,7 +134,8 @@ export default async function ShopPage({
   };
 
   return (
-    <main className="shop-page">
+    <main className="shop-page shop-page--sky">
+      <CloudBackdrop fixed />
       <StructuredData data={itemList} />
       <StructuredData
         data={breadcrumbSchema([

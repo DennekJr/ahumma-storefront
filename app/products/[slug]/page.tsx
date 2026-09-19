@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
-import { CloudBackdrop } from "@/components/cloud-backdrop";
 import { CollectionCard } from "@/components/collection-card";
 import { EditorialRow } from "@/components/editorial-row";
 import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
@@ -77,8 +76,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <span className="is-current">{product.name}</span>
       </nav>
 
-      <section className="product-intro product-intro--sky">
-        <CloudBackdrop />
+      <section className="product-intro">
         <div className={`product-gallery product-gallery--${Math.min(media.length, 4)}`}>
           {media.map((image, index) => (
             <div className={`product-gallery__item product-gallery__item--${index + 1}`} key={`${image}-${index}`}>

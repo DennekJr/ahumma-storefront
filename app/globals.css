@@ -1534,7 +1534,22 @@ img {
 }
 
 /* Shop */
-.shop-page {
+/*
+ * No solid ground: the cloud video is the page background, so anything painted
+ * here would simply cover it. Sections that need their own ground (the closing
+ * band, the cards) still carry it individually.
+ */
+.shop-page--sky {
+  position: relative;
+  isolation: isolate;
+}
+
+.shop-page--sky > *:not(.cloud-backdrop) {
+  position: relative;
+  z-index: 1;
+}
+
+.shop-page:not(.shop-page--sky) {
   background: var(--porcelain);
 }
 
@@ -4458,71 +4473,6 @@ img {
     linear-gradient(180deg, rgba(250, 248, 243, 0.55), rgba(250, 248, 243, 0.2) 45%, rgba(250, 248, 243, 0.7));
 }
 
-/* Product intro sitting over the sky */
-/*
- * Content is inset so the sky frames the whole composition rather than showing
- * only through the seams. Without the padding the two columns cover the band
- * edge to edge and the backdrop may as well not be there.
- */
-.product-intro--sky {
-  position: relative;
-  isolation: isolate;
-  gap: 1.5rem;
-  padding: 2.5rem var(--gutter) 4rem;
-  border-bottom: 0;
-}
-
-.product-intro--sky > .product-gallery,
-.product-intro--sky > .product-summary {
-  position: relative;
-  z-index: 1;
-}
-
-/*
- * Over the sky the gallery drops its own ground and insets, so the packshots
- * float on cloud instead of sitting on a slab that hides it. The 1px seam grid
- * becomes a real gap for the same reason — it is now sky showing through.
- */
-.product-intro--sky > .product-gallery {
-  gap: 1.25rem;
-  padding: 0;
-  background: transparent;
-  border-right: 0;
-}
-
-.product-intro--sky .product-gallery__item {
-  overflow: hidden;
-}
-
-/*
- * The purchase panel carries small type — price, size, the trust line — which
- * cannot be read against moving cloud. A translucent porcelain surface keeps
- * the sky visible while holding the text on a stable ground.
- */
-.product-intro--sky > .product-summary {
-  top: 1.5rem;
-  padding: 3rem 2.5rem;
-  background: rgba(250, 248, 243, 0.82);
-  -webkit-backdrop-filter: blur(0.75rem);
-  backdrop-filter: blur(0.75rem);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .product-intro--sky > .product-summary {
-    background: rgba(250, 248, 243, 0.94);
-  }
-}
-
-@media (max-width: 850px) {
-  /* Stacked, the panel covers the band entirely, so the sky would only ever be
-     a sliver behind the gallery. Solid ground reads better than a hint of it. */
-  .product-intro--sky > .product-summary {
-    background: var(--porcelain);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   /* The poster stays visible underneath, so the band keeps its backdrop. */
   .cloud-backdrop__video {
@@ -4533,6 +4483,72 @@ img {
     background-image: url("/images/hero-sky.jpeg");
     background-position: center;
     background-size: cover;
+  }
+}
+
+/* Pinned backdrop for a whole page */
+.cloud-backdrop--fixed {
+  position: fixed;
+}
+
+/*
+ * The scrim carries more weight here than behind a single band. A collection
+ * page is mostly small type — breadcrumb, filter chips, prices, rail labels —
+ * and cloud moving underneath it is the difference between a page that looks
+ * expensive and one nobody can read. Heavier where the text lives, lighter
+ * through the middle so the sky still moves.
+ */
+.shop-page--sky .cloud-backdrop__scrim {
+  background:
+    linear-gradient(180deg, rgba(250, 248, 243, 0.42), rgba(250, 248, 243, 0.14) 32%, rgba(250, 248, 243, 0.24));
+}
+
+/*
+ * Secondary copy on this page is set in low-contrast greys that were chosen
+ * against porcelain. Over cloud they lose their footing, so they darken here —
+ * the sky stays legible behind them instead of being flattened to keep them
+ * readable.
+ */
+.shop-page--sky .collection-crumbs a,
+.shop-page--sky .collection-head > p,
+.shop-page--sky .concern-tile__label,
+.shop-page--sky .collection-card__price,
+.shop-page--sky .filter-bar__count {
+  color: rgba(24, 32, 25, 0.82);
+}
+
+.shop-page--sky .collection-head h1 sup {
+  color: rgba(24, 32, 25, 0.68);
+}
+
+/* Chips need a surface of their own once the ground behind them is moving. */
+.shop-page--sky .filter-chip,
+.shop-page--sky .filter-sort {
+  background: rgba(250, 248, 243, 0.78);
+}
+
+/* Announcement and header sit on the sky rather than boxing it out. */
+.shop-page--sky .announcement-bar {
+  position: relative;
+  z-index: 2;
+}
+
+.shop-page--sky .site-header {
+  background: rgba(250, 248, 243, 0.72);
+  -webkit-backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(0.625rem);
+}
+
+/* The closing band keeps its dark ground — it is the page's full stop. */
+.shop-page--sky .shop-closing,
+.shop-page--sky .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-backdrop--fixed {
+    position: absolute;
   }
 }
 
