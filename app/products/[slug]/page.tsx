@@ -72,13 +72,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <AnnouncementBar />
       <SiteHeader />
 
-      <Link
+      {/*<Link
         href="/shop"
         className="product-back-button"
         aria-label="Back to the collection"
       >
         <ArrowLeft size={20} />
-      </Link>
+      </Link>*/}
 
       <section className="product-intro">
         <div

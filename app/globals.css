@@ -2232,12 +2232,13 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9vw;
-  padding: 9.0625rem 8vw;
+  padding: 4.8rem 2.4rem;
   background: var(--paper);
 }
 
 .product-story h2 {
   font-size: clamp(3rem, 5vw, 4.75rem);
+  margin: 0;
 }
 
 .product-story__body {
