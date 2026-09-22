@@ -187,18 +187,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <section className="shop-section related-products">
           <div className="section-heading related-products__heading">
             <div>
-              <h2>
-                You may also
-                <br />
-                love.
-              </h2>
+              <h2>You may also love.</h2>
             </div>
-            <Link
-              href="/shop"
-              className="underlined-link related-products__link"
-            >
-              Shop all essentials <ArrowRight size={17} />
-            </Link>
           </div>
           <div className="product-grid">
             {relatedProducts.map((relatedProduct, index) => (

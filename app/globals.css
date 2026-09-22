@@ -5803,7 +5803,7 @@ img {
 .why-grid article,
 .ingredient-grid article {
   padding-top: 1.15rem;
-  border-top: 1px solid var(--line);
+  /*border-top: 1px solid var(--line);*/
 }
 
 .ingredient-section {
