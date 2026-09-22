@@ -4,13 +4,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { ProductCard } from "@/components/product-card";
+import { CollectionCard } from "@/components/collection-card";
+import { EditorialRow } from "@/components/editorial-row";
 import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
+import { nextEditorialProduct } from "@/lib/concerns";
 import { buildDetailRows } from "@/lib/product-details";
 import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
@@ -53,6 +55,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((candidate) => candidate.ref !== product.ref)
     .slice(0, 3);
   const detailRows = buildDetailRows(info);
+  // The break row cross-sells: it shows a different product with editorial art,
+  // never the one being viewed, whose own gallery is already above.
+  const editorialPick = nextEditorialProduct(products, product.ref);
   const descriptionParagraphs = (product.description ?? "")
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
@@ -72,13 +77,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <AnnouncementBar />
       <SiteHeader />
 
-      {/*<Link
+      <Link
         href="/shop"
         className="product-back-button"
         aria-label="Back to the collection"
       >
         <ArrowLeft size={20} />
-      </Link>*/}
+      </Link>
 
       <section className="product-intro">
         <div
@@ -152,6 +157,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
+      {editorialPick ? (
+        <div className="product-editorial">
+          <EditorialRow product={editorialPick} />
+        </div>
+      ) : null}
+
       <section className="product-details-grid">
         <article>
           <Leaf size={22} strokeWidth={1.4} />
@@ -190,9 +201,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <h2>You may also love.</h2>
             </div>
           </div>
-          <div className="product-grid">
+          <div className="collection-grid">
             {relatedProducts.map((relatedProduct, index) => (
-              <ProductCard
+              <CollectionCard
                 product={relatedProduct}
                 index={index}
                 key={relatedProduct.ref}

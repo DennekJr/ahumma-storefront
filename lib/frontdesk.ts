@@ -21,12 +21,14 @@ const previewOnly = process.env.FRONTDESK_PREVIEW_ONLY === "true";
 
 /** Live catalogue reads. The publishable key is all the store endpoints need. */
 export const hasFrontdeskReads = Boolean(
-  !previewOnly && isConfiguredKey(process.env.FRONTDESK_PUBLISHABLE_KEY, "fd_pk_"),
+  !previewOnly &&
+  isConfiguredKey(process.env.FRONTDESK_PUBLISHABLE_KEY, "fd_pk_"),
 );
 
 /** Opening a checkout. Only the secret key can take payments. */
 export const hasFrontdeskCheckout = Boolean(
-  hasFrontdeskReads && isConfiguredKey(process.env.FRONTDESK_SECRET_KEY, "fd_sk_"),
+  hasFrontdeskReads &&
+  isConfiguredKey(process.env.FRONTDESK_SECRET_KEY, "fd_sk_"),
 );
 
 export class FrontdeskApiError extends Error {
@@ -81,11 +83,10 @@ async function requestWithNetworkGuard(url: string, init: RequestInit) {
   try {
     return await fetch(url, init);
   } catch (error) {
-    throw new FrontdeskApiError(
-      "Could not reach FrontDesk.",
-      503,
-      { code: "NETWORK_ERROR", details: error },
-    );
+    throw new FrontdeskApiError("Could not reach FrontDesk.", 503, {
+      code: "NETWORK_ERROR",
+      details: error,
+    });
   }
 }
 
@@ -111,9 +112,13 @@ async function parseResponse<T>(response: Response): Promise<T> {
 async function publicRequest<T>(path: string): Promise<T> {
   const key = process.env.FRONTDESK_PUBLISHABLE_KEY;
   if (!key) {
-    throw new FrontdeskApiError("FrontDesk publishable key is not configured.", 503, {
-      code: "NOT_CONFIGURED",
-    });
+    throw new FrontdeskApiError(
+      "FrontDesk publishable key is not configured.",
+      503,
+      {
+        code: "NOT_CONFIGURED",
+      },
+    );
   }
 
   const response = await requestWithNetworkGuard(`${API_BASE}${path}`, {
@@ -126,7 +131,10 @@ async function publicRequest<T>(path: string): Promise<T> {
   });
 
   if (response.status === 403 && process.env.FRONTDESK_SECRET_KEY) {
-    const payload = await response.clone().json().catch(() => null);
+    const payload = await response
+      .clone()
+      .json()
+      .catch(() => null);
     if (payload?.error?.code === "ORIGIN_NOT_ALLOWED") {
       // Server-rendered reads can safely use the secret key without exposing it
       // to the browser. This keeps local preview working before its origin is
@@ -144,9 +152,13 @@ async function secretRequest<T>(
 ): Promise<T> {
   const key = process.env.FRONTDESK_SECRET_KEY;
   if (!key) {
-    throw new FrontdeskApiError("FrontDesk secret key is not configured.", 503, {
-      code: "NOT_CONFIGURED",
-    });
+    throw new FrontdeskApiError(
+      "FrontDesk secret key is not configured.",
+      503,
+      {
+        code: "NOT_CONFIGURED",
+      },
+    );
   }
 
   const response = await requestWithNetworkGuard(`${API_BASE}${path}`, {
@@ -166,6 +178,14 @@ export async function getCheckout(ref: string): Promise<CheckoutSession> {
   return secretRequest<CheckoutSession>(
     `/store/checkouts/${encodeURIComponent(ref)}`,
   );
+}
+
+export async function getCatalogue(): Promise<{
+  products: ProductSummary[];
+  unavailable: boolean;
+}> {
+  const products = await getProducts();
+  return { products, unavailable: hasFrontdeskReads && products.length === 0 };
 }
 
 export async function getProducts(): Promise<ProductSummary[]> {
