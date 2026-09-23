@@ -4,7 +4,15 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
-export function ProductCarousel({ children }: { children: ReactNode }) {
+export function ProductCarousel({
+  children,
+  viewAllLabel = "View all",
+  viewAllHref = "/shop",
+}: {
+  children: ReactNode;
+  viewAllLabel?: string;
+  viewAllHref?: string;
+}) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -18,6 +26,7 @@ export function ProductCarousel({ children }: { children: ReactNode }) {
 
       carousel = Blossom(carouselRef.current, {});
       carousel.init();
+      carouselRef.current.scrollTo({ left: 0, behavior: "auto" });
     });
 
     return () => {
@@ -70,8 +79,8 @@ export function ProductCarousel({ children }: { children: ReactNode }) {
         {children}
       </div>
       <div className="product-carousel__controls">
-        <Link className="product-carousel__view-all" href="/shop">
-          View all
+        <Link className="product-carousel__view-all" href={viewAllHref}>
+          {viewAllLabel}
         </Link>
         <div className="product-carousel__arrows">
           <button

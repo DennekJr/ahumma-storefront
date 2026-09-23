@@ -34,6 +34,29 @@ export default async function HomePage() {
 
     return match ? `/products/${match.slug}` : "/#shop";
   };
+  const ritualProducts = [
+    {
+      names: ["ara"],
+      displayName: "For Black skin.",
+      displayImage: "/images/ara-ritual.jpg",
+    },
+    {
+      names: ["dream whip", "dream"],
+      displayName: "For brown skin.",
+      displayImage: "/images/dream-ritual.jpg",
+    },
+    {
+      names: ["sika", "sike"],
+      displayName: "For every shade that knows its beauty.",
+      displayImage: "/images/sika-ritual.jpg",
+    },
+  ].flatMap(({ names, displayName, displayImage }) => {
+    const product = products.find((item) =>
+      names.some((name) => item.name.toLowerCase().includes(name)),
+    );
+
+    return product ? [{ product, displayName, displayImage }] : [];
+  });
 
   return (
     <main>
@@ -101,6 +124,51 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section
+        className="love-skin-section love-skin-section--reverse"
+        id="love-your-skin-continued"
+        aria-labelledby="love-your-skin-continued-title"
+      >
+        <div className="love-skin__image-panel">
+          <video
+            className="love-skin__video"
+            src="/videos/ingredients-video.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label="Ahumma body-care ritual"
+          />
+        </div>
+        <div className="love-skin__content">
+          <div className="love-skin__heading-row">
+            <h2 id="love-your-skin-continued-title">
+              Made from thoughtfully selected plant butters, nourishing oils and
+              African beauty traditions.
+            </h2>
+          </div>
+          <ProductCarousel
+            viewAllLabel="Find your ritual"
+            viewAllHref="/consultation"
+          >
+            {ritualProducts.map(
+              ({ product, displayName, displayImage }, index) => (
+                <ProductCard
+                  product={product}
+                  index={index}
+                  displayName={displayName}
+                  displayImage={displayImage}
+                  hideStatus
+                  hidePrice
+                  hideAction
+                  key={`continued-${product.ref}-${index}`}
+                />
+              ),
+            )}
+          </ProductCarousel>
+        </div>
+      </section>
+
       {SHOW_STORY_SECTION ? (
         <section className="story-section" id="story">
           <div className="story-copy">
@@ -133,18 +201,50 @@ export default async function HomePage() {
       ) : null}
 
       <section
-        className="home-ritual-break"
-        aria-labelledby="ritual-break-title"
+        className="love-skin-section ritual-gallery-section"
+        aria-labelledby="ritual-gallery-title"
       >
-        <Image
-          src="/images/love-your-skin.jpg"
-          alt="Ahumma body-care ritual on skin"
-          fill
-          sizes="(max-width: 780px) 100vw, 50vw"
-        />
-        <div className="home-ritual-break__copy">
-          <h2 id="ritual-break-title">Care that feels like yours.</h2>
+        <div className="ritual-gallery-section__copy">
+          <h2 id="ritual-gallery-title">Care that feels like yours.</h2>
           <Link href="/consultation">Find your ritual</Link>
+        </div>
+        <div className="ritual-gallery-section__gallery">
+          <Link
+            href={productHref("ara")}
+            className="ritual-gallery-section__item"
+          >
+            <Image
+              src="/images/ara-ritual.jpg"
+              alt="Ahumma Ara body-care ritual"
+              fill
+              sizes="(max-width: 780px) 100vw, 25vw"
+            />
+            <span>For Black skin.</span>
+          </Link>
+          <Link
+            href={productHref("dream whip", "dream")}
+            className="ritual-gallery-section__item"
+          >
+            <Image
+              src="/images/dream-ritual.jpg"
+              alt="Ahumma Dream Whip body-care ritual"
+              fill
+              sizes="(max-width: 780px) 100vw, 25vw"
+            />
+            <span>For brown skin.</span>
+          </Link>
+          <Link
+            href={productHref("sika", "sike")}
+            className="ritual-gallery-section__item"
+          >
+            <Image
+              src="/images/sika-ritual.jpg"
+              alt="Ahumma Sika body-care ritual"
+              fill
+              sizes="(max-width: 780px) 100vw, 25vw"
+            />
+            <span>For every shade that knows its beauty.</span>
+          </Link>
         </div>
       </section>
 

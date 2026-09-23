@@ -10,9 +10,19 @@ import type { ProductSummary } from "@/lib/store-types";
 export function ProductCard({
   product,
   index,
+  displayName = product.name,
+  displayImage,
+  hideStatus = false,
+  hidePrice = false,
+  hideAction = false,
 }: {
   product: ProductSummary;
   index: number;
+  displayName?: string;
+  displayImage?: string;
+  hideStatus?: boolean;
+  hidePrice?: boolean;
+  hideAction?: boolean;
 }) {
   const { addItem, currency } = useCart();
   const status = product.preorderable
@@ -54,31 +64,33 @@ export function ProductCard({
       <Link
         className="product-card__image"
         href={`/products/${product.slug}`}
-        aria-label={`View ${product.name}`}
+        aria-label={`View ${displayName}`}
       >
-        {product.coverUrl ? (
+        {displayImage || product.coverUrl ? (
           <Image
-            src={product.coverUrl}
-            alt={product.name}
+            src={displayImage || product.coverUrl || ""}
+            alt={displayName}
             fill
             sizes="(max-width: 720px) 92vw, 33vw"
           />
         ) : (
           <span className="product-image-placeholder">Ahumma</span>
         )}
-        <span className="product-card__status">{status}</span>
+        {!hideStatus && <span className="product-card__status">{status}</span>}
       </Link>
       <div className="product-card__details">
         <div>
           <Link href={`/products/${product.slug}`}>
-            <h3>{product.name}</h3>
+            <h3>{displayName}</h3>
           </Link>
         </div>
-        <strong>
-          {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
-        </strong>
+        {!hidePrice && (
+          <strong>
+            {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
+          </strong>
+        )}
       </div>
-      {product.previewVariantRef && !product.soldOut ? (
+      {!hideAction && product.previewVariantRef && !product.soldOut ? (
         <button
           type="button"
           className="product-card__action"
@@ -86,14 +98,14 @@ export function ProductCard({
         >
           <span>Add to Bag</span> <Plus size={16} />
         </button>
-      ) : (
+      ) : !hideAction ? (
         <Link
           className="product-card__action"
           href={`/products/${product.slug}`}
         >
           Choose your care
         </Link>
-      )}
+      ) : null}
     </article>
   );
 }

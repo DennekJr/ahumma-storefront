@@ -1112,10 +1112,23 @@ img {
 .love-skin-section {
   display: grid;
   min-height: 46rem;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   overflow: hidden;
   background: var(--porcelain);
   color: var(--deep-forest);
+}
+
+.love-skin-section--reverse .love-skin__image-panel {
+  order: 2;
+}
+
+.love-skin-section--reverse .love-skin__content {
+  order: 1;
+  padding-bottom: 3rem;
+}
+
+.love-skin-section--reverse .love-skin__content h2 {
+  max-width: 48rem;
 }
 
 .love-skin__image-panel {
@@ -1164,7 +1177,7 @@ img {
   min-width: 0;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 6rem 4vw 3rem;
+  padding: 6rem 2rem 3rem;
 }
 
 .love-skin__heading-row {
@@ -1433,11 +1446,12 @@ img {
 }
 
 .product-grid.top-products-grid .product-card__status {
+  padding: 0.3rem 0.5rem;
   border-radius: 1.4rem;
   background: var(--forest);
   color: var(--porcelain);
   font-family: var(--serif);
-  font-size: var(--type-sans-ui);
+  font-size: var(--type-sans-small);
   letter-spacing: var(--tracking-heading);
   text-transform: var(--case-none);
 }
@@ -1526,7 +1540,6 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  min-height: 6.5625rem;
   text-align: left;
   text-wrap: pretty;
   padding: 1rem 0.2rem 1rem;
@@ -7989,6 +8002,84 @@ img {
     align-items: flex-start;
     flex-direction: column;
   }
+}
+
+.ritual-gallery-section {
+  display: grid;
+  min-height: 46rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--porcelain);
+  color: var(--deep-forest);
+}
+
+.ritual-gallery-section__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6rem 4vw 3rem;
+}
+
+.ritual-gallery-section__copy h2 {
+  max-width: 38rem;
+  margin: 0 0 1.5rem;
+  font-family: var(--serif);
+  font-size: var(--type-serif-section);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-display);
+}
+
+.ritual-gallery-section__copy a {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  background: var(--forest);
+  color: var(--porcelain);
+  font-family: var(--serif);
+}
+
+.ritual-gallery-section__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+
+.ritual-gallery-section__item {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.ritual-gallery-section__item::after {
+  position: absolute;
+  inset: 50% 0 0;
+  background: linear-gradient(transparent, rgba(12, 20, 15, 0.62));
+  content: "";
+}
+
+.ritual-gallery-section__item img {
+  object-fit: cover;
+  transition: transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ritual-gallery-section__item:hover img {
+  transform: scale(1.05);
+}
+
+.ritual-gallery-section__item span {
+  position: absolute;
+  z-index: 1;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  color: white;
+  font-family: var(--serif);
+  font-size: var(--type-serif-label);
+  line-height: var(--leading-compact);
 }
 
 .home-ritual-break {
