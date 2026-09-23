@@ -41,8 +41,7 @@ export function SiteFooter() {
       <div className="footer-legal">
         <span>© {new Date().getFullYear()} Ahumma Limited</span>
         <div>
-          <a href="https://ahumma.com/privacy-policy/" target="_blank" rel="noreferrer">Privacy</a>
-          <a href="https://ahumma.com/privacy-policy/" target="_blank" rel="noreferrer">Terms</a>
+          <Link href="/privacy">Privacy</Link>
         </div>
       </div>
     </footer>

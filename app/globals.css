@@ -3745,6 +3745,207 @@ img {
   }
 }
 
+/* Legal pages — a long document, set for reading rather than scanning */
+.legal-page {
+  background: var(--porcelain);
+}
+
+.legal-head {
+  padding: 3rem var(--gutter) 0;
+}
+
+.legal-head h1 {
+  margin: 1.5rem 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.legal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.75rem;
+  margin: 2rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.legal-meta dt {
+  margin-bottom: 0.3125rem;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legal-meta dd {
+  margin: 0;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: 0.875rem;
+}
+
+.legal-meta a {
+  color: inherit;
+}
+
+.legal-body {
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  gap: 4rem;
+  padding: 3.5rem var(--gutter) 6rem;
+}
+
+.legal-toc {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.legal-toc ol {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.legal-toc a {
+  display: grid;
+  grid-template-columns: 1.625rem 1fr;
+  gap: 0.25rem;
+  padding: 0.3125rem 0;
+  color: rgba(24, 32, 25, 0.68);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.legal-toc a:hover {
+  color: var(--ink);
+}
+
+.legal-toc a span {
+  color: rgba(24, 32, 25, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Measure is capped: 35 sections of legal prose at full width is unreadable. */
+.legal-content {
+  max-width: 44rem;
+}
+
+.legal-content section {
+  padding-top: 2.75rem;
+  /* Clears the header when a contents link jumps here. */
+  scroll-margin-top: 2rem;
+}
+
+.legal-content section + section {
+  border-top: 1px solid var(--line);
+}
+
+.legal-content h2 {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  margin: 0 0 1.125rem;
+  font-family: var(--serif);
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.legal-content h2 > span {
+  color: rgba(24, 32, 25, 0.35);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.legal-content h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.legal-content h3 > span {
+  color: rgba(24, 32, 25, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.legal-content p {
+  margin: 0 0 1rem;
+  color: rgba(24, 32, 25, 0.78);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.legal-content ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.125rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.4375rem;
+  color: rgba(24, 32, 25, 0.78);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.legal-closing {
+  margin-top: 1rem;
+  padding: 2.75rem;
+  background: var(--sand);
+}
+
+.legal-closing h2 {
+  grid-template-columns: 1fr;
+}
+
+.legal-closing__signoff {
+  margin: 1.5rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 950px) {
+  .legal-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  /* Sticky is meaningless once it is stacked above the text it indexes. */
+  .legal-toc {
+    position: static;
+    max-height: none;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .legal-toc ol {
+    columns: 2;
+    column-gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .legal-toc ol {
+    columns: 1;
+  }
+
+  .legal-closing {
+    padding: 1.75rem 1.375rem;
+  }
+}
+
 /* Cart */
 .cart-backdrop {
   position: fixed;
