@@ -7343,9 +7343,9 @@ img {
 }
 
 .home-hero--editorial .hero-copy {
-  bottom: 4.5rem;
-  left: var(--gutter);
-  width: min(39rem, calc(100% - (var(--gutter) * 2)));
+  bottom: 12rem;
+  left: calc(var(--gutter) * 2);
+  width: min(52rem, calc(100% - (var(--gutter) * 2)));
   max-width: none;
   color: var(--ink);
   text-align: left;
@@ -7363,6 +7363,7 @@ img {
   margin: 1.15rem 0 1.25rem;
   font-size: var(--type-serif-display);
   text-wrap: balance;
+  line-height: var(--leading-display);
 }
 
 .hero-lede {
