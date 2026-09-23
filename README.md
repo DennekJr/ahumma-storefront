@@ -66,3 +66,10 @@ In Frontdesk, keep both price entries complete:
 3. Publish the changes and verify both currencies on the storefront before accepting orders.
 
 The delivery-area field appears only when the workspace returns at least one delivery zone.
+
+## Review and inspiration prompts
+
+- `AHUMMA-WEBSITE-REVIEW-PROMPTS.md` contains the completed original storefront review and QA prompts.
+- `AHUMMA-INSPIRATION-PROMPTS.md` contains the new reference-study prompt library for adapting useful patterns from Arami Essentials and Aesop without copying their branded expression, assets, or code.
+
+The inspiration library explicitly keeps the Ahumma positioning centered on Nigerian-rooted premium body care for Black and brown skin. It also distinguishes the footer newsletter from the separate delayed promotional popup.
