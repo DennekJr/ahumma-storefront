@@ -191,55 +191,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section
-        className="testimonial-section"
-        aria-labelledby="testimonial-title"
-      >
-        <div className="testimonial-section__intro">
-          <h2 id="testimonial-title">Loved by our customers</h2>
-        </div>
-        <div className="testimonial-grid">
-          <article className="testimonial-card testimonial-card--blue">
-            <p>“A beautiful ritual I look forward to every day.”</p>
-            <span>Adaeze · Lagos</span>
-          </article>
-          <article className="testimonial-card testimonial-card--cream">
-            <p>
-              “Thoughtful body care that makes my skin feel deeply nourished.”
-            </p>
-            <span>Amara · London</span>
-          </article>
-          <article className="testimonial-card testimonial-card--lilac">
-            <p>
-              “The texture, the scent and the feeling are all so considered.”
-            </p>
-            <span>Chidinma · Abuja</span>
-          </article>
-          <article className="testimonial-card testimonial-card--green">
-            <p>“Finally, body care that feels made with my skin in mind.”</p>
-            <span>Yasmin · Manchester</span>
-          </article>
-          <article className="testimonial-card testimonial-card--yellow">
-            <p>“A small moment of care that changes how I feel.”</p>
-            <span>Funmi · Lagos</span>
-          </article>
-          <article className="testimonial-card testimonial-card--pink">
-            <p>“Beautiful products for a ritual that feels entirely my own.”</p>
-            <span>Nia · New York</span>
-          </article>
-          <article className="testimonial-card testimonial-card--orange">
-            <p>“My skin has never felt so soft, calm and cared for.”</p>
-            <span>Tomi · Toronto</span>
-          </article>
-          <article className="testimonial-card testimonial-card--teal">
-            <p>
-              “Every product turns an everyday routine into something special.”
-            </p>
-            <span>Zainab · Accra</span>
-          </article>
-        </div>
-      </section>
-
       <SiteFooter />
     </main>
   );
