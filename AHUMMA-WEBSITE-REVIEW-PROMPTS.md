@@ -243,19 +243,19 @@ Return a severity-ranked QA report with reproduction steps, affected file paths,
 
 ## Suggested usage order
 
-For a complete review and implementation cycle, use the prompts in this order:
+Completed prompts are marked so the next workstream is clear:
 
-1. Full-site review and implementation roadmap.
-2. Homepage hero direction.
-3. Homepage narrative and copy reduction.
-4. Visual storytelling and media audit.
-5. Color system and CTA consistency.
-6. Navigation, sidebar, and fixed-header review.
-7. Newsletter signup and promotional surfaces.
-8. Skin consultation form.
-9. About page refinement.
-10. Product-page conversion review.
-11. Footer and conversion-path review.
-12. Final launch QA and regression pass.
+- [x] 1. Full-site review and implementation roadmap.
+- [x] 2. Homepage hero direction.
+- [x] 3. Homepage narrative and copy reduction.
+- [ ] 4. Visual storytelling and media audit — next.
+- [ ] 5. Color system and CTA consistency.
+- [ ] 6. Navigation, sidebar, and fixed-header review.
+- [x] 7. Newsletter signup and promotional surfaces.
+- [x] 8. Skin consultation form.
+- [ ] 9. About page refinement.
+- [ ] 10. Product-page conversion review.
+- [x] 11. Footer and conversion-path review.
+- [ ] 12. Final launch QA and regression pass.
 
 Use the working brand copy, token map, available photography, and configured integrations. Verify factual product and regulatory claims during final QA.

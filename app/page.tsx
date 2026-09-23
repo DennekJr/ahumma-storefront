@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { connection } from "next/server";
-import { CloudBackdrop } from "@/components/cloud-backdrop";
+
 import { ProductCard } from "@/components/product-card";
 import { ProductCarousel } from "@/components/product-carousel";
 import { AnnouncementBar } from "@/components/announcement-bar";
+import { CloudBackdrop } from "@/components/cloud-backdrop";
 
 import { ScrollLink } from "@/components/scroll-link";
 import { SiteFooter } from "@/components/site-footer";
@@ -44,14 +45,14 @@ export default async function HomePage() {
         <CloudBackdrop />
         <div className="hero-light-overlay" aria-hidden="true" />
         <div className="hero-copy">
-          <h1>Beautiful skin. Beautiful rituals.</h1>
+          <h1>A New Ritual for Black and Brown Skin.</h1>
           <p className="hero-lede">
-            Born in Nigeria. Made for the world. Premium body care rooted in
-            African heritage, made for Black and brown skin.
+            Premium body care made in Nigeria, rooted in African beauty
+            traditions and created for Black and brown skin everywhere.
           </p>
           <div className="hero-actions">
             <Link href="/shop" className="hero-link">
-              Explore the collection
+              Start my ritual
             </Link>
           </div>
         </div>

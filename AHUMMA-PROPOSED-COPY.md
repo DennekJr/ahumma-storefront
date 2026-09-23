@@ -2,6 +2,17 @@
 
 This document preserves the proposed Ahumma website copy and structure supplied for review. The customer-facing version should stay close to this language. SEO and AI-search enhancements are included separately so they can be evaluated without making the main experience feel over-written.
 
+## Working brand tone
+
+- Punchy, warm and culturally grounded.
+- Premium without sounding clinical, corporate or overly polished.
+- Lead with feeling and memorable phrases; use the supporting line for clarity.
+- Speak specifically to Black and brown skin rather than broadening the audience to “everyone.”
+- Make Nigerian origin and global ambition feel confident, not defensive or over-explained.
+- Prefer short sentences, strong nouns and sensory language.
+- Use “ritual” as a meaningful care behavior, not as decoration in every section.
+- Avoid generic wellness language, correction-focused language and long explanatory paragraphs.
+
 ---
 
 # Primary Homepage Copy
@@ -14,20 +25,19 @@ This document preserves the proposed Ahumma website copy and structure supplied 
 
 **Headline:**
 
-> Beautiful skin, beautiful rituals.
+> A New Ritual for Black and Brown Skin.
 
 **Body:**
 
-> Ahumma creates premium body care rooted in African heritage, natural ingredients and the simple pleasure of caring for your skin.
+> Premium body care made in Nigeria, rooted in African beauty traditions and created for Black and brown skin everywhere.
 
-**CTAs:**
+**CTA:**
 
-- Shop body care
-- Discover Ahumma
+- Start my ritual
 
-**Supporting line:**
+**Working direction:**
 
-> Premium body butters & liquid African black soap, made for everyday rituals.
+> The headline carries the feeling. The supporting line carries the category, origin, heritage and audience.
 
 ---
 
