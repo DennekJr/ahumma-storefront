@@ -69,26 +69,37 @@ export const INGREDIENT_STORY = [
   {
     name: "Shea butter",
     body: "A rich, nourishing plant butter long cherished across Africa for caring for dry skin.",
+    productMatches: ["ara", "sika"],
   },
   {
     name: "Mango butter",
     body: "A luxurious plant butter that brings richness and softness to body-care formulas.",
+    productMatches: ["dream", "sika"],
   },
   {
     name: "Cocoa butter",
     body: "A deeply emollient butter loved for its rich texture and skin-conditioning feel.",
+    productMatches: ["dream"],
   },
   {
     name: "Jojoba oil",
     body: "A lightweight botanical oil that helps leave skin feeling soft and conditioned without a heavy finish.",
+    productMatches: ["sika"],
   },
   {
-    name: "Avocado oil",
-    body: "A nourishing plant oil selected for its rich, moisturising feel.",
+    name: "Avocado butter",
+    body: "A nourishing plant butter selected for its rich, moisturising feel.",
+    productMatches: ["dream"],
+  },
+  {
+    name: "Cocoa pod ash",
+    body: "A traditional African ingredient that gives Ara its distinctive cleansing heritage.",
+    productMatches: ["ara"],
   },
   {
     name: "African black soap",
     body: "A traditional African cleansing ingredient with generations of beauty heritage behind it.",
+    productMatches: ["ara"],
   },
 ];
 

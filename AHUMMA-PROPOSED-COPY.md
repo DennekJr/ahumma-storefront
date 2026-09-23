@@ -225,7 +225,7 @@ This document preserves the proposed Ahumma website copy and structure supplied 
 - Mango butter
 - Cocoa butter
 - Jojoba oil
-- Avocado oil
+- Avocado butter
 - African black soap
 
 **Body:**

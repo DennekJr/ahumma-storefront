@@ -4,6 +4,7 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { ConsultationForm } from "@/components/consultation-form";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { findConcern } from "@/lib/concerns";
 
 export const metadata: Metadata = {
   title: "Skin consultation",
@@ -12,7 +13,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/consultation" },
 };
 
-export default function ConsultationPage() {
+export default async function ConsultationPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ concern?: string }>;
+}) {
+  const query = await searchParams;
+  const concern = findConcern(query.concern);
+
   return (
     <main className="consultation-page">
       <AnnouncementBar />
@@ -39,7 +47,7 @@ export default function ConsultationPage() {
           <h2 id="consultation-heading">A little about you.</h2>
           <p>There are no wrong answers. Share only what feels useful.</p>
         </div>
-        <ConsultationForm />
+        <ConsultationForm initialConcerns={concern?.consultationLabels} />
       </section>
       <SiteFooter />
     </main>

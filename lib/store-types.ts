@@ -79,6 +79,7 @@ export type ProductInfo = {
   countryOfOrigin?: string | null;
   careInstructions?: string | null;
   sustainabilityText?: string | null;
+  ingredients?: string[];
   warrantyText?: string | null;
   warrantyMonths?: number | null;
   specs?: Array<{

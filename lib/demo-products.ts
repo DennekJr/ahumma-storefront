@@ -49,6 +49,12 @@ export const demoProducts: ProductDetail[] = [
         "Massage onto damp skin or scalp, work into a generous lather, then rinse well. Follow with body butter while skin is still slightly damp.",
       sustainabilityText:
         "Concentrated care, made in Lagos in considered small batches.",
+      ingredients: [
+        "Shea butter",
+        "Coconut oil",
+        "Palm kernel oil",
+        "Cocoa pod ash",
+      ],
       countryOfOrigin: "Nigeria",
       weightValue: 500,
       weightUnit: "ml",
@@ -105,6 +111,7 @@ export const demoProducts: ProductDetail[] = [
         "Warm a small amount between palms and press into damp skin at night, paying attention to elbows, knees and other dry areas.",
       sustainabilityText:
         "A concentrated, water-conscious formula made in Lagos in considered small batches.",
+      ingredients: ["Avocado butter", "Cocoa butter", "Mango butter"],
       countryOfOrigin: "Nigeria",
       weightValue: 250,
       weightUnit: "ml",
@@ -161,6 +168,7 @@ export const demoProducts: ProductDetail[] = [
         "Massage into clean, damp skin each morning or whenever skin needs comfort. Patch test before first use.",
       sustainabilityText:
         "A concentrated, water-conscious formula made in Lagos in considered small batches.",
+      ingredients: ["Shea butter", "Jojoba oil", "CoQ10"],
       countryOfOrigin: "Nigeria",
       weightValue: 250,
       weightUnit: "ml",

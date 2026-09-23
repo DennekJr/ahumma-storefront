@@ -34,8 +34,15 @@ const EMPTY: FormState = {
   marketingConsent: false,
 };
 
-export function ConsultationForm() {
-  const [form, setForm] = useState(EMPTY);
+export function ConsultationForm({
+  initialConcerns = [],
+}: {
+  initialConcerns?: string[];
+}) {
+  const [form, setForm] = useState(() => ({
+    ...EMPTY,
+    concerns: initialConcerns,
+  }));
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle",
   );

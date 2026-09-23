@@ -177,6 +177,14 @@ export default async function ShopPage({
             selected={concernId ?? ALL_CONCERN}
             products={products}
           />
+          {concern ? (
+            <div className="concern-consultation-link">
+              <p>Not sure where to start with {concern.label.toLowerCase()}?</p>
+              <Link href={`/consultation?concern=${concern.id}`}>
+                Talk through your routine <ArrowRight size={15} />
+              </Link>
+            </div>
+          ) : null}
           <FilterBar facets={facets} total={shown.length} />
         </>
       )}

@@ -4,7 +4,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
+import { IngredientStoryCard } from "@/components/ingredient-story-card";
 import { SiteHeader } from "@/components/site-header";
+import { getProducts } from "@/lib/frontdesk";
 import { INGREDIENT_STORY, WHY_AHUMMA } from "@/lib/homepage";
 
 export const metadata: Metadata = {
@@ -14,7 +16,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const products = await getProducts();
+
   return (
     <main className="about-page">
       <AnnouncementBar />
@@ -175,10 +179,11 @@ export default function AboutPage() {
         </div>
         <div className="ingredient-grid">
           {INGREDIENT_STORY.map((ingredient) => (
-            <article key={ingredient.name}>
-              <h3>{ingredient.name}</h3>
-              <p>{ingredient.body}</p>
-            </article>
+            <IngredientStoryCard
+              key={ingredient.name}
+              {...ingredient}
+              products={products}
+            />
           ))}
         </div>
         <div className="about-cta-row">

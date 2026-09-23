@@ -385,9 +385,9 @@ Return severity-ranked findings with reproduction steps and exact file paths. Fi
 
 - [x] 1. Reference-site benchmark and transferable patterns — see `AHUMMA-REFERENCE-BENCHMARK.md`.
 - [ ] 2. Homepage structure and art direction.
-- [ ] 3. Brand voice and copy system.
-- [ ] 4. Product discovery, shop, and collection architecture.
-- [ ] 5. Product detail pages and sensory merchandising.
+- [x] 3. Brand voice and copy system — see `AHUMMA-BRAND-VOICE-GUIDE.md`.
+- [x] 4. Product discovery, shop, and collection architecture — see `AHUMMA-DISCOVERY-AUDIT.md`.
+- [x] 5. Product detail pages and sensory merchandising — see `AHUMMA-PRODUCT-PAGE-AUDIT.md`.
 - [ ] 6. Story, About, ingredients, and editorial content.
 - [ ] 7. Navigation, search, service, and commerce utilities.
 - [ ] 8. Newsletter, retention, gifting, refill, and community.

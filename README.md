@@ -71,5 +71,9 @@ The delivery-area field appears only when the workspace returns at least one del
 
 - `AHUMMA-WEBSITE-REVIEW-PROMPTS.md` contains the completed original storefront review and QA prompts.
 - `AHUMMA-INSPIRATION-PROMPTS.md` contains the new reference-study prompt library for adapting useful patterns from Arami Essentials and Aesop without copying their branded expression, assets, or code.
+- `AHUMMA-REFERENCE-BENCHMARK.md` records the completed reference benchmark and prioritized Ahumma-specific opportunities.
+- `AHUMMA-BRAND-VOICE-GUIDE.md` records the approved voice, copy mechanics, CTA system, and claim guardrails.
+- `AHUMMA-DISCOVERY-AUDIT.md` records the shop, concern, filter, and collection-discovery findings.
+- `AHUMMA-PRODUCT-PAGE-AUDIT.md` records the product-page hierarchy, structured ingredient stories, and ritual-pairing work.
 
 The inspiration library explicitly keeps the Ahumma positioning centered on Nigerian-rooted premium body care for Black and brown skin. It also distinguishes the footer newsletter from the separate delayed promotional popup.

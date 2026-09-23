@@ -7,12 +7,17 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { EditorialRow } from "@/components/editorial-row";
 import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
+import { ProductIngredientStory } from "@/components/product-ingredient-story";
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
 import { nextEditorialProduct } from "@/lib/concerns";
+import {
+  getProductIngredients,
+  getRitualPairings,
+} from "@/lib/product-merchandising";
 import { buildDetailRows } from "@/lib/product-details";
 import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
@@ -51,9 +56,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         : []
   ).slice(0, 4);
   const info = product.info;
-  const relatedProducts = products
-    .filter((candidate) => candidate.ref !== product.ref)
-    .slice(0, 3);
+  const ritualPairings = getRitualPairings(product, products);
   const detailRows = buildDetailRows(info);
   // The break row cross-sells: it shows a different product with editorial art,
   // never the one being viewed, whose own gallery is already above.
@@ -195,19 +198,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
         ) : null}
       </section>
 
-      {relatedProducts.length ? (
+      <ProductIngredientStory ingredients={getProductIngredients(product)} />
+
+      {ritualPairings.length ? (
         <section className="shop-section related-products">
           <div className="section-heading related-products__heading">
             <div>
-              <h2>You may also love.</h2>
+              <h2>Build the ritual.</h2>
+              <p>{ritualPairings[0].reason}</p>
             </div>
           </div>
           <div className="collection-grid">
-            {relatedProducts.map((relatedProduct, index) => (
+            {ritualPairings.map(({ product: pairedProduct }, index) => (
               <CollectionCard
-                product={relatedProduct}
+                product={pairedProduct}
                 index={index}
-                key={relatedProduct.ref}
+                key={pairedProduct.ref}
               />
             ))}
           </div>

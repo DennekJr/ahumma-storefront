@@ -20,6 +20,7 @@ export type Concern = {
   /** Null when no lifestyle shot exists; the tile uses a product cover. */
   image: string | null;
   alt: string;
+  consultationLabels: string[];
 };
 
 export const ALL_CONCERN = "all";
@@ -31,6 +32,7 @@ export const CONCERNS: Concern[] = [
     match: ["sika", "sike", "dream"],
     image: "/images/dream-texture.jpg",
     alt: "Dream Whip body butter held by a model",
+    consultationLabels: ["Dry skin", "Very dry skin"],
   },
   {
     id: "dull-uneven",
@@ -38,6 +40,7 @@ export const CONCERNS: Concern[] = [
     match: ["sika", "sike"],
     image: "/images/sika-texture.jpg",
     alt: "Whipped Sika body butter, jar open",
+    consultationLabels: ["Dull-looking skin", "Uneven-looking skin tone"],
   },
   {
     id: "everyday-softness",
@@ -45,6 +48,7 @@ export const CONCERNS: Concern[] = [
     match: ["dream"],
     image: "/images/skin-closeup.jpg",
     alt: "Skin after the Ahumma ritual",
+    consultationLabels: ["Not sure what my skin needs"],
   },
   {
     // The only concern with no shot of its own — Baby Bloom was never part of
@@ -54,6 +58,7 @@ export const CONCERNS: Concern[] = [
     match: ["baby"],
     image: null,
     alt: "Baby Bloom, for delicate skin",
+    consultationLabels: ["Shopping for a baby or child"],
   },
   {
     id: "cleansing",
@@ -61,6 +66,7 @@ export const CONCERNS: Concern[] = [
     match: ["ara"],
     image: "/images/ara-ritual.jpg",
     alt: "Ara African black soap against skin",
+    consultationLabels: ["Body acne or congestion"],
   },
 ];
 
@@ -70,6 +76,7 @@ export const ALL_TILE = {
   label: "Everything",
   image: "/images/sika-ritual.jpg",
   alt: "Sika body butter held by a model",
+  consultationLabels: [],
 };
 
 export function findConcern(id: string | undefined): Concern | null {
@@ -94,7 +101,12 @@ export function filterByConcern(
  * for filling a trailing gap in the grid. Frontdesk holds packshots; these are
  * the model and texture shots that give the page its rhythm.
  */
-const EDITORIAL: { match: string[]; portrait: string; wide: string; alt: string }[] = [
+const EDITORIAL: {
+  match: string[];
+  portrait: string;
+  wide: string;
+  alt: string;
+}[] = [
   {
     match: ["sika", "sike"],
     portrait: "/images/sika-ritual.jpg",
@@ -145,7 +157,8 @@ export function nextEditorialProduct(
 
   for (let step = 1; step <= products.length; step += 1) {
     const candidate = products[(start + step) % products.length];
-    if (candidate.ref !== currentRef && editorialFor(candidate)) return candidate;
+    if (candidate.ref !== currentRef && editorialFor(candidate))
+      return candidate;
   }
 
   return undefined;
@@ -159,7 +172,9 @@ export function concernImage(
   if (concern.image) return concern.image;
 
   const match = products.find((product) =>
-    concern.match.some((fragment) => product.name.toLowerCase().includes(fragment)),
+    concern.match.some((fragment) =>
+      product.name.toLowerCase().includes(fragment),
+    ),
   );
 
   return match?.coverUrl ?? null;
