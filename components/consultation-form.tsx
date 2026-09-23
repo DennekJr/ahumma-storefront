@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Check } from "lucide-react";
-import {
-  CONSULTATION_SAFETY_NOTICE,
-  SKIN_CONCERNS,
-} from "@/lib/consultation";
+import { CONSULTATION_SAFETY_NOTICE, SKIN_CONCERNS } from "@/lib/consultation";
 
 type FormState = {
   firstName: string;
@@ -39,8 +36,11 @@ const EMPTY: FormState = {
 
 export function ConsultationForm() {
   const [form, setForm] = useState(EMPTY);
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
+    "idle",
+  );
   const [error, setError] = useState("");
+  const submittingRef = useRef(false);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -57,6 +57,8 @@ export function ConsultationForm() {
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setError("");
     setStatus("submitting");
 
@@ -66,9 +68,8 @@ export function ConsultationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const result = await response.json().catch(() => null);
-
       if (!response.ok) {
+        const result = await response.json().catch(() => null);
         setError(result?.message ?? "We couldn't send your consultation.");
         setStatus("idle");
         return;
@@ -78,6 +79,8 @@ export function ConsultationForm() {
     } catch {
       setError("We couldn't send your consultation. Please try again.");
       setStatus("idle");
+    } finally {
+      submittingRef.current = false;
     }
   }
 
@@ -86,7 +89,9 @@ export function ConsultationForm() {
       <div className="consultation-success" role="status" aria-live="polite">
         <Check size={24} />
         <h2>We&apos;ll be in touch.</h2>
-        <p>We&apos;ll use your answers to suggest a considered Ahumma ritual.</p>
+        <p>
+          We&apos;ll use your answers to suggest a considered Ahumma ritual.
+        </p>
       </div>
     );
   }
@@ -227,7 +232,11 @@ export function ConsultationForm() {
       </label>
 
       <p className="consultation-form__safety">{CONSULTATION_SAFETY_NOTICE}</p>
-      {error ? <p className="consultation-form__error" role="alert">{error}</p> : null}
+      {error ? (
+        <p className="consultation-form__error" role="alert">
+          {error}
+        </p>
+      ) : null}
       <button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "Sending…" : "Send my consultation"}
       </button>

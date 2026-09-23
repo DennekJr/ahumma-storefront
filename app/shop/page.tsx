@@ -83,8 +83,8 @@ function CollectionFiller() {
   return (
     <Link
       className="collection-filler"
-      href="/#ritual"
-      aria-label="The Ahumma ritual"
+      href="/consultation"
+      aria-label="Find your Ahumma ritual"
     >
       <span>
         At the edge of everything beautiful is you

@@ -256,6 +256,6 @@ Completed prompts are marked so the next workstream is clear:
 - [x] 9. About page refinement.
 - [x] 10. Product-page conversion review.
 - [x] 11. Footer and conversion-path review.
-- [ ] 12. Final launch QA and regression pass — next.
+- [x] 12. Final launch QA and regression pass.
 
 Use the working brand copy, token map, available photography, and configured integrations. Verify factual product and regulatory claims during final QA.

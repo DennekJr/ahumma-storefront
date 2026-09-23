@@ -29,9 +29,9 @@ export function CatalogueUnavailable({ variant = "full" }: Props) {
           not yours. Nothing has sold out.
         </p>
         <div className="catalogue-unavailable__actions">
-          <a href="/shop">
+          <Link href="/shop">
             Try again <RefreshCw size={14} />
-          </a>
+          </Link>
           <Link href="/faq">
             Read the FAQs <ArrowRight size={14} />
           </Link>
