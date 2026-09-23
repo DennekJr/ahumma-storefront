@@ -63,7 +63,6 @@
   --type-serif-hero-action: 1.15rem;
 
   --tracking-normal: normal;
-  --tracking-display: -0.06em;
   --tracking-heading: -0.025em;
   --tracking-copy: -0.018em;
   --tracking-label: 0.08em;
@@ -84,7 +83,6 @@
   --leading-art-display: 0.86;
 
   --case-none: none;
-  --case-upper: uppercase;
 }
 
 * {
@@ -292,7 +290,7 @@ img {
   font-weight: 650;
   letter-spacing: var(--tracking-eyebrow);
   line-height: var(--leading-normal);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .eyebrow--light {
@@ -645,7 +643,7 @@ img {
   color: var(--ink);
   font-family: var(--serif);
   font-size: var(--type-serif-section);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
   opacity: 0.8;
   transition: opacity 180ms ease;
@@ -882,22 +880,22 @@ img {
   justify-content: center;
   padding: 1rem 2.5rem 1.125rem;
   border-radius: 999px;
-  background: var(--rose);
+  background: var(--forest);
   color: var(--porcelain);
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
   transition:
     color 100ms ease-in-out,
     background-color 100ms ease-in-out;
-  border: 0.1rem solid var(--rose);
+  border: 0.1rem solid var(--forest);
 }
 
 .hero-link:hover {
   background: var(--porcelain);
-  color: var(--rose);
+  color: var(--forest);
   /*transform: translateY(-0.125rem);*/
 }
 
@@ -1008,7 +1006,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -1112,16 +1110,27 @@ img {
 }
 
 .love-skin-section {
-  position: relative;
-  display: flex;
-  min-height: auto;
-  align-items: center;
+  display: grid;
+  min-height: 46rem;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   overflow: hidden;
-  padding: 4.8rem 2.4rem;
   background: var(--porcelain);
   color: var(--deep-forest);
-  border: 0;
-  isolation: isolate;
+}
+
+.love-skin__image-panel {
+  position: relative;
+  height: 880px;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.love-skin__image-panel img,
+.love-skin__image-panel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .love-skin__image {
@@ -1151,22 +1160,51 @@ img {
 }
 
 .love-skin__content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6rem 4vw 3rem;
+}
+
+.love-skin__heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .love-skin__content h2 {
-  margin: 0 0 1.75rem;
+  max-width: 38rem;
+  margin: 0;
   font-family: var(--serif);
-  font-size: var(--type-serif-display);
-  font-weight: 500;
-  letter-spacing: var(--tracking-display);
+  font-size: var(--type-serif-section);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
   text-wrap: balance;
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
+}
+
+.love-skin__round-link {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  margin-top: 0.75rem;
+  border-radius: 50%;
+  background: var(--deep-forest);
+  color: var(--porcelain);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.love-skin__round-link:hover,
+.love-skin__round-link:focus-visible {
+  background: var(--rose);
+  transform: translateX(0.15rem);
 }
 
 .love-skin__lead,
@@ -1297,13 +1335,13 @@ img {
 .product-grid.top-products-grid {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 1.875rem) / 3.5);
+  grid-auto-columns: minmax(18rem, 20.4rem);
   grid-template-columns: none;
   gap: 0.75rem;
   overflow-x: auto;
   border: 0;
   scrollbar-width: none;
-  margin-top: 3.6rem;
+  margin-top: 3rem;
 }
 
 .product-grid.top-products-grid::-webkit-scrollbar {
@@ -1396,10 +1434,10 @@ img {
 
 .product-grid.top-products-grid .product-card__status {
   border-radius: 1.4rem;
-  background: var(--rose);
+  background: var(--forest);
   color: var(--porcelain);
   font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-size: var(--type-sans-ui);
   letter-spacing: var(--tracking-heading);
   text-transform: var(--case-none);
 }
@@ -1471,7 +1509,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 620;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .product-card__status {
@@ -1646,7 +1684,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
   text-wrap: balance;
 }
@@ -1737,7 +1775,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -1826,7 +1864,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-tight);
   white-space: nowrap;
 }
@@ -1850,7 +1888,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 600;
   line-height: var(--leading-normal);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .footer-newsletter {
@@ -1867,7 +1905,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -1954,7 +1992,7 @@ img {
   outline: 0;
   background: transparent;
   font-size: var(--type-sans-micro);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .footer-email-form input::placeholder {
@@ -2186,7 +2224,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -2257,7 +2295,7 @@ img {
   padding: 0.9375rem 0;
   font-size: var(--type-sans-micro);
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .single-variant strong {
@@ -2275,7 +2313,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .variant-grid {
@@ -2407,7 +2445,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 620;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .product-story {
@@ -2495,7 +2533,7 @@ img {
 }
 .product-details-grid dt {
   color: rgba(24, 32, 25, 0.55);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   letter-spacing: var(--tracking-label);
 }
 .product-details-grid dd {
@@ -2538,7 +2576,7 @@ img {
   color: rgba(24, 32, 25, 0.55);
   font-size: var(--type-sans-label);
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 @media (max-width: 780px) {
@@ -2558,7 +2596,7 @@ img {
   margin: 1.75rem 0 2.5rem;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -2612,7 +2650,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -2647,7 +2685,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -2692,7 +2730,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .shop-closing {
@@ -2706,7 +2744,7 @@ img {
   margin: 1.75rem 0 2.5rem;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -2755,7 +2793,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -2840,7 +2878,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -2991,7 +3029,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -3021,7 +3059,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -3090,7 +3128,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
   text-align: left;
 }
@@ -3100,7 +3138,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .testimonial-grid {
@@ -3134,7 +3172,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .testimonial-card--blue {
@@ -3187,7 +3225,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .ritual-category__tagline {
@@ -3232,7 +3270,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .ritual-product__tagline {
@@ -3256,7 +3294,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .why-section,
@@ -3386,7 +3424,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -3412,7 +3450,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   transition: background 220ms ease;
 }
 
@@ -3438,7 +3476,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -3498,7 +3536,7 @@ img {
   display: block;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -3507,7 +3545,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-tier__status {
@@ -3531,7 +3569,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-tier__requirements dd {
@@ -3620,7 +3658,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -3715,7 +3753,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-field input,
@@ -3770,7 +3808,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-category-options {
@@ -3878,7 +3916,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   transition: background 220ms ease;
 }
 
@@ -4002,7 +4040,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .sla-column dl {
@@ -4036,7 +4074,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .sla-turnaround table {
@@ -4107,7 +4145,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-step__index {
@@ -4124,7 +4162,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-field__label em {
@@ -4133,7 +4171,7 @@ img {
   font-weight: 400;
   font-style: normal;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-form-grid--two {
@@ -4267,7 +4305,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   transition: background 200ms ease;
 }
 
@@ -4298,7 +4336,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   transition:
     background 220ms ease,
     transform 220ms ease;
@@ -4469,7 +4507,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -4524,7 +4562,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   transition: background 220ms ease;
 }
 
@@ -4563,7 +4601,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .partner-form__community:hover {
@@ -4595,7 +4633,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -4613,7 +4651,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .sla-doc dl {
@@ -4751,7 +4789,7 @@ img {
   font-weight: 650;
   letter-spacing: var(--tracking-label);
   text-decoration: none;
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   border-bottom: 1px solid rgba(24, 32, 25, 0.25);
   padding-bottom: 0.1875rem;
   transition: border-color 200ms ease;
@@ -4808,7 +4846,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -5062,7 +5100,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .editorial-row__caption small {
@@ -5122,7 +5160,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 @media (max-width: 900px) {
@@ -5179,7 +5217,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -5208,7 +5246,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -5268,7 +5306,7 @@ img {
 .ingredient-story-card__products span {
   width: 100%;
   color: rgba(24, 32, 25, 0.5);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
   letter-spacing: var(--tracking-label);
 }
 
@@ -5431,7 +5469,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .filter-option {
@@ -5515,7 +5553,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 /* Card additions: video playback, New badge, variant row */
@@ -5551,7 +5589,7 @@ img {
   left: 0.75rem;
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .collection-card__actions {
@@ -5807,7 +5845,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
 }
 
 .empty-cart-recommendations {
@@ -5830,7 +5868,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-tight);
 }
 
@@ -6029,7 +6067,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .cart-checkout {
@@ -6135,7 +6173,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -6157,7 +6195,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 .cart-form label small {
   color: rgba(24, 32, 25, 0.45);
@@ -6318,7 +6356,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
 }
 .status-card > p,
 .not-found-page p {
@@ -6353,7 +6391,7 @@ img {
   font-size: var(--type-sans-micro);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 .status-actions .filled {
   background: var(--forest);
@@ -6413,7 +6451,7 @@ img {
 .route-loading__wordmark {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-tight);
 }
 
@@ -7230,7 +7268,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -7269,7 +7307,7 @@ img {
 
 .about-mantra {
   font-size: var(--type-serif-section);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -7288,7 +7326,7 @@ img {
   color: var(--cream);
   font-family: var(--serif);
   font-size: var(--type-serif-section);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -7490,7 +7528,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-field);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .brand-story-section,
@@ -7512,7 +7550,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
   text-wrap: balance;
 }
@@ -7534,7 +7572,7 @@ img {
 
 .story-mantra {
   font-size: var(--type-serif-section);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -7575,7 +7613,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -7623,7 +7661,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-body);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
 
@@ -7704,7 +7742,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -7822,7 +7860,7 @@ img {
   font-family: var(--sans);
   font-size: var(--type-sans-label);
   letter-spacing: var(--tracking-caps);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .circle-benefits span {
@@ -7985,7 +8023,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -8019,7 +8057,7 @@ img {
   margin: 0 auto;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
 
@@ -8043,7 +8081,7 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: var(--tracking-heading);
   line-height: var(--leading-art-display);
 }
 
@@ -8095,7 +8133,7 @@ img {
   font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: var(--tracking-label);
-  text-transform: var(--case-upper);
+  text-transform: var(--case-none);
 }
 
 .consultation-form input:not([type="checkbox"]),

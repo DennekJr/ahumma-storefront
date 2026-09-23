@@ -91,7 +91,7 @@ export function ProductCard({
           className="product-card__action"
           href={`/products/${product.slug}`}
         >
-          Discover
+          Choose your care
         </Link>
       )}
     </article>

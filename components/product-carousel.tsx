@@ -65,7 +65,7 @@ export function ProductCarousel({ children }: { children: ReactNode }) {
         ref={carouselRef}
         className="product-grid top-products-grid"
         role="region"
-        aria-label="Top products"
+        aria-label="Ahumma collection"
       >
         {children}
       </div>

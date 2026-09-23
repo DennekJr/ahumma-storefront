@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import { connection } from "next/server";
 
 import { ProductCard } from "@/components/product-card";
@@ -18,7 +18,7 @@ import { organizationSchema } from "@/lib/structured-data";
 
 /** The Ahumma story reads long beside the philosophy, so it is held back for
  *  now. Flip to true to restore it above the philosophy section. */
-const SHOW_STORY_SECTION = false;
+const SHOW_STORY_SECTION = true;
 
 export default async function HomePage() {
   await connection();
@@ -67,6 +67,40 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section
+        className="love-skin-section"
+        id="love-your-skin"
+        aria-labelledby="love-your-skin-title"
+      >
+        <div className="love-skin__image-panel">
+          <video
+            className="love-skin__video"
+            src="/videos/explore-media.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label="Ahumma body-care ritual"
+          />
+        </div>
+        <div className="love-skin__content">
+          <div className="love-skin__heading-row">
+            <h2 id="love-your-skin-title">
+              The ritual starts here, with care made for the skin you’re in.
+            </h2>
+          </div>
+          <ProductCarousel>
+            {topProducts.map((product, index) => (
+              <ProductCard
+                product={product}
+                index={index}
+                key={`${product.ref}-${index}`}
+              />
+            ))}
+          </ProductCarousel>
+        </div>
+      </section>
+
       {SHOW_STORY_SECTION ? (
         <section className="story-section" id="story">
           <div className="story-copy">
@@ -97,25 +131,6 @@ export default async function HomePage() {
           </div>
         </section>
       ) : null}
-
-      <section
-        className="love-skin-section"
-        id="love-your-skin"
-        aria-labelledby="love-your-skin-title"
-      >
-        <div className="love-skin__content">
-          <h2 id="love-your-skin-title">Explore some of our top products</h2>
-          <ProductCarousel>
-            {topProducts.map((product, index) => (
-              <ProductCard
-                product={product}
-                index={index}
-                key={`${product.ref}-${index}`}
-              />
-            ))}
-          </ProductCarousel>
-        </div>
-      </section>
 
       <section
         className="home-ritual-break"
