@@ -253,8 +253,8 @@ Completed prompts are marked so the next workstream is clear:
 - [x] 6. Navigation, sidebar, and fixed-header review.
 - [x] 7. Newsletter signup and promotional surfaces.
 - [x] 8. Skin consultation form.
-- [ ] 9. About page refinement — next.
-- [ ] 10. Product-page conversion review.
+- [x] 9. About page refinement.
+- [ ] 10. Product-page conversion review — next.
 - [x] 11. Footer and conversion-path review.
 - [ ] 12. Final launch QA and regression pass.
 

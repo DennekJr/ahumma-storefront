@@ -27,9 +27,8 @@ export default function AboutPage() {
           feel this good.
         </h1>
         <p>
-          Ahumma is a Nigerian-born premium body-care brand for Black and brown
-          skin, created from a simple belief: you are enough, and you are
-          beautiful by design.
+          Ahumma is Nigerian-born body care for Black and brown skin, built on a
+          simple belief: you are enough, and you are beautiful by design.
         </p>
       </section>
 
@@ -39,8 +38,8 @@ export default function AboutPage() {
         </div>
         <div className="story-body">
           <p>
-            Ahumma was born from a desire to remind Africans around the world of
-            something we should never have had to forget:
+            Ahumma was born to remind Africans around the world of something we
+            should never have had to forget:
           </p>
           <p>
             You are enough.
@@ -48,18 +47,9 @@ export default function AboutPage() {
             You are beautiful by design.
           </p>
           <p>
-            For too long, beauty has been presented as something to achieve —
-            something to alter, correct or become. We wanted to create something
-            different. A brand that celebrates Black and brown skin as it is.
-            <br />A brand that draws from the richness of African ingredients
-            and beauty traditions.
-            <br />A brand that makes caring for yourself feel less like a chore
-            and more like a ritual.
-          </p>
-          <p>So we created Ahumma.</p>
-          <p>
-            Beautiful, thoughtfully made body care for skin that deserves to be
-            nourished, softened, enjoyed and celebrated.
+            We make thoughtful body care that celebrates Black and brown skin as
+            it is, draws from African ingredients and beauty traditions, and
+            turns everyday care into a ritual.
           </p>
         </div>
       </section>
@@ -129,19 +119,14 @@ export default function AboutPage() {
             Ahumma is proudly Nigerian.
             <br />
             <br />
-            Our inspiration comes from the ingredients, rituals, stories and
-            beauty traditions that surround us — from shea and mango butter to
-            the enduring tradition of African black soap.
+            Our inspiration comes from the ingredients, rituals and beauty
+            traditions around us — from shea and mango butter to the enduring
+            tradition of African black soap.
             <br />
             <br />
-            But our ambition is global.
-            <br />
-            <br />
-            We are building a modern African beauty and body-care brand for
-            people in Lagos, New York, London, Paris and everywhere in between.
-            <br />
-            <br />A brand that allows African heritage to feel not distant or
-            nostalgic, but beautiful, modern and entirely at home in the world.
+            Our ambition is global: to build a modern African body-care brand
+            that feels at home in Lagos, New York, London, Paris and everywhere
+            in between.
           </p>
           <p className="story-body__close">
             African heritage.
@@ -157,7 +142,7 @@ export default function AboutPage() {
         <div className="section-heading">
           <div>
             <h2>
-              Care should
+              Why care should
               <br />
               feel this good.
             </h2>
