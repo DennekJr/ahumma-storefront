@@ -139,7 +139,7 @@ export function FooterSignupPopup({
             width={190}
             height={53}
           />
-          <h2 id="footer-signup-popup-title">Join the Ahumma Circle.</h2>
+          <h2 id="footer-signup-popup-title">Unlock 10% on your first order</h2>
           <p className="footer-signup-popup__lede">
             First access to new rituals, limited releases and stories from
             Ahumma.

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
+import { ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { EditorialRow } from "@/components/editorial-row";
@@ -79,14 +79,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
       />
       <AnnouncementBar />
       <SiteHeader />
-
-      <Link
-        href="/shop"
-        className="product-back-button"
-        aria-label="Back to the collection"
-      >
-        <ArrowLeft size={20} />
-      </Link>
 
       <section className="product-intro">
         <div
@@ -222,12 +214,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <section className="product-closing">
         <p>
-          Care for the body.
-          <br />A return to the self.
+          A ritual worth returning to.
+          <br />
+          Care for body and self.
         </p>
-        <Link href="/shop">
-          Explore every essential <ArrowLeft size={16} />
-        </Link>
+        <Link href="/shop">Shop the full collection</Link>
       </section>
       <SiteFooter />
     </main>

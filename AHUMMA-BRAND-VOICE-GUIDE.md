@@ -173,7 +173,7 @@ The footer signup is the primary relationship surface. The popup is a separate p
 
 Footer direction:
 
-> Join the Ahumma Circle.
+> Join the Ahumma Circle for 10% on your first Order
 > First access to new rituals, limited releases and stories from Ahumma.
 > Join us
 

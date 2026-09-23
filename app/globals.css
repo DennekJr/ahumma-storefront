@@ -2099,31 +2099,6 @@ img {
   background: var(--porcelain);
 }
 
-.product-back-button {
-  position: absolute;
-  z-index: 10;
-  top: calc(var(--header-top) + var(--header-height) + 1.25rem);
-  left: var(--gutter);
-  display: grid;
-  width: 3.25rem;
-  height: 3.25rem;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--rose);
-  color: var(--ink);
-  box-shadow: 0 0.5rem 1.5rem rgba(24, 32, 25, 0.12);
-  transition:
-    background 180ms ease,
-    transform 180ms ease;
-}
-
-.product-back-button:hover,
-.product-back-button:focus-visible {
-  background: var(--deep-forest);
-  color: var(--porcelain);
-  transform: translateX(-0.125rem);
-}
-
 .product-intro {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2573,13 +2548,12 @@ img {
 
 .product-closing a {
   display: inline-flex;
-  flex-direction: row-reverse;
   align-items: center;
-  gap: 1.25rem;
   padding-bottom: 0.5625rem;
   border-bottom: 1px solid white;
-  font-size: var(--type-sans-micro);
-  letter-spacing: var(--tracking-label);
+  font-size: var(--type-sans-ui);
+  letter-spacing: var(--tracking-copy);
+  text-transform: none;
 }
 
 /* Shop */
@@ -6610,12 +6584,7 @@ img {
   .footer-legal {
     padding: 1.0625rem 1.375rem;
   }
-  .product-back-button {
-    top: calc(var(--header-top) + var(--header-height) + 0.875rem);
-    left: 1.125rem;
-    width: 2.875rem;
-    height: 2.875rem;
-  }
+
   .product-intro {
     grid-template-columns: 1fr;
   }
@@ -7798,6 +7767,10 @@ img {
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-art-display);
+}
+
+.consultation-section__intro h2 {
+  font-size: var(--type-serif-section);
 }
 
 .consultation-hero p {
