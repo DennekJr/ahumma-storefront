@@ -43,6 +43,15 @@ export default async function HomePage() {
       <section className="home-hero home-hero--editorial">
         <SiteHeader />
         <CloudBackdrop />
+        <Image
+          className="hero-layer"
+          src="/images/hero-layer.webp"
+          alt="Ahumma Sika body butter held beside glowing skin"
+          fill
+          priority
+          sizes="(max-width: 780px) 92vw, 58vw"
+        />
+
         <div className="hero-light-overlay" aria-hidden="true" />
         <div className="hero-copy">
           <h1>A New Ritual for Black and Brown Skin.</h1>

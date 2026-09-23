@@ -37,10 +37,56 @@ Direct site inspection remained blocked by Cloudflare. No Aesop-specific token, 
 
 ### Typography
 
-- Keep serif display headlines for feeling and distinction.
-- Keep sans-serif utility copy for navigation, price, labels, and form controls.
-- Prefer short display lines with clear line breaks rather than oversized paragraphs.
-- Maintain comfortable reading widths for story and FAQ content.
+Ahumma uses two editorial type systems. The token name is also the family rule: `sans` tokens render in `var(--sans)`, and `serif` tokens render in `var(--serif)`.
+
+| Family | Token                      | Role        | Approved use                                                          |
+| ------ | -------------------------- | ----------- | --------------------------------------------------------------------- |
+| Sans   | `--type-sans-micro`        | Micro       | Counts, status text, compact metadata, helper text                    |
+| Sans   | `--type-sans-label`        | Label       | Eyebrows, uppercase labels, secondary links, field labels             |
+| Sans   | `--type-sans-small`        | Small       | Supporting copy, captions, compact descriptions                       |
+| Sans   | `--type-sans-body`         | Body        | Prices, short product metadata, default compact body copy             |
+| Sans   | `--type-sans-ui`           | UI          | Navigation, controls, form inputs, utility text                       |
+| Sans   | `--type-sans-lead`         | Lead        | Larger sans-serif supporting copy where a serif voice is not intended |
+| Serif  | `--type-serif-label`       | Label       | Serif buttons, product tags, ingredient headings, editorial labels    |
+| Serif  | `--type-serif-body`        | Body        | Product ledes, story copy, FAQ introductions, serif paragraphs        |
+| Serif  | `--type-serif-section`     | Section     | Section headings, menu links, editorial statements, large actions     |
+| Serif  | `--type-serif-display`     | Display     | Hero headlines, page titles, major campaign and closing statements    |
+| Serif  | `--type-serif-hero-action` | Hero action | Hero-specific serif buttons and action links                          |
+
+#### Pairing rules
+
+- Choose the family first, then choose the smallest semantic role that fits the content.
+- Sans is the default for navigation, forms, prices, metadata, labels, and operational UI.
+- Serif is for brand voice, editorial storytelling, product narratives, section headings, and display moments.
+- A serif family must use a `--type-serif-*` token. A sans family must use a `--type-sans-*` token.
+- Do not introduce a new numeric `font-size`, one-off `clamp()`, or an unnamed type token for a component.
+- Do not use a serif token on an element that inherits the sans family. Set the family explicitly or use the matching sans token.
+- Use `font-size: inherit` only when a child intentionally shares its parent’s complete typographic role.
+- `--mono` is reserved for code-like content such as `code`, `pre`, `kbd`, and `samp`; it is not a general UI family.
+- Responsive scaling belongs in the shared tokens. Components should not create their own art-directed type scale.
+
+#### Tracking, leading, and casing
+
+Use these shared supporting tokens with the type roles above:
+
+| Concern  | Tokens                                                                            | Use                                                              |
+| -------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Tracking | `--tracking-normal`                                                               | UI text that should follow the font’s default spacing            |
+| Tracking | `--tracking-display`, `--tracking-heading`, `--tracking-copy`                     | Serif display, heading, and reading text                         |
+| Tracking | `--tracking-label`, `--tracking-caps`, `--tracking-field`, `--tracking-eyebrow`   | Links, uppercase metadata, form labels, and eyebrows             |
+| Tracking | `--tracking-zero`, `--tracking-wide`                                              | Explicit zero tracking and wide eyebrow treatments               |
+| Leading  | `--leading-zero`, `--leading-tight`, `--leading-display`, `--leading-art-display` | Layout resets, controls, and display headlines                   |
+| Leading  | `--leading-compact`, `--leading-normal`                                           | Compact labels and editorial copy                                |
+| Leading  | `--leading-body`, `--leading-relaxed`, `--leading-loose`                          | Paragraphs and long-form reading content                         |
+| Casing   | `--case-none`, `--case-upper`                                                     | Sentence case by default; uppercase only for labels and metadata |
+
+- Use a tracking token instead of a numeric `letter-spacing` value.
+- Use a leading token instead of a numeric `line-height` value.
+- Use `--case-upper` only when the content is intentionally a label, status, field name, or metadata treatment.
+- Do not uppercase headlines, paragraphs, product names, or customer-facing sentences by default.
+- Keep casing in CSS only when it is a visual treatment; preserve meaningful text casing in the source content.
+
+Keep serif display headlines for feeling and distinction. Prefer short display lines with clear line breaks rather than oversized paragraphs, and maintain comfortable reading widths for story and FAQ content.
 
 ### Color
 
