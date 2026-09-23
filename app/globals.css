@@ -3962,7 +3962,10 @@ img {
   border-radius: 62.4375rem;
   cursor: pointer;
   font-size: 0.875rem;
-  transition: border-color 200ms ease, background 200ms ease, color 200ms ease;
+  transition:
+    border-color 200ms ease,
+    background 200ms ease,
+    color 200ms ease;
 }
 
 .partner-category:hover {
@@ -3983,7 +3986,10 @@ img {
   width: 0;
   overflow: hidden;
   opacity: 0;
-  transition: width 200ms ease, opacity 200ms ease, margin 200ms ease;
+  transition:
+    width 200ms ease,
+    opacity 200ms ease,
+    margin 200ms ease;
 }
 
 .partner-category.is-selected {
@@ -4008,7 +4014,9 @@ img {
   border: 1px solid var(--line);
   border-radius: 0.5rem;
   background: var(--porcelain);
-  transition: border-color 220ms ease, background 220ms ease;
+  transition:
+    border-color 220ms ease,
+    background 220ms ease;
 }
 
 .partner-checkbox--sla.is-signed {
@@ -4103,7 +4111,9 @@ img {
   font-weight: 650;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: background 220ms ease, transform 220ms ease;
+  transition:
+    background 220ms ease,
+    transform 220ms ease;
 }
 
 .partner-submit:hover:not(:disabled) {
@@ -4220,11 +4230,16 @@ img {
 }
 
 @keyframes partner-dialog-in {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 
 @keyframes partner-panel-in {
-  from { opacity: 0; transform: translateY(0.75rem) scale(0.985); }
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.985);
+  }
 }
 
 .partner-dialog__close {
@@ -4240,7 +4255,9 @@ img {
   background: transparent;
   color: rgba(24, 32, 25, 0.55);
   cursor: pointer;
-  transition: background 200ms ease, color 200ms ease;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
 }
 
 .partner-dialog__close:hover {
@@ -4710,7 +4727,10 @@ img {
 }
 
 @keyframes card-reveal {
-  from { opacity: 0; transform: translateY(0.875rem); }
+  from {
+    opacity: 0;
+    transform: translateY(0.875rem);
+  }
 }
 
 .collection-card__image {
@@ -4772,7 +4792,9 @@ img {
   background: transparent;
   color: rgba(24, 32, 25, 0.55);
   cursor: pointer;
-  transition: background 200ms ease, color 200ms ease;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
 }
 
 .collection-card__meta button:hover {
@@ -4992,7 +5014,9 @@ img {
   cursor: pointer;
   font: inherit;
   font-size: 0.75rem;
-  transition: border-color 200ms ease, background 200ms ease;
+  transition:
+    border-color 200ms ease,
+    background 200ms ease;
 }
 
 .filter-chip:hover,
@@ -5082,7 +5106,10 @@ img {
 }
 
 @keyframes filter-panel-in {
-  from { opacity: 0; transform: translateY(-0.25rem); }
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
 }
 
 .filter-panel__group > span {
@@ -5129,7 +5156,10 @@ img {
   place-items: center;
   border: 1px solid var(--line);
   color: transparent;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .filter-option input:checked + .filter-option__box {
@@ -5277,8 +5307,12 @@ img {
 .cloud-backdrop__scrim {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(250, 248, 243, 0.55), rgba(250, 248, 243, 0.2) 45%, rgba(250, 248, 243, 0.7));
+  background: linear-gradient(
+    180deg,
+    rgba(250, 248, 243, 0.55),
+    rgba(250, 248, 243, 0.2) 45%,
+    rgba(250, 248, 243, 0.7)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -5307,8 +5341,12 @@ img {
  * through the middle so the sky still moves.
  */
 .shop-page--sky .cloud-backdrop__scrim {
-  background:
-    linear-gradient(180deg, rgba(250, 248, 243, 0.42), rgba(250, 248, 243, 0.14) 32%, rgba(250, 248, 243, 0.24));
+  background: linear-gradient(
+    180deg,
+    rgba(250, 248, 243, 0.42),
+    rgba(250, 248, 243, 0.14) 32%,
+    rgba(250, 248, 243, 0.24)
+  );
 }
 
 /*
@@ -7034,19 +7072,13 @@ img {
 .home-hero--editorial .hero-copy {
   bottom: 4.5rem;
   max-width: 73rem;
+  color: var(--ink);
 }
 
-.hero-kicker,
 .hero-lede,
 .hero-supporting {
   max-width: 43rem;
   margin: 0 auto;
-}
-
-.hero-kicker {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .home-hero--editorial .hero-copy h1 {
@@ -7075,6 +7107,14 @@ img {
   margin-top: 1.75rem;
 }
 
+.home-hero--editorial .hero-light-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(250, 248, 243, 0.12),
+    rgba(250, 248, 243, 0.48)
+  );
+}
+
 .home-hero--editorial .hero-link {
   padding: 0.85rem 1.5rem 0.95rem;
   font-size: 1.15rem;
@@ -7084,7 +7124,7 @@ img {
   display: inline-flex;
   align-items: center;
   padding: 0.85rem 1.5rem 0.95rem;
-  border: 1px solid rgba(250, 248, 243, 0.75);
+  border: 1px solid var(--ink);
   border-radius: 999px;
   font-family: var(--serif);
   font-size: 1.15rem;

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { connection } from "next/server";
+import { CloudBackdrop } from "@/components/cloud-backdrop";
 import { ProductCard } from "@/components/product-card";
 import { ProductCarousel } from "@/components/product-carousel";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -38,25 +39,24 @@ export default async function HomePage() {
       <StructuredData data={organizationSchema()} />
       <AnnouncementBar />
 
-      <section className="home-hero">
+      <section className="home-hero home-hero--editorial">
         <SiteHeader />
-        <Image
-          className="hero-sky"
-          src="/images/hero-ahumma.avif"
-          alt="Ahumma body care ritual"
-          fill
-          loading="eager"
-          fetchPriority="high"
-          sizes="100vw"
-        />
+        <CloudBackdrop />
         <div className="hero-light-overlay" aria-hidden="true" />
         <div className="hero-copy">
-          <h1>
-            We create beautiful, natural body care rooted in African heritage
-          </h1>
-          <Link href="/shop" className="hero-link">
-            Shop now
-          </Link>
+          <h1>Beautiful skin. Beautiful rituals.</h1>
+          <p className="hero-lede">
+            Born in Nigeria. Made for the world. Premium body care rooted in
+            African heritage, made for Black and brown skin.
+          </p>
+          <div className="hero-actions">
+            <Link href="/shop" className="hero-link">
+              Shop body care
+            </Link>
+            <Link href="/about" className="hero-secondary-link">
+              Discover Ahumma
+            </Link>
+          </div>
         </div>
       </section>
 
