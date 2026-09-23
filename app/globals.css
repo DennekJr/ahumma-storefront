@@ -1026,12 +1026,6 @@ img {
   margin: 0;
 }
 
-.about-page > .philosophy-image-grid {
-  margin: 0;
-  padding: var(--gutter);
-  background: var(--porcelain);
-}
-
 .section-heading h2,
 .section-heading h1,
 .product-story h2,
@@ -1062,53 +1056,6 @@ img {
     height: 1ch;
     display: block;
   }
-}
-
-.philosophy-image-grid {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 2.4rem;
-}
-
-.philosophy-image-grid__item {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--sand);
-}
-
-.philosophy-image-grid__item img {
-  object-fit: cover;
-  transition: transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.philosophy-image-grid__item::after {
-  position: absolute;
-  inset: 50% 0 0;
-  background: linear-gradient(transparent, rgba(12, 20, 15, 0.62));
-  content: "";
-}
-
-.philosophy-image-grid__label {
-  position: absolute;
-  z-index: 1;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  color: white;
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  line-height: var(--leading-compact);
-}
-
-.philosophy-image-grid__item:hover img {
-  transform: scale(1.05);
 }
 
 .philosophy-copy {
@@ -1976,12 +1923,6 @@ img {
   background: var(--porcelain);
   color: var(--ink);
   cursor: pointer;
-}
-
-.about-cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
 }
 
 .footer-meta-links,
@@ -6564,9 +6505,7 @@ img {
     max-width: none;
     padding: 4rem var(--gutter);
   }
-  .philosophy-image-grid {
-    grid-template-columns: 1fr;
-  }
+
   .section-heading h2,
   .section-heading h1 {
     font-size: var(--type-serif-display);
@@ -6858,14 +6797,6 @@ img {
   padding: 0 2.5vw;
 }
 
-.about-page .ingredient-section .section-heading p {
-  max-width: 26.25rem;
-  margin: 0 0 0.25rem auto;
-  font-family: var(--serif);
-  font-size: var(--type-serif-body);
-  line-height: var(--leading-body);
-}
-
 .about-page .ingredient-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3rem 3.5rem;
@@ -6906,10 +6837,6 @@ img {
     display: block;
     margin-bottom: 2.75rem;
     padding: 0;
-  }
-
-  .about-page .ingredient-section .section-heading p {
-    margin: 1.5rem 0 0;
   }
 
   .about-page .why-grid,
@@ -7802,11 +7729,6 @@ img {
   .circle-section .circle-form {
     grid-column: auto;
   }
-
-  .about-cta-row {
-    align-items: flex-start;
-    flex-direction: column;
-  }
 }
 
 .home-ritual-break {
@@ -7852,31 +7774,6 @@ img {
   background: var(--porcelain);
   color: var(--ink);
   font-family: var(--serif);
-}
-
-.about-visual-break {
-  display: grid;
-  min-height: 28rem;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  overflow: hidden;
-  background: var(--sand);
-}
-
-.about-visual-break img {
-  width: 100%;
-  height: 34rem;
-  object-fit: contain;
-  object-position: center bottom;
-}
-
-.about-visual-break p {
-  max-width: 22rem;
-  margin: 0 auto;
-  font-family: var(--serif);
-  font-size: var(--type-serif-display);
-  letter-spacing: var(--tracking-heading);
-  line-height: var(--leading-display);
 }
 
 .consultation-hero,
@@ -8072,18 +7969,6 @@ img {
     right: var(--gutter);
     bottom: 2rem;
     left: var(--gutter);
-  }
-
-  .about-visual-break {
-    grid-template-columns: 1fr;
-  }
-
-  .about-visual-break img {
-    height: 24rem;
-  }
-
-  .about-visual-break p {
-    padding: 3rem var(--gutter);
   }
 
   .consultation-section__image {

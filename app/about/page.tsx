@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { IngredientStoryCard } from "@/components/ingredient-story-card";
@@ -18,13 +17,6 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const products = await getProducts();
-  const productHref = (...names: string[]) => {
-    const match = products.find((product) =>
-      names.some((name) => product.name.toLowerCase().includes(name)),
-    );
-
-    return match ? `/products/${match.slug}` : "/shop";
-  };
 
   return (
     <main className="about-page">
@@ -66,58 +58,6 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="philosophy-image-grid" aria-label="Ahumma rituals">
-        <Link href={productHref("ara")} className="philosophy-image-grid__item">
-          <Image
-            src="/images/ara-ritual.jpg"
-            alt="Ahumma Ara body-care ritual"
-            fill
-            sizes="(max-width: 780px) 100vw, 33vw"
-          />
-          <span className="philosophy-image-grid__label">
-            For Black skin. <ArrowRight size={17} />
-          </span>
-        </Link>
-        <Link
-          href={productHref("dream whip", "dream")}
-          className="philosophy-image-grid__item"
-        >
-          <Image
-            src="/images/dream-ritual.jpg"
-            alt="Ahumma Dream Whip body-care ritual"
-            fill
-            sizes="(max-width: 780px) 100vw, 33vw"
-          />
-          <span className="philosophy-image-grid__label">
-            For brown skin. <ArrowRight size={17} />
-          </span>
-        </Link>
-        <Link
-          href={productHref("sika", "sike")}
-          className="philosophy-image-grid__item"
-        >
-          <Image
-            src="/images/sika-ritual.jpg"
-            alt="Ahumma Sika body-care ritual"
-            fill
-            sizes="(max-width: 780px) 100vw, 33vw"
-          />
-          <span className="philosophy-image-grid__label">
-            For every shade that knows its beauty. <ArrowRight size={17} />
-          </span>
-        </Link>
-      </section>
-
-      <section className="about-visual-break" aria-label="Ahumma ritual">
-        <Image
-          src="/images/hero-woman.png"
-          alt="A person taking a quiet moment for their ritual"
-          width={1411}
-          height={1800}
-        />
-        <p>African heritage. Modern ritual. Beautiful skin.</p>
-      </section>
-
       <section className="why-section" id="why">
         <div className="section-heading">
           <div>
@@ -147,11 +87,6 @@ export default async function AboutPage() {
               the right ingredients.
             </h2>
           </div>
-          <p>
-            Every ingredient has a role.
-            <br />
-            Every formula has a reason.
-          </p>
         </div>
         <div className="ingredient-grid">
           {INGREDIENT_STORY.map((ingredient) => (
@@ -161,14 +96,6 @@ export default async function AboutPage() {
               products={products}
             />
           ))}
-        </div>
-        <div className="about-cta-row">
-          <Link href="/shop" className="underlined-link">
-            Explore the collection <ArrowRight size={16} />
-          </Link>
-          <Link href="/consultation" className="underlined-link">
-            Find your ritual <ArrowRight size={16} />
-          </Link>
         </div>
       </section>
 
