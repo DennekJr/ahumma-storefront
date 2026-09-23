@@ -54,20 +54,8 @@ export function SiteFooter() {
               <Link href="/faq#shipping">Contact</Link>
               <Link href="/faq#shipping">Shipping & Delivery</Link>
               <Link href="/faq#shipping">Returns & Exchanges</Link>
-              <a
-                href="https://ahumma.com/privacy-policy/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Privacy
-              </a>
-              <a
-                href="https://ahumma.com/privacy-policy/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Terms
-              </a>
+              <Link href="/privacy">Privacy</Link>
+              
             </div>
             <div>
               <span>Connect</span>
