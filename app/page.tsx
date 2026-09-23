@@ -84,7 +84,7 @@ export default async function HomePage() {
           </p>
           <div className="hero-actions">
             <Link href="/shop" className="hero-link">
-              Start my ritual
+              Start your ritual
             </Link>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default async function HomePage() {
             </h2>
           </div>
           <ProductCarousel
-            viewAllLabel="Find your ritual"
+            viewAllLabel="Find what’s right for your skin"
             viewAllHref="/consultation"
           >
             {ritualProducts.map(
