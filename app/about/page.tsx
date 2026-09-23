@@ -43,28 +43,6 @@ export default async function AboutPage() {
         </p>
       </section>
 
-      <section className="story-section" id="story">
-        <div className="story-copy">
-          <h2>We started with a belief.</h2>
-        </div>
-        <div className="story-body">
-          <p>
-            Ahumma was born to remind Africans around the world of something we
-            should never have had to forget:
-          </p>
-          <p>
-            You are enough.
-            <br />
-            You are beautiful by design.
-          </p>
-          <p>
-            We make thoughtful body care that celebrates Black and brown skin as
-            it is, draws from African ingredients and beauty traditions, and
-            turns everyday care into a ritual.
-          </p>
-        </div>
-      </section>
-
       <section className="about-belief-section" id="philosophy">
         <div className="about-belief-section__image">
           <Image
@@ -138,38 +116,6 @@ export default async function AboutPage() {
           height={1800}
         />
         <p>African heritage. Modern ritual. Beautiful skin.</p>
-      </section>
-
-      <section className="story-section about-difference-section" id="heritage">
-        <div className="story-copy">
-          <h2>
-            Rooted in Africa.
-            <br />
-            Made for everywhere.
-          </h2>
-        </div>
-        <div className="story-body">
-          <p>
-            Ahumma is proudly Nigerian.
-            <br />
-            <br />
-            Our inspiration comes from the ingredients, rituals and beauty
-            traditions around us — from shea and mango butter to the enduring
-            tradition of African black soap.
-            <br />
-            <br />
-            Our ambition is global: to build a modern African body-care brand
-            that feels at home in Lagos, New York, London, Paris and everywhere
-            in between.
-          </p>
-          <p className="story-body__close">
-            African heritage.
-            <br />
-            Modern ritual.
-            <br />
-            Beautiful skin.
-          </p>
-        </div>
       </section>
 
       <section className="why-section" id="why">

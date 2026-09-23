@@ -16,10 +16,6 @@ import { getProducts } from "@/lib/frontdesk";
 
 import { organizationSchema } from "@/lib/structured-data";
 
-/** The Ahumma story reads long beside the philosophy, so it is held back for
- *  now. Flip to true to restore it above the philosophy section. */
-const SHOW_STORY_SECTION = true;
-
 export default async function HomePage() {
   await connection();
   const products = await getProducts();
@@ -169,82 +165,29 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {SHOW_STORY_SECTION ? (
-        <section className="story-section" id="story">
-          <div className="story-copy">
-            <h2>
-              We started
-              <br />
-              with a belief.
-            </h2>
-          </div>
-          <div className="story-body">
-            <p>
-              Ahumma was born to remind Africans everywhere of something we
-              should never have had to forget: you are enough, and you are
-              beautiful by design.
-            </p>
-            <p>
-              For too long, beauty has been something to achieve — to alter,
-              correct or become. We wanted something different. A brand that
-              celebrates Black and brown skin as it is, draws from the richness
-              of African ingredients and beauty traditions, and makes caring for
-              yourself feel less like a chore and more like a ritual.
-            </p>
-            <p className="story-body__close">
-              So we created Ahumma. Beautiful, thoughtfully made body care for
-              skin that deserves to be nourished, softened, enjoyed and
-              celebrated.
-            </p>
-          </div>
-        </section>
-      ) : null}
+      <section className="home-hero home-hero--editorial home-hero--belief">
+        <SiteHeader />
+        <Image
+          className="hero-belief-image"
+          src="/images/belief-bg-image.webp"
+          alt="Ahumma Sika body butter being applied to skin"
+          fill
+          sizes="100vw"
+        />
 
-      <section
-        className="love-skin-section ritual-gallery-section"
-        aria-labelledby="ritual-gallery-title"
-      >
-        <div className="ritual-gallery-section__copy">
-          <h2 id="ritual-gallery-title">Care that feels like yours.</h2>
-          <Link href="/consultation">Find your ritual</Link>
-        </div>
-        <div className="ritual-gallery-section__gallery">
-          <Link
-            href={productHref("ara")}
-            className="ritual-gallery-section__item"
-          >
-            <Image
-              src="/images/ara-ritual.jpg"
-              alt="Ahumma Ara body-care ritual"
-              fill
-              sizes="(max-width: 780px) 100vw, 25vw"
-            />
-            <span>For Black skin.</span>
-          </Link>
-          <Link
-            href={productHref("dream whip", "dream")}
-            className="ritual-gallery-section__item"
-          >
-            <Image
-              src="/images/dream-ritual.jpg"
-              alt="Ahumma Dream Whip body-care ritual"
-              fill
-              sizes="(max-width: 780px) 100vw, 25vw"
-            />
-            <span>For brown skin.</span>
-          </Link>
-          <Link
-            href={productHref("sika", "sike")}
-            className="ritual-gallery-section__item"
-          >
-            <Image
-              src="/images/sika-ritual.jpg"
-              alt="Ahumma Sika body-care ritual"
-              fill
-              sizes="(max-width: 780px) 100vw, 25vw"
-            />
-            <span>For every shade that knows its beauty.</span>
-          </Link>
+        <div className="hero-light-overlay" aria-hidden="true" />
+        <div className="hero-copy">
+          <h1>The care you should never have forgotten.</h1>
+          <p className="hero-lede">
+            Ahumma was born to remind Africans everywhere of something we should
+            never have had to forget: you are enough, and you are beautiful by
+            design.
+          </p>
+          <div className="hero-actions">
+            <Link href="/shop" className="hero-link">
+              Start your ritual
+            </Link>
+          </div>
         </div>
       </section>
 

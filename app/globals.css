@@ -58,7 +58,7 @@
   --type-sans-lead: 1.125rem;
   --type-serif-label: 1.25rem;
   --type-serif-body: 1.3125rem;
-  --type-serif-section: clamp(1.75rem, 3.4vw, 2.875rem);
+  --type-serif-section: clamp(1.5rem, 2.8vw, 2.25rem);
   --type-serif-display: clamp(3rem, 5.4vw, 6.2rem);
   --type-serif-hero-action: 1.15rem;
 
@@ -765,6 +765,37 @@ img {
   inset: 0;
   background: linear-gradient(180deg in oklch, #1d2c2200 0%, #1d2c2288 100%);
   pointer-events: none;
+}
+
+.home-hero--belief .hero-belief-image {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-hero--belief .hero-light-overlay {
+  background: rgba(17, 27, 21, 0.68);
+}
+
+.home-hero.home-hero--belief .site-header {
+  color: var(--porcelain);
+}
+
+.home-hero.home-hero--belief .hero-actions {
+  justify-content: center;
+}
+
+.home-hero.home-hero--belief .hero-link {
+  margin-inline: auto;
+}
+
+.home-hero.home-hero--belief .hero-copy {
+  bottom: 50%;
+  left: 50%;
+  width: min(52rem, calc(100% - 4rem));
+  color: var(--porcelain);
+  text-align: center;
+  transform: translate(-50%, 50%);
 }
 
 .hero-sky-video {
@@ -1893,7 +1924,7 @@ img {
 
 .footer-details {
   position: static;
-  margin: 2rem 1.375rem 1.25rem;
+  margin: 0 1.375rem 1.25rem;
   display: grid;
   grid-template-columns: 1fr;
   align-items: end;
@@ -7149,7 +7180,7 @@ img {
     flex-direction: column;
     align-items: stretch;
     gap: 2.25rem;
-    margin: 7rem 1.375rem 1.25rem;
+    margin: 0 1.375rem 1.25rem;
   }
 
   .footer-email-form {
@@ -8002,84 +8033,6 @@ img {
     align-items: flex-start;
     flex-direction: column;
   }
-}
-
-.ritual-gallery-section {
-  display: grid;
-  min-height: 46rem;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  overflow: hidden;
-  background: var(--porcelain);
-  color: var(--deep-forest);
-}
-
-.ritual-gallery-section__copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 6rem 4vw 3rem;
-}
-
-.ritual-gallery-section__copy h2 {
-  max-width: 38rem;
-  margin: 0 0 1.5rem;
-  font-family: var(--serif);
-  font-size: var(--type-serif-section);
-  font-weight: 400;
-  letter-spacing: var(--tracking-heading);
-  line-height: var(--leading-display);
-}
-
-.ritual-gallery-section__copy a {
-  display: inline-flex;
-  width: fit-content;
-  padding: 0.85rem 1.2rem;
-  border-radius: 999px;
-  background: var(--forest);
-  color: var(--porcelain);
-  font-family: var(--serif);
-}
-
-.ritual-gallery-section__gallery {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-  padding: 0.75rem;
-}
-
-.ritual-gallery-section__item {
-  position: relative;
-  min-height: 100%;
-  overflow: hidden;
-  background: var(--sand);
-}
-
-.ritual-gallery-section__item::after {
-  position: absolute;
-  inset: 50% 0 0;
-  background: linear-gradient(transparent, rgba(12, 20, 15, 0.62));
-  content: "";
-}
-
-.ritual-gallery-section__item img {
-  object-fit: cover;
-  transition: transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.ritual-gallery-section__item:hover img {
-  transform: scale(1.05);
-}
-
-.ritual-gallery-section__item span {
-  position: absolute;
-  z-index: 1;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  color: white;
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  line-height: var(--leading-compact);
 }
 
 .home-ritual-break {

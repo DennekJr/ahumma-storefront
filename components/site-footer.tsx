@@ -14,6 +14,18 @@ export function SiteFooter() {
     <>
       <FooterSignupPopup footerRef={footerRef} />
       <footer ref={footerRef} className="site-footer">
+        <section
+          className="footer-newsletter"
+          aria-labelledby="footer-newsletter-title"
+        >
+          <h2 id="footer-newsletter-title">Join the Ahumma Circle.</h2>
+          <p>
+            First access to new rituals, limited releases and stories from
+            Ahumma.
+          </p>
+          <CircleSignup buttonLabel="Join us" />
+        </section>
+
         <div
           className="footer-wordmark"
           aria-label="At the edge of everything beautiful is you."
@@ -23,17 +35,6 @@ export function SiteFooter() {
         </div>
 
         <div className="footer-details">
-          <section
-            className="footer-newsletter"
-            aria-labelledby="footer-newsletter-title"
-          >
-            <h2 id="footer-newsletter-title">Join the Ahumma Circle.</h2>
-            <p>
-              First access to new rituals, limited releases and stories from
-              Ahumma.
-            </p>
-            <CircleSignup buttonLabel="Join us" />
-          </section>
           <nav className="footer-utility-links" aria-label="Footer links">
             <div>
               <span>Shop</span>
