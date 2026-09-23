@@ -25,6 +25,10 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
   }, [menuOpen]);
 
   useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     if (!menuOpen) {
       if (menuWasOpenRef.current) menuTriggerRef.current?.focus();
       menuWasOpenRef.current = false;

@@ -250,10 +250,10 @@ Completed prompts are marked so the next workstream is clear:
 - [x] 3. Homepage narrative and copy reduction.
 - [x] 4. Visual storytelling and media audit.
 - [x] 5. Color system and CTA consistency.
-- [ ] 6. Navigation, sidebar, and fixed-header review — next.
+- [x] 6. Navigation, sidebar, and fixed-header review.
 - [x] 7. Newsletter signup and promotional surfaces.
 - [x] 8. Skin consultation form.
-- [ ] 9. About page refinement.
+- [ ] 9. About page refinement — next.
 - [ ] 10. Product-page conversion review.
 - [x] 11. Footer and conversion-path review.
 - [ ] 12. Final launch QA and regression pass.

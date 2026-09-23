@@ -519,6 +519,13 @@ img {
   cursor: pointer;
 }
 
+.header-menu,
+.header-cart,
+.menu-drawer__close,
+.menu-drawer__currency-options button {
+  min-height: 2.75rem;
+}
+
 .header-menu {
   grid-column: 1;
   justify-self: start;
