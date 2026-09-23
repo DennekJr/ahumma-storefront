@@ -98,68 +98,6 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      <section className="philosophy-section" id="philosophy">
-        <div className="philosophy-heading">
-          <p>
-            <span>
-              Ahumma is a Nigerian-born premium body-care brand for Black and
-              brown skin, created from a simple belief: you are enough, and you
-              are beautiful by design.
-            </span>
-            <i />
-            <span>
-              Care should feel like a ritual, not a correction. Beautiful,
-              thoughtful body care for skin that deserves to be nourished,
-              softened and celebrated.
-            </span>
-          </p>
-        </div>
-        <div className="philosophy-image-grid">
-          <Link
-            href={productHref("ara")}
-            className="philosophy-image-grid__item"
-          >
-            <Image
-              src="/images/ara-ritual.jpg"
-              alt="Ahumma Ara body-care ritual"
-              fill
-              sizes="(max-width: 780px) 100vw, 33vw"
-            />
-            <span className="philosophy-image-grid__label">
-              For Black skin. <ArrowRight size={17} />
-            </span>
-          </Link>
-          <Link
-            href={productHref("dream whip", "dream")}
-            className="philosophy-image-grid__item"
-          >
-            <Image
-              src="/images/dream-ritual.jpg"
-              alt="Ahumma Dream Whip body-care ritual"
-              fill
-              sizes="(max-width: 780px) 100vw, 33vw"
-            />
-            <span className="philosophy-image-grid__label">
-              For brown skin. <ArrowRight size={17} />
-            </span>
-          </Link>
-          <Link
-            href={productHref("sika", "sike")}
-            className="philosophy-image-grid__item"
-          >
-            <Image
-              src="/images/sika-ritual.jpg"
-              alt="Ahumma Sika body-care ritual"
-              fill
-              sizes="(max-width: 780px) 100vw, 33vw"
-            />
-            <span className="philosophy-image-grid__label">
-              For every shade that knows its beauty. <ArrowRight size={17} />
-            </span>
-          </Link>
-        </div>
-      </section>
-
       <section
         className="love-skin-section"
         id="love-your-skin"

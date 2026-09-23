@@ -960,6 +960,46 @@ img {
   border: 0;
 }
 
+.about-belief-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  background: var(--paper);
+}
+
+.about-belief-section__image {
+  position: relative;
+  min-height: 34rem;
+  overflow: hidden;
+}
+
+.about-belief-section__image img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-belief-section__copy {
+  display: flex;
+  max-width: 38rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 5.5rem var(--gutter);
+  font-family: var(--serif);
+  font-size: var(--type-serif-body);
+  line-height: var(--leading-body);
+}
+
+.about-belief-section__copy p {
+  margin: 0;
+}
+
+.about-page > .philosophy-image-grid {
+  margin: 0;
+  padding: var(--gutter);
+  background: var(--porcelain);
+}
+
 .section-heading h2,
 .section-heading h1,
 .product-story h2,
@@ -6606,6 +6646,16 @@ img {
   .philosophy-section {
     gap: 1.75rem;
     padding: 5.625rem 1.375rem 6.25rem;
+  }
+  .about-belief-section {
+    grid-template-columns: 1fr;
+  }
+  .about-belief-section__image {
+    min-height: 24rem;
+  }
+  .about-belief-section__copy {
+    max-width: none;
+    padding: 4rem var(--gutter);
   }
   .philosophy-image-grid {
     grid-template-columns: 1fr;

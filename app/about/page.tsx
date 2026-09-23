@@ -18,6 +18,13 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const products = await getProducts();
+  const productHref = (...names: string[]) => {
+    const match = products.find((product) =>
+      names.some((name) => product.name.toLowerCase().includes(name)),
+    );
+
+    return match ? `/products/${match.slug}` : "/shop";
+  };
 
   return (
     <main className="about-page">
@@ -58,46 +65,69 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section
-        className="global-section about-philosophy-section"
-        id="philosophy"
-      >
-        <div className="global-copy">
-          <h2>
-            We don't believe
-            <br />
-            in fixing you.
-          </h2>
+      <section className="about-belief-section" id="philosophy">
+        <div className="about-belief-section__image">
+          <Image
+            src="/images/love-your-skin.jpg"
+            alt="A woman enjoying a quiet body-care ritual"
+            fill
+            sizes="(max-width: 780px) 100vw, 50vw"
+          />
         </div>
-        <div className="global-body">
+        <div className="about-belief-section__copy">
           <p>
-            We believe in caring for you.
-            <i />
-            Your skin doesn't need to become something else to be beautiful.
-            <br />
-            It needs care.
-            <i />
-            The small ritual after a shower.
-            <br />
-            The scoop of butter between your palms.
-            <br />
-            The first lather of soap.
-            <br />
-            The scent that stays on your skin.
-            <br />
-            The five quiet minutes that belong entirely to you.
-            <i />
-            Ahumma is about making space for those moments.
-            <br />
-            Not correction.
-            <br />
-            Not perfection.
-            <br />
-            Just care.
-            <i />
-            That is Ahumma.
+            Ahumma is a Nigerian-born premium body-care brand for Black and
+            brown skin, created from a simple belief: you are enough, and you
+            are beautiful by design.
+          </p>
+          <p>
+            Care should feel like a ritual, not a correction. Beautiful,
+            thoughtful body care for skin that deserves to be nourished,
+            softened and celebrated.
           </p>
         </div>
+      </section>
+
+      <section className="philosophy-image-grid" aria-label="Ahumma rituals">
+        <Link href={productHref("ara")} className="philosophy-image-grid__item">
+          <Image
+            src="/images/ara-ritual.jpg"
+            alt="Ahumma Ara body-care ritual"
+            fill
+            sizes="(max-width: 780px) 100vw, 33vw"
+          />
+          <span className="philosophy-image-grid__label">
+            For Black skin. <ArrowRight size={17} />
+          </span>
+        </Link>
+        <Link
+          href={productHref("dream whip", "dream")}
+          className="philosophy-image-grid__item"
+        >
+          <Image
+            src="/images/dream-ritual.jpg"
+            alt="Ahumma Dream Whip body-care ritual"
+            fill
+            sizes="(max-width: 780px) 100vw, 33vw"
+          />
+          <span className="philosophy-image-grid__label">
+            For brown skin. <ArrowRight size={17} />
+          </span>
+        </Link>
+        <Link
+          href={productHref("sika", "sike")}
+          className="philosophy-image-grid__item"
+        >
+          <Image
+            src="/images/sika-ritual.jpg"
+            alt="Ahumma Sika body-care ritual"
+            fill
+            sizes="(max-width: 780px) 100vw, 33vw"
+          />
+          <span className="philosophy-image-grid__label">
+            For every shade that knows its beauty. <ArrowRight size={17} />
+          </span>
+        </Link>
       </section>
 
       <section className="about-visual-break" aria-label="Ahumma ritual">
