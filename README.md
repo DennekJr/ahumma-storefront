@@ -75,5 +75,10 @@ The delivery-area field appears only when the workspace returns at least one del
 - `AHUMMA-BRAND-VOICE-GUIDE.md` records the approved voice, copy mechanics, CTA system, and claim guardrails.
 - `AHUMMA-DISCOVERY-AUDIT.md` records the shop, concern, filter, and collection-discovery findings.
 - `AHUMMA-PRODUCT-PAGE-AUDIT.md` records the product-page hierarchy, structured ingredient stories, and ritual-pairing work.
+- `AHUMMA-STORY-CONTENT-AUDIT.md` records the About, ingredient, media, FAQ, and editorial-content audit.
+- `AHUMMA-UTILITY-AUDIT.md` records the navigation, search, service, and commerce-utility audit.
+- `AHUMMA-RETENTION-AUDIT.md` records the newsletter, popup, retention, gifting, refill, and community audit.
+- `AHUMMA-DESIGN-SYSTEM-AUDIT.md` records the design tokens, media, motion, performance, and anti-copy guidance.
+- `AHUMMA-INSPIRATION-ROADMAP.md` consolidates the inspiration workstream, dependencies, priorities, and regression checklist.
 
 The inspiration library explicitly keeps the Ahumma positioning centered on Nigerian-rooted premium body care for Black and brown skin. It also distinguishes the footer newsletter from the separate delayed promotional popup.

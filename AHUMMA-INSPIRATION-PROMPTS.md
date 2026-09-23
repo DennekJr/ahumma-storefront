@@ -388,12 +388,12 @@ Return severity-ranked findings with reproduction steps and exact file paths. Fi
 - [x] 3. Brand voice and copy system — see `AHUMMA-BRAND-VOICE-GUIDE.md`.
 - [x] 4. Product discovery, shop, and collection architecture — see `AHUMMA-DISCOVERY-AUDIT.md`.
 - [x] 5. Product detail pages and sensory merchandising — see `AHUMMA-PRODUCT-PAGE-AUDIT.md`.
-- [ ] 6. Story, About, ingredients, and editorial content.
-- [ ] 7. Navigation, search, service, and commerce utilities.
-- [ ] 8. Newsletter, retention, gifting, refill, and community.
-- [ ] 9. Design system, media, motion, and interaction language.
-- [ ] 10. Cross-site feature prioritization and implementation roadmap.
-- [ ] 11. Implementation pass for each approved finding.
+- [x] 6. Story, About, ingredients, and editorial content — see `AHUMMA-STORY-CONTENT-AUDIT.md`.
+- [x] 7. Navigation, search, service, and commerce utilities — see `AHUMMA-UTILITY-AUDIT.md`.
+- [x] 8. Newsletter, retention, gifting, refill, and community — see `AHUMMA-RETENTION-AUDIT.md`.
+- [x] 9. Design system, media, motion, and interaction language — see `AHUMMA-DESIGN-SYSTEM-AUDIT.md`.
+- [x] 10. Cross-site feature prioritization and implementation roadmap — see `AHUMMA-INSPIRATION-ROADMAP.md`.
+- [x] 11. Implementation pass for each approved finding — concern-to-consultation, ingredient fallbacks, ritual pairings, and popup race fix completed.
 - [ ] 12. Inspiration regression and anti-copy QA.
 
 Recommended first pass: run Prompts 1, 3, 4, 5, and 10 before changing code. Prompt 1 is complete in `AHUMMA-REFERENCE-BENCHMARK.md`; continue with Prompt 3 unless you want to resolve the Aesop browser-access limitation first. Then use Prompt 11 one approved finding at a time, followed by Prompt 12.

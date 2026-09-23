@@ -11,6 +11,7 @@ export function FooterSignupPopup({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [suppressed, setSuppressed] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const suppressionKey = "ahumma-footer-signup-suppressed";
@@ -18,11 +19,12 @@ export function FooterSignupPopup({
 
   useEffect(() => {
     setSuppressed(window.localStorage.getItem(suppressionKey) === "true");
+    setStorageReady(true);
   }, []);
 
   useEffect(() => {
     const footer = footerRef.current;
-    if (!footer) return;
+    if (!footer || !storageReady) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -40,7 +42,7 @@ export function FooterSignupPopup({
 
     observer.observe(footer);
     return () => observer.disconnect();
-  }, [footerRef, suppressed]);
+  }, [footerRef, storageReady, suppressed]);
 
   useEffect(() => {
     if (!isOpen) {
