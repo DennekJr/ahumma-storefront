@@ -191,39 +191,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="global-section">
-        <div className="global-copy">
-          <h2>
-            Born in Nigeria.
-            <br />
-            Made for the world.
-          </h2>
-        </div>
-        <div className="global-body">
-          <p>
-            Ahumma began in Nigeria, but it was never meant to belong to Nigeria
-            alone. We are building a new generation of African beauty brands —
-            brands that carry our heritage confidently while speaking to a
-            global customer.
-            <i />
-            From Lagos to New York, London, Paris and beyond, Ahumma is for
-            anyone who sees beauty in African heritage, beautiful ingredients
-            and the simple pleasure of caring for their skin.
-            <i />
-            There is beauty in where we come from. There is beauty in who we
-            are. And there is beauty in becoming more of ourselves.
-          </p>
-          <div className="global-section__actions">
-            <Link className="global-section__cta" href="/about">
-              About us
-            </Link>
-            <Link className="global-section__cta" href="/consultation">
-              Find your ritual
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <section
         className="testimonial-section"
         aria-labelledby="testimonial-title"
