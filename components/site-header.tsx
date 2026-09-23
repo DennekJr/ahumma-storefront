@@ -122,13 +122,11 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
             backgroundColor: "transparent",
             color: ink,
             borderColor: line,
-            backdropFilter: "blur(0.25rem)",
           },
           {
             backgroundColor: "rgba(250, 248, 243, 0.94)",
             color: ink,
             borderColor: line,
-            backdropFilter: "blur(0.25rem)",
             ease: "none",
           },
           0,

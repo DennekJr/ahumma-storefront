@@ -184,8 +184,8 @@ export default async function HomePage() {
             design.
           </p>
           <div className="hero-actions">
-            <Link href="/shop" className="hero-link">
-              Start your ritual
+            <Link href="/about" className="hero-link">
+              Read our story
             </Link>
           </div>
         </div>

@@ -361,7 +361,6 @@ img {
   padding: 0 2.4rem;
   border-bottom: 1px solid var(--line);
   background: rgba(250, 248, 243, 0.92);
-  backdrop-filter: blur(0.5rem);
 }
 
 .home-hero .site-header {
@@ -372,7 +371,6 @@ img {
   border-color: var(--line);
   background: transparent;
   color: var(--ink);
-  backdrop-filter: blur(0.5rem);
   transition: none;
 }
 
@@ -5599,8 +5597,6 @@ img {
 /* The header sits on the sky rather than boxing it out. */
 .shop-page--sky .site-header {
   background: rgba(250, 248, 243, 0.72);
-  -webkit-backdrop-filter: blur(0.625rem);
-  backdrop-filter: blur(0.625rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
