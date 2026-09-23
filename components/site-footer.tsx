@@ -23,16 +23,8 @@ export function SiteFooter() {
             First access to new rituals, limited releases and stories from
             Ahumma.
           </p>
-          <CircleSignup buttonLabel="Join us" />
+          <CircleSignup buttonLabel="Join us" showArrow={false} />
         </section>
-
-        <div
-          className="footer-wordmark"
-          aria-label="At the edge of everything beautiful is you."
-        >
-          <span>At the edge of everything</span>
-          <span>beautiful is you.</span>
-        </div>
 
         <div className="footer-details">
           <nav className="footer-utility-links" aria-label="Footer links">
