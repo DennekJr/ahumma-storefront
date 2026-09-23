@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -103,6 +104,16 @@ export default function AboutPage() {
             That is Ahumma.
           </p>
         </div>
+      </section>
+
+      <section className="about-visual-break" aria-label="Ahumma ritual">
+        <Image
+          src="/images/hero-woman.png"
+          alt="A person taking a quiet moment for their ritual"
+          width={1411}
+          height={1800}
+        />
+        <p>African heritage. Modern ritual. Beautiful skin.</p>
       </section>
 
       <section className="story-section about-difference-section" id="heritage">

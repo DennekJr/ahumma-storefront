@@ -170,6 +170,22 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section
+        className="home-ritual-break"
+        aria-labelledby="ritual-break-title"
+      >
+        <Image
+          src="/images/love-your-skin.jpg"
+          alt="Ahumma body-care ritual on skin"
+          fill
+          sizes="(max-width: 780px) 100vw, 50vw"
+        />
+        <div className="home-ritual-break__copy">
+          <h2 id="ritual-break-title">Care that feels like yours.</h2>
+          <Link href="/consultation">Find your ritual</Link>
+        </div>
+      </section>
+
       <section className="global-section">
         <div className="global-copy">
           <h2>

@@ -249,8 +249,8 @@ Completed prompts are marked so the next workstream is clear:
 - [x] 2. Homepage hero direction.
 - [x] 3. Homepage narrative and copy reduction.
 - [x] 4. Visual storytelling and media audit.
-- [ ] 5. Color system and CTA consistency — next.
-- [ ] 6. Navigation, sidebar, and fixed-header review.
+- [x] 5. Color system and CTA consistency.
+- [ ] 6. Navigation, sidebar, and fixed-header review — next.
 - [x] 7. Newsletter signup and promotional surfaces.
 - [x] 8. Skin consultation form.
 - [ ] 9. About page refinement.

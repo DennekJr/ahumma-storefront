@@ -694,7 +694,7 @@ img {
   position: relative;
   min-height: min(56.25rem, calc(100vh - 5.2rem));
   overflow: hidden;
-  background: #aab8b5;
+  background: var(--sand);
   color: white;
 }
 
@@ -1149,10 +1149,10 @@ img {
   max-width: min(31rem, calc(100vw - 2rem));
   padding: 1rem 1.4rem;
   border-radius: 1rem;
-  background: rgba(232, 231, 231, 0.7);
+  background: color-mix(in srgb, var(--porcelain) 78%, transparent);
   -webkit-backdrop-filter: blur(4rem);
   backdrop-filter: blur(4rem);
-  color: #171717;
+  color: var(--ink);
   font-family: var(--mono);
   font-size: 1.1rem;
   line-height: 1.35;
@@ -1712,7 +1712,7 @@ img {
 
 /* Footer */
 .site-footer {
-  --footer-ink: #071a43;
+  --footer-ink: var(--deep-forest);
   position: relative;
   min-height: 34.125rem;
   padding-top: 6.5rem;
@@ -7675,6 +7675,76 @@ img {
   }
 }
 
+.home-ritual-break {
+  position: relative;
+  min-height: 38rem;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.home-ritual-break img {
+  object-fit: cover;
+}
+
+.home-ritual-break::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(17, 27, 21, 0.68), transparent 68%);
+  content: "";
+}
+
+.home-ritual-break__copy {
+  position: absolute;
+  z-index: 1;
+  bottom: 3rem;
+  left: var(--gutter);
+  max-width: 26rem;
+  color: var(--porcelain);
+}
+
+.home-ritual-break__copy h2 {
+  margin: 0 0 1.25rem;
+  font-family: var(--serif);
+  font-size: clamp(2.75rem, 5vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.home-ritual-break__copy a {
+  display: inline-flex;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  background: var(--porcelain);
+  color: var(--ink);
+  font-family: var(--serif);
+}
+
+.about-visual-break {
+  display: grid;
+  min-height: 28rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.about-visual-break img {
+  width: 100%;
+  height: 34rem;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.about-visual-break p {
+  max-width: 22rem;
+  margin: 0 auto;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
 .consultation-hero,
 .consultation-section {
   padding: 6rem var(--gutter);
@@ -7716,6 +7786,13 @@ img {
   max-width: 18rem;
   margin-top: 1.5rem;
   line-height: 1.45;
+}
+
+.consultation-section__image {
+  width: min(100%, 18rem);
+  height: 24rem;
+  margin-top: 2rem;
+  object-fit: cover;
 }
 
 .consultation-form {
@@ -7851,6 +7928,34 @@ img {
   .consultation-section {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .home-ritual-break {
+    min-height: 30rem;
+  }
+
+  .home-ritual-break__copy {
+    right: var(--gutter);
+    bottom: 2rem;
+    left: var(--gutter);
+  }
+
+  .about-visual-break {
+    grid-template-columns: 1fr;
+  }
+
+  .about-visual-break img {
+    height: 24rem;
+  }
+
+  .about-visual-break p {
+    padding: 3rem var(--gutter);
+  }
+
+  .consultation-section__image {
+    width: 100%;
+    height: 20rem;
+    margin-top: 1rem;
   }
 
   .consultation-form__grid {
