@@ -394,6 +394,6 @@ Return severity-ranked findings with reproduction steps and exact file paths. Fi
 - [x] 9. Design system, media, motion, and interaction language — see `AHUMMA-DESIGN-SYSTEM-AUDIT.md`.
 - [x] 10. Cross-site feature prioritization and implementation roadmap — see `AHUMMA-INSPIRATION-ROADMAP.md`.
 - [x] 11. Implementation pass for each approved finding — concern-to-consultation, ingredient fallbacks, ritual pairings, and popup race fix completed.
-- [ ] 12. Inspiration regression and anti-copy QA.
+- [ ] 12. Inspiration regression and anti-copy QA — static pass recorded in `AHUMMA-REGRESSION-QA.md`; browser visual pass remains.
 
 Recommended first pass: run Prompts 1, 3, 4, 5, and 10 before changing code. Prompt 1 is complete in `AHUMMA-REFERENCE-BENCHMARK.md`; continue with Prompt 3 unless you want to resolve the Aesop browser-access limitation first. Then use Prompt 11 one approved finding at a time, followed by Prompt 12.

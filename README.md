@@ -80,5 +80,6 @@ The delivery-area field appears only when the workspace returns at least one del
 - `AHUMMA-RETENTION-AUDIT.md` records the newsletter, popup, retention, gifting, refill, and community audit.
 - `AHUMMA-DESIGN-SYSTEM-AUDIT.md` records the design tokens, media, motion, performance, and anti-copy guidance.
 - `AHUMMA-INSPIRATION-ROADMAP.md` consolidates the inspiration workstream, dependencies, priorities, and regression checklist.
+- `AHUMMA-REGRESSION-QA.md` records the completed static QA pass and remaining browser-only checks.
 
 The inspiration library explicitly keeps the Ahumma positioning centered on Nigerian-rooted premium body care for Black and brown skin. It also distinguishes the footer newsletter from the separate delayed promotional popup.

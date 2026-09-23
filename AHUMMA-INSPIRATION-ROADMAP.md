@@ -90,4 +90,5 @@
 - [x] Priority 2 and 3 opportunities separated.
 - [x] Unsupported features deferred.
 - [ ] Broken Help links replaced with verified destinations.
+- [x] Static regression QA completed in `AHUMMA-REGRESSION-QA.md`.
 - [ ] Browser-based visual QA completed.
