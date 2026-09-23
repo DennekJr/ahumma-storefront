@@ -383,7 +383,7 @@ Return severity-ranked findings with reproduction steps and exact file paths. Fi
 
 ## Suggested usage order
 
-- [ ] 1. Reference-site benchmark and transferable patterns.
+- [x] 1. Reference-site benchmark and transferable patterns — see `AHUMMA-REFERENCE-BENCHMARK.md`.
 - [ ] 2. Homepage structure and art direction.
 - [ ] 3. Brand voice and copy system.
 - [ ] 4. Product discovery, shop, and collection architecture.
@@ -396,4 +396,4 @@ Return severity-ranked findings with reproduction steps and exact file paths. Fi
 - [ ] 11. Implementation pass for each approved finding.
 - [ ] 12. Inspiration regression and anti-copy QA.
 
-Recommended first pass: run Prompts 1, 3, 4, 5, and 10 before changing code. Then use Prompt 11 one approved finding at a time, followed by Prompt 12.
+Recommended first pass: run Prompts 1, 3, 4, 5, and 10 before changing code. Prompt 1 is complete in `AHUMMA-REFERENCE-BENCHMARK.md`; continue with Prompt 3 unless you want to resolve the Aesop browser-access limitation first. Then use Prompt 11 one approved finding at a time, followed by Prompt 12.
