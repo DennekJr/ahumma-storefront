@@ -18,8 +18,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${base}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/shop`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${base}/about`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/faq`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/partner-network`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/consultation`, changeFrequency: "monthly", priority: 0.8 },
+    {
+      url: `${base}/partner-network`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
 
   // A catalogue read failure must not take the whole sitemap down; the static
@@ -33,9 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${base}/products/${product.slug}`,
-    ...(product.updatedAt
-      ? { lastModified: new Date(product.updatedAt) }
-      : {}),
+    ...(product.updatedAt ? { lastModified: new Date(product.updatedAt) } : {}),
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));

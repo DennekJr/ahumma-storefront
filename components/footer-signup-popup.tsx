@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { CircleSignup } from "@/components/circle-signup";
 
 export function FooterSignupPopup({
@@ -11,6 +11,8 @@ export function FooterSignupPopup({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [suppressed, setSuppressed] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const suppressionKey = "ahumma-footer-signup-suppressed";
   const sessionKey = "ahumma-footer-signup-shown";
 
@@ -41,11 +43,38 @@ export function FooterSignupPopup({
   }, [footerRef, suppressed]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      previousFocusRef.current?.focus();
+      previousFocusRef.current = null;
+      return;
+    }
+
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setIsOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const dialog = closeRef.current?.closest<HTMLElement>("[role=dialog]");
+      if (!dialog) return;
+
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, input, [href], select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
       }
     }
 
@@ -91,6 +120,7 @@ export function FooterSignupPopup({
         </div>
         <div className="footer-signup-popup__content">
           <button
+            ref={closeRef}
             type="button"
             className="footer-signup-popup__close"
             aria-label="Close signup offer"
@@ -107,10 +137,10 @@ export function FooterSignupPopup({
             width={190}
             height={53}
           />
-          <h2 id="footer-signup-popup-title">Come a little closer.</h2>
+          <h2 id="footer-signup-popup-title">Join the Ahumma Circle.</h2>
           <p className="footer-signup-popup__lede">
-            Join the Ahumma Circle for first access to new rituals, limited
-            releases, stories and everything we&apos;re creating next.
+            First access to new rituals, limited releases and stories from
+            Ahumma.
           </p>
           <CircleSignup
             className="footer-signup-popup__form"

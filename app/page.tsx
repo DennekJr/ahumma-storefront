@@ -51,10 +51,7 @@ export default async function HomePage() {
           </p>
           <div className="hero-actions">
             <Link href="/shop" className="hero-link">
-              Shop body care
-            </Link>
-            <Link href="/about" className="hero-secondary-link">
-              Discover Ahumma
+              Explore the collection
             </Link>
           </div>
         </div>
@@ -101,10 +98,9 @@ export default async function HomePage() {
             </span>
             <i />
             <span>
-              Ahumma was created with Black and brown skin at the heart of the
-              brand. From the richness of deep melanin to every shade in
-              between, our products celebrate the skin you&apos;re in — not ask
-              you to become something else.
+              Care should feel like a ritual, not a correction. Beautiful,
+              thoughtful body care for skin that deserves to be nourished,
+              softened and celebrated.
             </span>
           </p>
         </div>
@@ -195,9 +191,14 @@ export default async function HomePage() {
             There is beauty in where we come from. There is beauty in who we
             are. And there is beauty in becoming more of ourselves.
           </p>
-          <Link className="global-section__cta" href="/about">
-            About us
-          </Link>
+          <div className="global-section__actions">
+            <Link className="global-section__cta" href="/about">
+              About us
+            </Link>
+            <Link className="global-section__cta" href="/consultation">
+              Find your ritual
+            </Link>
+          </div>
         </div>
       </section>
 

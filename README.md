@@ -21,6 +21,7 @@ FRONTDESK_PUBLISHABLE_KEY=fd_pk_test_...
 FRONTDESK_SECRET_KEY=fd_sk_test_...
 FRONTDESK_PREVIEW_ONLY=false
 NEXT_PUBLIC_SITE_URL=http://localhost:6543
+FRONTDESK_CONSULTATION_FORM_URL=https://api.frontdesk.africa/v1/storefront/by-handle/ahumma/forms/ahumma-skin-consultation/submit
 ```
 
 In Frontdesk → Developers:
@@ -30,7 +31,7 @@ In Frontdesk → Developers:
 3. Publish Ahumma's products and delivery zones.
 4. Use test keys first, then replace them with live keys for production.
 
-The secret key is read only by server-side route handlers. Never expose it with a `NEXT_PUBLIC_` prefix.
+The secret key and consultation destination are read only by server-side route handlers. Never expose either with a `NEXT_PUBLIC_` prefix. The consultation page posts the structured answers to `FRONTDESK_CONSULTATION_FORM_URL` and shows a clear configuration error until that endpoint is available.
 
 ## Frontdesk webhook
 

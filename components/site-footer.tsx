@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import { CircleSignup } from "@/components/circle-signup";
 import { FooterSignupPopup } from "@/components/footer-signup-popup";
 import { ScrollLink } from "@/components/scroll-link";
 
@@ -23,6 +24,17 @@ export function SiteFooter() {
         </div>
 
         <div className="footer-details">
+          <section
+            className="footer-newsletter"
+            aria-labelledby="footer-newsletter-title"
+          >
+            <h2 id="footer-newsletter-title">Join the Ahumma Circle.</h2>
+            <p>
+              First access to new rituals, limited releases and stories from
+              Ahumma.
+            </p>
+            <CircleSignup buttonLabel="Join us" />
+          </section>
           <nav className="footer-utility-links" aria-label="Footer links">
             <div>
               <span>Shop</span>
@@ -37,13 +49,13 @@ export function SiteFooter() {
             </div>
             <div>
               <span>Discover</span>
-              <ScrollLink href="/#story">Our Story</ScrollLink>
-              <ScrollLink href="/#philosophy">Our Philosophy</ScrollLink>
-              <ScrollLink href="/#heritage">African Heritage</ScrollLink>
-              <ScrollLink href="/#ingredients">Ingredients</ScrollLink>
-              <ScrollLink href="/#ritual">Rituals</ScrollLink>
-              <ScrollLink href="/#journal">Journal</ScrollLink>
+              <ScrollLink href="/about#story">Our Story</ScrollLink>
+              <ScrollLink href="/about#philosophy">Our Philosophy</ScrollLink>
+              <ScrollLink href="/about#heritage">African Heritage</ScrollLink>
+              <ScrollLink href="/about#ingredients">Ingredients</ScrollLink>
+              <Link href="/shop">Rituals</Link>
               <Link href="/faq">FAQs</Link>
+              <Link href="/consultation">Skin consultation</Link>
             </div>
             <div>
               <span>Help</span>

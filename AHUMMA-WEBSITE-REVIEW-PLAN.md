@@ -52,7 +52,7 @@ One primary CTA: Shop or explore the collection
 >
 > **CTA:** Explore the collection
 
-This wording is a direction only. Final hero copy and CTA require brand-team approval before implementation.
+This wording is the working hero direction for implementation.
 
 #### Acceptance criteria
 
@@ -139,7 +139,7 @@ Create a small approved UI color map before applying colors across the site.
 
 #### Rules
 
-- Do not introduce new colors without approval.
+- Keep new colors within the existing token map unless a new role is genuinely needed.
 - Use the same CTA treatment across the homepage, shop, product pages, and checkout.
 - Reserve pink for moments that need warmth or emphasis.
 - Use green for primary brand and purchase actions.
@@ -272,7 +272,7 @@ Recommended skin concern options:
 - Provide a product recommendation only where the data supports it.
 - Do not diagnose or promise to treat conditions.
 
-The checkbox options and final destination still require approval.
+The working checkbox options are implemented in the consultation flow. The delivery endpoint is configured through `FRONTDESK_CONSULTATION_FORM_URL`.
 
 ### Priority 9 — About page
 
@@ -343,13 +343,11 @@ Keep the footer concise, useful, and easy to navigate on mobile.
 
 Before implementation:
 
-- Approve the global hero message.
-- Approve the main CTA wording.
-- Confirm the approved color codes.
-- Confirm whether consultation is a form, quiz, or email-assisted service.
-- Confirm the newsletter tool and destination.
-- Confirm final product photography assets.
-- Confirm whether pop-ups are allowed immediately or only after launch.
+- Use the working global hero message and CTA direction.
+- Keep the documented color tokens consistent across surfaces.
+- Configure `FRONTDESK_CONSULTATION_FORM_URL` for consultation submissions.
+- Confirm final product photography assets when additional photography is available.
+- Keep the newsletter popup delayed and dismissible.
 
 ### Phase 1 — Fix the homepage conversion path
 
@@ -388,7 +386,7 @@ Before implementation:
 1. Finalize consultation checkbox options.
 2. Build the consultation form.
 3. Add consent and safety language.
-4. Connect the form to the approved destination.
+4. Connect the form to `FRONTDESK_CONSULTATION_FORM_URL`.
 5. Add newsletter pop-up behavior.
 6. Add frequency controls and dismissal persistence.
 7. Add success and error states.

@@ -15,6 +15,9 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const menuCloseRef = useRef<HTMLButtonElement>(null);
+  const menuWasOpenRef = useRef(false);
 
   useEffect(() => {
     document.body.classList.toggle("menu-is-open", menuOpen);
@@ -22,10 +25,40 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
   }, [menuOpen]);
 
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!menuOpen) {
+      if (menuWasOpenRef.current) menuTriggerRef.current?.focus();
+      menuWasOpenRef.current = false;
+      return;
+    }
+
+    menuWasOpenRef.current = true;
+    menuCloseRef.current?.focus();
 
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const drawer =
+        menuCloseRef.current?.closest<HTMLElement>("[role=dialog]");
+      if (!drawer) return;
+
+      const focusable = drawer.querySelectorAll<HTMLElement>(
+        'button, a, [tabindex]:not([tabindex="-1"])',
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     };
 
     document.addEventListener("keydown", closeOnEscape);
@@ -120,6 +153,7 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
         className={`site-header ${light ? "site-header--light" : ""}`}
       >
         <button
+          ref={menuTriggerRef}
           type="button"
           className="header-menu"
           onClick={() => setMenuOpen((open) => !open)}
@@ -190,6 +224,7 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
       >
         <div className="menu-drawer__header">
           <button
+            ref={menuCloseRef}
             type="button"
             className="menu-drawer__close"
             onClick={() => setMenuOpen(false)}

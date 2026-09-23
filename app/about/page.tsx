@@ -185,9 +185,14 @@ export default function AboutPage() {
             </article>
           ))}
         </div>
-        <Link href="/shop" className="underlined-link">
-          Explore our ingredients <ArrowRight size={16} />
-        </Link>
+        <div className="about-cta-row">
+          <Link href="/shop" className="underlined-link">
+            Explore the collection <ArrowRight size={16} />
+          </Link>
+          <Link href="/consultation" className="underlined-link">
+            Find your ritual <ArrowRight size={16} />
+          </Link>
+        </div>
       </section>
 
       <SiteFooter />

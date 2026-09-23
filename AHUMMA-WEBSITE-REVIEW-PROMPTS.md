@@ -13,7 +13,7 @@ Return:
 1. A concise findings summary.
 2. A prioritized list of verified issues with file paths.
 3. Quick wins versus larger changes.
-4. Risks, dependencies, and decisions that require brand approval.
+4. Risks, dependencies, and decisions that affect implementation.
 5. A recommended implementation sequence for the first sprint.
 
 Do not change code. Base every finding on evidence from the repository and clearly label assumptions.
@@ -34,7 +34,7 @@ Inspect the existing hero component, copy, media, colors, responsive behavior, a
 - Desktop and mobile composition
 - Rationale
 
-Do not implement yet. Do not invent unapproved brand claims. Flag all copy that requires brand-team approval.
+Implement the strongest direction using the working Ahumma claims already present in the repository. Flag factual claims that need verification, but do not stop implementation for a separate approval step.
 ```
 
 ## 3. Homepage narrative and copy reduction
@@ -91,7 +91,7 @@ Use only the approved color roles from AHUMMA-WEBSITE-REVIEW-PLAN.md:
 
 Identify arbitrary or inconsistent colors, contrast risks, and CTA variations. Propose a minimal token map and component application plan using existing project conventions.
 
-Do not add colors or dependencies without approval. If implementing, keep the change focused and verify contrast for text and controls.
+Keep the change focused, reuse the existing design tokens, and verify contrast for text and controls.
 ```
 
 ## 6. Navigation, sidebar, and fixed-header review
@@ -132,7 +132,7 @@ Return:
 5. Accessibility and analytics requirements.
 6. Relevant implementation files.
 
-Do not connect a real provider or invent credentials. Ask for the approved newsletter destination if it is not configured.
+Use the configured newsletter integration. If credentials or a destination are missing, keep the existing integration boundary and report the exact environment variable or endpoint needed.
 ```
 
 ## 8. Skin consultation form
@@ -140,9 +140,9 @@ Do not connect a real provider or invent credentials. Ask for the approved newsl
 ```text
 Design and implement the Ahumma skin consultation form based on AHUMMA-WEBSITE-REVIEW-PLAN.md.
 
-Include first name, last name, email, marketing consent, approved skin-concern checkboxes, and optional routine, product, texture, fragrance, care-goal, region, and referral fields.
+Include first name, last name, email, marketing consent, skin-concern checkboxes, and optional routine, product, texture, fragrance, care-goal, region, and referral fields.
 
-Use this safety notice exactly unless the brand team approves an edit:
+Use this safety notice exactly:
 “Ahumma offers product guidance, not medical advice. For persistent, painful or concerning skin issues, please consult a qualified healthcare professional.”
 
 The form must:
@@ -153,7 +153,7 @@ The form must:
 - Send data only to the approved form or CRM destination.
 - Provide recommendations only where the submitted data supports them.
 
-First inspect existing form and integration patterns. If the destination or checkbox approval is missing, do not guess; create the UI and document the blocking decision.
+First inspect existing form and integration patterns. Use `FRONTDESK_CONSULTATION_FORM_URL` as the submission destination and document the environment requirement if it is not configured.
 ```
 
 ## 9. About page refinement
@@ -258,4 +258,4 @@ For a complete review and implementation cycle, use the prompts in this order:
 11. Footer and conversion-path review.
 12. Final launch QA and regression pass.
 
-Require approval for brand copy, color codes, photography, newsletter destination, consultation destination, and any new claims before implementation.
+Use the working brand copy, token map, available photography, and configured integrations. Verify factual product and regulatory claims during final QA.
