@@ -248,8 +248,8 @@ Completed prompts are marked so the next workstream is clear:
 - [x] 1. Full-site review and implementation roadmap.
 - [x] 2. Homepage hero direction.
 - [x] 3. Homepage narrative and copy reduction.
-- [ ] 4. Visual storytelling and media audit — next.
-- [ ] 5. Color system and CTA consistency.
+- [x] 4. Visual storytelling and media audit.
+- [ ] 5. Color system and CTA consistency — next.
 - [ ] 6. Navigation, sidebar, and fixed-header review.
 - [x] 7. Newsletter signup and promotional surfaces.
 - [x] 8. Skin consultation form.
