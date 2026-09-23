@@ -127,6 +127,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
           ) : null}
           <ProductPurchase product={product} />
+          {info?.highlights?.length ? (
+            <ul className="product-summary__highlights">
+              {info.highlights.slice(0, 3).map((highlight) => (
+                <li key={highlight}>
+                  <Check size={15} /> {highlight}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </aside>
       </section>
 
@@ -142,15 +151,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
         <div className="product-story__body">
           <p>{info?.longDescription ?? product.description}</p>
-          {info?.highlights?.length ? (
-            <div className="highlight-list">
-              {info.highlights.map((highlight) => (
-                <span key={highlight}>
-                  <Check size={15} /> {highlight}
-                </span>
-              ))}
-            </div>
-          ) : null}
+
           {descriptionBlocks.length ? (
             <ProductDescriptionBlocks blocks={descriptionBlocks} />
           ) : null}

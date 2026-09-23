@@ -2121,6 +2121,29 @@ img {
   padding-top: 1.6875rem;
 }
 
+.product-summary__highlights {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.product-summary__highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.product-summary__highlights svg {
+  flex: none;
+  margin-top: 0.05rem;
+  color: var(--forest);
+}
+
 .purchase-price {
   display: flex;
   align-items: center;
