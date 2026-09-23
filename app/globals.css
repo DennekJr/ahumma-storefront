@@ -2491,22 +2491,35 @@ img {
 
 .product-details-grid dl {
   margin: 0;
+  border-top: 1px solid var(--line);
 }
+
 .product-details-grid dl > div {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  padding: 0.9375rem 0;
+  grid-template-columns: minmax(5rem, 0.75fr) minmax(0, 1.25fr);
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.0625rem 0;
   border-bottom: 1px solid var(--line);
-  font-size: var(--type-sans-micro);
+  font-size: var(--type-sans-small);
+  line-height: var(--leading-compact);
 }
+
 .product-details-grid dt {
-  color: rgba(24, 32, 25, 0.55);
-  text-transform: var(--case-none);
+  color: rgba(24, 32, 25, 0.58);
+  font-size: var(--type-sans-small);
+  font-weight: 400;
   letter-spacing: var(--tracking-label);
+  line-height: var(--leading-compact);
+  text-transform: var(--case-none);
 }
+
 .product-details-grid dd {
   margin: 0;
+  color: var(--deep-forest);
+  font-family: var(--serif);
+  font-size: var(--type-serif-label);
+  letter-spacing: var(--tracking-heading);
   text-align: right;
 }
 
