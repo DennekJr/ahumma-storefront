@@ -13,7 +13,6 @@ export function SiteFooter() {
   return (
     <>
       <FooterSignupPopup footerRef={footerRef} />
-
       <footer ref={footerRef} className="site-footer">
         <div
           className="footer-wordmark"

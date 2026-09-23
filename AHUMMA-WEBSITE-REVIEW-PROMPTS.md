@@ -113,16 +113,16 @@ Verify the following:
 First report the current behavior and relevant files. Then propose the smallest implementation plan. If implementing, test desktop, tablet, mobile, keyboard, focus, and dismissal behavior.
 ```
 
-## 7. Newsletter pop-up and promotional surfaces
+## 7. Newsletter signup and promotional surfaces
 
 ```text
-Design and implement a restrained newsletter and promotional-surface strategy for Ahumma.
+Design and implement the Ahumma newsletter as an inline footer conversion surface plus a separate delayed promotional modal.
 
 The newsletter message should use this direction:
 “Join the Ahumma Circle. First access to new rituals, limited releases and stories from Ahumma.”
 CTA: “Join us”
 
-The pop-up must not appear immediately on page load. Evaluate exit intent, engagement, scroll threshold, and second-page-view timing. Persist dismissal and submission state, provide an obvious close action, respect reduced motion, and remain usable on small mobile screens.
+The inline newsletter should remain visible in the footer and should be the primary signup path. The separate promotional modal must not show immediately on page load; evaluate engagement or second-page-view timing, persist dismissal and submission state, provide an obvious close action, respect reduced motion, and keep it usable on small mobile screens.
 
 Return:
 1. Trigger recommendation and rationale.
@@ -251,7 +251,7 @@ For a complete review and implementation cycle, use the prompts in this order:
 4. Visual storytelling and media audit.
 5. Color system and CTA consistency.
 6. Navigation, sidebar, and fixed-header review.
-7. Newsletter pop-up and promotional surfaces.
+7. Newsletter signup and promotional surfaces.
 8. Skin consultation form.
 9. About page refinement.
 10. Product-page conversion review.

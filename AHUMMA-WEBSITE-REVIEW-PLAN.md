@@ -186,9 +186,9 @@ The header works consistently on the homepage, product pages, shop, FAQ, About, 
 
 ### Priority 7 — Newsletter and promotional surfaces
 
-#### Newsletter pop-up
+#### Newsletter signup
 
-Consider a newsletter pop-up with one of these triggers:
+Use the inline footer newsletter signup as the primary newsletter conversion surface and keep the delayed promotional modal as a separate capture moment.
 
 - Exit intent on desktop.
 - Display after meaningful engagement.
@@ -215,12 +215,10 @@ Use promotional surfaces for:
 
 #### Rules
 
-- Do not show the newsletter pop-up immediately on page load.
-- Do not repeatedly show it after dismissal.
-- Store dismissal and submission state.
-- Make the close button obvious.
-- Respect reduced motion and mobile viewport constraints.
+- Keep the inline newsletter form visible in the footer.
+- Store submission state where the provider supports it.
 - Keep the message short.
+- Delay the promotional modal, make dismissal obvious, persist dismissal, and respect reduced motion.
 
 ### Priority 8 — Skin consultation form
 
@@ -387,8 +385,8 @@ Before implementation:
 2. Build the consultation form.
 3. Add consent and safety language.
 4. Connect the form to `FRONTDESK_CONSULTATION_FORM_URL`.
-5. Add newsletter pop-up behavior.
-6. Add frequency controls and dismissal persistence.
+5. Keep the inline newsletter signup prominent.
+6. Maintain frequency controls and dismissal persistence for the separate promotional modal.
 7. Add success and error states.
 8. Track submissions and conversions.
 
