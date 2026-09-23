@@ -35,8 +35,8 @@
   --line: rgba(24, 32, 25, 0.2);
   --line-light: rgba(255, 255, 255, 0.25);
   --header-height: 4.875rem;
-  --header-top: 0px;
-  --header-top: 0px;
+  --header-top: 3rem;
+  --header-top: 3rem;
   /* Page frame. The gutter alone defines it: under proportional scaling the
      composition never balloons, so a content cap has nothing to protect
      against — any rem value would simply bind at a fixed ratio and hold the
@@ -6423,6 +6423,7 @@ img {
   }
   :root {
     --header-height: 4.1875rem;
+    --header-top: 2.5rem;
   }
   .site-header {
     grid-template-columns: 1fr 7.25rem 1fr;

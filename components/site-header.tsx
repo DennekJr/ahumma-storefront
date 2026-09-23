@@ -85,15 +85,6 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
       const ink = rootStyles.getPropertyValue("--ink").trim();
       const line = rootStyles.getPropertyValue("--line").trim();
 
-      const initialHeaderHeight = getComputedStyle(header)
-        .getPropertyValue("--header-height")
-        .trim();
-      const announcementBar = hero.previousElementSibling;
-      const initialHeaderTop =
-        announcementBar instanceof HTMLElement &&
-        announcementBar.classList.contains("announcement-bar")
-          ? announcementBar.getBoundingClientRect().height
-          : 0;
       const context = gsap.context(() => {
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -103,18 +94,11 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           },
         });
 
-        timeline.fromTo(
-          document.documentElement,
-          {
-            "--header-height": initialHeaderHeight,
-            "--header-top": `${initialHeaderTop}px`,
-          },
-          {
-            "--header-height": "3.2rem",
-            "--header-top": "0px",
-            ease: "none",
-          },
-        );
+        timeline.to(document.documentElement, {
+          "--header-height": "3.2rem",
+          "--header-top": "0px",
+          ease: "none",
+        });
 
         timeline.fromTo(
           header,
