@@ -44,10 +44,8 @@
      keep the homepage and shop grids identical stay in one place. */
   --gutter: 2.4rem;
   --content-max: none;
-  --serif:
-    "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville,
-    "Times New Roman", serif;
-  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif: var(--font-faculty-glyphic), Georgia, serif;
+  --sans: var(--font-faculty-glyphic), Georgia, serif;
   --mono: "Mono45 Headline", monospace;
 
   --type-sans-micro: 0.625rem;
