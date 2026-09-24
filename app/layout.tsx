@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { MetaPixel } from "@/components/meta-pixel";
 import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/google-tag-manager";
-import { Faculty_Glyphic } from "next/font/google";
+import { Faculty_Glyphic, Roboto } from "next/font/google";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
@@ -16,6 +16,12 @@ const facultyGlyphic = Faculty_Glyphic({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-faculty-glyphic",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
 });
 
 function getMetadataBase() {
@@ -53,7 +59,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={facultyGlyphic.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={`${facultyGlyphic.variable} ${roboto.variable}`} data-scroll-behavior="smooth">
       <body>
         <GoogleTagManagerNoScript />
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>
