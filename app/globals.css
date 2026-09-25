@@ -729,13 +729,13 @@ img {
 .menu-drawer__currency-options button {
   position: relative;
   z-index: 1;
-  min-width: 3.25rem;
-  padding: 0.5rem 0.625rem;
+  min-width: 4.25rem;
+  padding: 0.75rem 0.875rem;
   background: transparent;
   color: var(--ink);
   cursor: pointer;
   font-family: var(--sans);
-  font-size: var(--type-sans-ui);
+  font-size: var(--type-sans-lead);
   font-weight: 500;
   letter-spacing: var(--tracking-normal);
   line-height: var(--leading-tight);
@@ -4844,7 +4844,7 @@ img {
 }
 
 .collection-head h1 {
-  margin: 1.5rem 0 0;
+  margin: 0;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
   font-weight: 400;
@@ -4852,8 +4852,38 @@ img {
   line-height: var(--leading-display);
 }
 
-/* The item count, set as a superscript the way the reference does it. */
-.collection-head h1 sup {
+.collection-head--intro {
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.collection-head--intro h1 {
+  margin-top: 2rem;
+}
+
+.collection-head.collection-head--intro > p {
+  max-width: 43rem;
+  margin-inline: auto;
+  font-family: var(--serif);
+  font-size: var(--type-serif-body);
+  line-height: var(--leading-normal);
+}
+
+.collection-subhead {
+  padding: 2.5rem var(--gutter) 0;
+}
+
+.collection-subhead h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--type-serif-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-display);
+}
+
+.collection-head h1 sup,
+.collection-subhead h2 sup {
   margin-left: 0.5rem;
   font-family: var(--sans, inherit);
   font-size: var(--type-sans-label);
@@ -4894,7 +4924,7 @@ img {
 .concern-tile {
   display: block;
   /* 11rem is 11.5% of the 1512 design width, matching the reference. */
-  width: 11rem;
+  width: 22rem;
   text-decoration: none;
 }
 
@@ -4922,16 +4952,34 @@ img {
 }
 
 .concern-tile__label {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1;
   display: block;
-  margin-top: 0.625rem;
-  color: rgba(24, 32, 25, 0.72);
-  font-size: var(--type-sans-label);
-  line-height: var(--leading-normal);
+  color: var(--porcelain);
+  font-family: var(--serif);
+  font-size: var(--type-serif-section);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-compact);
+  text-shadow: 0 0.1rem 0.35rem rgba(0, 0, 0, 0.3);
+}
+
+.concern-tile__image::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 45%;
+  background: linear-gradient(transparent, rgba(17, 27, 21, 0.7));
+  content: "";
 }
 
 .concern-tile.is-selected .concern-tile__label {
-  color: var(--ink);
-  font-weight: 650;
+  color: var(--porcelain);
+  font-weight: 400;
 }
 
 .concern-consultation-link {
@@ -5181,7 +5229,7 @@ img {
   }
 
   .concern-tile {
-    width: 8.5rem;
+    width: 17rem;
   }
 
   .editorial-row {
@@ -5710,7 +5758,6 @@ img {
  */
 .shop-page--sky .collection-crumbs a,
 .shop-page--sky .collection-head > p,
-.shop-page--sky .concern-tile__label,
 .shop-page--sky .collection-card__price,
 .shop-page--sky .filter-bar__count {
   color: rgba(24, 32, 25, 0.82);

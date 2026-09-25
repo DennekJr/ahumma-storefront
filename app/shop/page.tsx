@@ -155,11 +155,14 @@ export default async function ShopPage({
       <AnnouncementBar />
       <SiteHeader />
 
-      <header className="collection-head">
-        <h1>
-          {concern ? concern.label : "Everything we make"}
-          {unavailable ? null : <sup>{shown.length}</sup>}
-        </h1>
+      <header className="collection-head collection-head--intro">
+        <h1>Find what&apos;s right for your skin.</h1>
+        <p>
+          <p>
+            Explore rich body butters and African black soap, made in Nigeria
+            for Black and brown skin.
+          </p>
+        </p>
       </header>
 
       {unavailable ? null : (
@@ -168,14 +171,13 @@ export default async function ShopPage({
             selected={concernId ?? ALL_CONCERN}
             products={products}
           />
-          {concern ? (
-            <div className="concern-consultation-link">
-              <p>Not sure where to start with {concern.label.toLowerCase()}?</p>
-              <Link href={`/consultation?concern=${concern.id}`}>
-                Talk through your routine <ArrowRight size={15} />
-              </Link>
-            </div>
-          ) : null}
+          <header className="collection-subhead">
+            <h2>
+              {concern ? concern.label : "Everything we make"}
+              {unavailable ? null : <sup>{shown.length}</sup>}
+            </h2>
+          </header>
+
           <FilterBar facets={facets} total={shown.length} />
         </>
       )}

@@ -36,7 +36,9 @@ export function ConcernRail({
             <li key={tile.id}>
               <Link
                 className={`concern-tile${isSelected ? " is-selected" : ""}`}
-                href={tile.id === ALL_CONCERN ? "/shop" : `/shop?concern=${tile.id}`}
+                href={
+                  tile.id === ALL_CONCERN ? "/shop" : `/shop?concern=${tile.id}`
+                }
                 aria-current={isSelected ? "true" : undefined}
                 scroll={false}
               >
@@ -49,8 +51,8 @@ export function ConcernRail({
                       sizes="(max-width: 700px) 38vw, 13vw"
                     />
                   ) : null}
+                  <span className="concern-tile__label">{tile.label}</span>
                 </span>
-                <span className="concern-tile__label">{tile.label}</span>
               </Link>
             </li>
           );

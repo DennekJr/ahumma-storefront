@@ -73,7 +73,7 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
     const header = headerRef.current;
     const hero = header?.closest<HTMLElement>(".home-hero");
 
-    if (!header || !hero) return;
+    if (!header) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -100,21 +100,23 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           ease: "none",
         });
 
-        timeline.fromTo(
-          header,
-          {
-            backgroundColor: "transparent",
-            color: ink,
-            borderColor: line,
-          },
-          {
-            backgroundColor: "rgba(250, 248, 243, 0.94)",
-            color: ink,
-            borderColor: line,
-            ease: "none",
-          },
-          0,
-        );
+        if (hero) {
+          timeline.fromTo(
+            header,
+            {
+              backgroundColor: "transparent",
+              color: ink,
+              borderColor: line,
+            },
+            {
+              backgroundColor: "rgba(250, 248, 243, 0.94)",
+              color: ink,
+              borderColor: line,
+              ease: "none",
+            },
+            0,
+          );
+        }
 
         if (wordmark) {
           timeline.fromTo(
@@ -150,8 +152,12 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
             MENU
           </button>
           <nav className="header-nav" aria-label="Quick navigation">
-            <Link href="/shop">SHOP</Link>
-            <Link href="/about">ABOUT</Link>
+            <Link href="/shop" prefetch>
+              SHOP
+            </Link>
+            <Link href="/about" prefetch>
+              ABOUT
+            </Link>
           </nav>
         </div>
         <Link
@@ -173,7 +179,11 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           />
         </Link>
         <div className="header-actions">
-          <Link className="header-partner-link" href="/partner-network">
+          <Link
+            className="header-partner-link"
+            href="/partner-network"
+            prefetch
+          >
             PARTNER PROGRAM
           </Link>
           <button
@@ -229,22 +239,30 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           <span>MENU</span>
         </div>
         <nav className="menu-drawer__nav" aria-label="Primary navigation">
-          <Link href="/" onClick={() => setMenuOpen(false)}>
+          <Link href="/" prefetch onClick={() => setMenuOpen(false)}>
             <span>Home</span>
           </Link>
-          <Link href="/shop" onClick={() => setMenuOpen(false)}>
+          <Link href="/shop" prefetch onClick={() => setMenuOpen(false)}>
             <span>Shop</span>
           </Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>
+          <Link href="/about" prefetch onClick={() => setMenuOpen(false)}>
             <span>About</span>
           </Link>
-          <Link href="/consultation" onClick={() => setMenuOpen(false)}>
+          <Link
+            href="/consultation"
+            prefetch
+            onClick={() => setMenuOpen(false)}
+          >
             <span>Skin consultation</span>
           </Link>
-          <Link href="/partner-network" onClick={() => setMenuOpen(false)}>
+          <Link
+            href="/partner-network"
+            prefetch
+            onClick={() => setMenuOpen(false)}
+          >
             <span>Partner Program</span>
           </Link>
-          <Link href="/faq" onClick={() => setMenuOpen(false)}>
+          <Link href="/faq" prefetch onClick={() => setMenuOpen(false)}>
             <span>FAQs</span>
           </Link>
         </nav>
