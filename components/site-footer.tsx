@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { CircleSignup } from "@/components/circle-signup";
 import { FooterSignupPopup } from "@/components/footer-signup-popup";
 import { ScrollLink } from "@/components/scroll-link";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 
 export function SiteFooter() {
   const footerRef = useRef<HTMLElement>(null);
@@ -14,34 +15,11 @@ export function SiteFooter() {
     <>
       <FooterSignupPopup footerRef={footerRef} />
       <footer ref={footerRef} className="site-footer">
+        <TestimonialCarousel />
         <section
           className="footer-newsletter"
           aria-labelledby="footer-newsletter-title"
         >
-          <div className="footer-testimonial">
-            <blockquote>
-              <svg
-                className="footer-testimonial__quote-mark"
-                viewBox="0 0 48 40"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M0 40V23.5C0 8.5 7.7 1.3 23.2 0v8.7C15.4 10 11.5 14.2 10.3 21H20v19H0Zm28 0V23.5C28 8.5 35.7 1.3 51.2 0v8.7C43.4 10 39.5 14.2 38.3 21H48v19H28Z" />
-              </svg>
-              <p>
-                “My skin has never felt this cared for. Ahumma has made body
-                care feel like a ritual I look forward to.”
-              </p>
-            </blockquote>
-            <div className="footer-testimonial__image">
-              <Image
-                src="/images/dream-whip.jpg"
-                alt="Ahumma Dream Whip body butter"
-                fill
-                sizes="(max-width: 780px) 100vw, 50vw"
-              />
-            </div>
-          </div>
           <h2 id="footer-newsletter-title">Join the Ahumma Circle.</h2>
           <p>
             First access to new rituals, limited releases and stories from
