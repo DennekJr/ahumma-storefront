@@ -148,8 +148,10 @@ export function ConsultationForm({
         </label>
       </div>
 
-      <fieldset>
-        <legend>What would you like help with?</legend>
+      <div className="consultation-form__field">
+        <span className="consultation-form__legend">
+          What would you like help with?
+        </span>
         <div className="consultation-form__options">
           {SKIN_CONCERNS.map((concern) => (
             <label key={concern}>
@@ -162,7 +164,7 @@ export function ConsultationForm({
             </label>
           ))}
         </div>
-      </fieldset>
+      </div>
 
       <div className="consultation-form__grid">
         <label>

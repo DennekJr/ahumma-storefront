@@ -7837,7 +7837,8 @@ img {
 
 .consultation-form {
   display: grid;
-  gap: 2rem;
+  gap: 0;
+  color: var(--ink);
 }
 
 .consultation-form__grid {
@@ -7847,16 +7848,18 @@ img {
 }
 
 .consultation-form label,
-.consultation-form fieldset {
+.consultation-form__field {
   display: grid;
-  gap: 0.5rem;
+  gap: 0;
 }
 
 .consultation-form label > span,
-.consultation-form legend {
-  font-size: var(--type-sans-label);
-  font-weight: 650;
+.consultation-form__legend {
+  color: rgba(24, 32, 25, 0.68);
+  font-size: var(--type-sans-small);
+  font-weight: 500;
   letter-spacing: var(--tracking-label);
+  line-height: var(--leading-compact);
   text-transform: var(--case-none);
 }
 
@@ -7864,22 +7867,31 @@ img {
 .consultation-form textarea,
 .consultation-form select {
   width: 100%;
-  padding: 0.85rem 0;
+  padding: 0 0 0.875rem;
   border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0;
   background: transparent;
   color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--type-serif-label);
+  line-height: var(--leading-body);
+  outline: none;
+  transition: border-color 180ms ease;
+}
+
+.consultation-form input:not([type="checkbox"]):focus,
+.consultation-form textarea:focus,
+.consultation-form select:focus {
+  border-bottom-color: var(--deep-forest);
 }
 
 .consultation-form textarea {
   resize: vertical;
 }
 
-.consultation-form fieldset {
+.consultation-form__field {
   min-width: 0;
-  padding: 0;
-  border: 0;
 }
 
 .consultation-form__options {
@@ -7897,8 +7909,10 @@ img {
   padding: 0.7rem 0.85rem;
   border: 1px solid var(--line);
   border-radius: 999px;
+  color: rgba(24, 32, 25, 0.72);
   cursor: pointer;
-  font-size: var(--type-sans-label);
+  font-size: var(--type-sans-small);
+  line-height: var(--leading-compact);
 }
 
 .consultation-form__options input,
@@ -7915,7 +7929,7 @@ img {
 .consultation-form__safety,
 .consultation-form__error {
   margin: 0;
-  font-size: var(--type-sans-label);
+  font-size: var(--type-sans-small);
   line-height: var(--leading-body);
 }
 
@@ -7931,12 +7945,16 @@ img {
 .consultation-form > button {
   width: fit-content;
   padding: 1rem 1.5rem;
+  border: 1px solid var(--forest);
   border-radius: 999px;
   background: var(--forest);
   color: var(--porcelain);
   cursor: pointer;
   font-family: var(--serif);
   font-size: var(--type-serif-hero-action);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-tight);
 }
 
 .consultation-form > button:disabled {
