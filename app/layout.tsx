@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Faculty_Glyphic } from "next/font/google";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
@@ -7,6 +8,13 @@ import { hasFrontdeskCheckout, hasFrontdeskReads } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
 import "@blossom-carousel/core/style.css";
 import "./globals.css";
+
+const facultyGlyphic = Faculty_Glyphic({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-faculty-glyphic",
+  display: "swap",
+});
 
 function getMetadataBase() {
   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -43,7 +51,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={facultyGlyphic.variable}
+    >
       <body>
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>
           {children}

@@ -44,9 +44,7 @@
      keep the homepage and shop grids identical stay in one place. */
   --gutter: 2.4rem;
   --content-max: none;
-  --serif:
-    "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville,
-    "Times New Roman", serif;
+  --serif: var(--font-faculty-glyphic), serif;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono: "Mono45 Headline", monospace;
 
@@ -1175,7 +1173,7 @@ img {
   font-size: var(--type-serif-section);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
-  line-height: var(--leading-display);
+  line-height: var(--leading-compact);
   text-wrap: balance;
   text-transform: var(--case-none);
 }
