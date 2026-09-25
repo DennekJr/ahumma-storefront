@@ -138,16 +138,22 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
         ref={headerRef}
         className={`site-header ${light ? "site-header--light" : ""}`}
       >
-        <button
-          ref={menuTriggerRef}
-          type="button"
-          className="header-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-expanded={menuOpen}
-          aria-controls="site-menu"
-        >
-          MENU
-        </button>
+        <div className="header-left">
+          <button
+            ref={menuTriggerRef}
+            type="button"
+            className="header-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+          >
+            MENU
+          </button>
+          <nav className="header-nav" aria-label="Quick navigation">
+            <Link href="/shop">SHOP</Link>
+            <Link href="/about">ABOUT</Link>
+          </nav>
+        </div>
         <Link
           href="/"
           className="wordmark"
@@ -167,6 +173,9 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           />
         </Link>
         <div className="header-actions">
+          <Link className="header-partner-link" href="/partner-network">
+            PARTNER PROGRAM
+          </Link>
           <button
             type="button"
             className="header-cart"
