@@ -5,6 +5,10 @@ function AnnouncementGroup({ hidden = false }: { hidden?: boolean }) {
       <span className="announcement-divider" aria-hidden="true">
         ·
       </span>
+      <span>Complimentary delivery across the US on orders over $200</span>
+      <span className="announcement-divider" aria-hidden="true">
+        ·
+      </span>
       <span>Made in Lagos · Shipping worldwide</span>
       <span className="announcement-divider" aria-hidden="true">
         ·
