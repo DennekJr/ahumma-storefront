@@ -156,19 +156,10 @@ export default async function ShopPage({
       <SiteHeader />
 
       <header className="collection-head">
-        <nav className="collection-crumbs" aria-label="Breadcrumb">
-          <Link href="/">Ahumma</Link>
-          <span aria-hidden="true">—</span>
-          <Link href="/shop">Shop all</Link>
-        </nav>
         <h1>
           {concern ? concern.label : "Everything we make"}
           {unavailable ? null : <sup>{shown.length}</sup>}
         </h1>
-        <p>
-          Fewer, intentional products. Each formula is made to work deeply, feel
-          beautiful and earn its place in your ritual.
-        </p>
       </header>
 
       {unavailable ? null : (

@@ -1,16 +1,34 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { ProductCard } from "@/components/product-card";
+import { CollectionCard } from "@/components/collection-card";
+import { ConcernRail } from "@/components/concern-rail";
+import { EditorialRow } from "@/components/editorial-row";
+import { FilterBar } from "@/components/filter-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getProducts } from "@/lib/frontdesk";
+import { ALL_CONCERN, firstEditorialProduct } from "@/lib/concerns";
+import {
+  applyFilters,
+  applySort,
+  buildFacets,
+  toList,
+} from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
+
+type SearchParams = Promise<{
+  size?: string | string[];
+  type?: string | string[];
+  price?: string | string[];
+  sort?: string;
+}>;
 
 type CategoryPageProps = {
   params: Promise<{ category: string }>;
+  searchParams: SearchParams;
 };
 
 type Category = {
@@ -66,46 +84,82 @@ export async function generateMetadata({
     : { title: "Shop" };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { category: categorySlug } = await params;
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
+  const [{ category: categorySlug }, query, products] = await Promise.all([
+    params,
+    searchParams,
+    getProducts(),
+  ]);
   const category = CATEGORY_MATCHERS[categorySlug];
 
-  if (!category) {
-    notFound();
-  }
+  if (!category) notFound();
 
-  const products = await getProducts();
   const categoryProducts = products.filter(category.matches);
+  const filters = {
+    size: toList(query.size),
+    type: toList(query.type),
+    price: toList(query.price),
+  };
+  const facets = buildFacets(categoryProducts, filters);
+  const shown = applySort(applyFilters(categoryProducts, filters), query.sort);
+  const editorialProduct = firstEditorialProduct(shown);
 
   return (
-    <main className="shop-page">
+    <main className="shop-page shop-page--sky">
       <AnnouncementBar />
       <SiteHeader />
-      <header className="shop-hero">
-        <h1>{category.title}</h1>
+
+      <header className="collection-head">
+        <nav className="collection-crumbs" aria-label="Breadcrumb">
+          <Link href="/">Ahumma</Link>
+          <span aria-hidden="true">—</span>
+          <Link href="/shop">Shop all</Link>
+          <span aria-hidden="true">—</span>
+          <span>{category.title}</span>
+        </nav>
+        <h1>
+          {category.title}
+          <sup>{shown.length}</sup>
+        </h1>
         <p>{category.description}</p>
       </header>
-      <section className="shop-group shop-category-page">
-        <div className="shop-group__heading">
-          <Link href="/shop" className="underlined-link">
-            <ArrowLeft size={16} /> All essentials
-          </Link>
-        </div>
-        {categoryProducts.length ? (
-          <div className="product-grid">
-            {categoryProducts.map((product, index) => (
-              <ProductCard product={product} index={index} key={product.ref} />
+
+      <ConcernRail selected={ALL_CONCERN} products={categoryProducts} />
+      <FilterBar facets={facets} total={shown.length} />
+
+      {shown.length ? (
+        <div className="collection-body">
+          <div className="collection-grid">
+            {shown.map((product, index) => (
+              <CollectionCard
+                product={product}
+                index={index}
+                priority={index < 3}
+                key={product.ref}
+              />
             ))}
           </div>
-        ) : (
-          <div className="shop-group__empty">
-            <p>
-              New essentials are coming soon. Join the Ahumma Circle to hear
-              first.
-            </p>
-          </div>
-        )}
-      </section>
+          <EditorialRow product={editorialProduct} />
+        </div>
+      ) : (
+        <div className="collection-empty">
+          <p>
+            {filters.size.length || filters.type.length || filters.price.length
+              ? "Nothing matches those filters."
+              : "New essentials are coming soon. Join the Ahumma Circle to hear first."}
+          </p>
+          <Link href={`/shop/${categorySlug}`}>
+            {filters.size.length || filters.type.length || filters.price.length
+              ? "Clear the filters"
+              : "See everything"}{" "}
+            <ArrowRight size={15} />
+          </Link>
+        </div>
+      )}
+
       <SiteFooter />
     </main>
   );
