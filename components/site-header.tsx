@@ -238,6 +238,12 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
           <Link href="/about" onClick={() => setMenuOpen(false)}>
             <span>About</span>
           </Link>
+          <Link href="/consultation" onClick={() => setMenuOpen(false)}>
+            <span>Skin consultation</span>
+          </Link>
+          <Link href="/partner-network" onClick={() => setMenuOpen(false)}>
+            <span>Partner Program</span>
+          </Link>
           <Link href="/faq" onClick={() => setMenuOpen(false)}>
             <span>FAQs</span>
           </Link>
