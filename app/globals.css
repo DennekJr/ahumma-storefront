@@ -5078,6 +5078,23 @@ img {
   padding: 3rem var(--gutter) 5rem;
 }
 
+.saved-products {
+  padding: 0 var(--gutter) 5rem;
+}
+
+.saved-products h2 {
+  margin: 0 0 1.5rem;
+  font-family: var(--serif);
+  font-size: var(--type-serif-section);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-compact);
+}
+
+.saved-products .collection-grid {
+  margin-top: 0;
+}
+
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

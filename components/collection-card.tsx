@@ -7,6 +7,11 @@ import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import { isNew } from "@/lib/shop-filters";
+import {
+  isProductSaved,
+  SAVED_PRODUCTS_CHANGE_EVENT,
+  setProductSaved,
+} from "@/lib/saved-products";
 import type { ProductSummary } from "@/lib/store-types";
 
 /**
@@ -40,17 +45,18 @@ export function CollectionCard({
   const showNew = isNew(product);
 
   useEffect(() => {
-    setSaved(
-      window.localStorage.getItem(`ahumma-saved-${product.ref}`) === "true",
-    );
+    const syncSaved = () => setSaved(isProductSaved(product.ref));
+    syncSaved();
+    window.addEventListener(SAVED_PRODUCTS_CHANGE_EVENT, syncSaved);
+    window.addEventListener("storage", syncSaved);
+    return () => {
+      window.removeEventListener(SAVED_PRODUCTS_CHANGE_EVENT, syncSaved);
+      window.removeEventListener("storage", syncSaved);
+    };
   }, [product.ref]);
 
   function toggleSaved() {
-    const next = !saved;
-    setSaved(next);
-    if (next)
-      window.localStorage.setItem(`ahumma-saved-${product.ref}`, "true");
-    else window.localStorage.removeItem(`ahumma-saved-${product.ref}`);
+    setProductSaved(product.ref, !saved);
   }
 
   function toggleVideo() {

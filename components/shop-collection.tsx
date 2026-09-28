@@ -6,6 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
 import { FilterBar } from "@/components/filter-bar";
+import { SavedProductsSection } from "@/components/saved-products-section";
 import { ALL_CONCERN, findConcern, filterByConcern } from "@/lib/concerns";
 import { applyFilters, applySort, buildFacets } from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
@@ -91,6 +92,7 @@ export function ShopCollection({
           </Link>
         </div>
       )}
+      <SavedProductsSection products={products} />
     </>
   );
 }

@@ -6,6 +6,7 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
 import { FilterBar } from "@/components/filter-bar";
+import { SavedProductsSection } from "@/components/saved-products-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getProducts } from "@/lib/frontdesk";
@@ -157,6 +158,7 @@ export default async function CategoryPage({
         </div>
       )}
 
+      <SavedProductsSection products={products} />
       <SiteFooter />
     </main>
   );
