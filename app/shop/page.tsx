@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { CollectionCard } from "@/components/collection-card";
-import { ConcernRail } from "@/components/concern-rail";
-import { EditorialRow } from "@/components/editorial-row";
-import { FilterBar } from "@/components/filter-bar";
+import { Sparkles } from "lucide-react";
+import { ShopCollection } from "@/components/shop-collection";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
@@ -12,18 +8,9 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
 import { CloudBackdrop } from "@/components/cloud-backdrop";
 import { getCatalogue, hasFrontdeskReads } from "@/lib/frontdesk";
-import {
-  ALL_CONCERN,
-  filterByConcern,
-  findConcern,
-  firstEditorialProduct,
-} from "@/lib/concerns";
-import {
-  applyFilters,
-  applySort,
-  buildFacets,
-  toList,
-} from "@/lib/shop-filters";
+import { filterByConcern, findConcern } from "@/lib/concerns";
+
+import { applyFilters, applySort, toList } from "@/lib/shop-filters";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
 
 const baseMetadata: Metadata = {
@@ -78,22 +65,6 @@ export async function generateMetadata({
     : scoped;
 }
 
-/** Closes a short last row with brand imagery instead of empty cells. */
-function CollectionFiller() {
-  return (
-    <Link
-      className="collection-filler"
-      href="/consultation"
-      aria-label="Find your Ahumma ritual"
-    >
-      <span>
-        At the edge of everything beautiful is you
-        <ArrowRight size={16} />
-      </span>
-    </Link>
-  );
-}
-
 export default async function ShopPage({
   searchParams,
 }: {
@@ -103,7 +74,6 @@ export default async function ShopPage({
   const { products, unavailable } = catalogue;
   const concernId = query.concern;
   const concern = findConcern(concernId);
-
   // Facets are built from the concern-scoped set, so a count next to an option
   // is the number of products that option would actually leave on screen.
   const inConcern = filterByConcern(products, concern);
@@ -112,21 +82,7 @@ export default async function ShopPage({
     type: toList(query.type),
     price: toList(query.price),
   };
-  const facets = buildFacets(inConcern, filters);
   const shown = applySort(applyFilters(inConcern, filters), query.sort);
-
-  // The grid runs three-up, broken after the first row by a pair of editorial
-  // images. With four products that leaves a single card on the last row, so
-  // the remaining span is filled with editorial art rather than whitespace.
-  const breakAfter = shown.length > 3 ? 3 : shown.length;
-  const leading = shown.slice(0, breakAfter);
-  const trailing = shown.slice(breakAfter);
-  const breakProduct = firstEditorialProduct(shown);
-  // Whichever grid ends on a short row gets the filler, so a narrow result
-  // (one product under a concern) never leaves dead cells beside it.
-  const shortGrid = trailing.length
-    ? trailing.length % 3 && "tail"
-    : leading.length % 3 && "lead";
 
   const itemList = {
     "@context": "https://schema.org",
@@ -163,22 +119,7 @@ export default async function ShopPage({
         </p>
       </header>
 
-      {unavailable ? null : (
-        <>
-          <ConcernRail
-            selected={concernId ?? ALL_CONCERN}
-            products={products}
-          />
-          <header className="collection-subhead">
-            <h2>
-              {concern ? concern.label : "Everything we make"}
-              {unavailable ? null : <sup>{shown.length}</sup>}
-            </h2>
-          </header>
-
-          <FilterBar facets={facets} total={shown.length} />
-        </>
-      )}
+      <ShopCollection products={products} unavailable={unavailable} />
 
       {!hasFrontdeskReads ? (
         <div className="api-preview-note shop-preview-note">
@@ -191,51 +132,6 @@ export default async function ShopPage({
       ) : null}
 
       {unavailable ? <CatalogueUnavailable /> : null}
-
-      {unavailable ? null : shown.length ? (
-        <div className="collection-body">
-          <div className="collection-grid">
-            {leading.map((product, index) => (
-              <CollectionCard
-                product={product}
-                index={index}
-                priority={index < 3}
-                key={product.ref}
-              />
-            ))}
-            {shortGrid === "lead" ? <CollectionFiller /> : null}
-          </div>
-
-          <EditorialRow product={breakProduct} />
-
-          {trailing.length ? (
-            <div className="collection-grid collection-grid--tail">
-              {trailing.map((product, index) => (
-                <CollectionCard
-                  product={product}
-                  index={index}
-                  key={product.ref}
-                />
-              ))}
-              {shortGrid === "tail" ? <CollectionFiller /> : null}
-            </div>
-          ) : null}
-        </div>
-      ) : (
-        <div className="collection-empty">
-          <p>
-            {filters.size.length || filters.type.length || filters.price.length
-              ? "Nothing matches those filters."
-              : "Nothing in this edit yet."}
-          </p>
-          <Link href={concern ? `/shop?concern=${concern.id}` : "/shop"}>
-            {filters.size.length || filters.type.length || filters.price.length
-              ? "Clear the filters"
-              : "See everything"}{" "}
-            <ArrowRight size={15} />
-          </Link>
-        </div>
-      )}
 
       <SiteFooter />
     </main>

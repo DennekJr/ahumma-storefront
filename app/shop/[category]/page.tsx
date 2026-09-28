@@ -103,7 +103,7 @@ export default async function CategoryPage({
     type: toList(query.type),
     price: toList(query.price),
   };
-  const facets = buildFacets(categoryProducts, filters);
+  const facets = buildFacets(categoryProducts);
   const shown = applySort(applyFilters(categoryProducts, filters), query.sort);
   const editorialProduct = firstEditorialProduct(shown);
 

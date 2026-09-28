@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ALL_CONCERN, ALL_TILE, CONCERNS, concernImage } from "@/lib/concerns";
@@ -6,16 +8,17 @@ import type { ProductSummary } from "@/lib/store-types";
 /**
  * The visual rail above the grid.
  *
- * Tiles are links rather than client-side filter buttons so each concern has a
- * shareable URL and works before hydration — the grid is server-rendered from
- * the same query, so there is no second source of truth for what is selected.
+ * Tile selection updates the shop's client-side query state without waiting
+ * for another server render.
  */
 export function ConcernRail({
   selected,
   products,
+  onSelectAction,
 }: {
   selected: string;
   products: ProductSummary[];
+  onSelectAction?: (id: string) => void;
 }) {
   const tiles = [
     ALL_TILE,
@@ -32,28 +35,45 @@ export function ConcernRail({
           const isSelected =
             tile.id === selected || (tile.id === ALL_CONCERN && !selected);
 
+          const className = `concern-tile${isSelected ? " is-selected" : ""}`;
+          const content = (
+            <span className="concern-tile__image">
+              {tile.image ? (
+                <Image
+                  src={tile.image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 700px) 38vw, 13vw"
+                />
+              ) : null}
+              <span className="concern-tile__label">{tile.label}</span>
+            </span>
+          );
+
           return (
             <li key={tile.id}>
-              <Link
-                className={`concern-tile${isSelected ? " is-selected" : ""}`}
-                href={
-                  tile.id === ALL_CONCERN ? "/shop" : `/shop?concern=${tile.id}`
-                }
-                aria-current={isSelected ? "true" : undefined}
-                scroll={false}
-              >
-                <span className="concern-tile__image">
-                  {tile.image ? (
-                    <Image
-                      src={tile.image}
-                      alt=""
-                      fill
-                      sizes="(max-width: 700px) 38vw, 13vw"
-                    />
-                  ) : null}
-                  <span className="concern-tile__label">{tile.label}</span>
-                </span>
-              </Link>
+              {onSelectAction ? (
+                <button
+                  type="button"
+                  className={className}
+                  aria-pressed={isSelected}
+                  onClick={() => onSelectAction(tile.id)}
+                >
+                  {content}
+                </button>
+              ) : (
+                <Link
+                  className={className}
+                  href={
+                    tile.id === ALL_CONCERN
+                      ? "/shop"
+                      : `/shop?concern=${tile.id}`
+                  }
+                  aria-current={isSelected ? "true" : undefined}
+                >
+                  {content}
+                </Link>
+              )}
             </li>
           );
         })}

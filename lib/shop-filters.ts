@@ -39,32 +39,55 @@ export function sizeOf(product: ProductSummary): string | null {
   return match ? match[1].replace(/\s+/g, "").toLowerCase() : null;
 }
 
-const TYPE_RULES: { value: string; label: string; test: (name: string) => boolean }[] = [
-  { value: "black-soap", label: "Black soap", test: (n) => n.includes("ara") || n.includes("soap") },
-  { value: "baby", label: "Baby care", test: (n) => n.includes("baby") || n.includes("bloom") },
+const TYPE_RULES: {
+  value: string;
+  label: string;
+  test: (name: string) => boolean;
+}[] = [
+  {
+    value: "black-soap",
+    label: "Black soap",
+    test: (n) => n.includes("ara") || n.includes("soap"),
+  },
+  {
+    value: "baby",
+    label: "Baby care",
+    test: (n) => n.includes("baby") || n.includes("bloom"),
+  },
   { value: "body-butter", label: "Body butter", test: () => true },
 ];
 
 export function typeOf(product: ProductSummary) {
   const name = product.name.toLowerCase();
-  return TYPE_RULES.find((rule) => rule.test(name)) ?? TYPE_RULES[TYPE_RULES.length - 1];
+  return (
+    TYPE_RULES.find((rule) => rule.test(name)) ??
+    TYPE_RULES[TYPE_RULES.length - 1]
+  );
 }
 
 const PRICE_BANDS = [
   { value: "under-25k", label: "Under ₦25,000", min: 0, max: 2_500_000 },
-  { value: "25k-35k", label: "₦25,000 – ₦35,000", min: 2_500_000, max: 3_500_000 },
+  {
+    value: "25k-35k",
+    label: "₦25,000 – ₦35,000",
+    min: 2_500_000,
+    max: 3_500_000,
+  },
   { value: "over-35k", label: "Over ₦35,000", min: 3_500_000, max: Infinity },
 ];
 
 export function priceBandOf(product: ProductSummary) {
   return PRICE_BANDS.find(
-    (band) => product.priceMinorFrom >= band.min && product.priceMinorFrom < band.max,
+    (band) =>
+      product.priceMinorFrom >= band.min && product.priceMinorFrom < band.max,
   );
 }
 
 function tally(
   products: ProductSummary[],
-  key: (p: ProductSummary) => { value: string; label: string } | null | undefined,
+  key: (
+    p: ProductSummary,
+  ) => { value: string; label: string } | null | undefined,
 ): FacetOption[] {
   const counts = new Map<string, FacetOption>();
 
@@ -79,10 +102,7 @@ function tally(
   return [...counts.values()].sort((a, b) => a.label.localeCompare(b.label));
 }
 
-export function buildFacets(
-  products: ProductSummary[],
-  active: Record<string, string[]> = {},
-): Facet[] {
+export function buildFacets(products: ProductSummary[]): Facet[] {
   const facets: Facet[] = [
     {
       id: "size",
@@ -110,12 +130,7 @@ export function buildFacets(
     },
   ];
 
-  // A facet that cannot narrow anything is a control that does nothing — but a
-  // facet the shopper has already chosen from must stay on screen, or an active
-  // filter becomes invisible and the empty grid has no visible cause.
-  return facets.filter(
-    (facet) => facet.options.length > 1 || active[facet.id]?.length,
-  );
+  return facets;
 }
 
 export function applyFilters(products: ProductSummary[], query: ShopQuery) {
@@ -136,7 +151,10 @@ export function applyFilters(products: ProductSummary[], query: ShopQuery) {
   });
 }
 
-export function applySort(products: ProductSummary[], sort: string | undefined) {
+export function applySort(
+  products: ProductSummary[],
+  sort: string | undefined,
+) {
   const sorted = [...products];
 
   switch (sort) {
@@ -147,7 +165,8 @@ export function applySort(products: ProductSummary[], sort: string | undefined) 
     case "newest":
       return sorted.sort(
         (a, b) =>
-          new Date(b.updatedAt ?? 0).getTime() - new Date(a.updatedAt ?? 0).getTime(),
+          new Date(b.updatedAt ?? 0).getTime() -
+          new Date(a.updatedAt ?? 0).getTime(),
       );
     default:
       // "Recommended" is the merchant's own order, which is how it arrives.
@@ -172,6 +191,8 @@ export function toList(value: string | string[] | undefined): string[] {
 
 export function countActive(query: ShopQuery) {
   return (
-    (query.size?.length ?? 0) + (query.type?.length ?? 0) + (query.price?.length ?? 0)
+    (query.size?.length ?? 0) +
+    (query.type?.length ?? 0) +
+    (query.price?.length ?? 0)
   );
 }

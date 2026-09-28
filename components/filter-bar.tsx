@@ -17,14 +17,18 @@ import { SORTS, type Facet, type FacetId } from "@/lib/shop-filters";
 export function FilterBar({
   facets,
   total,
+  clientFiltering = false,
 }: {
   facets: Facet[];
   total: number;
+  clientFiltering?: boolean;
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const [openPanel, setOpenPanel] = useState<FacetId | "sort" | "all" | null>(null);
+  const [openPanel, setOpenPanel] = useState<FacetId | "sort" | "all" | null>(
+    null,
+  );
   const barRef = useRef<HTMLDivElement>(null);
 
   // A panel left open while the pointer moves elsewhere is a panel in the way.
@@ -46,13 +50,19 @@ export function FilterBar({
     };
   }, [openPanel]);
 
-  const selected = (id: FacetId) => params.get(id)?.split(",").filter(Boolean) ?? [];
-  const activeCount = facets.reduce((sum, facet) => sum + selected(facet.id).length, 0);
+  const selected = (id: FacetId) =>
+    params.get(id)?.split(",").filter(Boolean) ?? [];
+  const activeCount = facets.reduce(
+    (sum, facet) => sum + selected(facet.id).length,
+    0,
+  );
   const currentSort = params.get("sort") ?? "recommended";
 
   function push(next: URLSearchParams) {
     const query = next.toString();
-    router.push(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    const href = query ? `${pathname}?${query}` : pathname;
+    if (clientFiltering) window.history.pushState(null, "", href);
+    else router.push(href, { scroll: false });
   }
 
   function toggle(id: FacetId, value: string) {
@@ -95,14 +105,20 @@ export function FilterBar({
                 type="button"
                 className={`filter-chip${chosen.length ? " is-active" : ""}`}
                 aria-expanded={openPanel === facet.id}
-                onClick={() => setOpenPanel(openPanel === facet.id ? null : facet.id)}
+                onClick={() =>
+                  setOpenPanel(openPanel === facet.id ? null : facet.id)
+                }
               >
                 {facet.label}
                 {chosen.length ? <em>{chosen.length}</em> : null}
                 <ChevronDown size={13} />
               </button>
               {openPanel === facet.id ? (
-                <div className="filter-panel" role="group" aria-label={facet.label}>
+                <div
+                  className="filter-panel"
+                  role="group"
+                  aria-label={facet.label}
+                >
                   {facet.options.map((option) => (
                     <label className="filter-option" key={option.value}>
                       <input
@@ -134,7 +150,11 @@ export function FilterBar({
             {activeCount ? <em>{activeCount}</em> : null}
           </button>
           {openPanel === "all" ? (
-            <div className="filter-panel filter-panel--all" role="group" aria-label="All filters">
+            <div
+              className="filter-panel filter-panel--all"
+              role="group"
+              aria-label="All filters"
+            >
               {facets.map((facet) => (
                 <div className="filter-panel__group" key={facet.id}>
                   <span>{facet.label}</span>
@@ -155,7 +175,11 @@ export function FilterBar({
                 </div>
               ))}
               {activeCount ? (
-                <button type="button" className="filter-clear" onClick={clearAll}>
+                <button
+                  type="button"
+                  className="filter-clear"
+                  onClick={clearAll}
+                >
                   Clear all <X size={13} />
                 </button>
               ) : null}
@@ -184,7 +208,11 @@ export function FilterBar({
             <ChevronDown size={13} />
           </button>
           {openPanel === "sort" ? (
-            <div className="filter-panel filter-panel--right" role="group" aria-label="Sort by">
+            <div
+              className="filter-panel filter-panel--right"
+              role="group"
+              aria-label="Sort by"
+            >
               {SORTS.map((option) => (
                 <button
                   type="button"
