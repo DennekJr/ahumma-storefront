@@ -7,6 +7,8 @@ type CircleSignupProps = {
   className?: string;
   buttonLabel?: string;
   showArrow?: boolean;
+  showFirstName?: boolean;
+  consultationOptions?: string[];
   onSuccess?: () => void;
 };
 
@@ -14,9 +16,13 @@ export function CircleSignup({
   className = "",
   buttonLabel = "Join us",
   showArrow = true,
+  showFirstName = false,
+  consultationOptions = [],
   onSuccess,
 }: CircleSignupProps) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [interests, setInterests] = useState<string[]>([]);
   const [honeypot, setHoneypot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -31,7 +37,7 @@ export function CircleSignup({
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, honeypot }),
+        body: JSON.stringify({ email, name, honeypot }),
       });
       const result = await response.json().catch(() => null);
 
@@ -62,6 +68,20 @@ export function CircleSignup({
       className={`circle-form${className ? ` ${className}` : ""}`}
       onSubmit={handleSubmit}
     >
+      {showFirstName ? (
+        <label className="circle-form__field circle-form__name">
+          <span className="visually-hidden">First name</span>
+          <input
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            type="text"
+            name="name"
+            autoComplete="given-name"
+            placeholder="First name"
+          />
+        </label>
+      ) : null}
+
       <label className="circle-form__field">
         <span className="visually-hidden">Email address</span>
         <input
@@ -74,6 +94,30 @@ export function CircleSignup({
           required
         />
       </label>
+
+      {consultationOptions.length ? (
+        <div className="circle-form__consultation">
+          <div>What would you like help with?</div>
+          {consultationOptions.map((option) => (
+            <label key={option}>
+              <input
+                type="checkbox"
+                name="interests"
+                value={option}
+                checked={interests.includes(option)}
+                onChange={() =>
+                  setInterests((current) =>
+                    current.includes(option)
+                      ? current.filter((item) => item !== option)
+                      : [...current, option],
+                  )
+                }
+              />
+              <span>{option}</span>
+            </label>
+          ))}
+        </div>
+      ) : null}
 
       <button type="submit" disabled={submitting}>
         {submitting ? "Submitting…" : buttonLabel}

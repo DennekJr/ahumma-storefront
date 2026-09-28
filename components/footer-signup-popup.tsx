@@ -141,13 +141,22 @@ export function FooterSignupPopup({
           />
           <h2 id="footer-signup-popup-title">Unlock 10% on your first order</h2>
           <p className="footer-signup-popup__lede">
-            First access to new rituals, limited releases and stories from
-            Ahumma.
+            Sign up for 10% off your first order, plus early access to new
+            rituals and limited releases.
           </p>
           <CircleSignup
             className="footer-signup-popup__form"
             buttonLabel="JOIN US"
             showArrow={false}
+            showFirstName
+            consultationOptions={[
+              "Dry or very dry skin",
+              "Dull or uneven-looking skin",
+              "Everyday softness",
+              "Body acne or congestion",
+              "Shopping for a baby or child",
+              "Sensitive or irritated skin",
+            ]}
             onSuccess={suppress}
           />
           <button
