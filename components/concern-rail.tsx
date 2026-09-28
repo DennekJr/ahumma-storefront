@@ -26,6 +26,13 @@ export function ConcernRail({
       ...concern,
       image: concernImage(concern, products),
     })),
+    {
+      id: "consultation",
+      label: "Personal consultation",
+      image: "/images/skin-closeup.jpg",
+      alt: "Skin close-up",
+      consultationLabels: [],
+    },
   ];
 
   return (
@@ -52,7 +59,21 @@ export function ConcernRail({
 
           return (
             <li key={tile.id}>
-              {onSelectAction ? (
+              {tile.id === "consultation" || !onSelectAction ? (
+                <Link
+                  className={className}
+                  href={
+                    tile.id === "consultation"
+                      ? "/consultation"
+                      : tile.id === ALL_CONCERN
+                        ? "/shop"
+                        : `/shop?concern=${tile.id}`
+                  }
+                  aria-current={isSelected ? "true" : undefined}
+                >
+                  {content}
+                </Link>
+              ) : (
                 <button
                   type="button"
                   className={className}
@@ -61,18 +82,6 @@ export function ConcernRail({
                 >
                   {content}
                 </button>
-              ) : (
-                <Link
-                  className={className}
-                  href={
-                    tile.id === ALL_CONCERN
-                      ? "/shop"
-                      : `/shop?concern=${tile.id}`
-                  }
-                  aria-current={isSelected ? "true" : undefined}
-                >
-                  {content}
-                </Link>
               )}
             </li>
           );

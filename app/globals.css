@@ -5214,34 +5214,6 @@ img {
   letter-spacing: inherit;
 }
 
-/* Fills a short last row rather than leaving a hole in the grid. */
-.collection-filler {
-  display: grid;
-  grid-column: span 2;
-  align-items: end;
-  aspect-ratio: auto;
-  padding: 2rem;
-  background: var(--sand);
-  color: var(--ink);
-  text-decoration: none;
-  transition: background 260ms ease;
-}
-
-.collection-filler:hover {
-  background: var(--clay, #e4ded2);
-}
-
-.collection-filler span {
-  display: inline-flex;
-  gap: 0.625rem;
-  align-items: center;
-  max-width: 20rem;
-  font-family: var(--serif);
-  font-size: var(--type-serif-body);
-  letter-spacing: var(--tracking-heading);
-  line-height: var(--leading-normal);
-}
-
 .collection-empty {
   display: grid;
   gap: 1rem;
@@ -5271,10 +5243,6 @@ img {
   .collection-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .collection-filler {
-    grid-column: span 1;
-  }
 }
 
 @media (max-width: 600px) {
@@ -5288,11 +5256,6 @@ img {
 
   .editorial-row {
     grid-template-columns: 1fr;
-  }
-
-  .collection-filler {
-    min-height: 12rem;
-    padding: 1.5rem;
   }
 }
 

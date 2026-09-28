@@ -44,9 +44,6 @@ export function ShopCollection({
   const leading = shown.slice(0, breakAfter);
   const trailing = shown.slice(breakAfter);
   const editorialProduct = firstEditorialProduct(shown);
-  const shortGrid = trailing.length
-    ? trailing.length % 3 && "tail"
-    : leading.length % 3 && "lead";
 
   function updateQuery(next: URLSearchParams) {
     const query = next.toString();
@@ -88,7 +85,6 @@ export function ShopCollection({
                 key={product.ref}
               />
             ))}
-            {shortGrid === "lead" ? <CollectionFiller /> : null}
           </div>
           <EditorialRow product={editorialProduct} />
           {trailing.length ? (
@@ -100,7 +96,6 @@ export function ShopCollection({
                   key={product.ref}
                 />
               ))}
-              {shortGrid === "tail" ? <CollectionFiller /> : null}
             </div>
           ) : null}
         </div>
@@ -120,20 +115,5 @@ export function ShopCollection({
         </div>
       )}
     </>
-  );
-}
-
-function CollectionFiller() {
-  return (
-    <Link
-      className="collection-filler"
-      href="/consultation"
-      aria-label="Find your Ahumma ritual"
-    >
-      <span>
-        At the edge of everything beautiful is you
-        <ArrowRight size={16} />
-      </span>
-    </Link>
   );
 }
