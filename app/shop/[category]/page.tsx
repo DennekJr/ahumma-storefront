@@ -5,12 +5,11 @@ import { ArrowRight } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
-import { EditorialRow } from "@/components/editorial-row";
 import { FilterBar } from "@/components/filter-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getProducts } from "@/lib/frontdesk";
-import { ALL_CONCERN, firstEditorialProduct } from "@/lib/concerns";
+import { ALL_CONCERN } from "@/lib/concerns";
 import {
   applyFilters,
   applySort,
@@ -105,7 +104,6 @@ export default async function CategoryPage({
   };
   const facets = buildFacets(categoryProducts);
   const shown = applySort(applyFilters(categoryProducts, filters), query.sort);
-  const editorialProduct = firstEditorialProduct(shown);
 
   return (
     <main className="shop-page shop-page--sky">
@@ -142,7 +140,6 @@ export default async function CategoryPage({
               />
             ))}
           </div>
-          <EditorialRow product={editorialProduct} />
         </div>
       ) : (
         <div className="collection-empty">

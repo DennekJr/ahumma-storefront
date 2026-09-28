@@ -100,7 +100,10 @@ export function FilterBar({
         {facets.map((facet) => {
           const chosen = selected(facet.id);
           return (
-            <div className="filter-chip-wrap" key={facet.id}>
+            <div
+              className="filter-chip-wrap filter-chip-wrap--facet"
+              key={facet.id}
+            >
               <button
                 type="button"
                 className={`filter-chip${chosen.length ? " is-active" : ""}`}
@@ -109,7 +112,7 @@ export function FilterBar({
                   setOpenPanel(openPanel === facet.id ? null : facet.id)
                 }
               >
-                {facet.label}
+                <SlidersHorizontal size={13} /> {facet.label}
                 {chosen.length ? <em>{chosen.length}</em> : null}
                 <ChevronDown size={13} />
               </button>
@@ -130,7 +133,6 @@ export function FilterBar({
                         <Check size={12} />
                       </span>
                       <span>{option.label}</span>
-                      <small>{option.count}</small>
                     </label>
                   ))}
                 </div>
@@ -139,14 +141,14 @@ export function FilterBar({
           );
         })}
 
-        <div className="filter-chip-wrap">
+        <div className="filter-chip-wrap filter-chip-wrap--all">
           <button
             type="button"
             className={`filter-chip${activeCount ? " is-active" : ""}`}
             aria-expanded={openPanel === "all"}
             onClick={() => setOpenPanel(openPanel === "all" ? null : "all")}
           >
-            <SlidersHorizontal size={13} /> All filters
+            <SlidersHorizontal size={13} /> Filters
             {activeCount ? <em>{activeCount}</em> : null}
           </button>
           {openPanel === "all" ? (
@@ -169,7 +171,6 @@ export function FilterBar({
                         <Check size={12} />
                       </span>
                       <span>{option.label}</span>
-                      <small>{option.count}</small>
                     </label>
                   ))}
                 </div>
@@ -203,7 +204,7 @@ export function FilterBar({
             aria-expanded={openPanel === "sort"}
             onClick={() => setOpenPanel(openPanel === "sort" ? null : "sort")}
           >
-            Sort by:{" "}
+            Sort by:
             <strong>{SORTS.find((s) => s.value === currentSort)?.label}</strong>
             <ChevronDown size={13} />
           </button>

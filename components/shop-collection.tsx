@@ -5,15 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
-import { EditorialRow } from "@/components/editorial-row";
 import { FilterBar } from "@/components/filter-bar";
-import {
-  ALL_CONCERN,
-  findConcern,
-  filterByConcern,
-  firstEditorialProduct,
-} from "@/lib/concerns";
-
+import { ALL_CONCERN, findConcern, filterByConcern } from "@/lib/concerns";
 import { applyFilters, applySort, buildFacets } from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
 
@@ -40,10 +33,6 @@ export function ShopCollection({
     params.get("sort") ?? undefined,
   );
   const title = concern?.label ?? "Everything we make";
-  const breakAfter = Math.min(3, shown.length);
-  const leading = shown.slice(0, breakAfter);
-  const trailing = shown.slice(breakAfter);
-  const editorialProduct = firstEditorialProduct(shown);
 
   function updateQuery(next: URLSearchParams) {
     const query = next.toString();
@@ -77,7 +66,7 @@ export function ShopCollection({
       {shown.length ? (
         <div className="collection-body">
           <div className="collection-grid">
-            {leading.map((product, index) => (
+            {shown.map((product, index) => (
               <CollectionCard
                 product={product}
                 index={index}
@@ -86,18 +75,6 @@ export function ShopCollection({
               />
             ))}
           </div>
-          <EditorialRow product={editorialProduct} />
-          {trailing.length ? (
-            <div className="collection-grid collection-grid--tail">
-              {trailing.map((product, index) => (
-                <CollectionCard
-                  product={product}
-                  index={index}
-                  key={product.ref}
-                />
-              ))}
-            </div>
-          ) : null}
         </div>
       ) : (
         <div className="collection-empty">

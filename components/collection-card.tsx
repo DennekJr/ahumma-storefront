@@ -3,15 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Bookmark, Pause, Play, Plus } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import { isNew } from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
 
 /**
- * The collection-grid card, following the reference's anatomy: media, then
- * name, save, price, then the variant row.
+ * The collection-grid card follows the homepage product-card layout.
  *
  * Video plays muted and looping with a pause control, exactly as the reference
  * does. Frontdesk currently returns only stills, so the control appears when a
@@ -34,10 +33,25 @@ export function CollectionCard({
   const { addItem, currency } = useCart();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [paused, setPaused] = useState(false);
+  const [saved, setSaved] = useState(false);
   const displayPrice = resolveSummaryPrice(product, currency);
   const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(product.coverUrl ?? "");
   const variants = product.variantCount ?? 0;
   const showNew = isNew(product);
+
+  useEffect(() => {
+    setSaved(
+      window.localStorage.getItem(`ahumma-saved-${product.ref}`) === "true",
+    );
+  }, [product.ref]);
+
+  function toggleSaved() {
+    const next = !saved;
+    setSaved(next);
+    if (next)
+      window.localStorage.setItem(`ahumma-saved-${product.ref}`, "true");
+    else window.localStorage.removeItem(`ahumma-saved-${product.ref}`);
+  }
 
   function toggleVideo() {
     const video = videoRef.current;
@@ -111,7 +125,9 @@ export function CollectionCard({
         ) : product.preorderable ? (
           <span className="collection-card__badge">Preorder</span>
         ) : showNew ? (
-          <span className="collection-card__badge collection-card__badge--new">New</span>
+          <span className="collection-card__badge collection-card__badge--new">
+            New
+          </span>
         ) : null}
       </Link>
 
@@ -120,32 +136,55 @@ export function CollectionCard({
           type="button"
           className="collection-card__playback"
           onClick={toggleVideo}
-          aria-label={paused ? `Play ${product.name} video` : `Pause ${product.name} video`}
+          aria-label={
+            paused
+              ? `Play ${product.name} video`
+              : `Pause ${product.name} video`
+          }
         >
           {paused ? <Play size={13} /> : <Pause size={13} />}
         </button>
       ) : null}
 
       <div className="collection-card__meta">
-        <Link href={`/products/${product.slug}`}>{product.name}</Link>
-        <span className="collection-card__actions">
-          {product.previewVariantRef && !product.soldOut ? (
-            <button type="button" onClick={quickAdd} aria-label={`Add ${product.name} to bag`}>
-              <Plus size={15} />
-            </button>
-          ) : null}
-          <Link
-            href={`/products/${product.slug}`}
-            className="collection-card__save"
-            aria-label={`View ${product.name}`}
-          >
-            <Bookmark size={15} />
-          </Link>
-        </span>
+        <Link href={`/products/${product.slug}`}>
+          <h3>{product.name}</h3>
+        </Link>
+        <p className="collection-card__price">
+          {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
+        </p>
       </div>
-      <p className="collection-card__price">
-        {formatMoney(displayPrice.priceMinor, displayPrice.currency)}
-      </p>
+      <div className="collection-card__purchase">
+        <button
+          type="button"
+          className={`collection-card__save${saved ? " is-saved" : ""}`}
+          aria-label={
+            saved
+              ? `Remove ${product.name} from saved items`
+              : `Save ${product.name}`
+          }
+          aria-pressed={saved}
+          onClick={toggleSaved}
+        >
+          <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
+        </button>
+        {product.previewVariantRef && !product.soldOut ? (
+          <button
+            type="button"
+            className="product-card__action"
+            onClick={quickAdd}
+          >
+            <span>Add to Bag</span> <Plus size={16} />
+          </button>
+        ) : (
+          <Link
+            className="product-card__action"
+            href={`/products/${product.slug}`}
+          >
+            Choose your care
+          </Link>
+        )}
+      </div>
       {variants > 1 ? (
         <p className="collection-card__variants">
           <span>{Math.min(variants, 5)} sizes</span>

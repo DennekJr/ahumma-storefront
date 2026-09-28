@@ -12,7 +12,7 @@ import type { ProductSummary } from "@/lib/store-types";
  * never offers a value that matches nothing, and new products widen the options
  * without a code change.
  */
-export type FacetOption = { value: string; label: string; count: number };
+export type FacetOption = { value: string; label: string };
 export type Facet = { id: FacetId; label: string; options: FacetOption[] };
 export type FacetId = "size" | "type" | "price";
 
@@ -89,17 +89,14 @@ function tally(
     p: ProductSummary,
   ) => { value: string; label: string } | null | undefined,
 ): FacetOption[] {
-  const counts = new Map<string, FacetOption>();
+  const options = new Map<string, FacetOption>();
 
   for (const product of products) {
     const entry = key(product);
-    if (!entry) continue;
-    const existing = counts.get(entry.value);
-    if (existing) existing.count += 1;
-    else counts.set(entry.value, { ...entry, count: 1 });
+    if (entry) options.set(entry.value, entry);
   }
 
-  return [...counts.values()].sort((a, b) => a.label.localeCompare(b.label));
+  return [...options.values()].sort((a, b) => a.label.localeCompare(b.label));
 }
 
 export function buildFacets(products: ProductSummary[]): Facet[] {
