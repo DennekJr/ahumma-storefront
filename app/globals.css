@@ -4967,8 +4967,12 @@ img {
 .concern-tile {
   display: block;
   /* 11rem is 11.5% of the 1512 design width, matching the reference. */
-  width: 22rem;
+  width: 16rem;
   text-decoration: none;
+}
+
+.concern-rail li:last-child .concern-tile {
+  margin-right: var(--gutter);
 }
 
 .concern-tile__image {
@@ -5003,11 +5007,12 @@ img {
   display: block;
   color: var(--porcelain);
   font-family: var(--serif);
-  font-size: var(--type-serif-section);
+  font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
   text-shadow: 0 0.1rem 0.35rem rgba(0, 0, 0, 0.3);
+  text-wrap: balance;
 }
 
 .concern-tile__image::after {
