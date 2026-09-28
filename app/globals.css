@@ -2334,14 +2334,14 @@ img {
 
 .product-intro {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   border-bottom: 1px solid var(--line);
 }
 
 .product-gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 1.25rem;
   padding: 1.25rem;
   background: var(--porcelain);
 }
@@ -2401,12 +2401,12 @@ img {
 }
 
 .product-summary {
-  --product-summary-gutter: 5vw;
+  --product-summary-gutter: 2.5vw;
   position: sticky;
   top: calc(var(--header-height) + 1rem);
   align-self: start;
   margin: 1.25rem 1.25rem 1.25rem 0;
-  padding: clamp(2rem, 4vw, 4rem) var(--product-summary-gutter);
+  padding: clamp(1rem, 2vw, 2rem) var(--product-summary-gutter);
   border-radius: 1.2rem;
   background: var(--paper);
 }
@@ -2433,7 +2433,7 @@ img {
   margin: 0 0 2.1875rem;
   color: rgba(24, 32, 25, 0.72);
   font-family: var(--serif);
-  font-size: var(--type-serif-body);
+  font-size: var(--type-serif-label);
   line-height: var(--leading-body);
 }
 
@@ -2473,9 +2473,9 @@ img {
 
 .purchase-price strong {
   color: var(--deep-forest);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  font-weight: 500;
+  font-family: var(--sans);
+  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+  font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
 }
@@ -2493,7 +2493,7 @@ img {
   padding: 1rem 0;
   border-block: 1px solid var(--line);
   color: rgba(24, 32, 25, 0.62);
-  font-size: var(--type-sans-small);
+  font-size: var(--type-sans-lead);
   letter-spacing: var(--tracking-label);
   line-height: var(--leading-compact);
   text-transform: var(--case-none);
@@ -2651,7 +2651,7 @@ img {
   border-top: 1px solid var(--line);
   color: rgba(24, 32, 25, 0.5);
   font-size: var(--type-sans-body);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: var(--tracking-normal);
   line-height: var(--leading-compact);
   text-transform: var(--case-none);
@@ -6954,7 +6954,7 @@ img {
     grid-template-columns: 1fr;
   }
   .product-gallery {
-    gap: 0.75rem;
+    gap: 1.25rem;
     padding: 0.75rem;
   }
   .product-gallery__item:first-child,
@@ -6968,10 +6968,10 @@ img {
     object-position: center;
   }
   .product-summary {
-    --product-summary-gutter: 1.375rem;
+    --product-summary-gutter: 0.6875rem;
     position: static;
     margin: 0.75rem 1.375rem 1.375rem;
-    padding: 2rem var(--product-summary-gutter) 3rem;
+    padding: 1rem var(--product-summary-gutter) 1.5rem;
   }
   .product-summary h1 {
     font-size: var(--type-serif-display);
