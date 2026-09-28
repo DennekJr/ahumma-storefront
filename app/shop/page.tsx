@@ -158,10 +158,8 @@ export default async function ShopPage({
       <header className="collection-head collection-head--intro">
         <h1>Find what&apos;s right for your skin.</h1>
         <p>
-          <p>
-            Explore rich body butters and African black soap, made in Nigeria
-            for Black and brown skin.
-          </p>
+          Explore rich body butters and African black soap, made in Nigeria for
+          Black and brown skin.
         </p>
       </header>
 
