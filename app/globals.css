@@ -2017,7 +2017,7 @@ img {
   display: grid;
   width: 100%;
   min-height: 32rem;
-  grid-template-columns: minmax(0, 57.5fr) minmax(0, 42.5fr);
+  grid-template-columns: minmax(0, 50fr) minmax(0, 50fr);
   gap: 2rem;
   width: min(100%, 90rem);
   margin: 0 auto 3rem;
@@ -2034,17 +2034,17 @@ img {
   display: flex;
   width: 100%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   max-width: none;
   margin: 0;
   padding: 2rem 0.5rem;
 }
 
 .footer-testimonial__quote-mark {
-  width: 1.75rem;
+  width: 2.8rem;
   height: auto;
   margin-top: -0.75rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
   transform: scaleX(0.8);
   transform-origin: left bottom;
   fill: currentColor;
