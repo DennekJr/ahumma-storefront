@@ -2373,18 +2373,31 @@ img {
   object-fit: cover;
 }
 
-.product-gallery__item > span {
+.product-gallery__back {
   position: absolute;
   z-index: 2;
   top: 1.125rem;
   left: 1.125rem;
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
   padding: 0.4375rem 0.625rem;
   border-radius: 1.4rem;
-  background: var(--rose);
+  background: var(--deep-forest);
   color: var(--porcelain);
   font-family: var(--serif);
   font-size: var(--type-serif-label);
   letter-spacing: var(--tracking-heading);
+  text-decoration: none;
+}
+
+.product-gallery__back:hover {
+  background: var(--forest);
+}
+
+.product-gallery__back:focus-visible {
+  outline: 2px solid var(--deep-forest);
+  outline-offset: 3px;
 }
 
 .product-summary {

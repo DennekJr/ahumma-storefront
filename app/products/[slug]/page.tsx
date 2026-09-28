@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { EditorialRow } from "@/components/editorial-row";
@@ -102,11 +102,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 sizes="(max-width: 850px) 100vw, 50vw"
               />
               {index === 0 ? (
-                <span>
-                  {product.preorderable
-                    ? "Small-batch preorder"
-                    : "Ahumma essential"}
-                </span>
+                <Link className="product-gallery__back" href="/shop">
+                  <ArrowLeft size={15} /> Back to shop
+                </Link>
               ) : null}
             </div>
           ))}

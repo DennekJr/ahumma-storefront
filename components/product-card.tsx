@@ -76,7 +76,9 @@ export function ProductCard({
         ) : (
           <span className="product-image-placeholder">Ahumma</span>
         )}
-        {!hideStatus && <span className="product-card__status">{status}</span>}
+        {!hideStatus && (product.preorderable || product.soldOut) ? (
+          <span className="product-card__status">{status}</span>
+        ) : null}
       </Link>
       <div className="product-card__details">
         <div>
