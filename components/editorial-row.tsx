@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+
 import { editorialFor } from "@/lib/concerns";
 import type { ProductSummary } from "@/lib/store-types";
 
@@ -17,16 +17,20 @@ import type { ProductSummary } from "@/lib/store-types";
  * Renders nothing when a product has no editorial imagery, so the grid closes
  * up rather than showing a gap.
  */
-export function EditorialRow({ product }: { product: ProductSummary | undefined }) {
+export function EditorialRow({
+  product,
+}: {
+  product: ProductSummary | undefined;
+}) {
   const art = editorialFor(product);
   if (!art || !product) return null;
 
   return (
-    <section
-      className="editorial-row"
-      aria-label={`${product.name} in detail`}
-    >
-      <Link className="editorial-row__figure" href={`/products/${product.slug}`}>
+    <section className="editorial-row" aria-label={`${product.name} in detail`}>
+      <Link
+        className="editorial-row__figure"
+        href={`/products/${product.slug}`}
+      >
         <Image
           src={art.portrait}
           alt={art.alt}
@@ -44,10 +48,6 @@ export function EditorialRow({ product }: { product: ProductSummary | undefined 
           fill
           sizes="(max-width: 700px) 100vw, 50vw"
         />
-        <span className="editorial-row__caption">
-          <small>{product.name}</small>
-          Read the ritual <ArrowRight size={15} />
-        </span>
       </Link>
     </section>
   );

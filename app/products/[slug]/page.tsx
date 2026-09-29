@@ -2,20 +2,20 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, Leaf, PackageCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Leaf } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { EditorialRow } from "@/components/editorial-row";
 import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
-import { ProductIngredientStory } from "@/components/product-ingredient-story";
+
 import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProduct, getProducts } from "@/lib/frontdesk";
-import { nextEditorialProduct } from "@/lib/concerns";
+
 import {
-  getProductIngredients,
+  getProductStoryCopy,
   getRitualPairings,
 } from "@/lib/product-merchandising";
 import { buildDetailRows } from "@/lib/product-details";
@@ -56,11 +56,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
         : []
   ).slice(0, 4);
   const info = product.info;
+  const storyDescription = getProductStoryCopy(product);
   const ritualPairings = getRitualPairings(product, products);
   const detailRows = buildDetailRows(info);
-  // The break row cross-sells: it shows a different product with editorial art,
-  // never the one being viewed, whose own gallery is already above.
-  const editorialPick = nextEditorialProduct(products, product.ref);
+
   const descriptionParagraphs = (product.description ?? "")
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
@@ -143,7 +142,23 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </h2>
         </div>
         <div className="product-story__body">
-          <p>{info?.longDescription ?? product.description}</p>
+          {storyDescription ? (
+            <>
+              <p>{storyDescription.summary}</p>
+              {storyDescription.ingredients.length ? (
+                <ul className="product-story__ingredients">
+                  {storyDescription.ingredients.map((ingredient) => (
+                    <li key={ingredient.name}>
+                      <strong>{ingredient.name}</strong>
+                      {ingredient.description ? (
+                        <p>{ingredient.description}</p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </>
+          ) : null}
 
           {descriptionBlocks.length ? (
             <ProductDescriptionBlocks blocks={descriptionBlocks} />
@@ -151,31 +166,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
-      {editorialPick ? (
-        <div className="product-editorial">
-          <EditorialRow product={editorialPick} />
-        </div>
-      ) : null}
+      <div className="product-editorial">
+        <EditorialRow product={product} />
+      </div>
 
       <section className="product-details-grid">
-        <article>
-          <Leaf size={22} strokeWidth={1.4} />
-
-          <h3>Make room for the ritual.</h3>
-          <p>
-            {info?.careInstructions ??
-              "Apply generously to clean skin and take your time."}
-          </p>
-        </article>
-        <article>
-          <PackageCheck size={22} strokeWidth={1.4} />
-
-          <h3>Rooted in Lagos.</h3>
-          <p>
-            {info?.sustainabilityText ??
-              "Considered body care made with high-performing African botanicals."}
-          </p>
-        </article>
         {detailRows.length ? (
           <dl>
             {detailRows.map((row) => (
@@ -186,18 +181,34 @@ export default async function ProductPage({ params }: ProductPageProps) {
             ))}
           </dl>
         ) : null}
+
+        <article>
+          <Leaf size={22} strokeWidth={1.4} />
+
+          <h3>Make room for the ritual.</h3>
+          <p>
+            {[
+              info?.careInstructions ??
+                "Apply generously to clean skin and take your time.",
+              info?.sustainabilityText ??
+                "Considered body care made with high-performing African botanicals.",
+            ].join(" ")}
+          </p>
+        </article>
       </section>
 
-      <ProductIngredientStory ingredients={getProductIngredients(product)} />
+      <section className="product-closing">
+        <p>
+          A ritual worth returning to.
+          <br />
+          Care for body and self.
+        </p>
+        <Link href="/shop">Shop the full collection</Link>
+      </section>
 
       {ritualPairings.length ? (
-        <section className="shop-section related-products">
-          <div className="section-heading related-products__heading">
-            <div>
-              <h2>Build the ritual.</h2>
-              <p>{ritualPairings[0].reason}</p>
-            </div>
-          </div>
+        <section className="saved-products related-products">
+          <h2>Pairs well with</h2>
           <div className="collection-grid">
             {ritualPairings.map(({ product: pairedProduct }, index) => (
               <CollectionCard
@@ -209,15 +220,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </section>
       ) : null}
-
-      <section className="product-closing">
-        <p>
-          A ritual worth returning to.
-          <br />
-          Care for body and self.
-        </p>
-        <Link href="/shop">Shop the full collection</Link>
-      </section>
       <SiteFooter />
     </main>
   );

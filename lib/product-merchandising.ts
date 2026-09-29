@@ -1,3 +1,4 @@
+import { INGREDIENT_STORY } from "@/lib/homepage";
 import type { ProductDetail, ProductSummary } from "@/lib/store-types";
 
 type RitualPairing = {
@@ -39,17 +40,17 @@ const RITUAL_PAIRINGS: RitualPairing[] = [
   {
     productMatches: ["ara", "black soap"],
     pairedProducts: ["sika", "dream"],
-    reason: "Cleanse first, then seal in softness.",
+    reason: "Follow your cleanse with a nourishing body butter.",
   },
   {
     productMatches: ["sika"],
     pairedProducts: ["ara", "dream"],
-    reason: "A bright, everyday finish after a considered cleanse.",
+    reason: "Start with a gentle cleanse or finish with richer moisture.",
   },
   {
     productMatches: ["dream"],
     pairedProducts: ["ara", "sika"],
-    reason: "A slow, nourishing finish for after the shower.",
+    reason: "Pair with a gentle cleanse or a lighter layer for everyday care.",
   },
 ];
 
@@ -65,6 +66,32 @@ export function getProductIngredients(product: ProductDetail) {
   );
 
   return fallback?.ingredients ?? [];
+}
+
+export function getProductStoryCopy(product: ProductDetail) {
+  const ingredients = getProductIngredients(product);
+
+  if (ingredients.length) {
+    const ingredientList = new Intl.ListFormat("en", {
+      style: "long",
+      type: "conjunction",
+    }).format(ingredients);
+
+    return {
+      summary: `A thoughtful blend of ${ingredientList}.`,
+      ingredients: ingredients.map((name) => ({
+        name,
+        description: INGREDIENT_STORY.find(
+          (entry) => entry.name.toLowerCase() === name.toLowerCase(),
+        )?.body,
+      })),
+    };
+  }
+
+  const longDescription = product.info?.longDescription;
+  return longDescription && longDescription !== product.description
+    ? { summary: longDescription, ingredients: [] }
+    : null;
 }
 
 export function getRitualPairings(

@@ -2335,7 +2335,6 @@ img {
 .product-intro {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  border-bottom: 1px solid var(--line);
 }
 
 .product-gallery {
@@ -2690,7 +2689,7 @@ img {
 }
 
 .product-story h2 {
-  font-size: var(--type-serif-display);
+  font-size: clamp(2.5rem, 4.4vw, 5rem);
   margin: 0;
 }
 
@@ -2699,9 +2698,37 @@ img {
 }
 
 .product-story__body > p {
-  margin: 0 0 2.625rem;
+  margin: 0;
   font-family: var(--serif);
   font-size: var(--type-serif-body);
+  line-height: var(--leading-body);
+}
+
+.product-story__ingredients {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-story__ingredients li {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.7fr) minmax(0, 1.3fr);
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.product-story__ingredients strong {
+  font-size: var(--type-sans-lead);
+  font-weight: 400;
+}
+
+.product-story__ingredients li p {
+  margin: 0;
+  color: rgba(24, 32, 25, 0.68);
+  font-size: var(--type-sans-body);
   line-height: var(--leading-body);
 }
 
@@ -2721,20 +2748,31 @@ img {
 
 .product-details-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.9fr;
-  background: var(--line);
-  gap: 1px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: 7fr 3fr;
+  padding: 2.4rem var(--gutter);
+  background: var(--paper);
+  gap: 0;
 }
 
 .product-details-grid > * {
   min-height: 22.5rem;
-  padding: 3.4375rem 4.5vw;
-  background: var(--porcelain);
+  padding: 1.2rem 4.5vw 1.2rem 2.25vw;
+  background: var(--paper);
+}
+
+.product-details-grid > *:not(:last-child) {
+  border-right: 1px solid var(--line);
+}
+
+.product-details-grid article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .product-details-grid article > svg {
+  width: 3.4375rem !important;
+  height: 3.4375rem !important;
   margin-bottom: 3.25rem;
 }
 .product-details-grid h3 {
@@ -2755,7 +2793,6 @@ img {
 
 .product-details-grid dl {
   margin: 0;
-  border-top: 1px solid var(--line);
 }
 
 .product-details-grid dl > div {
@@ -2769,11 +2806,15 @@ img {
   line-height: var(--leading-compact);
 }
 
+.product-details-grid dl > div:last-child {
+  border-bottom: 0;
+}
+
 .product-details-grid dt {
-  color: rgba(24, 32, 25, 0.58);
-  font-size: var(--type-sans-small);
+  color: rgba(24, 32, 25, 0.72);
+  font-size: var(--type-sans-body);
   font-weight: 400;
-  letter-spacing: var(--tracking-label);
+  letter-spacing: -0.015em;
   line-height: var(--leading-compact);
   text-transform: var(--case-none);
 }
@@ -2784,7 +2825,9 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-label);
   letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-body);
   text-align: right;
+  text-wrap: balance;
 }
 
 /* Product description blocks (info.descriptionBlocks) */
@@ -5110,7 +5153,7 @@ img {
 }
 
 .saved-products {
-  padding: 0 var(--gutter) 5rem;
+  padding: var(--gutter);
 }
 
 .saved-products h2 {
@@ -5365,14 +5408,19 @@ img {
 
 .product-editorial {
   padding: 0 var(--gutter);
+  background: var(--paper);
 }
 
 .product-editorial .editorial-row {
   margin-top: 0;
 }
 
+.product-editorial .editorial-row__figure {
+  aspect-ratio: 9 / 10;
+}
+
 .related-products .collection-grid {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
 .product-ingredients {
@@ -6651,11 +6699,9 @@ img {
 
 /* Related products */
 .related-products {
-  border-top: 1px solid var(--line);
-}
-
-.related-products__heading {
-  align-items: end;
+  padding-top: 3.6rem;
+  padding-bottom: 1.2rem;
+  border-top: 0;
 }
 
 .related-products__link {
@@ -6999,14 +7045,18 @@ img {
     padding: 5.9375rem 1.375rem;
   }
   .product-story h2 {
-    font-size: var(--type-serif-display);
+    font-size: clamp(2.5rem, 4.4vw, 5rem);
   }
   .product-story__body > p {
     font-size: var(--type-serif-label);
   }
   .product-details-grid > * {
     min-height: 0;
-    padding: 3.625rem 1.375rem;
+    padding: 1.2rem 1.375rem 1.2rem 0.6875rem;
+  }
+  .product-details-grid > *:not(:last-child) {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
   .product-details-grid article > svg {
     margin-bottom: 2.1875rem;
