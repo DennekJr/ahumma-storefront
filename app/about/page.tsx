@@ -66,7 +66,9 @@ export default async function AboutPage() {
             something we should never have had to forget:
           </p>
           <p className="about-mantra">
-            You are enough. You are beautiful by design.
+            You are enough.
+            <br />
+            You are beautiful by design.
           </p>
           <p>
             For too long, beauty has been presented as something to achieve—to
@@ -83,49 +85,10 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="story-section" id="black-brown-skin">
-        <div className="story-copy">
-          <h2>Made for Black & brown skin.</h2>
-        </div>
-        <div className="story-body">
-          <p className="about-mantra">Your skin. Your ritual. Your beauty.</p>
-          <p>
-            Ahumma was created with Black and brown skin at the heart of the
-            brand. Our products are made to celebrate the skin you’re in—not ask
-            you to become something else.
-          </p>
-          <p>
-            We believe beautiful body care should feel good on your skin, look
-            beautiful on your shelf and make you feel good using it.
-          </p>
-        </div>
-      </section>
-
-      <section className="story-section" id="from-nigeria">
-        <div className="story-copy">
-          <h2>Born in Nigeria. Made for the world.</h2>
-        </div>
-        <div className="story-body">
-          <p>
-            Ahumma is proudly Nigerian. Our inspiration comes from the
-            ingredients, stories and beauty traditions that surround us.
-          </p>
-          <p>
-            We are building a modern African body-care brand for people in
-            Lagos, New York, London, Paris and everywhere in between—one that
-            carries its heritage confidently and feels at home in the world.
-          </p>
-        </div>
-      </section>
-
       <section className="ingredient-section" id="ingredients">
         <div className="section-heading">
           <div>
-            <h2>
-              Good things grow from
-              <br />
-              the right ingredients.
-            </h2>
+            <h2>Every ingredient has a reason.</h2>
           </div>
         </div>
         <div className="ingredient-grid">
@@ -136,6 +99,42 @@ export default async function AboutPage() {
               products={products}
             />
           ))}
+        </div>
+      </section>
+
+      <section className="about-audience-section" id="black-brown-skin">
+        <div className="about-audience-section__media">
+          <video
+            src="/videos/ingredients-video.webm"
+            poster="/images/sika-texture.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="about-audience-section__copy">
+          <h2>Made for Black & brown skin.</h2>
+          <p>
+            Ahumma was created with Black and brown skin at the heart of the
+            brand. Our products are made to celebrate the skin you’re in—not ask
+            you to become something else.
+          </p>
+          <p>
+            We believe beautiful body care should feel good on your skin, look
+            beautiful on your shelf and make you feel good using it.
+          </p>
+          <p>
+            Our inspiration comes from the ingredients, stories and beauty
+            traditions that surround us.
+          </p>
+          <p>
+            We are building a modern African body-care brand for people in
+            Lagos, New York, London, Paris and everywhere in between—one that
+            carries its heritage confidently and feels at home in the world.
+          </p>
         </div>
       </section>
 

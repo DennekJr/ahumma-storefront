@@ -22,17 +22,27 @@ export function IngredientStoryCard({
   return (
     <article>
       <h3>{name}</h3>
-      <p>{body}</p>
-      {matchedProducts.length ? (
-        <div className="ingredient-story-card__products">
-          <span>Found in</span>
-          {matchedProducts.map((product) => (
-            <Link key={product.ref} href={`/products/${product.slug}`}>
-              {product.name}
-            </Link>
-          ))}
-        </div>
-      ) : null}
+      <p>
+        {body}
+        {matchedProducts.length ? (
+          <>
+            <br />
+            Found in
+            <br />
+            {matchedProducts.map((product, index) => (
+              <span key={product.ref}>
+                {index > 0 ? ", " : null}
+                <Link
+                  className="ingredient-story-card__product-link"
+                  href={`/products/${product.slug}`}
+                >
+                  {product.name}
+                </Link>
+              </span>
+            ))}
+          </>
+        ) : null}
+      </p>
     </article>
   );
 }
