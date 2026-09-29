@@ -25,13 +25,14 @@ export default async function AboutPage() {
 
       <section className="faq-hero about-intro">
         <h1>
-          Care should
+          Body care rooted in Africa.
           <br />
-          feel this good.
+          Made for the world.
         </h1>
         <p>
-          Ahumma is Nigerian-born body care for Black and brown skin, built on a
-          simple belief: you are enough, and you are beautiful by design.
+          Ahumma is for Africans everywhere, with premium body care inspired by
+          our roots and the belief that you are enough, just as you are. Our
+          rich body butters bring that care into your everyday ritual.
         </p>
       </section>
 
