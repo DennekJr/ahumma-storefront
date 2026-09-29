@@ -1016,37 +1016,77 @@ img {
 }
 
 .about-belief-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: stretch;
-  background: var(--paper);
-}
-
-.about-belief-section__image {
   position: relative;
-  min-height: 34rem;
-  overflow: hidden;
+  display: grid;
+  min-height: clamp(40rem, 60vw, 54rem);
+  overflow: clip;
+  place-items: center;
+  padding: 4rem var(--gutter);
+  clip-path: inset(0);
+  isolation: isolate;
+  background: var(--deep-forest);
 }
 
-.about-belief-section__image img {
+.about-belief-section::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(17, 27, 21, 0.3);
+  content: "";
+}
+
+.about-belief-section__video {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
-  object-position: center;
 }
 
 .about-belief-section__copy {
+  position: relative;
+  z-index: 2;
   display: flex;
-  max-width: 38rem;
+  width: min(37rem, calc(100% - 2rem));
   flex-direction: column;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 5.5rem var(--gutter);
+  gap: 1.25rem;
+  margin-inline: auto;
+  padding: 3.25rem;
+  border-radius: 1.25rem;
+  background: var(--porcelain);
   font-family: var(--serif);
   font-size: var(--type-serif-body);
   line-height: var(--leading-body);
 }
 
+.about-belief-section__copy h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.2vw, 1.75rem);
+  font-weight: 400;
+  line-height: var(--leading-compact);
+}
+
+.about-belief-section__copy .about-mantra {
+  font-size: clamp(1.5rem, 2.2vw, 1.75rem) !important;
+  line-height: var(--leading-compact) !important;
+}
+
 .about-belief-section__copy p {
   margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-belief-section {
+    clip-path: none;
+    background-image: url("/images/love-your-skin.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .about-belief-section__video {
+    display: none;
+  }
 }
 
 .section-heading h2,
@@ -6899,14 +6939,12 @@ img {
     padding: 5.625rem 1.375rem 6.25rem;
   }
   .about-belief-section {
-    grid-template-columns: 1fr;
-  }
-  .about-belief-section__image {
-    min-height: 24rem;
+    min-height: 0;
+    padding: 3rem 1rem;
   }
   .about-belief-section__copy {
-    max-width: none;
-    padding: 4rem var(--gutter);
+    width: calc(100% - 2rem);
+    padding: 2rem 1.5rem;
   }
 
   .section-heading h2,
@@ -7142,6 +7180,9 @@ img {
 }
 
 .about-page .why-section {
+  margin-inline: 4vw;
+  padding-top: 0;
+  padding-bottom: 4.375rem;
   background: var(--porcelain);
 }
 
@@ -7165,9 +7206,19 @@ img {
 
 .about-page .why-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 3rem;
+  gap: 1.5rem;
   max-width: var(--content-max);
   margin: 0 auto;
+}
+
+.about-page .why-grid article {
+  display: flex;
+  height: 18rem;
+  flex-direction: column;
+  padding: 1.75rem;
+  border: 1px solid rgba(24, 32, 25, 0.1);
+  border-radius: 0.75rem;
+  background: var(--paper);
 }
 
 .about-page .why-grid h3,
@@ -7181,12 +7232,24 @@ img {
   letter-spacing: var(--tracking-heading);
 }
 
+.about-page .why-grid h3 {
+  padding-top: 0;
+  border-top: 0;
+  font-size: var(--type-serif-label);
+  line-height: var(--leading-compact);
+}
+
 .about-page .why-grid p,
 .about-page .ingredient-grid p {
   margin: 0;
   color: rgba(24, 32, 25, 0.72);
   font-size: var(--type-sans-body);
   line-height: var(--leading-relaxed);
+}
+
+.about-page .why-grid p {
+  font-size: var(--type-sans-lead);
+  line-height: var(--leading-body);
 }
 
 .about-page .ingredient-section .section-heading {
@@ -7211,6 +7274,10 @@ img {
   .about-page .ingredient-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .about-page .why-grid {
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 780px) {
@@ -7234,6 +7301,12 @@ img {
     padding: 5.5rem var(--gutter);
   }
 
+  .about-page .why-section {
+    margin-inline: 1rem;
+    padding-top: 0;
+    padding-bottom: 2.75rem;
+  }
+
   .about-page .why-section .section-heading,
   .about-page .ingredient-section .section-heading {
     display: block;
@@ -7245,6 +7318,16 @@ img {
   .about-page .ingredient-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .about-page .why-grid {
+    gap: 1rem;
+  }
+
+  .about-page .why-grid article,
+  .about-page .why-grid article:nth-child(n) {
+    min-height: 0;
+    padding: 1.5rem;
   }
 }
 
@@ -7551,6 +7634,96 @@ img {
 
 .about-ingredients .underlined-link {
   margin-top: 3rem;
+}
+
+.about-community {
+  padding: 5rem 0 4rem;
+  background: var(--paper);
+}
+
+.about-community__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+.about-community__intro h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-compact);
+}
+
+.about-community__intro > p {
+  max-width: 42rem;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--type-serif-body);
+  line-height: var(--leading-body);
+}
+
+.about-community__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.75rem;
+  border: 1px solid var(--deep-forest);
+  border-radius: 999px;
+  color: var(--deep-forest);
+  font-size: var(--type-sans-body);
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.about-community__cta:hover,
+.about-community__cta:focus-visible {
+  background: var(--deep-forest);
+  color: var(--porcelain);
+}
+
+.about-community__gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 0 var(--gutter);
+}
+
+.about-community__image {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--sand);
+  scroll-snap-align: start;
+}
+
+.about-community__image img,
+.about-community__image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 780px) {
+  .about-community {
+    padding: 4rem 0 3rem;
+  }
+
+  .about-community__intro {
+    margin-bottom: 2rem;
+  }
+
+  .about-community__gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 780px) {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
+import { AboutCommunitySection } from "@/components/about-community-section";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { IngredientStoryCard } from "@/components/ingredient-story-card";
@@ -11,7 +11,7 @@ import { INGREDIENT_STORY, WHY_AHUMMA } from "@/lib/homepage";
 export const metadata: Metadata = {
   title: "About Ahumma",
   description:
-    "Discover Ahumma's approach to natural body care, sensory rituals, African heritage and beautiful simplicity.",
+    "Meet Ahumma: body care rooted in African beauty traditions, made in Nigeria for Africans everywhere.",
   alternates: { canonical: "/about" },
 };
 
@@ -36,39 +36,7 @@ export default async function AboutPage() {
         </p>
       </section>
 
-      <section className="about-belief-section" id="philosophy">
-        <div className="about-belief-section__image">
-          <Image
-            src="/images/love-your-skin.jpg"
-            alt="A woman enjoying a quiet body-care ritual"
-            fill
-            sizes="(max-width: 780px) 100vw, 50vw"
-          />
-        </div>
-        <div className="about-belief-section__copy">
-          <p>
-            Ahumma is a Nigerian-born premium body-care brand for Black and
-            brown skin, created from a simple belief: you are enough, and you
-            are beautiful by design.
-          </p>
-          <p>
-            Care should feel like a ritual, not a correction. Beautiful,
-            thoughtful body care for skin that deserves to be nourished,
-            softened and celebrated.
-          </p>
-        </div>
-      </section>
-
       <section className="why-section" id="why">
-        <div className="section-heading">
-          <div>
-            <h2>
-              Why care should
-              <br />
-              feel this good.
-            </h2>
-          </div>
-        </div>
         <div className="why-grid">
           {WHY_AHUMMA.map((reason) => (
             <article key={reason.title}>
@@ -76,6 +44,77 @@ export default async function AboutPage() {
               <p>{reason.body}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="about-belief-section" id="story">
+        <video
+          className="about-belief-section__video"
+          src="/videos/explore-media.webm"
+          poster="/images/love-your-skin.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <div className="about-belief-section__copy">
+          <h2>We started with a belief.</h2>
+          <p>
+            Ahumma was born from a desire to remind Africans around the world of
+            something we should never have had to forget:
+          </p>
+          <p className="about-mantra">
+            You are enough. You are beautiful by design.
+          </p>
+          <p>
+            For too long, beauty has been presented as something to achieve—to
+            alter, correct or become. We wanted to create something different: a
+            brand that celebrates Black and brown skin as it is, drawing from
+            African ingredients and beauty traditions.
+          </p>
+          <p id="philosophy">
+            Ahumma is a Nigerian-born premium body-care brand for Black and
+            brown skin. We believe care should feel like a ritual, not a
+            correction: thoughtful body care that nourishes, softens and
+            celebrates you.
+          </p>
+        </div>
+      </section>
+
+      <section className="story-section" id="black-brown-skin">
+        <div className="story-copy">
+          <h2>Made for Black & brown skin.</h2>
+        </div>
+        <div className="story-body">
+          <p className="about-mantra">Your skin. Your ritual. Your beauty.</p>
+          <p>
+            Ahumma was created with Black and brown skin at the heart of the
+            brand. Our products are made to celebrate the skin you’re in—not ask
+            you to become something else.
+          </p>
+          <p>
+            We believe beautiful body care should feel good on your skin, look
+            beautiful on your shelf and make you feel good using it.
+          </p>
+        </div>
+      </section>
+
+      <section className="story-section" id="from-nigeria">
+        <div className="story-copy">
+          <h2>Born in Nigeria. Made for the world.</h2>
+        </div>
+        <div className="story-body">
+          <p>
+            Ahumma is proudly Nigerian. Our inspiration comes from the
+            ingredients, stories and beauty traditions that surround us.
+          </p>
+          <p>
+            We are building a modern African body-care brand for people in
+            Lagos, New York, London, Paris and everywhere in between—one that
+            carries its heritage confidently and feels at home in the world.
+          </p>
         </div>
       </section>
 
@@ -100,6 +139,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      <AboutCommunitySection />
       <SiteFooter />
     </main>
   );
