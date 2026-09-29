@@ -3278,7 +3278,7 @@ img {
 
 .faq-entry__answer p {
   margin: 0 0 0.9375rem;
-  font-size: var(--type-sans-body);
+  font-size: var(--type-sans-ui);
   line-height: var(--leading-relaxed);
 }
 
@@ -3294,7 +3294,7 @@ img {
 
 .faq-entry__answer li {
   margin-bottom: 0.5rem;
-  font-size: var(--type-sans-body);
+  font-size: var(--type-sans-ui);
   line-height: var(--leading-relaxed);
 }
 
