@@ -6,7 +6,7 @@ import { Bookmark, Pause, Play, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
-import { isNew } from "@/lib/shop-filters";
+
 import {
   isProductSaved,
   SAVED_PRODUCTS_CHANGE_EVENT,
@@ -42,7 +42,6 @@ export function CollectionCard({
   const displayPrice = resolveSummaryPrice(product, currency);
   const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(product.coverUrl ?? "");
   const variants = product.variantCount ?? 0;
-  const showNew = isNew(product);
 
   useEffect(() => {
     const syncSaved = () => setSaved(isProductSaved(product.ref));
@@ -130,10 +129,6 @@ export function CollectionCard({
           <span className="collection-card__badge">Sold out</span>
         ) : product.preorderable ? (
           <span className="collection-card__badge">Preorder</span>
-        ) : showNew ? (
-          <span className="collection-card__badge collection-card__badge--new">
-            New
-          </span>
         ) : null}
       </Link>
 
@@ -187,7 +182,7 @@ export function CollectionCard({
             className="product-card__action"
             href={`/products/${product.slug}`}
           >
-            Choose your care
+            View product
           </Link>
         )}
       </div>
