@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import Image from "next/image";
 import { AboutCommunitySection } from "@/components/about-community-section";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
@@ -40,6 +41,15 @@ export default async function AboutPage() {
         <div className="why-grid">
           {WHY_AHUMMA.map((reason) => (
             <article key={reason.title}>
+              <div className="why-grid__image">
+                <Image
+                  src={reason.image}
+                  alt={reason.alt}
+                  fill
+                  sizes="(max-width: 780px) 92vw, 30vw"
+                />
+              </div>
+              <span className="why-grid__number">{reason.number}</span>
               <h3>{reason.title}</h3>
               <p>{reason.body}</p>
             </article>

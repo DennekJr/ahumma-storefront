@@ -14,15 +14,15 @@ export const PARTNER_FORM_URL =
 export const PARTNER_GOALS = [
   {
     title: "Content at scale",
-    body: "Authentic, consistent content across beauty, UGC, motherhood, lifestyle and men's skincare — in Nigeria and the United States.",
+    body: "Create consistent content in beauty, UGC, motherhood, lifestyle or men's skincare for audiences in Nigeria and the United States.",
   },
   {
     title: "Real earning opportunity",
-    body: "A low-risk way to earn from work you are already making, paid on what your audience actually buys.",
+    body: "Earn commission on sales made with your code through content you already create.",
   },
   {
     title: "Growing with the brand",
-    body: "As Ahumma scales, its most visible advocates should be the people who were here from the beginning.",
+    body: "Grow with Ahumma from the beginning, with opportunities to take on larger campaigns as the brand expands.",
   },
 ];
 
@@ -50,7 +50,7 @@ export const PARTNER_TIERS: PartnerTier[] = [
       "Monthly engagement session",
     ],
     progression:
-      "Hold 3+ quality pieces a month and ₦500,000 ($368) in sales through your code, across two consecutive months.",
+      "For two consecutive months, create at least 3 quality pieces each month and generate ₦500,000 ($368) in sales through your code.",
   },
   {
     name: "Standard Partner",
@@ -65,7 +65,7 @@ export const PARTNER_TIERS: PartnerTier[] = [
       "Eligible for brand features",
     ],
     progression:
-      "Hold 6+ quality pieces a month and ₦1,000,000 ($735) in sales through your code, across two consecutive months.",
+      "For two consecutive months, create at least 6 quality pieces each month and generate ₦1,000,000 ($735) in sales through your code.",
   },
   {
     name: "Elite Partner",
@@ -84,20 +84,20 @@ export const PARTNER_TIERS: PartnerTier[] = [
 ];
 
 export const QUALITY_CONTENT = [
-  "Follows the campaign brief and Ahumma's content pillars.",
-  "Clear audio and visuals — nothing rushed or low-effort.",
-  "Carries your discount code or tag, posted inside the campaign window.",
-  "Sounds like you, not a copy-paste script.",
+  "Follow the campaign brief and Ahumma's content pillars.",
+  "Use clear audio and visuals; take the time to make each piece feel considered.",
+  "Include your discount code or tag, and post within the campaign window.",
+  "Keep the content in your own voice—not a copy-paste script.",
 ];
 
 export const ONBOARDING_STEPS = [
   {
     title: "Welcome",
-    body: "You apply or are invited, and the Partner Network Manager sends a short video explaining the vision and answering questions.",
+    body: "After you apply or receive an invitation, the Partner Network Manager sends a short video about the vision and answers your questions.",
   },
   {
     title: "Your kit",
-    body: "A digital welcome kit: brand guidelines, content pillars, do's and don'ts, the code of conduct, and how the community works.",
+    body: "Get a digital welcome kit with brand guidelines, content pillars, do's and don'ts, the code of conduct and community details.",
   },
   {
     title: "Community access",
@@ -105,34 +105,34 @@ export const ONBOARDING_STEPS = [
   },
   {
     title: "First content",
-    body: "You submit your first piece within the first week, with feedback from the Partner Network Manager.",
+    body: "Share your first piece within your first week and get feedback from the Partner Network Manager.",
   },
   {
     title: "Full integration",
-    body: "You join the monthly content calendar, prompts and engagement sessions.",
+    body: "Take part in the monthly content calendar, prompts and engagement sessions.",
   },
 ];
 
 export const PARTNER_BENEFITS = [
   {
     title: "Branding & growth sessions",
-    body: "Regular sessions to sharpen your personal brand, content strategy and on-camera confidence.",
+    body: "Build your personal brand, sharpen your content strategy and grow your on-camera confidence in regular sessions.",
   },
   {
     title: "Brand visibility",
-    body: "Your content reposted on Ahumma's official channels, reaching beyond your own following.",
+    body: "Get the chance to be reposted on Ahumma's official channels and reach beyond your own following.",
   },
   {
     title: "Community & network",
-    body: "A real support system of creators across Nigeria and the United States to collaborate with.",
+    body: "Meet and collaborate with creators across Nigeria and the United States.",
   },
   {
-    title: "Ongoing access",
-    body: "Consistent product, monthly sessions, and a direct line to the brand rather than a faceless program.",
+    title: "A direct line to Ahumma",
+    body: "Stay connected to the people behind the brand throughout your partnership.",
   },
   {
     title: "Long-term opportunity",
-    body: "Early, high-performing partners are best placed for larger campaigns and paid ambassador roles as Ahumma grows.",
+    body: "Early partners who perform well may be considered for larger campaigns and paid ambassador roles as Ahumma grows.",
   },
 ];
 

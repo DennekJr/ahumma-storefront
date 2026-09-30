@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ArrowRight, Check } from "lucide-react";
+import { AboutCommunityGallery } from "@/components/about-community-section";
 import { SiteFooter } from "@/components/site-footer";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { PartnerApplicationForm } from "@/components/partner-application-form";
@@ -41,24 +42,23 @@ export default function PartnerNetworkPage() {
       <SiteHeader />
 
       <header className="partner-hero">
-        <h1>
-          Be the voice
-          <br />
-          of the ritual.
-        </h1>
+        <h1>Be the voice of the ritual.</h1>
         <p>
-          A community of trusted, paid creators growing with Ahumma as it moves
-          from a Nigerian favourite to a globally recognised, melanin-first
-          body-care name.
+          Create with Ahumma, earn commission, and grow alongside a Nigerian
+          body-care brand made for melanin-rich skin.
         </p>
         <a className="partner-apply" href="#apply">
-          Apply to join <ArrowRight size={17} />
+          Apply to become a partner <ArrowRight size={17} />
         </a>
       </header>
 
+      <section className="partner-community-gallery">
+        <AboutCommunityGallery />
+      </section>
+
       <section className="partner-goals" aria-labelledby="goals-heading">
         <div className="partner-section-heading">
-          <h2 id="goals-heading">Three things at once.</h2>
+          <h2 id="goals-heading">What you get from growing with Ahumma.</h2>
         </div>
         <div className="partner-goal-grid">
           {PARTNER_GOALS.map((goal) => (
@@ -67,6 +67,22 @@ export default function PartnerNetworkPage() {
               <p>{goal.body}</p>
             </article>
           ))}
+          {PARTNER_BENEFITS.map((benefit) => (
+            <article key={benefit.title}>
+              <h3>{benefit.title}</h3>
+              <p>{benefit.body}</p>
+            </article>
+          ))}
+          <article>
+            <h3>Bring someone with you</h3>
+            <p>
+              Refer a creator, and once they reach Standard Partner you earn
+              <strong> 1% of what they sell</strong> for the following three
+              months. The boost only starts once they have proven themselves at
+              Standard, and it stacks with every creator you bring who gets
+              there.
+            </p>
+          </article>
         </div>
       </section>
 
@@ -78,8 +94,8 @@ export default function PartnerNetworkPage() {
             in the same place.
           </h2>
           <p>
-            You grow from there on consistency, content quality and what your
-            code sells. Reviews happen monthly.
+            Move up through consistent, quality content and sales through your
+            code. We review partners every month.
           </p>
         </div>
 
@@ -127,29 +143,6 @@ export default function PartnerNetworkPage() {
         </div>
       </section>
 
-      <section className="partner-quality" aria-labelledby="quality-heading">
-        <div className="partner-section-heading">
-          <h2 id="quality-heading">What counts as quality.</h2>
-        </div>
-        <ul className="partner-quality-list">
-          {QUALITY_CONTENT.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="partner-referral" aria-labelledby="referral-heading">
-        <div>
-          <h2 id="referral-heading">Bring someone with you.</h2>
-        </div>
-        <p>
-          Refer a creator, and once they reach Standard Partner you earn
-          <strong> 1% of what they sell</strong> for the following three months.
-          The boost only starts once they have proven themselves at Standard,
-          and it stacks with every creator you bring who gets there.
-        </p>
-      </section>
-
       <section
         className="partner-onboarding"
         aria-labelledby="onboarding-heading"
@@ -161,32 +154,28 @@ export default function PartnerNetworkPage() {
             to first post.
           </h2>
         </div>
-        <ol className="partner-steps">
-          {ONBOARDING_STEPS.map((step, index) => (
-            <li key={step.title}>
-              <span className="partner-step__number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="partner-benefits" aria-labelledby="benefits-heading">
-        <div className="partner-section-heading">
-          <h2 id="benefits-heading">More than a commission.</h2>
-        </div>
-        <div className="partner-benefit-grid">
-          {PARTNER_BENEFITS.map((benefit) => (
-            <article key={benefit.title}>
-              <h3>{benefit.title}</h3>
-              <p>{benefit.body}</p>
-            </article>
-          ))}
+        <div className="partner-practice-grid">
+          <div>
+            <h3>What makes content count.</h3>
+            <ul className="partner-quality-list">
+              {QUALITY_CONTENT.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <ol className="partner-steps">
+            {ONBOARDING_STEPS.map((step, index) => (
+              <li key={step.title}>
+                <span className="partner-step__number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -198,8 +187,8 @@ export default function PartnerNetworkPage() {
         <div className="partner-section-heading">
           <h2 id="apply-heading">Tell us about your work.</h2>
           <p>
-            Applications are reviewed by the Partner Network Manager. Everyone
-            starts as a Founding Partner.
+            The Partner Network Manager reviews every application. All new
+            partners begin as Founding Partners.
           </p>
         </div>
         <PartnerApplicationForm />

@@ -33,6 +33,35 @@ const communityMedia: CommunityMedia[] = [
   },
 ];
 
+export function AboutCommunityGallery() {
+  return (
+    <div
+      className="about-community__gallery"
+      role="list"
+      aria-label="Ahumma videos and campaign imagery"
+    >
+      {communityMedia.map((media) => (
+        <div className="about-community__image" key={media.src} role="listitem">
+          {media.type === "video" ? (
+            <video
+              src={media.src}
+              poster={media.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={media.alt}
+            />
+          ) : (
+            <Image src={media.src} alt={media.alt} fill sizes="320px" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function AboutCommunitySection() {
   return (
     <section
@@ -49,34 +78,7 @@ export function AboutCommunitySection() {
           Explore the partner program
         </Link>
       </div>
-      <div
-        className="about-community__gallery"
-        role="list"
-        aria-label="Ahumma videos and campaign imagery"
-      >
-        {communityMedia.map((media) => (
-          <div
-            className="about-community__image"
-            key={media.src}
-            role="listitem"
-          >
-            {media.type === "video" ? (
-              <video
-                src={media.src}
-                poster={media.poster}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={media.alt}
-              />
-            ) : (
-              <Image src={media.src} alt={media.alt} fill sizes="320px" />
-            )}
-          </div>
-        ))}
-      </div>
+      <AboutCommunityGallery />
     </section>
   );
 }

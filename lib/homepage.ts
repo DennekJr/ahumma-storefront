@@ -48,20 +48,25 @@ export const RITUAL_PRODUCTS = [
 
 export const WHY_AHUMMA = [
   {
-    title: "Natural ingredients",
-    body: "Thoughtfully selected plant butters, oils and African beauty ingredients chosen for their nourishing qualities and sensory experience.",
+    number: "I.",
+    title: "African ingredients & heritage",
+    body: "Thoughtfully selected plant butters and oils, inspired by Africa’s ingredients, rituals and beauty traditions, and chosen for modern everyday care.",
+    image: "/images/sika-ritual.jpg",
+    alt: "A woman holding Sika body butter",
   },
   {
+    number: "II.",
     title: "Sensory rituals",
     body: "Beautiful textures, rich fragrances and satisfying rituals designed to make body care something you genuinely look forward to.",
+    image: "/images/ara-ritual.jpg",
+    alt: "African black soap used in a body-care ritual",
   },
   {
-    title: "African heritage",
-    body: "Inspired by the ingredients, rituals and beauty traditions of Africa and reimagined for modern everyday life.",
-  },
-  {
+    number: "III.",
     title: "Beautiful simplicity",
     body: "Fewer, intentional products. No complicated ten-step routine. Just beautiful body care that earns its place in your ritual.",
+    image: "/images/dream-ritual.jpg",
+    alt: "Ahumma Dream Whip body butter",
   },
 ];
 
