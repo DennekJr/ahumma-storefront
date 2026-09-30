@@ -104,9 +104,9 @@ export function ConsultationForm({
   }
 
   return (
-    <form className="consultation-form" onSubmit={submit}>
-      <div className="consultation-form__grid">
-        <label>
+    <form className="consultation-form partner-form" onSubmit={submit}>
+      <div className="partner-form-grid">
+        <label className="partner-field">
           <span>First name</span>
           <input
             name="firstName"
@@ -116,7 +116,7 @@ export function ConsultationForm({
             required
           />
         </label>
-        <label>
+        <label className="partner-field">
           <span>Last name</span>
           <input
             name="lastName"
@@ -126,7 +126,7 @@ export function ConsultationForm({
             required
           />
         </label>
-        <label>
+        <label className="partner-field">
           <span>Email</span>
           <input
             name="email"
@@ -137,7 +137,7 @@ export function ConsultationForm({
             required
           />
         </label>
-        <label>
+        <label className="partner-field">
           <span>Country or region</span>
           <input
             name="region"
@@ -148,13 +148,14 @@ export function ConsultationForm({
         </label>
       </div>
 
-      <div className="consultation-form__field">
-        <span className="consultation-form__legend">
-          What would you like help with?
-        </span>
-        <div className="consultation-form__options">
+      <fieldset className="partner-categories">
+        <legend>What would you like help with?</legend>
+        <div className="partner-category-options">
           {SKIN_CONCERNS.map((concern) => (
-            <label key={concern}>
+            <label
+              className={`partner-category${form.concerns.includes(concern) ? " is-selected" : ""}`}
+              key={concern}
+            >
               <input
                 type="checkbox"
                 checked={form.concerns.includes(concern)}
@@ -164,10 +165,10 @@ export function ConsultationForm({
             </label>
           ))}
         </div>
-      </div>
+      </fieldset>
 
-      <div className="consultation-form__grid">
-        <label>
+      <div className="partner-form-grid">
+        <label className="partner-field">
           <span>What are you using now?</span>
           <textarea
             name="routine"
@@ -176,7 +177,7 @@ export function ConsultationForm({
             rows={4}
           />
         </label>
-        <label>
+        <label className="partner-field">
           <span>Products you currently use</span>
           <textarea
             name="products"
@@ -185,7 +186,7 @@ export function ConsultationForm({
             rows={4}
           />
         </label>
-        <label>
+        <label className="partner-field">
           <span>Preferred texture</span>
           <select
             name="texture"
@@ -198,7 +199,7 @@ export function ConsultationForm({
             <option>Either is fine</option>
           </select>
         </label>
-        <label>
+        <label className="partner-field">
           <span>Fragrance preference</span>
           <select
             name="fragrance"
@@ -212,7 +213,7 @@ export function ConsultationForm({
             <option>No preference</option>
           </select>
         </label>
-        <label>
+        <label className="partner-field">
           <span>Main care goal</span>
           <textarea
             name="goal"
@@ -221,7 +222,7 @@ export function ConsultationForm({
             rows={3}
           />
         </label>
-        <label>
+        <label className="partner-field">
           <span>How did you hear about Ahumma?</span>
           <input
             name="referral"
@@ -231,12 +232,15 @@ export function ConsultationForm({
         </label>
       </div>
 
-      <label className="consultation-form__consent">
+      <label className="partner-checkbox">
         <input
           type="checkbox"
           checked={form.marketingConsent}
           onChange={(event) => update("marketingConsent", event.target.checked)}
         />
+        <span className="partner-checkbox__box" aria-hidden="true">
+          <Check size={13} />
+        </span>
         <span>Keep me updated with Ahumma news and new rituals.</span>
       </label>
 
@@ -246,7 +250,11 @@ export function ConsultationForm({
           {error}
         </p>
       ) : null}
-      <button type="submit" disabled={status === "submitting"}>
+      <button
+        className="partner-form__submit"
+        type="submit"
+        disabled={status === "submitting"}
+      >
         {status === "submitting" ? "Sending…" : "Send my consultation"}
       </button>
     </form>

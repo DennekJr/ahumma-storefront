@@ -8757,21 +8757,17 @@ img {
   font-family: var(--serif);
 }
 
-.consultation-hero,
-.consultation-section {
-  padding: 6rem var(--gutter);
-}
-
 .consultation-hero {
   display: grid;
-  min-height: 34rem;
-  align-content: end;
+  justify-items: center;
   gap: 1.5rem;
-  background: var(--sand);
+  max-width: 68.75rem;
+  margin: 0 auto;
+  padding: 5.525rem 2.5vw 5.5rem;
+  text-align: center;
 }
 
-.consultation-hero h1,
-.consultation-section__intro h2 {
+.consultation-hero h1 {
   max-width: 50rem;
   margin: 0;
   font-family: var(--serif);
@@ -8779,10 +8775,6 @@ img {
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-art-display);
-}
-
-.consultation-section__intro h2 {
-  font-size: var(--type-serif-section);
 }
 
 .consultation-hero p {
@@ -8803,114 +8795,14 @@ img {
   font-family: var(--sans);
 }
 
-.consultation-section {
-  display: grid;
-  grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
-  gap: 5rem;
-}
-
-.consultation-section__intro p {
-  max-width: 18rem;
-  margin-top: 1.5rem;
-  line-height: var(--leading-body);
-}
-
-.consultation-section__image {
-  width: min(100%, 18rem);
-  height: 24rem;
-  margin-top: 2rem;
-  object-fit: cover;
+.consultation-dialog__trigger {
+  margin-top: 1rem;
 }
 
 .consultation-form {
   display: grid;
-  gap: 0;
+  gap: 1.5rem;
   color: var(--ink);
-}
-
-.consultation-form__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
-}
-
-.consultation-form label,
-.consultation-form__field {
-  display: grid;
-  gap: 0;
-}
-
-.consultation-form label > span,
-.consultation-form__legend {
-  color: rgba(24, 32, 25, 0.68);
-  font-size: var(--type-sans-small);
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
-  line-height: var(--leading-compact);
-  text-transform: var(--case-none);
-}
-
-.consultation-form input:not([type="checkbox"]),
-.consultation-form textarea,
-.consultation-form select {
-  width: 100%;
-  padding: 0 0 0.875rem;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  line-height: var(--leading-body);
-  outline: none;
-  transition: border-color 180ms ease;
-}
-
-.consultation-form input:not([type="checkbox"]):focus,
-.consultation-form textarea:focus,
-.consultation-form select:focus {
-  border-bottom-color: var(--deep-forest);
-}
-
-.consultation-form textarea {
-  resize: vertical;
-}
-
-.consultation-form__field {
-  min-width: 0;
-}
-
-.consultation-form__options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.consultation-form__options label,
-.consultation-form__consent {
-  display: flex;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: rgba(24, 32, 25, 0.72);
-  cursor: pointer;
-  font-size: var(--type-sans-small);
-  line-height: var(--leading-compact);
-}
-
-.consultation-form__options input,
-.consultation-form__consent input {
-  accent-color: var(--forest);
-}
-
-.consultation-form__consent {
-  width: fit-content;
-  border: 0;
-  padding-inline: 0;
 }
 
 .consultation-form__safety,
@@ -8929,26 +8821,6 @@ img {
   color: var(--rose);
 }
 
-.consultation-form > button {
-  width: fit-content;
-  padding: 1rem 1.5rem;
-  border: 1px solid var(--forest);
-  border-radius: 999px;
-  background: var(--forest);
-  color: var(--porcelain);
-  cursor: pointer;
-  font-family: var(--serif);
-  font-size: var(--type-serif-hero-action);
-  font-weight: 400;
-  letter-spacing: var(--tracking-heading);
-  line-height: var(--leading-tight);
-}
-
-.consultation-form > button:disabled {
-  cursor: wait;
-  opacity: 0.6;
-}
-
 .consultation-success {
   display: grid;
   max-width: 34rem;
@@ -8965,14 +8837,8 @@ img {
 }
 
 @media (max-width: 780px) {
-  .consultation-hero,
-  .consultation-section {
+  .consultation-hero {
     padding: 4rem var(--gutter);
-  }
-
-  .consultation-section {
-    grid-template-columns: 1fr;
-    gap: 3rem;
   }
 
   .home-ritual-break {
@@ -8983,19 +8849,5 @@ img {
     right: var(--gutter);
     bottom: 2rem;
     left: var(--gutter);
-  }
-
-  .consultation-section__image {
-    width: 100%;
-    height: 20rem;
-    margin-top: 1rem;
-  }
-
-  .consultation-form__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .consultation-form > button {
-    width: 100%;
   }
 }

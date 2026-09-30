@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { ConsultationForm } from "@/components/consultation-form";
+import { ConsultationDialog } from "@/components/consultation-dialog";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { findConcern } from "@/lib/concerns";
@@ -31,24 +31,8 @@ export default async function ConsultationPage({
           Tell us a little about your skin, your routine and what care should
           feel like. We&apos;ll help you explore the Ahumma essentials that fit.
         </p>
+        <ConsultationDialog initialConcerns={concern?.consultationLabels} />
       </header>
-      <section
-        className="consultation-section"
-        aria-labelledby="consultation-heading"
-      >
-        <div className="consultation-section__intro">
-          <Image
-            className="consultation-section__image"
-            src="/images/skin-closeup.jpg"
-            alt="Close-up of skin after an Ahumma ritual"
-            width={1333}
-            height={2000}
-          />
-          <h2 id="consultation-heading">A little about you.</h2>
-          <p>There are no wrong answers. Share only what feels useful.</p>
-        </div>
-        <ConsultationForm initialConcerns={concern?.consultationLabels} />
-      </section>
       <SiteFooter />
     </main>
   );
