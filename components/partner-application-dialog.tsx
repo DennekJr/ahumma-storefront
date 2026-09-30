@@ -34,8 +34,10 @@ export function PartnerApplicationDialog() {
             <div>
               <h2 id="partner-application-title">Tell us about your work.</h2>
               <p>
-                The Partner Network Manager reviews every application. All new
-                partners begin as Founding Partners.
+                <span>
+                  The Partner Network Manager reviews every application.
+                </span>
+                <span>All new partners begin as Founding Partners.</span>
               </p>
             </div>
             <button

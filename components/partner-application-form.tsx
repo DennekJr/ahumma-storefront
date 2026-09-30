@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { CONTENT_CATEGORIES } from "@/lib/partner-network";
 
 type FormState = {
@@ -10,8 +10,8 @@ type FormState = {
   phone: string;
   categories: string[];
   primaryPlatform: string;
-  platformLinks: string;
-  contentLinks: string;
+  platformLinks: [string, string];
+  contentLinks: [string, string];
   motivation: string;
   otherBrands: string;
   monthlyCommitment: string;
@@ -19,14 +19,16 @@ type FormState = {
   codeOfConduct: boolean;
 };
 
+const LINK_SLOTS = [0, 1] as const;
+
 const EMPTY: FormState = {
   fullName: "",
   email: "",
   phone: "",
   categories: [],
   primaryPlatform: "",
-  platformLinks: "",
-  contentLinks: "",
+  platformLinks: ["", ""],
+  contentLinks: ["", ""],
   motivation: "",
   otherBrands: "",
   monthlyCommitment: "",
@@ -48,6 +50,17 @@ export function PartnerApplicationForm() {
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  function setLink(
+    key: "platformLinks" | "contentLinks",
+    index: 0 | 1,
+    value: string,
+  ) {
+    setForm((current) => ({
+      ...current,
+      [key]: index === 0 ? [value, current[key][1]] : [current[key][0], value],
+    }));
   }
 
   function toggleCategory(id: string) {
@@ -76,15 +89,20 @@ export function PartnerApplicationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          platformLinks: form.platformLinks.join("\n"),
+          contentLinks: form.contentLinks.join("\n"),
           honeypot,
-          elapsedMs: openedAt.current ? Date.now() - openedAt.current : undefined,
+          elapsedMs: openedAt.current
+            ? Date.now() - openedAt.current
+            : undefined,
         }),
       });
       const result = await response.json().catch(() => null);
 
       if (!response.ok) {
         setErrorMessage(
-          result?.message ?? "We couldn't send your application. Please try again.",
+          result?.message ??
+            "We couldn't send your application. Please try again.",
         );
         return;
       }
@@ -102,7 +120,11 @@ export function PartnerApplicationForm() {
 
   if (successMessage) {
     return (
-      <div className="partner-form partner-form--success" role="status" aria-live="polite">
+      <div
+        className="partner-form partner-form--success"
+        role="status"
+        aria-live="polite"
+      >
         <Check size={22} />
         <p>{successMessage}</p>
       </div>
@@ -179,45 +201,63 @@ export function PartnerApplicationForm() {
         </div>
       </fieldset>
 
-      <div className="partner-form-grid partner-form-grid--three">
-        <label className="partner-field">
-          <span>Primary platform, handle and follower count</span>
-          <input
-            value={form.primaryPlatform}
-            onChange={(event) => set("primaryPlatform", event.target.value)}
-            name="primaryPlatform"
-            type="text"
-            placeholder="e.g. Instagram, @yourhandle, 12k"
-            required
-          />
-        </label>
-        <label className="partner-field">
-          <span>Links to your top 2 platforms</span>
-          <input
-            value={form.platformLinks}
-            onChange={(event) => set("platformLinks", event.target.value)}
-            name="platformLinks"
-            type="text"
-            required
-          />
-        </label>
-        <label className="partner-field">
-          <span>Links to 2 pieces of content you're most proud of</span>
-          <input
-            value={form.contentLinks}
-            onChange={(event) => set("contentLinks", event.target.value)}
-            name="contentLinks"
-            type="text"
-            required
-          />
-        </label>
+      <label className="partner-field">
+        <span>Primary platform, handle and follower count</span>
+        <input
+          value={form.primaryPlatform}
+          onChange={(event) => set("primaryPlatform", event.target.value)}
+          name="primaryPlatform"
+          type="text"
+          placeholder="e.g. Instagram, @yourhandle, 12k"
+          required
+        />
+      </label>
+      <div className="partner-field partner-field--link-group">
+        <span>Links to your top 2 platforms</span>
+        <div className="partner-link-pair">
+          {LINK_SLOTS.map((index) => (
+            <input
+              key={index}
+              aria-label={`Platform link ${index + 1}`}
+              value={form.platformLinks[index]}
+              onChange={(event) =>
+                setLink("platformLinks", index, event.target.value)
+              }
+              name={`platformLink${index + 1}`}
+              type="text"
+              placeholder="https://"
+              required
+            />
+          ))}
+        </div>
+      </div>
+      <div className="partner-field partner-field--link-group">
+        <span>Links to 2 pieces of content you're most proud of</span>
+        <div className="partner-link-pair">
+          {LINK_SLOTS.map((index) => (
+            <input
+              key={index}
+              aria-label={`Content link ${index + 1}`}
+              value={form.contentLinks[index]}
+              onChange={(event) =>
+                setLink("contentLinks", index, event.target.value)
+              }
+              name={`contentLink${index + 1}`}
+              type="text"
+              placeholder="https://"
+              required
+            />
+          ))}
+        </div>
       </div>
 
       {/* Paired so the textarea keeps a readable measure instead of running
           the full width of the page. */}
       <div className="partner-form-split">
         <label className="partner-field">
-          <span>Why do you want to join the Ahumma Creator Partner Network?</span>
+          <span>
+            Why do you want to join the Ahumma Creator Partner Network?
+          </span>
           <textarea
             value={form.motivation}
             onChange={(event) => set("motivation", event.target.value)}
@@ -229,7 +269,9 @@ export function PartnerApplicationForm() {
 
         <div className="partner-form-split__aside">
           <label className="partner-field partner-select">
-            <span>Are you currently working with any other skincare brands?</span>
+            <span>
+              Are you currently working with any other skincare brands?
+            </span>
             <select
               value={form.otherBrands}
               onChange={(event) => set("otherBrands", event.target.value)}
@@ -247,7 +289,9 @@ export function PartnerApplicationForm() {
                 type="checkbox"
                 name="disclosureAgreement"
                 checked={form.disclosureAgreement}
-                onChange={(event) => set("disclosureAgreement", event.target.checked)}
+                onChange={(event) =>
+                  set("disclosureAgreement", event.target.checked)
+                }
                 required
               />
               <span className="partner-checkbox__box" aria-hidden="true">
@@ -289,18 +333,17 @@ export function PartnerApplicationForm() {
         />
       </div>
 
-      <button className="partner-form__submit" type="submit" disabled={submitting}>
+      <button
+        className="partner-form__submit"
+        type="submit"
+        disabled={submitting}
+      >
         {submitting ? "Sending your application…" : "Submit application"}
-        <ArrowRight size={17} />
       </button>
 
-      {errorMessage ? (
+      {errorMessage && (
         <p className="partner-form__status is-error" role="alert">
           {errorMessage}
-        </p>
-      ) : (
-        <p className="partner-form__status" role="note">
-          Your application goes straight to the Partner Network Manager.
         </p>
       )}
     </form>
