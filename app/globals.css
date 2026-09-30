@@ -87,41 +87,13 @@
   box-sizing: border-box;
 }
 
-/* Fluid root: every rem in this file scales from here.
-   1rem resolves to 16px at each tier's design width and scales purely with the
-   viewport, so a composition keeps its exact proportions at any size — the
-   1512px layout at 3024px is the same page at 2x, not a wider one.
-
-   One basis per layout tier, and the switches sit exactly on the tier
-   boundaries. That matters: a basis change is a step change in scale, and it
-   is only invisible where the layout changes with it. Switching at 780px
-   instead — mid-way through the 2-up range — put an 8.3px root next to a 29px
-   one in the same composition.
-
-   Trade-off worth knowing: this overrides a reader's own font-size setting.
-   That is inherent to proportional scaling; a clamp carrying rem terms keeps
-   the setting effective but will not hold proportions. */
 html {
-  font-size: calc(100vw / 1512 * 16);
+  font-size: max(16px, calc(100vw / 1512 * 16));
   scroll-behavior: smooth;
   overscroll-behavior: none;
   scrollbar-color: rgba(29, 44, 34, 0.58) transparent;
   scrollbar-width: thin;
   scrollbar-gutter: stable;
-}
-
-/* 2-up tier, drawn at 834 */
-@media (max-width: 900px) {
-  html {
-    font-size: calc(100vw / 834 * 16);
-  }
-}
-
-/* 1-up tier, drawn at 430 */
-@media (max-width: 600px) {
-  html {
-    font-size: calc(100vw / 430 * 16);
-  }
 }
 
 /* Lucide sets its size as width/height ATTRIBUTES, which sit outside this
@@ -262,6 +234,15 @@ button,
 a,
 select {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1rem);
+  }
 }
 
 button:focus-visible,
@@ -1686,7 +1667,7 @@ img {
   z-index: 1;
   display: grid;
   width: min(78rem, 100%);
-  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
   overflow-x: hidden;
   overflow-y: auto;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -7103,6 +7084,7 @@ img {
     padding-right: 1rem;
   }
   :root {
+    --gutter: clamp(1.25rem, 5vw, 2.4rem);
     --header-height: 4.1875rem;
     --header-top: 2.5rem;
   }
@@ -7264,7 +7246,16 @@ img {
     font-size: var(--type-serif-body);
   }
   .love-skin-section {
-    padding: 5.625rem var(--gutter);
+    min-height: 0;
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+  .love-skin-section--reverse .love-skin__image-panel,
+  .love-skin-section--reverse .love-skin__content {
+    order: initial;
+  }
+  .love-skin__image-panel {
+    height: clamp(20rem, 60svh, 28rem);
   }
   .love-skin__image {
     object-position: 43% center;
@@ -7278,8 +7269,13 @@ img {
     );
   }
   .love-skin__content {
-    width: calc(100% - 2.375rem);
-    padding-bottom: 2.375rem;
+    width: 100%;
+    padding: 2.5rem var(--gutter) 3rem;
+  }
+  .product-grid.top-products-grid {
+    grid-auto-columns: min(78vw, 20.4rem);
+    margin-top: 1.5rem;
+    touch-action: pan-y;
   }
   .love-skin__content h2 {
     margin-bottom: 1.375rem;
@@ -7687,7 +7683,7 @@ img {
   }
 
   .footer-signup-popup__dialog {
-    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
     overflow-y: auto;
     grid-template-columns: 1fr;
   }
