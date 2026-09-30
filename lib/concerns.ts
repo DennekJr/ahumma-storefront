@@ -17,8 +17,7 @@ export type Concern = {
   label: string;
   /** Names to match against the live catalogue. Slugs have changed before. */
   match: string[];
-  /** Null when no lifestyle shot exists; the tile uses a product cover. */
-  image: string | null;
+
   alt: string;
   consultationLabels: string[];
 };
@@ -30,7 +29,7 @@ export const CONCERNS: Concern[] = [
     id: "dry-skin",
     label: "Dry skin",
     match: ["sika", "sike", "dream"],
-    image: "/images/dream-texture.jpg",
+
     alt: "Dream Whip body butter held by a model",
     consultationLabels: ["Dry skin", "Very dry skin"],
   },
@@ -38,7 +37,7 @@ export const CONCERNS: Concern[] = [
     id: "dull-uneven",
     label: "Dull & uneven tone",
     match: ["sika", "sike"],
-    image: "/images/sika-texture.jpg",
+
     alt: "Whipped Sika body butter, jar open",
     consultationLabels: ["Dull-looking skin", "Uneven-looking skin tone"],
   },
@@ -46,17 +45,15 @@ export const CONCERNS: Concern[] = [
     id: "everyday-softness",
     label: "Everyday softness",
     match: ["dream"],
-    image: "/images/skin-closeup.jpg",
+
     alt: "Skin after the Ahumma ritual",
     consultationLabels: ["Not sure what my skin needs"],
   },
   {
-    // The only concern with no shot of its own — Baby Bloom was never part of
-    // the lifestyle shoot, so the tile falls back to the product's own cover.
     id: "delicate-skin",
     label: "Delicate & baby skin",
     match: ["baby"],
-    image: null,
+
     alt: "Baby Bloom, for delicate skin",
     consultationLabels: ["Shopping for a baby or child"],
   },
@@ -64,7 +61,7 @@ export const CONCERNS: Concern[] = [
     id: "cleansing",
     label: "Cleansing",
     match: ["ara"],
-    image: "/images/ara-ritual.jpg",
+
     alt: "Ara African black soap against skin",
     consultationLabels: ["Body acne or congestion"],
   },
@@ -164,18 +161,14 @@ export function nextEditorialProduct(
   return undefined;
 }
 
-/** Tile art, falling back to the cover of whichever product the concern matches. */
-export function concernImage(
-  concern: Concern,
-  products: ProductSummary[],
-): string | null {
-  if (concern.image) return concern.image;
-
-  const match = products.find((product) =>
-    concern.match.some((fragment) =>
-      product.name.toLowerCase().includes(fragment),
-    ),
+export function randomConcernImages(products: ProductSummary[]) {
+  return Object.fromEntries(
+    CONCERNS.map((concern) => {
+      const images = filterByConcern(products, concern)
+        .map((product) => product.coverUrl)
+        .filter((image): image is string => Boolean(image));
+      const image = images[Math.floor(Math.random() * images.length)] ?? null;
+      return [concern.id, image];
+    }),
   );
-
-  return match?.coverUrl ?? null;
 }

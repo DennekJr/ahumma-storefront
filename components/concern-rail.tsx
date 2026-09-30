@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ALL_CONCERN, ALL_TILE, CONCERNS, concernImage } from "@/lib/concerns";
-import type { ProductSummary } from "@/lib/store-types";
+import { ALL_CONCERN, ALL_TILE, CONCERNS } from "@/lib/concerns";
 
 /**
  * The visual rail above the grid.
@@ -13,18 +12,18 @@ import type { ProductSummary } from "@/lib/store-types";
  */
 export function ConcernRail({
   selected,
-  products,
+  concernImages,
   onSelectAction,
 }: {
   selected: string;
-  products: ProductSummary[];
+  concernImages: Record<string, string | null>;
   onSelectAction?: (id: string) => void;
 }) {
   const tiles = [
     ALL_TILE,
     ...CONCERNS.map((concern) => ({
       ...concern,
-      image: concernImage(concern, products),
+      image: concernImages[concern.id] ?? null,
     })),
     {
       id: "consultation",

@@ -169,8 +169,8 @@ export default async function HomePage() {
         <SiteHeader />
         <Image
           className="hero-belief-image"
-          src="/images/belief-bg-image.webp"
-          alt="Ahumma Sika body butter being applied to skin"
+          src="/images/skincare_couple_left_2.webp"
+          alt="A woman holding Ahumma Sika body butter"
           fill
           sizes="100vw"
         />

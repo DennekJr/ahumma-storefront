@@ -8,7 +8,11 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
 import { CloudBackdrop } from "@/components/cloud-backdrop";
 import { getCatalogue, hasFrontdeskReads } from "@/lib/frontdesk";
-import { filterByConcern, findConcern } from "@/lib/concerns";
+import {
+  filterByConcern,
+  findConcern,
+  randomConcernImages,
+} from "@/lib/concerns";
 
 import { applyFilters, applySort, toList } from "@/lib/shop-filters";
 import { breadcrumbSchema, siteUrl } from "@/lib/structured-data";
@@ -119,7 +123,11 @@ export default async function ShopPage({
         </p>
       </header>
 
-      <ShopCollection products={products} unavailable={unavailable} />
+      <ShopCollection
+        products={products}
+        concernImages={randomConcernImages(products)}
+        unavailable={unavailable}
+      />
 
       {!hasFrontdeskReads ? (
         <div className="api-preview-note shop-preview-note">

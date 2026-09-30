@@ -31,6 +31,7 @@ export function ProductCard({
       ? "Sold out"
       : "Available now";
   const displayPrice = resolveSummaryPrice(product, currency);
+  const imageSrc = displayImage || product.coverUrl;
   const alternatePrices = Object.entries(product.pricesFrom ?? {}).map(
     ([priceCurrency, priceMinor]) => ({
       currency: priceCurrency,
@@ -66,9 +67,9 @@ export function ProductCard({
         href={`/products/${product.slug}`}
         aria-label={`View ${displayName}`}
       >
-        {displayImage || product.coverUrl ? (
+        {imageSrc ? (
           <Image
-            src={displayImage || product.coverUrl || ""}
+            src={imageSrc}
             alt={displayName}
             fill
             sizes="(max-width: 720px) 92vw, 33vw"

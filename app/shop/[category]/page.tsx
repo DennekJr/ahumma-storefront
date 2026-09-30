@@ -10,7 +10,7 @@ import { SavedProductsSection } from "@/components/saved-products-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getProducts } from "@/lib/frontdesk";
-import { ALL_CONCERN } from "@/lib/concerns";
+import { ALL_CONCERN, randomConcernImages } from "@/lib/concerns";
 import {
   applyFilters,
   applySort,
@@ -126,7 +126,10 @@ export default async function CategoryPage({
         <p>{category.description}</p>
       </header>
 
-      <ConcernRail selected={ALL_CONCERN} products={categoryProducts} />
+      <ConcernRail
+        selected={ALL_CONCERN}
+        concernImages={randomConcernImages(products)}
+      />
       <FilterBar facets={facets} total={shown.length} />
 
       {shown.length ? (

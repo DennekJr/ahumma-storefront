@@ -2116,17 +2116,33 @@ img {
   }
 
   .footer-testimonial {
-    padding: 1.25rem;
+    min-height: 0;
+    gap: 1rem;
+    padding: 1rem;
   }
 
   .footer-testimonial blockquote {
-    min-height: 22rem;
-    padding: 2rem 0.5rem;
+    min-height: 0;
+    justify-content: flex-start;
+    padding: 0.5rem 0.25rem 0.75rem;
+  }
+
+  .footer-testimonial__quote-mark {
+    width: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .testimonial-carousel .footer-testimonial p {
+    max-width: 24ch;
+    font-size: clamp(1.65rem, 6vw, 2rem);
+    line-height: 1.12;
   }
 
   .footer-testimonial__image {
-    min-height: 18rem;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
     margin: 0;
+    border-radius: 1.25rem;
   }
 }
 
@@ -8220,10 +8236,6 @@ img {
   width: min(58vw, 52rem);
 }
 
-.home-hero--editorial .hero-light-overlay {
-  /*background: #111b15ad;*/
-}
-
 .home-hero--editorial .hero-actions {
   justify-content: flex-start;
 }
@@ -8620,10 +8632,34 @@ img {
   }
 
   .home-hero--editorial .hero-copy {
-    bottom: 2rem;
+    top: calc(var(--header-height) + 1.5rem);
+    bottom: auto;
     left: var(--gutter);
     width: calc(100% - (var(--gutter) * 2));
     transform: none;
+  }
+
+  .home-hero--editorial .hero-copy h1 {
+    font-size: clamp(2.25rem, 8.5vw, 2.75rem);
+  }
+
+  .home-hero--editorial .hero-lede {
+    max-width: 25rem;
+    font-size: 1rem;
+    line-height: var(--leading-body);
+  }
+
+  .home-hero--editorial .hero-actions {
+    margin-top: 1.25rem;
+  }
+
+  .home-hero--editorial .hero-light-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(250, 248, 243, 0.18) 0%,
+      rgba(250, 248, 243, 0.08) 36%,
+      rgba(250, 248, 243, 0) 72%
+    );
   }
 
   .home-hero--editorial .hero-layer {
@@ -8845,5 +8881,75 @@ img {
     right: var(--gutter);
     bottom: 2rem;
     left: var(--gutter);
+  }
+
+  .home-hero--belief {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-top: min(58svh, 34rem);
+    background: var(--porcelain);
+    color: var(--ink);
+  }
+
+  .home-hero--belief .hero-belief-image {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: min(62svh, 36rem);
+    object-position: 70% center;
+  }
+
+  .home-hero--belief .hero-light-overlay {
+    inset: 0 0 auto;
+    height: min(62svh, 36rem);
+    background: linear-gradient(
+      to bottom,
+      transparent 68%,
+      var(--porcelain) 100%
+    );
+  }
+
+  .home-hero.home-hero--belief .site-header {
+    color: var(--ink);
+  }
+
+  .home-hero.home-hero--belief .hero-copy {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    margin: 0;
+    padding: 1.75rem var(--gutter) 2.5rem;
+    color: var(--ink);
+    text-align: left;
+    transform: none;
+  }
+
+  .home-hero--belief .hero-copy h1 {
+    max-width: 18ch;
+    margin: 0 0 1rem;
+    font-size: clamp(2.25rem, 9vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .home-hero.home-hero--belief .hero-lede {
+    max-width: 34ch;
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .home-hero.home-hero--belief .hero-actions {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+  }
+
+  .home-hero.home-hero--belief .hero-link {
+    margin: 0;
   }
 }

@@ -13,9 +13,11 @@ import type { ProductSummary } from "@/lib/store-types";
 
 export function ShopCollection({
   products,
+  concernImages,
   unavailable,
 }: {
   products: ProductSummary[];
+  concernImages: Record<string, string | null>;
   unavailable: boolean;
 }) {
   const pathname = usePathname();
@@ -57,7 +59,7 @@ export function ShopCollection({
     <>
       <ConcernRail
         selected={concernId}
-        products={products}
+        concernImages={concernImages}
         onSelectAction={selectConcern}
       />
       <header className="collection-subhead">
