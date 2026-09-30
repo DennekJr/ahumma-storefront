@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { AboutCommunityGallery } from "@/components/about-community-section";
 import { SiteFooter } from "@/components/site-footer";
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { PartnerApplicationForm } from "@/components/partner-application-form";
+import { PartnerApplicationDialog } from "@/components/partner-application-dialog";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import {
@@ -47,9 +47,7 @@ export default function PartnerNetworkPage() {
           Create with Ahumma, earn commission, and grow alongside a Nigerian
           body-care brand made for melanin-rich skin.
         </p>
-        <a className="partner-apply" href="#apply">
-          Apply to become a partner <ArrowRight size={17} />
-        </a>
+        <PartnerApplicationDialog />
       </header>
 
       <section className="partner-community-gallery">
@@ -148,50 +146,34 @@ export default function PartnerNetworkPage() {
         aria-labelledby="onboarding-heading"
       >
         <div className="partner-section-heading">
-          <h2 id="onboarding-heading">
-            From application
-            <br />
-            to first post.
-          </h2>
+          <h2 id="onboarding-heading">How it works.</h2>
         </div>
         <div className="partner-practice-grid">
-          <div>
-            <h3>What makes content count.</h3>
+          <div className="partner-practice-grid__standards">
+            <h3>What makes content count</h3>
             <ul className="partner-quality-list">
               {QUALITY_CONTENT.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
-          <ol className="partner-steps">
-            {ONBOARDING_STEPS.map((step, index) => (
-              <li key={step.title}>
-                <span className="partner-step__number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <div className="partner-practice-grid__steps">
+            <h3>Your first steps</h3>
+            <ol className="partner-steps">
+              {ONBOARDING_STEPS.map((step, index) => (
+                <li key={step.title}>
+                  <span className="partner-step__number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h4>{step.title}</h4>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
-      </section>
-
-      <section
-        className="partner-apply-section"
-        id="apply"
-        aria-labelledby="apply-heading"
-      >
-        <div className="partner-section-heading">
-          <h2 id="apply-heading">Tell us about your work.</h2>
-          <p>
-            The Partner Network Manager reviews every application. All new
-            partners begin as Founding Partners.
-          </p>
-        </div>
-        <PartnerApplicationForm />
       </section>
 
       <SiteFooter />
