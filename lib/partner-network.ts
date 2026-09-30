@@ -56,7 +56,7 @@ export const PARTNER_TIERS: PartnerTier[] = [
     name: "Standard Partner",
     commission: "5%",
     status: "Earned through consistent content and sales",
-    content: "4–5 quality pieces a month, sustained",
+    content: "4 - 5 quality pieces a month, sustained",
     sales: "₦500,000 ($368) a month through your code",
     includes: [
       "Everything in Founding",
@@ -84,10 +84,30 @@ export const PARTNER_TIERS: PartnerTier[] = [
 ];
 
 export const QUALITY_CONTENT = [
-  "Follow the campaign brief and Ahumma's content pillars.",
-  "Use clear audio and visuals; take the time to make each piece feel considered.",
-  "Include your discount code or tag, and post within the campaign window.",
-  "Keep the content in your own voice—not a copy-paste script.",
+  {
+    number: "I.",
+    body: "Follow the campaign brief and Ahumma's content pillars.",
+    image: "/images/sika-ritual.jpg",
+    alt: "A creator holding Sika body butter",
+  },
+  {
+    number: "II.",
+    body: "Use clear audio and visuals; take the time to make each piece feel considered.",
+    image: "/images/ara-ritual.jpg",
+    alt: "African black soap used in a body-care ritual",
+  },
+  {
+    number: "III.",
+    body: "Include your discount code or tag, and post within the campaign window.",
+    image: "/images/dream-whip.jpg",
+    alt: "Ahumma Dream Whip body butter",
+  },
+  {
+    number: "IV.",
+    body: "Keep the content in your own voice—not a copy-paste script.",
+    image: "/images/ara-texture.jpg",
+    alt: "Ahumma Ara African black soap",
+  },
 ];
 
 export const ONBOARDING_STEPS = [
