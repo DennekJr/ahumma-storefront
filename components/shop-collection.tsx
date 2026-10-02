@@ -7,8 +7,8 @@ import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
 import { FilterBar } from "@/components/filter-bar";
 import { SavedProductsSection } from "@/components/saved-products-section";
+import { useFilteredCollection } from "@/components/use-filtered-collection";
 import { ALL_CONCERN, findConcern, filterByConcern } from "@/lib/concerns";
-import { applyFilters, applySort, buildFacets } from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
 
 export function ShopCollection({
@@ -24,17 +24,8 @@ export function ShopCollection({
   const params = useSearchParams();
   const concernId = params.get("concern") ?? ALL_CONCERN;
   const concern = findConcern(concernId);
-  const filters = {
-    size: params.get("size")?.split(",").filter(Boolean) ?? [],
-    type: params.get("type")?.split(",").filter(Boolean) ?? [],
-    price: params.get("price")?.split(",").filter(Boolean) ?? [],
-  };
   const concernProducts = filterByConcern(products, concern);
-  const facets = buildFacets(concernProducts);
-  const shown = applySort(
-    applyFilters(concernProducts, filters),
-    params.get("sort") ?? undefined,
-  );
+  const { facets, shown, filters } = useFilteredCollection(concernProducts);
   const title = concern?.label ?? "Everything we make";
 
   function updateQuery(next: URLSearchParams) {

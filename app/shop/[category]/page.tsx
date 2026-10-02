@@ -1,34 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { CollectionCard } from "@/components/collection-card";
+import {
+  CategoryCollection,
+  CategoryCount,
+} from "@/components/category-collection";
 import { ConcernRail } from "@/components/concern-rail";
-import { FilterBar } from "@/components/filter-bar";
 import { SavedProductsSection } from "@/components/saved-products-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getProducts } from "@/lib/frontdesk";
 import { ALL_CONCERN, randomConcernImages } from "@/lib/concerns";
-import {
-  applyFilters,
-  applySort,
-  buildFacets,
-  toList,
-} from "@/lib/shop-filters";
 import type { ProductSummary } from "@/lib/store-types";
-
-type SearchParams = Promise<{
-  size?: string | string[];
-  type?: string | string[];
-  price?: string | string[];
-  sort?: string;
-}>;
 
 type CategoryPageProps = {
   params: Promise<{ category: string }>;
-  searchParams: SearchParams;
 };
 
 type Category = {
@@ -84,13 +71,9 @@ export async function generateMetadata({
     : { title: "Shop" };
 }
 
-export default async function CategoryPage({
-  params,
-  searchParams,
-}: CategoryPageProps) {
-  const [{ category: categorySlug }, query, products] = await Promise.all([
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const [{ category: categorySlug }, products] = await Promise.all([
     params,
-    searchParams,
     getProducts(),
   ]);
   const category = CATEGORY_MATCHERS[categorySlug];
@@ -98,13 +81,6 @@ export default async function CategoryPage({
   if (!category) notFound();
 
   const categoryProducts = products.filter(category.matches);
-  const filters = {
-    size: toList(query.size),
-    type: toList(query.type),
-    price: toList(query.price),
-  };
-  const facets = buildFacets(categoryProducts);
-  const shown = applySort(applyFilters(categoryProducts, filters), query.sort);
 
   return (
     <main className="shop-page shop-page--sky">
@@ -121,7 +97,7 @@ export default async function CategoryPage({
         </nav>
         <h1>
           {category.title}
-          <sup>{shown.length}</sup>
+          <CategoryCount products={categoryProducts} />
         </h1>
         <p>{category.description}</p>
       </header>
@@ -130,36 +106,10 @@ export default async function CategoryPage({
         selected={ALL_CONCERN}
         concernImages={randomConcernImages(products)}
       />
-      <FilterBar facets={facets} total={shown.length} />
-
-      {shown.length ? (
-        <div className="collection-body">
-          <div className="collection-grid">
-            {shown.map((product, index) => (
-              <CollectionCard
-                product={product}
-                index={index}
-                priority={index < 3}
-                key={product.ref}
-              />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className="collection-empty">
-          <p>
-            {filters.size.length || filters.type.length || filters.price.length
-              ? "Nothing matches those filters."
-              : "New essentials are coming soon. Join the Ahumma Circle to hear first."}
-          </p>
-          <Link href={`/shop/${categorySlug}`}>
-            {filters.size.length || filters.type.length || filters.price.length
-              ? "Clear the filters"
-              : "See everything"}{" "}
-            <ArrowRight size={15} />
-          </Link>
-        </div>
-      )}
+      <CategoryCollection
+        products={categoryProducts}
+        categorySlug={categorySlug}
+      />
 
       <SavedProductsSection products={products} />
       <SiteFooter />

@@ -3,16 +3,27 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Check, ChevronDown, SlidersHorizontal, X } from "lucide-react";
-import { SORTS, type Facet, type FacetId } from "@/lib/shop-filters";
+import { useCart } from "@/components/cart-provider";
+import {
+  SORTS,
+  bandCurrency,
+  type Facet,
+  type FacetId,
+} from "@/lib/shop-filters";
 
 /**
  * Filter chips and sort, as the reference lays them out: a left-aligned row of
  * chips that open panels, with sort pushed to the right.
  *
- * The URL is the single source of truth. Every change is a router push, the
- * server re-filters, and this component holds no copy of the result — so a
+ * The URL is the single source of truth. Every change rewrites it, the grid
+ * re-filters from it, and this component holds no copy of the result — so a
  * filtered page is shareable, survives reload, and cannot disagree with the
  * grid it sits above.
+ *
+ * Both collection views filter in the browser (`clientFiltering`), because
+ * price bands and price sort depend on the shopper's currency and that only
+ * exists client-side. The router-push path remains for any caller that
+ * filters on the server, but a server-filtered view cannot be currency-aware.
  */
 export function FilterBar({
   facets,
@@ -24,6 +35,7 @@ export function FilterBar({
   clientFiltering?: boolean;
 }) {
   const router = useRouter();
+  const { currency } = useCart();
   const pathname = usePathname();
   const params = useSearchParams();
   const [openPanel, setOpenPanel] = useState<FacetId | "sort" | "all" | null>(
@@ -50,8 +62,15 @@ export function FilterBar({
     };
   }, [openPanel]);
 
-  const selected = (id: FacetId) =>
-    params.get(id)?.split(",").filter(Boolean) ?? [];
+  const selected = (id: FacetId) => {
+    const values = params.get(id)?.split(",").filter(Boolean) ?? [];
+    // A price band left in the URL from the other currency does nothing in
+    // applyFilters, so it must not light a chip either. Dropping it here also
+    // means the next change writes it out of the URL instead of carrying it.
+    return id === "price"
+      ? values.filter((value) => bandCurrency(value) === currency)
+      : values;
+  };
   const activeCount = facets.reduce(
     (sum, facet) => sum + selected(facet.id).length,
     0,
