@@ -9,6 +9,7 @@ import {
   Clock3,
   RefreshCw,
 } from "lucide-react";
+import { trackPurchase } from "@/lib/analytics";
 import type { CheckoutSession } from "@/lib/types";
 
 type ViewState = "checking" | "open" | "paid" | "failed";
@@ -41,6 +42,10 @@ export function CheckoutStatus({ checkoutRef }: { checkoutRef?: string }) {
       setState(next);
 
       if (next === "paid") {
+        // nextSession came from /api/checkout/:ref — the server's own lookup
+        // with the secret key — so this is a confirmed payment, not the
+        // return redirect. trackPurchase sends once per order.
+        trackPurchase(nextSession, checkoutRef);
         setMessage("Your order is confirmed. A receipt and the next steps are on their way to your email.");
       } else if (next === "failed") {
         setMessage("This checkout has expired or was cancelled. No payment was confirmed.");

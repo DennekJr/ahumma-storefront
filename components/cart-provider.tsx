@@ -2,6 +2,12 @@
 
 import Image from "next/image";
 import {
+  rememberCheckout,
+  trackAddToCart,
+  trackBeginCheckout,
+  type TrackableLine,
+} from "@/lib/analytics";
+import {
   ArrowRight,
   Check,
   Minus,
@@ -97,6 +103,18 @@ export function CartProvider({
   }, [isOpen]);
 
   const addItem = useCallback((item: CartItem) => {
+    // Outside the updater: React may invoke an updater twice, which would
+    // count one add as two.
+    trackAddToCart(
+      {
+        productRef: item.productRef,
+        name: item.name,
+        variantName: item.variantName,
+        priceMinor: resolvePrice(item.priceMinor, item.currency, item.prices, currency).priceMinor,
+        quantity: item.quantity,
+      },
+      currency,
+    );
     setItems((current) => {
       const existing = current.find((line) => line.variantRef === item.variantRef);
       if (!existing) return [...current, item];
@@ -112,7 +130,7 @@ export function CartProvider({
       });
     });
     setIsOpen(true);
-  }, []);
+  }, [currency]);
 
   const removeItem = useCallback((variantRef: string) => {
     setItems((current) => current.filter((item) => item.variantRef !== variantRef));
@@ -237,6 +255,15 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       return;
     }
 
+    const lines: TrackableLine[] = pricedItems.map(({ item, displayPrice }) => ({
+      productRef: item.productRef,
+      name: item.name,
+      variantName: item.variantName,
+      priceMinor: displayPrice.priceMinor,
+      quantity: item.quantity,
+    }));
+    trackBeginCheckout(lines, currency);
+
     setCheckingOut(true);
     try {
       const response = await fetch("/api/checkout", {
@@ -255,6 +282,10 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error?.message ?? "Checkout could not be started.");
       if (!payload.hostedUrl) throw new Error("Frontdesk did not return a secure checkout link.");
+      // What purchase will report once this checkout is verified as paid.
+      if (typeof payload.ref === "string") {
+        rememberCheckout(payload.ref, { currency, lines, shippingMinor: zoneFee });
+      }
       window.location.assign(payload.hostedUrl as string);
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Checkout could not be started.");

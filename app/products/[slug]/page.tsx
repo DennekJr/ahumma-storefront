@@ -9,6 +9,7 @@ import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
+import { TrackViewItem } from "@/components/track-view-item";
 import { getProduct, getProducts } from "@/lib/frontdesk";
 import { buildDetailRows } from "@/lib/product-details";
 import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
@@ -90,6 +91,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
           ) : null}
           <ProductPurchase product={product} />
+          <TrackViewItem product={product} />
         </aside>
       </section>
 
