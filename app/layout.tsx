@@ -5,6 +5,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/google-tag-manager";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { MetaPixel } from "@/components/meta-pixel";
 import { hasFrontdeskCheckout } from "@/lib/frontdesk";
 import { indexingAllowed } from "@/lib/seo";
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <GoogleTagManagerNoScript />
         <CartProvider checkoutEnabled={hasFrontdeskCheckout}>{children}</CartProvider>
         <GoogleTagManager />
+        <GoogleAnalytics />
         <MetaPixel />
         <Script
           id="frontdesk-chat-widget"
