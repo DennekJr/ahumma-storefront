@@ -36,6 +36,14 @@ export const metadata: Metadata = {
   ...(indexingAllowed()
     ? {}
     : { robots: { index: false, follow: false } }),
+  // Site-ownership verification for third-party platforms. Each entry renders
+  // as <meta name="…" content="…"> in the server HTML, where their crawlers
+  // look for it.
+  verification: {
+    other: {
+      "p:domain_verify": "2811b7a75a38be9624e76e12f7be2f33", // Pinterest
+    },
+  },
   openGraph: {
     title: "Ahumma — At the edge of everything beautiful is you",
     description: "Premium body butters and liquid African black soap, rooted in Africa and made for the world.",
