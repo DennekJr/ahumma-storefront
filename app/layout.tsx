@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { cookies, headers } from "next/headers";
+import { CURRENCY_COOKIE, initialCurrency } from "@/lib/currency";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import {
@@ -51,12 +53,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // Reading the request makes every page render per visit rather than from a
+  // static build. That is the point: a static page would show one currency to
+  // everyone. Responses are already private and uncached, so one visitor's
+  // currency can never be served to another.
+  const [cookieStore, requestHeaders] = await Promise.all([cookies(), headers()]);
+  const currency = initialCurrency(
+    cookieStore.get(CURRENCY_COOKIE)?.value,
+    // Set by Vercel on every request from the visitor's IP; absent locally.
+    requestHeaders.get("x-vercel-ip-country"),
+  );
+
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <GoogleTagManagerNoScript />
-        <CartProvider checkoutEnabled={hasFrontdeskCheckout}>{children}</CartProvider>
+        <CartProvider checkoutEnabled={hasFrontdeskCheckout} initialCurrency={currency}>
+          {children}
+        </CartProvider>
         <GoogleTagManager />
         <GoogleAnalytics />
         <MetaPixel />
