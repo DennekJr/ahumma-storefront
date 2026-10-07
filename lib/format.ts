@@ -53,6 +53,19 @@ export function resolveSummaryPrice(
   };
 }
 
+/**
+ * Whole units only — for round figures like filter bands, where "$20.00" reads
+ * as a price rather than a threshold. Same locale rules as formatMoney.
+ */
+export function formatMoneyWhole(amountMinor: number, currency = "NGN") {
+  return new Intl.NumberFormat(currency === "USD" ? "en-US" : "en-NG", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amountMinor / 100);
+}
+
 export function formatMoney(amountMinor: number, currency = "NGN") {
   return new Intl.NumberFormat(currency === "USD" ? "en-US" : "en-NG", {
     style: "currency",
