@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { CURRENCY_COOKIE, rememberCurrencyChoice } from "@/lib/currency";
 import {
   rememberCheckout,
   trackAddToCart,
@@ -28,7 +29,6 @@ import {
 } from "react";
 import {
   formatMoney,
-  isStoreCurrency,
   resolvePrice,
   type StoreCurrency,
 } from "@/lib/format";
@@ -69,33 +69,52 @@ const CURRENCY_STORAGE_KEY = "ahumma-currency";
 export function CartProvider({
   children,
   checkoutEnabled,
+  initialCurrency = "NGN",
 }: {
   children: ReactNode;
   checkoutEnabled: boolean;
+  /** Resolved on the server from the visitor's choice or country. */
+  initialCurrency?: StoreCurrency;
 }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
-  const [currency, setCurrency] = useState<StoreCurrency>("NGN");
+  // Starts where the server rendered, so the first paint is already right.
+  const [currency, setCurrency] = useState<StoreCurrency>(initialCurrency);
+
+  /** The toggle. Unlike the default, this is a choice, so it is remembered. */
+  const chooseCurrency = useCallback((next: StoreCurrency) => {
+    setCurrency(next);
+    rememberCurrencyChoice(next);
+  }, []);
 
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
-      const storedCurrency = window.localStorage.getItem(CURRENCY_STORAGE_KEY);
       if (stored) setItems(JSON.parse(stored) as CartItem[]);
-      if (isStoreCurrency(storedCurrency)) setCurrency(storedCurrency);
+
+      // The currency used to be saved here on every visit, defaults included,
+      // so a stored "NGN" cannot be told apart from a visitor who never chose.
+      // A stored "USD" can only have come from the toggle (the old default was
+      // naira), so that one is carried over as a choice; the rest is dropped.
+      const legacyCurrency = window.localStorage.getItem(CURRENCY_STORAGE_KEY);
+      if (legacyCurrency !== null) {
+        if (legacyCurrency === "USD" && !document.cookie.includes(`${CURRENCY_COOKIE}=`)) {
+          chooseCurrency("USD");
+        }
+        window.localStorage.removeItem(CURRENCY_STORAGE_KEY);
+      }
     } catch {
       window.localStorage.removeItem(STORAGE_KEY);
     } finally {
       setHydrated(true);
     }
-  }, []);
+  }, [chooseCurrency]);
 
   useEffect(() => {
     if (!hydrated) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    window.localStorage.setItem(CURRENCY_STORAGE_KEY, currency);
-  }, [currency, hydrated, items]);
+  }, [hydrated, items]);
 
   useEffect(() => {
     document.body.classList.toggle("cart-is-open", isOpen);
@@ -159,14 +178,14 @@ export function CartProvider({
       itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
       isOpen,
       currency,
-      setCurrency,
+      setCurrency: chooseCurrency,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
       addItem,
       removeItem,
       setQuantity,
     }),
-    [addItem, currency, isOpen, items, removeItem, setQuantity],
+    [addItem, chooseCurrency, currency, isOpen, items, removeItem, setQuantity],
   );
 
   return (
