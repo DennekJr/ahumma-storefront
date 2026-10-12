@@ -5,6 +5,7 @@ import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
 import { PreviewNotice } from "@/components/preview-notice";
 import { hasFrontdeskCheckout, hasFrontdeskReads } from "@/lib/frontdesk";
+import { siteUrl } from "@/lib/structured-data";
 import { indexingAllowed } from "@/lib/seo";
 import "@blossom-carousel/core/style.css";
 import "./globals.css";
@@ -16,20 +17,6 @@ const facultyGlyphic = Faculty_Glyphic({
   display: "swap",
 });
 
-function getMetadataBase() {
-  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-
-  if (configuredUrl) {
-    try {
-      return new URL(configuredUrl);
-    } catch {
-      // Fall through to a valid default when deployment configuration is malformed.
-    }
-  }
-
-  return new URL("http://localhost:6543");
-}
-
 export const metadata: Metadata = {
   title: {
     default: "Ahumma — Body care for Black and brown skin",
@@ -37,9 +24,11 @@ export const metadata: Metadata = {
   },
   description:
     "A Nigerian-born premium body-care brand for Black and brown skin. Whipped body butters and liquid African black soap, rooted in African heritage.",
-  metadataBase: getMetadataBase(),
+  metadataBase: new URL(siteUrl()),
   ...(indexingAllowed() ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
+    siteName: "Ahumma",
+    type: "website",
     title: "Ahumma — At the edge of everything beautiful is you",
     description:
       "Premium body butters and liquid African black soap, rooted in Africa and made for the world.",

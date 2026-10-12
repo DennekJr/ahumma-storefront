@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,7 +15,14 @@ import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { getProducts } from "@/lib/frontdesk";
 
-import { organizationSchema } from "@/lib/structured-data";
+import { organizationSchema, websiteSchema } from "@/lib/structured-data";
+
+export const metadata: Metadata = {
+  title: { absolute: "Ahumma | Body Butters & African Black Soap" },
+  description:
+    "Discover Ahumma, Nigerian-born body care for Black and brown skin. Shop whipped body butters and liquid African black soap rooted in African beauty traditions.",
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   await connection();
@@ -57,6 +65,7 @@ export default async function HomePage() {
   return (
     <main>
       <StructuredData data={organizationSchema()} />
+      <StructuredData data={websiteSchema()} />
       <AnnouncementBar />
 
       <section className="home-hero home-hero--editorial">

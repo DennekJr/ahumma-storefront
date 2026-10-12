@@ -17,13 +17,27 @@ export function siteUrl() {
 
   if (configured) {
     try {
-      return new URL(configured).origin;
+      const url = new URL(configured);
+      if (url.protocol === "https:" || url.protocol === "http:") {
+        return url.origin;
+      }
     } catch {
-      // Fall through when deployment configuration is malformed.
+      // Fall through to the official site when configuration is malformed.
     }
   }
 
-  return "https://www.ahumma.net";
+  return "https://www.ahumma.com";
+}
+
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl()}/#website`,
+    name: SITE_NAME,
+    url: siteUrl(),
+    publisher: { "@id": `${siteUrl()}/#organization` },
+  };
 }
 
 function absolute(path: string | null | undefined) {
@@ -36,6 +50,7 @@ export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteUrl()}/#organization`,
     name: SITE_NAME,
     url: siteUrl(),
     logo: absolute("/images/ahumma-logo.png"),
