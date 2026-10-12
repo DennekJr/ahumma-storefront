@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, MoveRight, Sparkles } from "lucide-react";
@@ -17,11 +18,18 @@ import {
   RITUAL_PRODUCTS,
   WHY_AHUMMA,
 } from "@/lib/homepage";
-import { organizationSchema } from "@/lib/structured-data";
+import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 
 /** The Ahumma story reads long beside the philosophy, so it is held back for
  *  now. Flip to true to restore it above the philosophy section. */
 const SHOW_STORY_SECTION = false;
+
+export const metadata: Metadata = {
+  title: { absolute: "Ahumma | Body Butters & African Black Soap" },
+  description:
+    "Discover Ahumma, Nigerian-born body care for Black and brown skin. Shop whipped body butters and liquid African black soap rooted in African beauty traditions.",
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   await connection();
@@ -38,6 +46,7 @@ export default async function HomePage() {
   return (
     <main>
       <StructuredData data={organizationSchema()} />
+      <StructuredData data={websiteSchema()} />
       <div className="announcement-bar">
         <span>Complimentary Lagos delivery on orders over ₦60,000</span>
         <span className="announcement-desktop">Made in Lagos · Shipping worldwide</span>

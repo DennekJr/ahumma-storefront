@@ -65,3 +65,27 @@ In Frontdesk, keep both price entries complete:
 3. Publish the changes and verify both currencies on the storefront before accepting orders.
 
 The delivery-area field appears only when the workspace returns at least one delivery zone.
+
+## SEO production review
+
+The official public site is `https://www.ahumma.com`. Before deploying this
+storefront there, set `NEXT_PUBLIC_SITE_URL=https://www.ahumma.com` and
+`AHUMMA_ALLOW_INDEXING=true` in that production environment, then rebuild.
+Keep indexing disabled on ahumma.net, local development, and preview deployments.
+The earlier .net webhook examples describe the testing deployment; register the
+.com origin and its webhook separately when moving production, and verify checkout
+return URLs. Do not change working payment/webhook destinations without testing.
+
+After deployment:
+
+- Confirm the public homepage has no `noindex` directive or blocking response header.
+- Check `/robots.txt` allows public pages and lists the .com sitemap.
+- Check `/sitemap.xml`, page canonical URLs, and JSON-LD all use the official origin.
+- Confirm apex ahumma.com redirects to www.ahumma.com, preserving paths and queries.
+- Validate homepage and product markup with Google's Rich Results Test.
+- Verify product prices, stock and review counts against the visible product pages.
+- Submit the sitemap in Search Console and inspect the homepage and product URLs.
+- Measure searches containing Ahumma with Country set to United States.
+
+Search Console ownership and reporting remain an account-side setup step. These
+code changes neither verify ownership nor guarantee a ranking or rich result.

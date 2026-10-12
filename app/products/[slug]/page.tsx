@@ -16,15 +16,30 @@ import { breadcrumbSchema, productSchema } from "@/lib/structured-data";
 
 type ProductPageProps = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return { title: "Product not found" };
+  const description =
+    product.description?.trim() ||
+    product.info?.longDescription?.trim() ||
+    `Discover ${product.name} by Ahumma, Nigerian-born body care for Black and brown skin.`;
   return {
     title: product.name,
-    description: product.description ?? product.info?.longDescription ?? "Considered body care by Ahumma.",
+    description,
     alternates: { canonical: `/products/${product.slug}` },
-    openGraph: product.coverUrl ? { images: [product.coverUrl] } : undefined,
+    openGraph: {
+      title: `${product.name} — Ahumma`,
+      description,
+      siteName: "Ahumma",
+      url: `/products/${product.slug}`,
+      type: "website",
+      ...(product.coverUrl
+        ? { images: [{ url: product.coverUrl, alt: product.name }] }
+        : {}),
+    },
   };
 }
 
@@ -54,7 +69,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <StructuredData
         data={breadcrumbSchema([
           { name: "Ahumma", path: "/" },
-          { name: info?.infoCategory ?? "Body care", path: "/#shop" },
+          { name: info?.infoCategory ?? "Body care", path: "/shop" },
           { name: product.name, path: `/products/${product.slug}` },
         ])}
       />
