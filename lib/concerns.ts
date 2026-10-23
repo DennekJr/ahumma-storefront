@@ -19,6 +19,7 @@ export type Concern = {
   match: string[];
 
   alt: string;
+  image: string;
   consultationLabels: string[];
 };
 
@@ -31,6 +32,7 @@ export const CONCERNS: Concern[] = [
     match: ["sika", "sike", "dream"],
 
     alt: "Dream Whip body butter held by a model",
+    image: "/images/dry-skin.jpg",
     consultationLabels: ["Dry skin", "Very dry skin"],
   },
   {
@@ -39,6 +41,7 @@ export const CONCERNS: Concern[] = [
     match: ["sika", "sike"],
 
     alt: "Whipped Sika body butter, jar open",
+    image: "/images/dull-uneven.jpg",
     consultationLabels: ["Dull-looking skin", "Uneven-looking skin tone"],
   },
   {
@@ -47,6 +50,7 @@ export const CONCERNS: Concern[] = [
     match: ["dream"],
 
     alt: "Skin after the Ahumma ritual",
+    image: "/images/everyday-softness.jpg",
     consultationLabels: ["Not sure what my skin needs"],
   },
   {
@@ -55,6 +59,7 @@ export const CONCERNS: Concern[] = [
     match: ["baby"],
 
     alt: "Baby Bloom, for delicate skin",
+    image: "/images/delicate-skin.jpg",
     consultationLabels: ["Shopping for a baby or child"],
   },
   {
@@ -63,6 +68,7 @@ export const CONCERNS: Concern[] = [
     match: ["ara"],
 
     alt: "Ara African black soap against skin",
+    image: "/images/cleansing.jpg",
     consultationLabels: ["Body acne or congestion"],
   },
 ];
@@ -71,7 +77,7 @@ export const CONCERNS: Concern[] = [
 export const ALL_TILE = {
   id: ALL_CONCERN,
   label: "Everything",
-  image: "/images/sika-ritual.jpg",
+  image: "/images/everything.jpg",
   alt: "Sika body butter held by a model",
   consultationLabels: [],
 };
@@ -164,11 +170,7 @@ export function nextEditorialProduct(
 export function randomConcernImages(products: ProductSummary[]) {
   return Object.fromEntries(
     CONCERNS.map((concern) => {
-      const images = filterByConcern(products, concern)
-        .map((product) => product.coverUrl)
-        .filter((image): image is string => Boolean(image));
-      const image = images[Math.floor(Math.random() * images.length)] ?? null;
-      return [concern.id, image];
+      return [concern.id, concern.image];
     }),
   );
 }

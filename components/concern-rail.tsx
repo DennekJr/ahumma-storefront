@@ -28,8 +28,8 @@ export function ConcernRail({
     {
       id: "consultation",
       label: "Personal consultation",
-      image: "/images/skin-closeup.jpg",
-      alt: "Skin close-up",
+      image: "/images/consultation.jpg",
+      alt: "Personal consultation",
       consultationLabels: [],
     },
   ];
