@@ -11,7 +11,11 @@ import {
 } from "@/components/google-tag-manager";
 import { MetaPixel } from "@/components/meta-pixel";
 import { PreviewNotice } from "@/components/preview-notice";
-import { CURRENCY_COOKIE, initialCurrency } from "@/lib/currency";
+import {
+  CURRENCY_COOKIE,
+  currencyIsLocked,
+  initialCurrency,
+} from "@/lib/currency";
 import { hasFrontdeskCheckout, hasFrontdeskReads } from "@/lib/frontdesk";
 import { siteUrl } from "@/lib/structured-data";
 import { indexingAllowed } from "@/lib/seo";
@@ -60,10 +64,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   // everyone. Responses are already private and uncached, so one visitor's
   // currency can never be served to another.
   const [cookieStore, requestHeaders] = await Promise.all([cookies(), headers()]);
+  // Set by Vercel on every request from the visitor's IP; absent locally.
+  const country = requestHeaders.get("x-vercel-ip-country");
   const currency = initialCurrency(
     cookieStore.get(CURRENCY_COOKIE)?.value,
-    // Set by Vercel on every request from the visitor's IP; absent locally.
-    requestHeaders.get("x-vercel-ip-country"),
+    country,
   );
 
   return (
@@ -77,6 +82,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <CartProvider
           checkoutEnabled={hasFrontdeskCheckout}
           initialCurrency={currency}
+          currencyLocked={currencyIsLocked(country)}
         >
           {children}
         </CartProvider>

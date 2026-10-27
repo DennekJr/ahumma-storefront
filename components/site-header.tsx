@@ -11,7 +11,8 @@ import { useCart } from "@/components/cart-provider";
 import { STORE_CURRENCIES } from "@/lib/format";
 
 export function SiteHeader({ light = false }: { light?: boolean }) {
-  const { itemCount, openCart, currency, setCurrency } = useCart();
+  const { itemCount, openCart, currency, currencyLocked, setCurrency } =
+    useCart();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -266,26 +267,28 @@ export function SiteHeader({ light = false }: { light?: boolean }) {
             <span>FAQs</span>
           </Link>
         </nav>
-        <div className="menu-drawer__currency" aria-label="Shopping currency">
-          <div
-            className={`menu-drawer__currency-options ${
-              currency === STORE_CURRENCIES[1] ? "is-second" : ""
-            }`}
-          >
-            {STORE_CURRENCIES.map((option) => (
-              <button
-                type="button"
-                key={option}
-                className={currency === option ? "is-active" : ""}
-                aria-pressed={currency === option}
-                aria-label={`Show prices in ${option}`}
-                onClick={() => setCurrency(option)}
-              >
-                {option}
-              </button>
-            ))}
+        {currencyLocked ? null : (
+          <div className="menu-drawer__currency" aria-label="Shopping currency">
+            <div
+              className={`menu-drawer__currency-options ${
+                currency === STORE_CURRENCIES[1] ? "is-second" : ""
+              }`}
+            >
+              {STORE_CURRENCIES.map((option) => (
+                <button
+                  type="button"
+                  key={option}
+                  className={currency === option ? "is-active" : ""}
+                  aria-pressed={currency === option}
+                  aria-label={`Show prices in ${option}`}
+                  onClick={() => setCurrency(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </aside>
     </>
   );

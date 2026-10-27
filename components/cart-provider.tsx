@@ -52,6 +52,8 @@ type CartContextValue = {
   itemCount: number;
   isOpen: boolean;
   currency: StoreCurrency;
+  /** Outside Nigeria: dollars only, and the toggle is not offered. */
+  currencyLocked: boolean;
   setCurrency: (currency: StoreCurrency) => void;
   openCart: () => void;
   closeCart: () => void;
@@ -68,11 +70,13 @@ export function CartProvider({
   children,
   checkoutEnabled,
   initialCurrency = "NGN",
+  currencyLocked = false,
 }: {
   children: ReactNode;
   checkoutEnabled: boolean;
   /** Resolved on the server from the visitor's choice or country. */
   initialCurrency?: StoreCurrency;
+  currencyLocked?: boolean;
 }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -82,9 +86,10 @@ export function CartProvider({
 
   /** The toggle. Unlike the default, this is a choice, so it is remembered. */
   const chooseCurrency = useCallback((next: StoreCurrency) => {
+    if (currencyLocked) return;
     setCurrency(next);
     rememberCurrencyChoice(next);
-  }, []);
+  }, [currencyLocked]);
 
   useEffect(() => {
     try {
@@ -180,6 +185,7 @@ export function CartProvider({
       itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
       isOpen,
       currency,
+      currencyLocked,
       setCurrency: chooseCurrency,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
@@ -187,7 +193,7 @@ export function CartProvider({
       removeItem,
       setQuantity,
     }),
-    [addItem, chooseCurrency, currency, isOpen, items, removeItem, setQuantity],
+    [addItem, chooseCurrency, currency, currencyLocked, isOpen, items, removeItem, setQuantity],
   );
 
   return (
