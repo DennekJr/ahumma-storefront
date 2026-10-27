@@ -53,41 +53,10 @@ export function SiteFooter() {
             </div>
             <div>
               <span>Help</span>
-              <a
-                href="https://ahumma.com/contact/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Contact
-              </a>
-              <a
-                href="https://ahumma.com/delivery/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Shipping & Delivery
-              </a>
-              <a
-                href="https://ahumma.com/return-cancellations/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Returns & Exchanges
-              </a>
-              <a
-                href="https://ahumma.com/privacy-policy/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Privacy
-              </a>
-              <a
-                href="https://ahumma.com/privacy-policy/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Terms
-              </a>
+              <Link href="/faq#shipping">Contact</Link>
+              <Link href="/faq#shipping">Shipping & Delivery</Link>
+              <Link href="/faq#shipping">Returns & Exchanges</Link>
+              <Link href="/privacy">Privacy</Link>
             </div>
             <div>
               <span>Connect</span>

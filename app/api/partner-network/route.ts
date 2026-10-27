@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import {
+  AGREED_VALUE,
   CATEGORY_IDS,
-  CONDUCT_AGREED_VALUE,
-  DISCLOSURE_AGREED_VALUE,
   PARTNER_FIELDS,
   PARTNER_FORM_SLUG,
 } from "@/lib/partner-network";
@@ -57,13 +56,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const fullName = requiredString(body.fullName, "Your name");
+    const firstName = requiredString(body.firstName, "First name");
+    const lastName = requiredString(body.lastName, "Last name");
     const email = requiredString(body.email, "Email");
     const phone = requiredString(body.phone, "Phone number");
-    const primaryPlatform = requiredString(
-      body.primaryPlatform,
-      "Primary platform, handle and follower count",
-    );
     const platformLinks = requiredString(
       body.platformLinks,
       "Links to your top 2 platforms",
@@ -108,11 +104,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // FrontDesk types this field as a number, so anything but digits is
-    // rejected upstream. Strip formatting rather than fail the applicant.
-    const phoneDigits = phone.replace(/\D/g, "");
-    if (!phoneDigits) {
-      throw new ApplicationError("Enter a valid phone number");
+    // Enforced here as well as in the form, so a direct POST cannot skip it.
+    if (body.slaAgreed !== true) {
+      throw new ApplicationError(
+        "You must accept the Service Level Agreement before applying",
+      );
     }
 
     const otherBrands =
@@ -121,17 +117,19 @@ export async function POST(request: Request) {
         : null;
 
     const answers: Record<string, unknown> = {
-      [PARTNER_FIELDS.fullName]: fullName,
+      [PARTNER_FIELDS.firstName]: firstName,
+      [PARTNER_FIELDS.lastName]: lastName,
       [PARTNER_FIELDS.email]: email,
-      [PARTNER_FIELDS.phone]: phoneDigits,
+      [PARTNER_FIELDS.phone]: phone,
       [PARTNER_FIELDS.categories]: categories,
-      [PARTNER_FIELDS.primaryPlatform]: primaryPlatform,
       [PARTNER_FIELDS.platformLinks]: platformLinks,
       [PARTNER_FIELDS.contentLinks]: contentLinks,
       [PARTNER_FIELDS.motivation]: motivation,
       [PARTNER_FIELDS.monthlyCommitment]: monthlyCommitment,
-      [PARTNER_FIELDS.disclosureAgreement]: DISCLOSURE_AGREED_VALUE,
-      [PARTNER_FIELDS.codeOfConduct]: CONDUCT_AGREED_VALUE,
+      [PARTNER_FIELDS.disclosureAgreement]: AGREED_VALUE,
+      [PARTNER_FIELDS.codeOfConduct]: AGREED_VALUE,
+      // A checkbox field, so it takes a boolean rather than a choice id.
+      [PARTNER_FIELDS.slaAgreed]: true,
       ...(otherBrands ? { [PARTNER_FIELDS.otherBrands]: otherBrands } : {}),
     };
 
@@ -169,9 +167,15 @@ export async function POST(request: Request) {
       );
     }
 
+    // The community invite is released only here, on a confirmed submission.
+    // Holding it server-side keeps it out of the JS bundle, where it would be
+    // readable by anyone who opened devtools without applying.
+    const communityUrl = process.env.PARTNER_COMMUNITY_URL?.trim() || null;
+
     return NextResponse.json({
       submitted: true,
       thankYouMessage: result?.data?.thankYouMessage ?? null,
+      communityUrl,
     });
   } catch (error) {
     if (error instanceof ApplicationError) {

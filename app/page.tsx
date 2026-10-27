@@ -13,7 +13,8 @@ import { ScrollLink } from "@/components/scroll-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
-import { getProducts } from "@/lib/frontdesk";
+import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
+import { getCatalogue } from "@/lib/frontdesk";
 
 import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   await connection();
-  const products = await getProducts();
+  const { products, unavailable } = await getCatalogue();
 
   const topProducts = products.length
     ? Array.from({ length: 6 }, (_, index) => products[index % products.length])

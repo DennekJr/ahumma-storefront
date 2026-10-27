@@ -15,8 +15,8 @@ import { indexingAllowed } from "@/lib/seo";
 export default function robots(): MetadataRoute.Robots {
   const base = siteUrl();
 
-  // Test deployments must not be crawled: ahumma.com is the live site, and a
-  // second copy of the same brand copy would compete with it.
+  // Only production may be crawled. Previews and the older ahumma.net
+  // deployment carry the same copy and would compete with ahumma.com.
   if (!indexingAllowed()) {
     return { rules: [{ userAgent: "*", disallow: "/" }] };
   }

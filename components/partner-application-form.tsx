@@ -1,46 +1,53 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Check } from "lucide-react";
+import { ArrowRight, Check, FileText, ShieldCheck } from "lucide-react";
 import { CONTENT_CATEGORIES } from "@/lib/partner-network";
+import { PartnerSlaDialog } from "@/components/partner-sla-dialog";
+import { PartnerWelcomeDialog } from "@/components/partner-welcome-dialog";
 
 type FormState = {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   categories: string[];
-  primaryPlatform: string;
-  platformLinks: [string, string];
-  contentLinks: [string, string];
+  platformLinks: string;
+  contentLinks: string;
   motivation: string;
   otherBrands: string;
   monthlyCommitment: string;
   disclosureAgreement: boolean;
   codeOfConduct: boolean;
+  slaAgreed: boolean;
 };
 
-const LINK_SLOTS = [0, 1] as const;
-
 const EMPTY: FormState = {
-  fullName: "",
+  firstName: "",
+  lastName: "",
   email: "",
   phone: "",
   categories: [],
-  primaryPlatform: "",
-  platformLinks: ["", ""],
-  contentLinks: ["", ""],
+  platformLinks: "",
+  contentLinks: "",
   motivation: "",
   otherBrands: "",
   monthlyCommitment: "",
   disclosureAgreement: false,
   codeOfConduct: false,
+  slaAgreed: false,
 };
+
+const COMMITMENT_OPTIONS = ["3 a month", "4–5 a month", "6+ a month"];
 
 export function PartnerApplicationForm() {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [communityUrl, setCommunityUrl] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [slaOpen, setSlaOpen] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const openedAt = useRef(0);
 
@@ -52,17 +59,6 @@ export function PartnerApplicationForm() {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  function setLink(
-    key: "platformLinks" | "contentLinks",
-    index: 0 | 1,
-    value: string,
-  ) {
-    setForm((current) => ({
-      ...current,
-      [key]: index === 0 ? [value, current[key][1]] : [current[key][0], value],
-    }));
-  }
-
   function toggleCategory(id: string) {
     setForm((current) => ({
       ...current,
@@ -72,15 +68,24 @@ export function PartnerApplicationForm() {
     }));
   }
 
+  /** Everything the browser cannot enforce on its own. */
+  function firstProblem() {
+    if (!form.categories.length) return "Choose at least one content category.";
+    if (!form.slaAgreed)
+      return "Please read and accept the Service Level Agreement.";
+    return "";
+  }
+
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    setErrorMessage("");
+    const problem = firstProblem();
 
-    if (!form.categories.length) {
-      setErrorMessage("Choose at least one content category.");
+    if (problem) {
+      setErrorMessage(problem);
       return;
     }
 
+    setErrorMessage("");
     setSubmitting(true);
 
     try {
@@ -89,28 +94,25 @@ export function PartnerApplicationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          platformLinks: form.platformLinks.join("\n"),
-          contentLinks: form.contentLinks.join("\n"),
           honeypot,
-          elapsedMs: openedAt.current
-            ? Date.now() - openedAt.current
-            : undefined,
+          elapsedMs: openedAt.current ? Date.now() - openedAt.current : undefined,
         }),
       });
       const result = await response.json().catch(() => null);
 
       if (!response.ok) {
         setErrorMessage(
-          result?.message ??
-            "We couldn't send your application. Please try again.",
+          result?.message ?? "We couldn't send your application. Please try again.",
         );
         return;
       }
 
+      setCommunityUrl(result?.communityUrl ?? null);
       setSuccessMessage(
         result?.thankYouMessage ||
           "Thanks for applying. We'll be in touch about next steps.",
       );
+      setDialogOpen(true);
     } catch {
       setErrorMessage("We couldn't send your application. Please try again.");
     } finally {
@@ -120,206 +122,287 @@ export function PartnerApplicationForm() {
 
   if (successMessage) {
     return (
-      <div
-        className="partner-form partner-form--success"
-        role="status"
-        aria-live="polite"
-      >
-        <Check size={22} />
-        <p>{successMessage}</p>
-      </div>
+      <>
+        {dialogOpen ? (
+          <PartnerWelcomeDialog
+            communityUrl={communityUrl}
+            onClose={() => setDialogOpen(false)}
+          />
+        ) : null}
+        <div
+          className="partner-form partner-form--success"
+          role="status"
+          aria-live="polite"
+        >
+          <span className="partner-form__tick" aria-hidden="true">
+            <Check size={26} />
+          </span>
+          <p>{successMessage}</p>
+          <p className="partner-form__aside">
+            Applications are reviewed by the Partner Network Manager. Keep an eye
+            on your inbox.
+          </p>
+          {communityUrl ? (
+            <a
+              className="partner-form__community"
+              href={communityUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Join the partner community <ArrowRight size={15} />
+            </a>
+          ) : null}
+        </div>
+      </>
     );
   }
 
   return (
     <form className="partner-form" onSubmit={handleSubmit}>
-      <div className="partner-form-grid">
-        <label className="partner-field">
-          <span>Full name</span>
-          <input
-            value={form.fullName}
-            onChange={(event) => set("fullName", event.target.value)}
-            name="fullName"
-            type="text"
-            autoComplete="name"
-            required
-          />
-        </label>
-        <label className="partner-field">
-          <span>Email</span>
-          <input
-            value={form.email}
-            onChange={(event) => set("email", event.target.value)}
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-          />
-        </label>
-        <label className="partner-field">
-          <span>Phone / WhatsApp</span>
-          <input
-            value={form.phone}
-            onChange={(event) => set("phone", event.target.value)}
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            required
-          />
-        </label>
-        <label className="partner-field">
-          <span>Content you can commit to each month</span>
-          <input
-            value={form.monthlyCommitment}
-            onChange={(event) => set("monthlyCommitment", event.target.value)}
-            name="monthlyCommitment"
-            type="text"
-            placeholder="e.g. 4 pieces"
-            required
-          />
-        </label>
-      </div>
-
-      <fieldset className="partner-categories">
-        <legend>Content category — choose all that apply</legend>
-        <div className="partner-category-options">
-          {CONTENT_CATEGORIES.map((category) => (
-            <label
-              className={`partner-category${form.categories.includes(category.id) ? " is-selected" : ""}`}
-              key={category.id}
-            >
-              <input
-                type="checkbox"
-                name="categories"
-                value={category.id}
-                checked={form.categories.includes(category.id)}
-                onChange={() => toggleCategory(category.id)}
-              />
-              <span>{category.label}</span>
-            </label>
-          ))}
+      {slaOpen ? <PartnerSlaDialog onClose={() => setSlaOpen(false)} /> : null}
+      <fieldset className="partner-step">
+        <legend>
+          <span className="partner-step__index">01</span> About you
+        </legend>
+        <div className="partner-form-grid">
+          <label className="partner-field">
+            <span>First name</span>
+            <input
+              value={form.firstName}
+              onChange={(event) => set("firstName", event.target.value)}
+              name="firstName"
+              type="text"
+              autoComplete="given-name"
+              required
+            />
+          </label>
+          <label className="partner-field">
+            <span>Last name</span>
+            <input
+              value={form.lastName}
+              onChange={(event) => set("lastName", event.target.value)}
+              name="lastName"
+              type="text"
+              autoComplete="family-name"
+              required
+            />
+          </label>
+          <label className="partner-field">
+            <span>Email</span>
+            <input
+              value={form.email}
+              onChange={(event) => set("email", event.target.value)}
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+            />
+          </label>
+          <label className="partner-field">
+            <span>Phone / WhatsApp</span>
+            <input
+              value={form.phone}
+              onChange={(event) => set("phone", event.target.value)}
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="+234…"
+              required
+            />
+          </label>
         </div>
       </fieldset>
 
-      <label className="partner-field">
-        <span>Primary platform, handle and follower count</span>
-        <input
-          value={form.primaryPlatform}
-          onChange={(event) => set("primaryPlatform", event.target.value)}
-          name="primaryPlatform"
-          type="text"
-          placeholder="e.g. Instagram, @yourhandle, 12k"
-          required
-        />
-      </label>
-      <div className="partner-field partner-field--link-group">
-        <span>Links to your top 2 platforms</span>
-        <div className="partner-link-pair">
-          {LINK_SLOTS.map((index) => (
-            <input
-              key={index}
-              aria-label={`Platform link ${index + 1}`}
-              value={form.platformLinks[index]}
-              onChange={(event) =>
-                setLink("platformLinks", index, event.target.value)
-              }
-              name={`platformLink${index + 1}`}
-              type="text"
-              placeholder="https://"
-              required
-            />
-          ))}
-        </div>
-      </div>
-      <div className="partner-field partner-field--link-group">
-        <span>Links to 2 pieces of content you're most proud of</span>
-        <div className="partner-link-pair">
-          {LINK_SLOTS.map((index) => (
-            <input
-              key={index}
-              aria-label={`Content link ${index + 1}`}
-              value={form.contentLinks[index]}
-              onChange={(event) =>
-                setLink("contentLinks", index, event.target.value)
-              }
-              name={`contentLink${index + 1}`}
-              type="text"
-              placeholder="https://"
-              required
-            />
-          ))}
-        </div>
-      </div>
+      <fieldset className="partner-step">
+        <legend>
+          <span className="partner-step__index">02</span> Your work
+        </legend>
 
-      {/* Paired so the textarea keeps a readable measure instead of running
-          the full width of the page. */}
-      <div className="partner-form-split">
-        <label className="partner-field">
-          <span>
-            Why do you want to join the Ahumma Creator Partner Network?
+        <div className="partner-categories">
+          <span className="partner-field__label">
+            Content category
+            <em>choose all that apply</em>
           </span>
-          <textarea
-            value={form.motivation}
-            onChange={(event) => set("motivation", event.target.value)}
-            name="motivation"
-            rows={7}
-            required
-          />
-        </label>
+          <div className="partner-category-options">
+            {CONTENT_CATEGORIES.map((category) => (
+              <label
+                className={`partner-category${form.categories.includes(category.id) ? " is-selected" : ""}`}
+                key={category.id}
+              >
+                <input
+                  type="checkbox"
+                  name="categories"
+                  value={category.id}
+                  checked={form.categories.includes(category.id)}
+                  onChange={() => toggleCategory(category.id)}
+                />
+                <span className="partner-category__tick" aria-hidden="true">
+                  <Check size={13} />
+                </span>
+                <span>{category.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
 
-        <div className="partner-form-split__aside">
-          <label className="partner-field partner-select">
-            <span>
-              Are you currently working with any other skincare brands?
-            </span>
-            <select
-              value={form.otherBrands}
-              onChange={(event) => set("otherBrands", event.target.value)}
-              name="otherBrands"
-            >
-              <option value="">Prefer not to say</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
+        <div className="partner-form-grid partner-form-grid--two">
+          <label className="partner-field">
+            <span>Links to your top 2 platforms</span>
+            <input
+              value={form.platformLinks}
+              onChange={(event) => set("platformLinks", event.target.value)}
+              name="platformLinks"
+              type="text"
+              placeholder="instagram.com/you, tiktok.com/@you"
+              required
+            />
+          </label>
+          <label className="partner-field">
+            <span>Links to 2 pieces you&apos;re most proud of</span>
+            <input
+              value={form.contentLinks}
+              onChange={(event) => set("contentLinks", event.target.value)}
+              name="contentLinks"
+              type="text"
+              placeholder="Paste two links"
+              required
+            />
+          </label>
+        </div>
+
+        <div className="partner-form-split">
+          <label className="partner-field">
+            <span>Why do you want to join the Ahumma Creator Partner Network?</span>
+            <textarea
+              value={form.motivation}
+              onChange={(event) => set("motivation", event.target.value)}
+              name="motivation"
+              rows={6}
+              placeholder="Tell us in your own words."
+              required
+            />
           </label>
 
-          <div className="partner-agreements">
-            <label className="partner-checkbox">
+          <div className="partner-form-split__aside">
+            <div className="partner-categories">
+              <span className="partner-field__label">
+                Content you can commit to each month
+              </span>
+              <div className="partner-category-options">
+                {COMMITMENT_OPTIONS.map((option) => (
+                  <label
+                    className={`partner-category${form.monthlyCommitment === option ? " is-selected" : ""}`}
+                    key={option}
+                  >
+                    <input
+                      type="radio"
+                      name="monthlyCommitment"
+                      value={option}
+                      checked={form.monthlyCommitment === option}
+                      onChange={() => set("monthlyCommitment", option)}
+                      required
+                    />
+                    <span className="partner-category__tick" aria-hidden="true">
+                      <Check size={13} />
+                    </span>
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <label className="partner-field partner-select">
+              <span>Working with any other skincare brands?</span>
+              <select
+                value={form.otherBrands}
+                onChange={(event) => set("otherBrands", event.target.value)}
+                name="otherBrands"
+              >
+                <option value="">Prefer not to say</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset className="partner-step">
+        <legend>
+          <span className="partner-step__index">03</span> Agreements
+        </legend>
+
+        <div className="partner-agreements">
+          <label className="partner-checkbox">
+            <input
+              type="checkbox"
+              name="disclosureAgreement"
+              checked={form.disclosureAgreement}
+              onChange={(event) => set("disclosureAgreement", event.target.checked)}
+              required
+            />
+            <span className="partner-checkbox__box" aria-hidden="true">
+              <Check size={13} />
+            </span>
+            <span>
+              I agree to disclose gifted and paid partnerships in line with FTC
+              (US) and Nigerian guidelines.
+            </span>
+          </label>
+
+          <label className="partner-checkbox">
+            <input
+              type="checkbox"
+              name="codeOfConduct"
+              checked={form.codeOfConduct}
+              onChange={(event) => set("codeOfConduct", event.target.checked)}
+              required
+            />
+            <span className="partner-checkbox__box" aria-hidden="true">
+              <Check size={13} />
+            </span>
+            <span>I agree to the Partner Code of Conduct.</span>
+          </label>
+
+          <div
+            className={`partner-sla-consent${form.slaAgreed ? " is-signed" : ""}`}
+          >
+            <label className="partner-checkbox partner-checkbox--sla">
               <input
                 type="checkbox"
-                name="disclosureAgreement"
-                checked={form.disclosureAgreement}
-                onChange={(event) =>
-                  set("disclosureAgreement", event.target.checked)
-                }
+                name="slaAgreed"
+                checked={form.slaAgreed}
+                onChange={(event) => set("slaAgreed", event.target.checked)}
                 required
               />
               <span className="partner-checkbox__box" aria-hidden="true">
                 <Check size={13} />
               </span>
               <span>
-                I agree to disclose gifted and paid partnerships in line with
-                FTC (US) and Nigerian guidelines.
+                <strong>
+                  <ShieldCheck size={14} /> I have read and accept the Service
+                  Level Agreement
+                </strong>
+                <em>
+                  Both sides&apos; commitments in full. Applications cannot be
+                  sent without it.
+                </em>
               </span>
             </label>
-            <label className="partner-checkbox">
-              <input
-                type="checkbox"
-                name="codeOfConduct"
-                checked={form.codeOfConduct}
-                onChange={(event) => set("codeOfConduct", event.target.checked)}
-                required
-              />
-              <span className="partner-checkbox__box" aria-hidden="true">
-                <Check size={13} />
-              </span>
-              <span>I agree to the Partner Code of Conduct.</span>
-            </label>
+            {/* Sibling, not child: a button inside the label would be
+                activated by the label and silently tick the consent. */}
+            <button
+              className="partner-sla-open"
+              type="button"
+              onClick={() => setSlaOpen(true)}
+            >
+              <FileText size={14} /> Read the full SLA
+            </button>
           </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div className="partner-hidden-field" aria-hidden="true">
+      <div className="partner-form__hidden" aria-hidden="true">
         <input
           value={honeypot}
           onChange={(event) => setHoneypot(event.target.value)}
@@ -333,19 +416,21 @@ export function PartnerApplicationForm() {
         />
       </div>
 
-      <button
-        className="partner-form__submit"
-        type="submit"
-        disabled={submitting}
-      >
-        {submitting ? "Sending your application…" : "Submit application"}
-      </button>
+      <div className="partner-form__actions">
+        <button className="partner-submit" type="submit" disabled={submitting}>
+          {submitting ? "Sending…" : "Submit application"}{" "}
+          <ArrowRight size={17} />
+        </button>
+        <p className="partner-form__note">
+          Your application goes straight to the Partner Network Manager.
+        </p>
+      </div>
 
-      {errorMessage && (
-        <p className="partner-form__status is-error" role="alert">
+      {errorMessage ? (
+        <p className="partner-form__error" role="alert">
           {errorMessage}
         </p>
-      )}
+      ) : null}
     </form>
   );
 }

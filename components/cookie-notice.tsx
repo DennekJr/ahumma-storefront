@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const COOKIE_NOTICE_KEY = "ahumma-cookie-notice-dismissed";
-const PRIVACY_POLICY_URL = "https://ahumma.com/privacy-policy/";
+const PRIVACY_POLICY_URL = "/privacy";
 
 export function CookieNotice() {
   const [visible, setVisible] = useState(false);

@@ -12,6 +12,7 @@ import { ProductPurchase } from "@/components/product-purchase";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
+import { TrackViewItem } from "@/components/track-view-item";
 import { getProduct, getProducts } from "@/lib/frontdesk";
 
 import {
@@ -138,6 +139,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               ))}
             </ul>
           ) : null}
+          <TrackViewItem product={product} />
         </aside>
       </section>
 
