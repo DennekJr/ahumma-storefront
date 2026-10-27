@@ -3767,7 +3767,8 @@ img {
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.25rem 0.85rem;
-  border: 0;
+  /* The light edge keeps it visible over the dark tier card and footer. */
+  border: 1px solid rgba(250, 248, 243, 0.32);
   border-radius: 999px;
   background: var(--forest);
   box-shadow: 0 0.75rem 2rem rgba(17, 27, 21, 0.24);
