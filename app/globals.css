@@ -2390,15 +2390,24 @@ img {
   height: auto;
 }
 
-/* Main's green footer. The page now closes on the dimmed belief hero, so the
-   footer continues in the same deep forest instead of switching back to
-   porcelain. Layout stays goodness's; only the palette and labels change. */
+/* Main's green footer, from the newsletter down. The testimonials sit at the
+   top of the footer element but keep their own porcelain band, so the quotes
+   read as page content and the green marks where the footer proper begins.
+   Layout stays goodness's; only the palette and labels change. */
 .site-footer {
   --footer-ink: var(--porcelain);
+  padding-top: 0;
   background: var(--deep-forest);
 }
 
+.site-footer .testimonial-carousel {
+  --footer-ink: var(--deep-forest);
+  padding-top: 4rem;
+  background: var(--porcelain);
+}
+
 .footer-newsletter {
+  padding-top: 6rem;
   background: transparent;
 }
 
@@ -2423,20 +2432,6 @@ img {
   border-color: var(--porcelain);
   background: var(--porcelain);
   color: var(--deep-forest);
-}
-
-.site-footer .testimonial-carousel__intro {
-  color: var(--porcelain);
-}
-
-.site-footer .testimonial-carousel__controls button {
-  border-color: var(--line-light);
-  color: var(--porcelain);
-}
-
-.site-footer .footer-testimonial {
-  border-color: var(--line-light);
-  background: transparent;
 }
 
 .testimonial-carousel .footer-testimonial p {
