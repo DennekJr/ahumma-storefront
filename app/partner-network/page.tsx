@@ -92,14 +92,11 @@ export default function PartnerNetworkPage() {
 
       <section className="partner-tiers" aria-labelledby="tiers-heading">
         <div className="partner-section-heading">
-          <h2 id="tiers-heading">
-            Everyone starts as a Founding Partner.
-            <br />
+          <h2 id="tiers-heading">Everyone starts as a Founding Partner.</h2>
+          <p>
             Move up through consistent, quality content and sales through your
-            code.
-            <br />
-            Reviews happen monthly.
-          </h2>
+            code. Reviews happen monthly.
+          </p>
         </div>
 
         <div className="partner-tier-grid">

@@ -29,40 +29,6 @@ export default async function HomePage() {
   await connection();
   const { products, unavailable } = await getCatalogue();
 
-  const topProducts = products.length
-    ? Array.from({ length: 6 }, (_, index) => products[index % products.length])
-    : [];
-  const productHref = (...names: string[]) => {
-    const match = products.find((product) =>
-      names.some((name) => product.name.toLowerCase().includes(name)),
-    );
-
-    return match ? `/products/${match.slug}` : "/#shop";
-  };
-  const ritualProducts = [
-    {
-      names: ["ara"],
-      displayName: "For Black skin.",
-      displayImage: "/images/ara-ritual.jpg",
-    },
-    {
-      names: ["dream whip", "dream"],
-      displayName: "For brown skin.",
-      displayImage: "/images/dream-ritual.jpg",
-    },
-    {
-      names: ["sika", "sike"],
-      displayName: "For every shade that knows its beauty.",
-      displayImage: "/images/sika-ritual.jpg",
-    },
-  ].flatMap(({ names, displayName, displayImage }) => {
-    const product = products.find((item) =>
-      names.some((name) => item.name.toLowerCase().includes(name)),
-    );
-
-    return product ? [{ product, displayName, displayImage }] : [];
-  });
-
   return (
     <main>
       <StructuredData data={organizationSchema()} />
@@ -97,82 +63,73 @@ export default async function HomePage() {
       </section>
 
       <section
-        className="love-skin-section"
+        className="ritual-shelf"
         id="love-your-skin"
-        aria-labelledby="love-your-skin-title"
+        aria-labelledby="ritual-shelf-title"
       >
-        <div className="love-skin__image-panel">
-          <video
-            className="love-skin__video"
-            src="/videos/explore-media.webm"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-label="Ahumma body-care ritual"
-          />
-        </div>
-        <div className="love-skin__content">
-          <div className="love-skin__heading-row">
-            <h2 id="love-your-skin-title">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">Shop the ritual</span>
+            <h2 id="ritual-shelf-title">
               The ritual starts here, with care made for the skin you’re in.
             </h2>
           </div>
-          <ProductCarousel>
-            {topProducts.map((product, index) => (
-              <ProductCard
-                product={product}
-                index={index}
-                key={`${product.ref}-${index}`}
-              />
-            ))}
-          </ProductCarousel>
+          <p>
+            Whipped body butters and liquid African black soap, made in Nigeria
+            for Black and brown skin.
+          </p>
+        </div>
+
+        <div className="ritual-shelf__body">
+          <div className="ritual-shelf__film">
+            <video
+              src="/videos/explore-media.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label="Ahumma body-care ritual"
+            />
+          </div>
+          {unavailable ? (
+            <CatalogueUnavailable variant="compact" />
+          ) : (
+            <ProductCarousel>
+              {products.map((product, index) => (
+                <ProductCard
+                  product={product}
+                  index={index}
+                  key={product.ref}
+                />
+              ))}
+            </ProductCarousel>
+          )}
         </div>
       </section>
 
       <section
-        className="love-skin-section love-skin-section--reverse"
-        id="love-your-skin-continued"
-        aria-labelledby="love-your-skin-continued-title"
+        className="ingredients-film"
+        id="ingredients"
+        aria-labelledby="ingredients-film-title"
       >
-        <div className="love-skin__image-panel">
-          <video
-            className="love-skin__video"
-            src="/videos/ingredients-video.webm"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-label="Ahumma body-care ritual"
-          />
-        </div>
-        <div className="love-skin__content">
-          <div className="love-skin__heading-row">
-            <h2 id="love-your-skin-continued-title">
-              Made from thoughtfully selected plant butters, nourishing oils and
-              African beauty traditions.
-            </h2>
-          </div>
-          <ProductCarousel
-            viewAllLabel="Find what’s right for your skin"
-            viewAllHref="/consultation"
-          >
-            {ritualProducts.map(
-              ({ product, displayName, displayImage }, index) => (
-                <ProductCard
-                  product={product}
-                  index={index}
-                  displayName={displayName}
-                  displayImage={displayImage}
-                  hideStatus
-                  hidePrice
-                  hideAction
-                  key={`continued-${product.ref}-${index}`}
-                />
-              ),
-            )}
-          </ProductCarousel>
-        </div>
+        <video
+          className="ingredients-film__video"
+          src="/videos/ingredients-video.webm"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        />
+        {/* The film carries its own "Our ingredients" title, so the heading
+            is for screen readers and search only. */}
+        <h2 id="ingredients-film-title" className="sr-only">
+          Made from thoughtfully selected plant butters, nourishing oils and
+          African beauty traditions.
+        </h2>
+        <Link className="ingredients-film__cta" href="/consultation">
+          Find what’s right for your skin
+        </Link>
       </section>
 
       <section className="home-hero home-hero--editorial home-hero--belief">

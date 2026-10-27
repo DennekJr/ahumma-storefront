@@ -36,7 +36,9 @@
   --line-light: rgba(255, 255, 255, 0.25);
   --header-height: 4.875rem;
   --header-top: 3rem;
-  --header-top: 3rem;
+  /* The bar's own height, so the hero beneath it can fill exactly the rest of
+     the first screen. */
+  --announcement-height: 2.8125rem;
   /* Page frame. The gutter alone defines it: under proportional scaling the
      composition never balloons, so a content cap has nothing to protect
      against — any rem value would simply bind at a fixed ratio and hold the
@@ -54,9 +56,16 @@
   --type-sans-body: 0.9375rem;
   --type-sans-ui: 1rem;
   --type-sans-lead: 1.125rem;
+  /* Each step reads as its own level: display (page title) > section (h2)
+     > subsection (h3 that heads copy) > quote > body > card title. Section
+     headings used to sit at 2.25rem beside 1.75–2.25rem quotes and subheads,
+     so the page had no clear top of each section. */
+  --type-serif-card: 1.0625rem;
   --type-serif-label: 1.25rem;
   --type-serif-body: 1.3125rem;
-  --type-serif-section: clamp(1.5rem, 2.8vw, 2.25rem);
+  --type-serif-quote: 1.75rem;
+  --type-serif-subsection: 1.5rem;
+  --type-serif-section: clamp(2.25rem, 3.9vw, 3.5rem);
   --type-serif-display: clamp(3rem, 5.4vw, 6.2rem);
   --type-serif-hero-action: 1.15rem;
 
@@ -281,8 +290,10 @@ img {
   z-index: 40;
   display: flex;
   width: 100%;
+  height: var(--announcement-height);
+  align-items: center;
   overflow: hidden;
-  padding: 0.8125rem 0;
+  padding: 0;
   background: var(--deep-forest);
   color: rgba(255, 255, 255, 0.87);
   font-size: var(--type-sans-small);
@@ -1043,13 +1054,13 @@ img {
 
 .about-belief-section__copy h2 {
   margin: 0;
-  font-size: clamp(1.5rem, 2.2vw, 1.75rem);
+  font-size: clamp(2rem, 2.8vw, 2.5rem);
   font-weight: 400;
   line-height: var(--leading-compact);
 }
 
 .about-belief-section__copy .about-mantra {
-  font-size: clamp(1.5rem, 2.2vw, 1.75rem) !important;
+  font-size: var(--type-serif-subsection) !important;
   line-height: var(--leading-compact) !important;
 }
 
@@ -1134,156 +1145,112 @@ img {
   letter-spacing: var(--tracking-label);
 }
 
-.love-skin-section {
-  display: grid;
-  min-height: 46rem;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  overflow: hidden;
+/* Home: the ritual shelf. Main's section rhythm (generous padding, an
+   eyebrow over the heading with a short lede beside it) around goodness's
+   film-plus-carousel idea, held to one row so nothing competes for size. */
+.ritual-shelf {
+  padding: 8rem var(--gutter) 7rem;
   background: var(--porcelain);
   color: var(--deep-forest);
 }
 
-.love-skin-section--reverse .love-skin__image-panel {
-  order: 2;
+.ritual-shelf .section-heading {
+  margin-bottom: 3rem;
 }
 
-.love-skin-section--reverse .love-skin__content {
-  order: 1;
-  padding-bottom: 3rem;
-}
-
-.love-skin-section--reverse .love-skin__content h2 {
-  max-width: 48rem;
-}
-
-.love-skin__image-panel {
-  position: relative;
-  height: 880px;
-  overflow: hidden;
-  background: var(--sand);
-}
-
-.love-skin__image-panel img,
-.love-skin__image-panel video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.love-skin__image {
-  z-index: 0;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.005);
-}
-
-.love-skin__overlay {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(31, 17, 12, 0.05) 18%,
-      rgba(45, 15, 13, 0.22) 52%,
-      rgba(48, 10, 12, 0.88) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(30, 12, 10, 0.14),
-      transparent 45%,
-      rgba(30, 12, 10, 0.08)
-    );
-}
-
-.love-skin__content {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 6rem 2rem 3rem;
-}
-
-.love-skin__heading-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.love-skin__content h2 {
-  max-width: 38rem;
-  margin: 0;
+.ritual-shelf .section-heading h2 {
+  max-width: 40rem;
+  margin: 1.125rem 0 0;
   font-family: var(--serif);
   font-size: var(--type-serif-section);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
   text-wrap: balance;
-  text-transform: var(--case-none);
 }
 
-.love-skin__round-link {
+.ritual-shelf .section-heading p {
+  font-family: var(--sans);
+  font-size: var(--type-sans-body);
+  line-height: var(--leading-relaxed);
+  color: rgba(24, 32, 25, 0.72);
+}
+
+.ritual-shelf__body {
   display: grid;
-  width: 3.5rem;
-  height: 3.5rem;
-  flex: 0 0 auto;
-  place-items: center;
-  margin-top: 0.75rem;
-  border-radius: 50%;
-  background: var(--deep-forest);
-  color: var(--porcelain);
-  transition:
-    background 180ms ease,
-    transform 180ms ease;
-}
-
-.love-skin__round-link:hover,
-.love-skin__round-link:focus-visible {
-  background: var(--rose);
-  transform: translateX(0.15rem);
-}
-
-.love-skin__lead,
-.love-skin__body {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 9fr);
+  align-items: stretch;
+  gap: 1.5rem;
+  max-width: var(--content-max);
   margin: 0 auto;
-  font-family: var(--serif);
+  padding: 0 2.5vw;
 }
 
-.love-skin__lead {
-  font-size: var(--type-serif-body);
-  font-weight: 650;
-  letter-spacing: var(--tracking-copy);
+.ritual-shelf__film {
+  position: relative;
+  min-height: 24rem;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  background: var(--sand);
 }
 
-.love-skin__body {
-  max-width: 63.75rem;
-  margin-top: 0.5rem;
-  font-size: var(--type-serif-body);
-  font-weight: 520;
-  line-height: var(--leading-body);
+.ritual-shelf__film video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.love-skin__cta {
+.ritual-shelf .product-grid.top-products-grid {
+  grid-auto-columns: calc((100% - 1.5rem) / 3);
+  margin-top: 0;
+}
+
+.ritual-shelf .product-card__details h3 {
+  font-size: var(--type-serif-card);
+}
+
+/* Home: the ingredients film, full bleed. The film carries its own title in
+   the middle of the frame, so the band keeps the film's proportions at every
+   width (the title always lands in the same place) and the call to action
+   sits centred just beneath it. */
+.ingredients-film {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.ingredients-film__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 44%;
+}
+
+.ingredients-film__cta {
+  position: absolute;
+  top: 69%;
+  left: 50%;
   display: inline-flex;
   align-items: center;
-  gap: 1.875rem;
-  margin-top: 2.375rem;
-  padding: 0.8125rem 1.125rem 0.8125rem 1.3125rem;
-  background: var(--porcelain);
-  color: var(--ink);
-  font-size: var(--type-sans-label);
-  font-weight: 650;
-  letter-spacing: var(--tracking-copy);
-  transition:
-    gap 220ms ease,
-    background 220ms ease;
+  padding: 0.85rem 1.5rem 0.95rem;
+  border-radius: 999px;
+  background: var(--deep-forest);
+  color: var(--porcelain);
+  font-family: var(--serif);
+  font-size: var(--type-serif-hero-action);
+  white-space: nowrap;
+  transform: translateX(-50%);
+  transition: background 220ms ease;
 }
 
-.love-skin__cta:hover {
-  gap: 2.5rem;
-  background: white;
+.ingredients-film__cta:hover,
+.ingredients-film__cta:focus-visible {
+  background: var(--forest);
 }
 
 .shop-section {
@@ -1396,15 +1363,15 @@ img {
 
 .product-carousel__view-all {
   display: inline-flex;
-  min-height: 2.75rem;
+  min-height: 2.5rem;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.25rem;
+  padding: 0.6rem 1.1rem;
   border-radius: 999px;
   background: var(--deep-forest);
   color: var(--porcelain);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-family: var(--sans);
+  font-size: var(--type-sans-small);
   font-weight: 400;
   line-height: var(--leading-tight);
   text-transform: var(--case-none);
@@ -1490,29 +1457,122 @@ img {
   padding: 1rem 0 0.75rem;
 }
 
-.product-grid.top-products-grid .product-card__action {
+.product-grid.top-products-grid .product-card__action svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  transition: none;
+}
+
+.product-grid.top-products-grid .product-card__action:hover {
+  border-color: var(--deep-forest);
+  background: var(--deep-forest);
+  color: var(--porcelain);
+}
+
+.product-grid.top-products-grid .product-card__action:hover svg {
+  transform: none;
+}
+
+.product-card__image {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  background: var(--sand);
+}
+
+.product-card__image img {
+  object-fit: cover;
+  transition:
+    transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 400ms ease;
+}
+
+.product-card:hover .product-card__image img {
+  filter: saturate(0.9);
+  transform: scale(1.035);
+}
+
+.product-card__status {
+  position: absolute;
+  z-index: 2;
+  top: 0.9375rem;
+  left: 0.9375rem;
+  padding: 0.4375rem 0.625rem;
+  background: rgba(250, 248, 243, 0.88);
+  backdrop-filter: blur(0.5rem);
+  font-size: var(--type-sans-micro);
+  font-weight: 620;
+  letter-spacing: var(--tracking-caps);
+  text-transform: var(--case-none);
+}
+
+.product-card__status {
+  border-radius: 1.4rem;
+  background: var(--rose);
+  color: var(--porcelain);
+  font-family: var(--serif);
+  font-size: var(--type-serif-label);
+  letter-spacing: var(--tracking-heading);
+  text-transform: var(--case-none);
+}
+
+.product-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: left;
+  text-wrap: pretty;
+  padding: 1rem 0.2rem 1rem;
+}
+
+.product-card__details h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--type-serif-body);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-compact);
+}
+
+.product-card__details strong {
+  font-family: var(--sans);
+  font-size: var(--type-sans-body);
+  font-weight: 400;
+  line-height: var(--leading-compact);
+  white-space: nowrap;
+}
+
+/* Quiet by design: the card sells through its image and name, so the action
+   is a small outlined pill rather than a full-width bar competing with both. */
+.product-card__action {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  align-self: flex-start;
   gap: 0.375rem;
-  padding: 0.8rem 0.75rem;
-  border: 1px solid var(--deep-forest);
+  margin-top: auto;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: transparent;
   color: var(--deep-forest);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: var(--type-sans-small);
   font-weight: 400;
   letter-spacing: var(--tracking-normal);
-  line-height: var(--leading-tight);
-  margin-top: auto;
+  line-height: var(--leading-compact);
   text-transform: var(--case-none);
   transition:
     background 220ms ease,
+    border-color 220ms ease,
     color 220ms ease;
 }
 
-.product-grid.top-products-grid .product-card__action svg {
-  width: 1rem;
+.product-card__action svg {
+  width: 0.875rem;
+  height: 0.875rem;
   transition: none;
 }
 
@@ -1596,32 +1656,10 @@ img {
   white-space: nowrap;
 }
 
-.product-card__action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 0.375rem;
-  margin-top: auto;
-  padding: 0.8rem 0.75rem;
-  border: 1px solid var(--deep-forest);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--deep-forest);
-  cursor: pointer;
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  font-weight: 400;
-  letter-spacing: var(--tracking-normal);
-  line-height: var(--leading-tight);
-  text-transform: var(--case-none);
-  transition:
-    background 220ms ease,
-    color 220ms ease;
-}
 
 .product-card__action svg {
-  width: 1rem;
+  width: 0.875rem;
+  height: 0.875rem;
   transition: none;
 }
 
@@ -2350,6 +2388,79 @@ img {
 .footer-legal img {
   width: 7rem;
   height: auto;
+}
+
+/* Main's green footer. The page now closes on the dimmed belief hero, so the
+   footer continues in the same deep forest instead of switching back to
+   porcelain. Layout stays goodness's; only the palette and labels change. */
+.site-footer {
+  --footer-ink: var(--porcelain);
+  background: var(--deep-forest);
+}
+
+.footer-newsletter {
+  background: transparent;
+}
+
+.footer-newsletter h2 {
+  font-size: var(--type-serif-section);
+  line-height: var(--leading-compact);
+}
+
+.footer-newsletter p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.footer-newsletter .circle-form input {
+  border-color: var(--line-light);
+}
+
+.footer-newsletter .circle-form input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-newsletter .circle-form button {
+  border-color: var(--porcelain);
+  background: var(--porcelain);
+  color: var(--deep-forest);
+}
+
+.site-footer .testimonial-carousel__intro {
+  color: var(--porcelain);
+}
+
+.site-footer .testimonial-carousel__controls button {
+  border-color: var(--line-light);
+  color: var(--porcelain);
+}
+
+.site-footer .footer-testimonial {
+  border-color: var(--line-light);
+  background: transparent;
+}
+
+.testimonial-carousel .footer-testimonial p {
+  font-size: var(--type-serif-quote);
+}
+
+.footer-utility-links span {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: var(--type-sans-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.footer-utility-links a {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.footer-legal {
+  border-top-color: var(--line-light);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-legal img {
+  filter: invert(1) brightness(3);
 }
 
 .sr-only {
@@ -3597,11 +3708,11 @@ img {
   text-align: center;
 }
 
-.partner-hero h1 {
+.partner-hero > h1 {
   margin: 2rem 0 0;
 }
 
-.partner-hero h1 {
+.partner-hero > h1 {
   margin: 0;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
@@ -3610,7 +3721,7 @@ img {
   line-height: var(--leading-display);
 }
 
-.partner-hero p {
+.partner-hero > p {
   max-width: 44rem;
   margin: 1.875rem auto 0;
   font-family: var(--serif);
@@ -3643,6 +3754,61 @@ img {
 
 .partner-hero .partner-apply {
   margin-top: 2.5rem;
+}
+
+/* Follows the reader once the hero button has scrolled away. It sits left of
+   the Frontdesk chat bubble, which owns the bottom-right corner. */
+.partner-apply-float {
+  position: fixed;
+  z-index: 60;
+  right: 6.5rem;
+  bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.25rem 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--forest);
+  box-shadow: 0 0.75rem 2rem rgba(17, 27, 21, 0.24);
+  color: var(--porcelain);
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: var(--type-serif-hero-action);
+  line-height: var(--leading-compact);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 320ms ease,
+    transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 180ms ease;
+}
+
+.partner-apply-float[data-visible="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.partner-apply-float:hover,
+.partner-apply-float:focus-visible {
+  background: var(--deep-forest);
+}
+
+@media (max-width: 600px) {
+  .partner-apply-float {
+    right: 5.25rem;
+    bottom: 1.25rem;
+    font-size: var(--type-sans-ui);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-apply-float {
+    transform: none;
+    transition: opacity 120ms linear;
+  }
 }
 
 .partner-apply:hover,
@@ -4491,7 +4657,7 @@ img {
     padding: 5.375rem 2.5vw 3.375rem;
   }
 
-  .partner-hero p {
+  .partner-hero > p {
     font-size: var(--type-sans-lead);
   }
 
@@ -5417,9 +5583,13 @@ img {
   list-style: none;
 }
 
+/* Small and muted on purpose: the tiles are a way into the shop, not the
+   show. Seven fit in one row at desktop widths, and a filter plus a forest
+   wash takes the gloss off the generated imagery so it sits with the
+   photographs around it. */
 .concern-tile {
   display: block;
-  width: 16rem;
+  width: 10.5rem;
   padding: 0;
   border: 0;
   background: transparent;
@@ -5437,8 +5607,9 @@ img {
 .concern-tile__image {
   position: relative;
   display: block;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+  border-radius: 0.4rem;
   background: var(--sand);
   border: 1px solid transparent;
   transition: border-color 220ms ease;
@@ -5446,11 +5617,19 @@ img {
 
 .concern-tile__image img {
   object-fit: cover;
-  transition: transform 600ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  filter: saturate(0.62) brightness(0.84) contrast(0.94);
+  transition:
+    transform 600ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    filter 400ms ease;
+}
+
+.concern-tile:hover .concern-tile__image img,
+.concern-tile.is-selected .concern-tile__image img {
+  filter: saturate(0.8) brightness(0.92) contrast(0.96);
 }
 
 .concern-tile:hover .concern-tile__image img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .concern-tile.is-selected .concern-tile__image {
@@ -5459,28 +5638,26 @@ img {
 
 .concern-tile__label {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  left: 1rem;
+  right: 0.75rem;
+  bottom: 0.7rem;
+  left: 0.75rem;
   z-index: 1;
   display: block;
   color: var(--porcelain);
   font-family: var(--serif);
-  font-size: 1.75rem;
+  font-size: var(--type-serif-card);
   font-weight: 400;
-  letter-spacing: var(--tracking-heading);
+  letter-spacing: var(--tracking-copy);
   line-height: var(--leading-compact);
-  text-shadow: 0 0.1rem 0.35rem rgba(0, 0, 0, 0.3);
   text-wrap: balance;
 }
 
 .concern-tile__image::after {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 45%;
-  background: linear-gradient(transparent, rgba(17, 27, 21, 0.7));
+  inset: 0;
+  background:
+    linear-gradient(transparent 45%, rgba(17, 27, 21, 0.62)),
+    rgba(17, 27, 21, 0.12);
   content: "";
 }
 
@@ -5763,18 +5940,14 @@ img {
   }
 
   .concern-tile {
-    width: min(70vw, 15rem);
-  }
-
-  .concern-tile__image {
-    aspect-ratio: 4 / 3;
+    width: min(36vw, 8.5rem);
   }
 
   .concern-tile__label {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    left: 0.75rem;
-    font-size: 1.25rem;
+    right: 0.6rem;
+    bottom: 0.55rem;
+    left: 0.6rem;
+    font-size: 0.9375rem;
   }
 
   .collection-subhead {
@@ -8199,9 +8372,6 @@ img {
 }
 
 @media (max-width: 780px) {
-  .announcement-bar {
-    padding-block: 0.6875rem;
-  }
   .announcement-group {
     gap: 1rem;
     padding-right: 1rem;
@@ -8210,6 +8380,7 @@ img {
     --gutter: clamp(1.25rem, 5vw, 2.4rem);
     --header-height: 4.1875rem;
     --header-top: 2.5rem;
+    --announcement-height: 2.5rem;
   }
   .site-header {
     grid-template-columns: 1fr 7.25rem 1fr;
@@ -8368,55 +8539,37 @@ img {
   .philosophy-copy p {
     font-size: var(--type-serif-body);
   }
-  .love-skin-section {
-    min-height: 0;
-    grid-template-columns: 1fr;
+  .ritual-shelf {
+    padding: 5rem var(--gutter) 4.5rem;
+  }
+  .ritual-shelf .section-heading {
+    margin-bottom: 2rem;
+  }
+  .ritual-shelf__body {
+    /* minmax(0, …): a bare 1fr would grow to the carousel's full scroll
+       width and drag the film with it. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
     padding: 0;
   }
-  .love-skin-section--reverse .love-skin__image-panel,
-  .love-skin-section--reverse .love-skin__content {
-    order: initial;
+  .ritual-shelf__film {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
   }
-  .love-skin__image-panel {
-    height: clamp(20rem, 60svh, 28rem);
-  }
-  .love-skin__image {
-    object-position: 43% center;
-  }
-  .love-skin__overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(31, 17, 12, 0.08) 10%,
-      rgba(45, 15, 13, 0.24) 46%,
-      rgba(48, 10, 12, 0.94) 100%
-    );
-  }
-  .love-skin__content {
-    width: 100%;
-    padding: 2.5rem var(--gutter) 3rem;
-  }
+  .ritual-shelf .product-grid.top-products-grid,
   .product-grid.top-products-grid {
-    grid-auto-columns: min(78vw, 20.4rem);
-    margin-top: 1.5rem;
+    grid-auto-columns: min(64vw, 16rem);
+    margin-top: 0;
     touch-action: pan-y;
   }
-  .love-skin__content h2 {
-    margin-bottom: 1.375rem;
-    font-size: var(--type-serif-section);
+  .ingredients-film {
+    aspect-ratio: 4 / 5;
   }
-  .love-skin__lead {
-    max-width: 20.625rem;
-    font-size: var(--type-sans-ui);
-    line-height: var(--leading-normal);
+  .ingredients-film__video {
+    object-position: center;
   }
-  .love-skin__body {
-    max-width: 21.875rem;
-    margin-top: 0.6875rem;
-    font-size: var(--type-sans-label);
-    line-height: var(--leading-body);
-  }
-  .love-skin__cta {
-    margin-top: 1.75rem;
+  .ingredients-film__cta {
+    top: 58%;
   }
   .shop-section {
     padding: 5.75rem 0.8125rem 6.25rem;
@@ -8658,7 +8811,7 @@ img {
   padding-top: 0;
   border-top: 0;
   font-family: var(--serif);
-  font-size: clamp(1.5rem, 2.2vw, 1.75rem);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -9290,8 +9443,11 @@ img {
   }
 }
 
+/* The hero fills the first screen exactly: the announcement bar plus the
+   hero is one viewport, so nothing from the next section peeks in. svh keeps
+   it steady while mobile browser chrome shows and hides. */
 .home-hero--editorial {
-  min-height: min(61rem, calc(100vh - 5.2rem));
+  min-height: calc(100svh - var(--announcement-height));
 }
 
 .home-hero--editorial .hero-copy {
@@ -9734,8 +9890,10 @@ img {
 }
 
 @media (max-width: 780px) {
+  /* A full screen, but never shorter than 48rem: the product image is
+     anchored to the hero's foot, so a shorter hero lifts it into the copy. */
   .home-hero--editorial {
-    min-height: 48rem;
+    min-height: max(48rem, calc(100svh - var(--announcement-height)));
   }
 
   .home-hero--editorial .hero-copy {
