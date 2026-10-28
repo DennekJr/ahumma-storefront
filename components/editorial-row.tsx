@@ -47,6 +47,9 @@ export function EditorialRow({
           alt=""
           fill
           sizes="(max-width: 700px) 100vw, 50vw"
+          style={
+            art.widePosition ? { objectPosition: art.widePosition } : undefined
+          }
         />
       </Link>
     </section>

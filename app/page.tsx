@@ -15,6 +15,7 @@ import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { CatalogueUnavailable } from "@/components/catalogue-unavailable";
 import { getCatalogue } from "@/lib/frontdesk";
+import { INGREDIENT_STORY } from "@/lib/homepage";
 
 import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 
@@ -121,15 +122,21 @@ export default async function HomePage() {
           playsInline
           aria-hidden="true"
         />
-        {/* The film carries its own "Our ingredients" title, so the heading
-            is for screen readers and search only. */}
-        <h2 id="ingredients-film-title" className="sr-only">
-          Made from thoughtfully selected plant butters, nourishing oils and
-          African beauty traditions.
-        </h2>
-        <Link className="ingredients-film__cta" href="/consultation">
-          Find what’s right for your skin
-        </Link>
+        <div className="ingredients-film__copy">
+          <span className="eyebrow">Our ingredients</span>
+          <h2 id="ingredients-film-title">
+            Made from thoughtfully selected plant butters, nourishing oils and
+            African beauty traditions.
+          </h2>
+          <ul className="ingredients-film__list">
+            {INGREDIENT_STORY.map((ingredient) => (
+              <li key={ingredient.name}>{ingredient.name}</li>
+            ))}
+          </ul>
+          <Link className="ingredients-film__cta" href="/consultation">
+            Find what’s right for your skin
+          </Link>
+        </div>
       </section>
 
       <section className="home-hero home-hero--editorial home-hero--belief">

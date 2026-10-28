@@ -109,6 +109,8 @@ const EDITORIAL: {
   portrait: string;
   wide: string;
   alt: string;
+  /** Where to anchor the wide photo when its frame crops it. */
+  widePosition?: string;
 }[] = [
   {
     match: ["sika", "sike"],
@@ -124,9 +126,11 @@ const EDITORIAL: {
   },
   {
     match: ["ara"],
-    portrait: "/images/ara-ritual.jpg",
-    wide: "/images/ara-soap.jpg",
-    alt: "Ara African black soap against skin",
+    portrait: "/images/ara-soap.jpg",
+    wide: "/images/ara-ritual.jpg",
+    alt: "Ara African black soap on a stone counter",
+    // The bottle is on the left of this very wide shot.
+    widePosition: "left center",
   },
 ];
 

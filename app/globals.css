@@ -1221,30 +1221,54 @@ img {
   margin-top: 0;
 }
 
-/* Home: the ingredients film, full bleed. The film carries its own title in
-   the middle of the frame, so the band keeps the film's proportions at every
-   width (the title always lands in the same place) and the call to action
-   sits centred just beneath it. */
+/* Home: the ingredients film beside its copy. The film is a 1080×1350
+   portrait clip, so it plays whole at its own shape and no larger than it
+   stays sharp; stretched across the page it was cropped to a blurry strip. */
 .ingredients-film {
-  position: relative;
-  aspect-ratio: 16 / 7;
-  overflow: hidden;
-  background: var(--sand);
+  display: grid;
+  grid-template-columns: min(42vw, 64svh, 34rem) minmax(0, 1fr);
+  gap: clamp(2.5rem, 7vw, 8rem);
+  align-items: center;
+  padding: 0 var(--gutter) 8rem;
+  background: var(--porcelain);
+  color: var(--deep-forest);
 }
 
 .ingredients-film__video {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-media);
+  background: var(--sand);
   object-fit: cover;
-  object-position: 50% 44%;
+}
+
+.ingredients-film__copy {
+  max-width: 44rem;
+}
+
+.ingredients-film__copy h2 {
+  margin: 1.375rem 0 0;
+  font-family: var(--serif);
+  font-size: var(--type-serif-section);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-display);
+}
+
+.ingredients-film__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem 1.5rem;
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--line);
+  color: rgba(24, 32, 25, 0.72);
+  font-size: var(--type-sans-body);
+  list-style: none;
 }
 
 .ingredients-film__cta {
-  position: absolute;
-  top: 69%;
-  left: 50%;
   display: inline-flex;
   align-items: center;
   padding: 0.85rem 1.5rem 0.95rem;
@@ -1254,7 +1278,6 @@ img {
   font-family: var(--serif);
   font-size: var(--type-serif-hero-action);
   white-space: nowrap;
-  transform: translateX(-50%);
   transition: background 220ms ease;
 }
 
@@ -5834,6 +5857,14 @@ img {
   outline-offset: 2px;
 }
 
+/* The pill sits beside the save circle at the same height and edge, so the
+   pair reads as one row of controls. */
+.collection-card__purchase .product-card__action {
+  min-height: 2.75rem;
+  margin-top: 0;
+  border-color: var(--deep-forest);
+}
+
 /* The break row */
 .editorial-row {
   display: grid;
@@ -6035,12 +6066,22 @@ img {
   background: var(--porcelain);
 }
 
+/* Each photo at its own shape (4:5 beside 5:4) at one shared height, capped
+   so the pair never fills the screen. Forced into two tall halves of the page,
+   both were cropped into close-ups. */
 .product-editorial .editorial-row {
-  margin-top: 0;
+  --editorial-height: min(30rem, 60svh);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6.25fr);
+  max-width: calc(var(--editorial-height) * 2.05 + 1.5rem);
+  margin: 0 auto;
 }
 
 .product-editorial .editorial-row__figure {
-  aspect-ratio: 9 / 10;
+  aspect-ratio: 4 / 5;
+}
+
+.product-editorial .editorial-row__figure--wide {
+  aspect-ratio: 5 / 4;
 }
 
 .related-products .collection-grid {
@@ -8625,13 +8666,9 @@ img {
     touch-action: pan-y;
   }
   .ingredients-film {
-    aspect-ratio: 4 / 5;
-  }
-  .ingredients-film__video {
-    object-position: center;
-  }
-  .ingredients-film__cta {
-    top: 58%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding: 0 var(--gutter) 5rem;
   }
   .shop-section {
     padding: 5.75rem 0.8125rem 6.25rem;
