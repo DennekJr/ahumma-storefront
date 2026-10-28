@@ -69,8 +69,8 @@
   --type-serif-body: 1.3125rem;
   --type-serif-quote: 1.75rem;
   --type-serif-subsection: 1.5rem;
-  --type-serif-section: clamp(2.25rem, 3.9vw, 3.5rem);
-  --type-serif-display: clamp(3rem, 5.4vw, 6.2rem);
+  --type-serif-section: clamp(1.875rem, 3.9vw, 3.5rem);
+  --type-serif-display: clamp(2.5rem, 5.4vw, 6.2rem);
   --type-serif-hero-action: 1.15rem;
 
   --tracking-normal: normal;
@@ -10463,4 +10463,11 @@ img {
   .not-found-message p {
     font-size: var(--type-sans-lead);
   }
+}
+
+/* Headings break into even lines, so a phone-width title never ends on a
+   single orphaned word ("ritual.", "belief."). */
+h1,
+h2 {
+  text-wrap: balance;
 }
