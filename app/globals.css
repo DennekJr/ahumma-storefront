@@ -36,6 +36,8 @@
   --rose: #d25c88;
   --line: rgba(24, 32, 25, 0.2);
   --line-light: rgba(255, 255, 255, 0.25);
+  /* The partner gallery's corner, shared by every image card. */
+  --radius-media: 0.75rem;
   --header-height: 4.875rem;
   --header-top: 3rem;
   /* The bar's own height, so the hero beneath it can fill exactly the rest of
@@ -10383,4 +10385,24 @@ img {
   .home-hero.home-hero--belief .hero-link {
     margin: 0;
   }
+}
+
+/* One corner for every image card: the rounded edge of the partner gallery,
+   so photos read as one family on every page. Full-bleed media (the heroes,
+   the ingredients film, split panels) stay square. Last in the file because
+   several of these selectors are repeated in earlier blocks. */
+.ritual-shelf__film,
+.product-card__image,
+.product-grid.top-products-grid .product-card__image,
+.collection-card__image,
+.concern-tile__image,
+.editorial-row__figure,
+.why-grid__image,
+.partner-quality-media,
+.partner-quality-list__image,
+.partner-onboarding-visual,
+.product-gallery__item,
+.about-community__image {
+  overflow: hidden;
+  border-radius: var(--radius-media);
 }
