@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { CollectionCard } from "@/components/collection-card";
 import { ConcernRail } from "@/components/concern-rail";
-import { FilterBar } from "@/components/filter-bar";
+import { FilterBar, SORT_ONLY_UP_TO } from "@/components/filter-bar";
 import { SavedProductsSection } from "@/components/saved-products-section";
 import { useFilteredCollection } from "@/components/use-filtered-collection";
 import { ALL_CONCERN, findConcern, filterByConcern } from "@/lib/concerns";
@@ -56,7 +56,12 @@ export function ShopCollection({
       <header className="collection-subhead">
         <h2>{title}</h2>
       </header>
-      <FilterBar facets={facets} total={shown.length} clientFiltering />
+      <FilterBar
+        facets={facets}
+        total={shown.length}
+        clientFiltering
+        sortOnly={products.length <= SORT_ONLY_UP_TO}
+      />
       {shown.length ? (
         <div className="collection-body">
           <div className="collection-grid">

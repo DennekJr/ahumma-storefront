@@ -24,6 +24,8 @@
 
 :root {
   --ink: #182019;
+  /* Only the hover lift on deep-forest controls. Every surface and button is
+     deep forest, so the site has one green. */
   --forest: #1d2c22;
   --deep-forest: #111b15;
   --paper: #f2eee6;
@@ -100,7 +102,7 @@ html {
   font-size: max(16px, calc(100vw / 1512 * 16));
   scroll-behavior: smooth;
   overscroll-behavior: none;
-  scrollbar-color: rgba(29, 44, 34, 0.58) transparent;
+  scrollbar-color: rgba(17, 27, 21, 0.58) transparent;
   scrollbar-width: thin;
   scrollbar-gutter: stable;
 }
@@ -175,7 +177,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   overscroll-behavior: none;
-  background: var(--paper);
+  background: var(--porcelain);
   color: var(--ink);
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
@@ -193,7 +195,7 @@ body {
 ::-webkit-scrollbar-thumb {
   border: 0.1875rem solid transparent;
   border-radius: 999px;
-  background: rgba(29, 44, 34, 0.58);
+  background: rgba(17, 27, 21, 0.58);
   background-clip: padding-box;
 }
 
@@ -614,12 +616,16 @@ img {
   overflow-y: auto;
   overscroll-behavior: contain;
   background: var(--porcelain);
-  box-shadow: 1.875rem 0 5rem rgba(16, 22, 17, 0.12);
   transform: translateX(-102%);
-  transition: transform 430ms cubic-bezier(0.65, 0, 0.15, 1);
+  transition:
+    transform 430ms cubic-bezier(0.65, 0, 0.15, 1),
+    box-shadow 430ms ease;
 }
 
+/* The shadow belongs to the open drawer only: parked off-screen it still
+   bled 50px of grey onto that edge of every page. */
 .menu-drawer.is-open {
+  box-shadow: 1.875rem 0 5rem rgba(16, 22, 17, 0.12);
   transform: translateX(0);
 }
 
@@ -776,7 +782,7 @@ img {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient(180deg in oklch, #1d2c2200 0%, #1d2c2288 100%);
+  background: linear-gradient(180deg in oklch, #111b1500 0%, #111b1588 100%);
   pointer-events: none;
 }
 
@@ -929,7 +935,7 @@ img {
   justify-content: center;
   padding: 1rem 2.5rem 1.125rem;
   border-radius: 999px;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
   font-family: var(--serif);
   font-size: var(--type-serif-section);
@@ -939,12 +945,12 @@ img {
   transition:
     color 100ms ease-in-out,
     background-color 100ms ease-in-out;
-  border: 0.1rem solid var(--forest);
+  border: 0.1rem solid var(--deep-forest);
 }
 
 .hero-link:hover {
   background: var(--porcelain);
-  color: var(--forest);
+  color: var(--deep-forest);
   /*transform: translateY(-0.125rem);*/
 }
 
@@ -1154,7 +1160,11 @@ img {
   color: var(--deep-forest);
 }
 
+/* Heading and its line read as one block; side by side they sat at opposite
+   edges of the page with nothing between them. */
 .ritual-shelf .section-heading {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
   margin-bottom: 3rem;
 }
 
@@ -1170,6 +1180,8 @@ img {
 }
 
 .ritual-shelf .section-heading p {
+  max-width: 34rem;
+  margin: 0;
   font-family: var(--sans);
   font-size: var(--type-sans-body);
   line-height: var(--leading-relaxed);
@@ -1829,7 +1841,7 @@ img {
 .footer-signup-popup__form .circle-form__consultation input {
   width: 1rem;
   height: 1rem;
-  accent-color: var(--forest);
+  accent-color: var(--deep-forest);
 }
 
 .footer-signup-popup__form input:not([type="checkbox"]),
@@ -1859,7 +1871,7 @@ img {
   margin-top: 1.2rem;
   border: 0;
   border-radius: 999px;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
   cursor: pointer;
   font-family: var(--serif);
@@ -2603,7 +2615,7 @@ img {
 .product-summary__highlights svg {
   flex: none;
   margin-top: 0.05rem;
-  color: var(--forest);
+  color: var(--deep-forest);
 }
 
 .purchase-price {
@@ -2828,7 +2840,7 @@ img {
   grid-template-columns: 1fr 1fr;
   gap: 9vw;
   padding: 4.8rem 2.4rem;
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .product-story h2 {
@@ -2893,14 +2905,14 @@ img {
   display: grid;
   grid-template-columns: 7fr 3fr;
   padding: 2.4rem var(--gutter);
-  background: var(--paper);
+  background: var(--porcelain);
   gap: 0;
 }
 
 .product-details-grid > * {
   min-height: 22.5rem;
   padding: 1.2rem 4.5vw 1.2rem 2.25vw;
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .product-details-grid > *:not(:last-child) {
@@ -3019,7 +3031,7 @@ img {
 
 .product-closing {
   padding: 9.375rem 8vw;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: white;
   text-align: center;
 }
@@ -3063,6 +3075,25 @@ img {
  */
 .shop-page--sky > .cloud-backdrop {
   z-index: -1;
+}
+
+/* The sky frames the top of the page and is gone before the grid: the product
+   photos carry their own sky, and cloud behind cloud made the cards hard to
+   tell apart. The products then sit on porcelain, as they do on the home page. */
+.shop-page--sky > .cloud-backdrop,
+.shop-page--sky > .cloud-backdrop--fixed {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 50rem;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+}
+
+@media (max-width: 780px) {
+  .shop-page--sky > .cloud-backdrop,
+  .shop-page--sky > .cloud-backdrop--fixed {
+    height: 40rem;
+  }
 }
 
 .shop-page:not(.shop-page--sky) {
@@ -3166,7 +3197,7 @@ img {
 
 .shop-closing {
   padding: 9.375rem 8vw;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: white;
   text-align: center;
 }
@@ -3247,12 +3278,14 @@ img {
   padding: 0 2.5vw 4.75rem;
 }
 
+/* One chip colour from the palette. The six pastel hues these used to cycle
+   through appeared nowhere else on the site and read as another brand. */
 .faq-contents a {
   padding: 0.4375rem 0.75rem;
   border: 0;
   border-radius: 1.4rem;
-  background: oklch(0.94 0.04 20);
-  color: #000;
+  background: var(--sand);
+  color: var(--ink);
   font-family: var(--serif);
   font-size: var(--type-serif-label);
   letter-spacing: var(--tracking-heading);
@@ -3260,26 +3293,6 @@ img {
   transition:
     background 220ms ease,
     color 220ms ease;
-}
-
-.faq-contents a:nth-child(6n + 2) {
-  background: oklch(0.94 0.04 80);
-}
-
-.faq-contents a:nth-child(6n + 3) {
-  background: oklch(0.94 0.04 140);
-}
-
-.faq-contents a:nth-child(6n + 4) {
-  background: oklch(0.94 0.04 200);
-}
-
-.faq-contents a:nth-child(6n + 5) {
-  background: oklch(0.94 0.04 260);
-}
-
-.faq-contents a:nth-child(6n) {
-  background: oklch(0.94 0.04 320);
 }
 
 .faq-contents a:hover,
@@ -3576,7 +3589,7 @@ img {
 }
 
 .ingredient-section {
-  background: var(--paper);
+  background: var(--sand);
 }
 
 .why-grid {
@@ -3731,9 +3744,9 @@ img {
   justify-content: center;
   margin-top: 2.5rem;
   padding: 0.85rem 1.5rem 0.95rem;
-  border: 0.1rem solid var(--forest);
+  border: 0.1rem solid var(--deep-forest);
   border-radius: 999px;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
   font-family: var(--serif);
   font-size: var(--type-serif-hero-action);
@@ -3765,7 +3778,7 @@ img {
   /* The light edge keeps it visible over the dark tier card and footer. */
   border: 1px solid rgba(250, 248, 243, 0.32);
   border-radius: 999px;
-  background: var(--forest);
+  background: var(--deep-forest);
   box-shadow: 0 0.75rem 2rem rgba(17, 27, 21, 0.24);
   color: var(--porcelain);
   cursor: pointer;
@@ -3810,7 +3823,7 @@ img {
 .partner-apply:hover,
 .partner-apply:focus-visible {
   background: var(--porcelain);
-  color: var(--forest);
+  color: var(--deep-forest);
 }
 
 .partner-apply:focus-visible,
@@ -3888,7 +3901,7 @@ img {
   cursor: pointer;
 }
 
-.partner-page section {
+.partner-page > section {
   max-width: var(--content-max);
   margin-inline: auto;
   padding: 0 var(--gutter) 7rem;
@@ -3900,7 +3913,7 @@ img {
 
 .partner-page .partner-goals {
   padding-block: 3.6rem;
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .partner-page .partner-tiers {
@@ -4002,7 +4015,7 @@ img {
 }
 
 .partner-tier:nth-child(3) {
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
 }
 
@@ -4100,7 +4113,7 @@ img {
 
 .partner-page .partner-quality {
   padding-block: 3.6rem;
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .partner-quality-heading {
@@ -4222,7 +4235,7 @@ img {
   max-width: none !important;
   margin-block: 0 6rem;
   padding: 5rem var(--gutter) !important;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
 }
 
@@ -4256,7 +4269,7 @@ img {
 
 .partner-step__number {
   margin-right: 0.625rem;
-  color: var(--forest);
+  color: var(--deep-forest);
   font-family: var(--serif);
   font-size: var(--type-serif-label);
   font-weight: 400;
@@ -4362,7 +4375,7 @@ img {
 .partner-field input:focus-visible,
 .partner-field textarea:focus-visible,
 .partner-field select:focus-visible {
-  border-color: var(--forest);
+  border-color: var(--deep-forest);
   outline: 0.125rem solid var(--clay);
   outline-offset: 0.125rem;
 }
@@ -4424,8 +4437,8 @@ img {
 }
 
 .partner-category.is-selected {
-  border-color: var(--forest);
-  background: var(--forest);
+  border-color: var(--deep-forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
 }
 
@@ -4495,9 +4508,9 @@ img {
   min-height: 3.5rem;
   margin-top: 0.5rem;
   padding: 0 2rem;
-  border: 1px solid var(--forest);
+  border: 1px solid var(--deep-forest);
   border-radius: 62.4375rem;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
   cursor: pointer;
   font-family: var(--serif);
@@ -4514,7 +4527,7 @@ img {
 .partner-form__submit:hover:not(:disabled) {
   border-color: var(--porcelain);
   background: var(--porcelain);
-  color: var(--forest);
+  color: var(--deep-forest);
 }
 
 .partner-form__submit:focus-visible {
@@ -4607,7 +4620,8 @@ img {
   }
 
   .partner-onboarding-visual {
-    position: static;
+    position: relative;
+    top: auto;
     height: auto;
     min-height: 0;
     aspect-ratio: 1 / 0.85;
@@ -4675,7 +4689,7 @@ img {
 
 /* Partner SLA */
 .partner-sla {
-  background: var(--paper);
+  background: var(--porcelain);
   padding-top: 5.5rem !important;
 }
 
@@ -6033,7 +6047,7 @@ img {
 
 .product-editorial {
   padding: 0 var(--gutter);
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .product-editorial .editorial-row {
@@ -6165,10 +6179,10 @@ img {
   gap: 0.5rem;
   align-items: center;
   padding: 0.625rem 1rem;
-  border: 1px solid var(--clay);
-  border-radius: 0.5rem;
-  background: var(--clay);
-  color: var(--porcelain);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--porcelain);
+  color: var(--ink);
   cursor: pointer;
   font: inherit;
   font-size: var(--type-sans-small);
@@ -6181,9 +6195,7 @@ img {
 
 .filter-chip:hover,
 .filter-sort:hover {
-  border-color: var(--clay);
-  background: var(--clay);
-  color: var(--porcelain);
+  border-color: var(--deep-forest);
 }
 
 .filter-chip.is-active {
@@ -6556,12 +6568,6 @@ img {
   color: rgba(24, 32, 25, 0.68);
 }
 
-/* Chips need a surface of their own once the ground behind them is moving. */
-.shop-page--sky .filter-chip,
-.shop-page--sky .filter-sort {
-  background: var(--clay);
-  color: var(--porcelain);
-}
 
 .shop-page--sky .filter-chip.is-active {
   background: var(--deep-forest);
@@ -6581,7 +6587,7 @@ img {
 
 /* Partner SLA */
 .partner-sla {
-  background: var(--paper);
+  background: var(--porcelain);
   padding-top: 5.5rem !important;
 }
 
@@ -6869,6 +6875,27 @@ img {
 
 .partner-sla-open:hover {
   background: var(--sand);
+}
+
+.partner-sla-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--type-sans-small);
+  transition: border-color 180ms ease;
+}
+
+.partner-sla-read:hover,
+.partner-sla-read:focus-visible {
+  border-color: var(--deep-forest);
 }
 
 .partner-form__actions {
@@ -7414,9 +7441,10 @@ img {
 
 .legal-toc {
   position: sticky;
-  top: 2rem;
+  /* Clears the sticky header (51px once scrolled), which hid the first entry. */
+  top: 5rem;
   align-self: start;
-  max-height: calc(100vh - 4rem);
+  max-height: calc(100vh - 7rem);
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -7591,15 +7619,17 @@ img {
   flex-direction: column;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-color: rgba(29, 44, 34, 0.58) transparent;
+  scrollbar-color: rgba(17, 27, 21, 0.58) transparent;
   scrollbar-width: thin;
   background: var(--porcelain);
-  box-shadow: -1.875rem 0 5rem rgba(16, 22, 17, 0.12);
   transform: translateX(102%);
-  transition: transform 430ms cubic-bezier(0.65, 0, 0.15, 1);
+  transition:
+    transform 430ms cubic-bezier(0.65, 0, 0.15, 1),
+    box-shadow 430ms ease;
 }
 
 .cart-drawer.is-open {
+  box-shadow: -1.875rem 0 5rem rgba(16, 22, 17, 0.12);
   transform: translateX(0);
 }
 
@@ -8103,7 +8133,7 @@ img {
   padding: 0.8rem 1.25rem;
   border: 0;
   border-radius: 999px;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
   cursor: pointer;
   font-family: var(--serif);
@@ -8135,22 +8165,19 @@ img {
 }
 
 /* Checkout status and 404 */
-.status-page,
-.not-found-page {
+.status-page {
   min-height: 100dvh;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: white;
 }
 
-.status-shell,
-.not-found-page {
+.status-shell {
   display: grid;
   place-items: center;
   padding: 5rem 1.5rem;
 }
 
-.status-card,
-.not-found-page > div {
+.status-card {
   width: min(38.125rem, 100%);
   padding: 4.375rem;
   background: var(--porcelain);
@@ -8175,7 +8202,7 @@ img {
 }
 
 .status-card h1,
-.not-found-page h1 {
+.not-found-message h1 {
   margin: 0 0 1.125rem;
   font-family: var(--serif);
   font-size: var(--type-serif-display);
@@ -8183,7 +8210,7 @@ img {
   letter-spacing: var(--tracking-heading);
 }
 .status-card > p,
-.not-found-page p {
+.not-found-message p {
   color: rgba(24, 32, 25, 0.65);
   font-family: var(--serif);
   font-size: var(--type-serif-body);
@@ -8202,8 +8229,7 @@ img {
   margin-top: 1.875rem;
 }
 .status-actions button,
-.status-actions a,
-.not-found-page a {
+.status-actions a {
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
@@ -8218,12 +8244,64 @@ img {
   text-transform: var(--case-none);
 }
 .status-actions .filled {
-  background: var(--forest);
+  background: var(--deep-forest);
   color: white;
 }
-.not-found-page > div > span {
-  font-size: var(--type-sans-micro);
+/* 404: a normal page on porcelain, with the range below the message. */
+.not-found-page {
+  background: var(--porcelain);
+  color: var(--ink);
+}
+
+.not-found-message {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 7rem var(--gutter) 6rem;
+  text-align: center;
+}
+
+.not-found-message > span {
+  margin-bottom: 1rem;
+  font-size: var(--type-sans-label);
   letter-spacing: var(--tracking-wide);
+}
+
+.not-found-message p {
+  max-width: 32rem;
+  margin: 0 0 2rem;
+}
+
+.not-found-message a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: var(--deep-forest);
+  color: var(--porcelain);
+  font-size: var(--type-sans-small);
+  transition: background-color 180ms ease;
+}
+
+.not-found-message a:hover,
+.not-found-message a:focus-visible {
+  background: var(--forest);
+}
+
+.not-found-products {
+  padding: 0 var(--gutter) 7rem;
+}
+
+.not-found-products h2 {
+  margin: 0 0 2rem;
+  font-family: var(--serif);
+  font-size: var(--type-serif-section);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-compact);
 }
 
 .spinner {
@@ -8314,7 +8392,7 @@ img {
 /* Related products */
 .related-products {
   padding-top: 3.6rem;
-  padding-bottom: 1.2rem;
+  padding-bottom: 5rem;
   border-top: 0;
 }
 
@@ -8684,9 +8762,12 @@ img {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  .status-card,
-  .not-found-page > div {
+  .status-card {
     padding: 3.4375rem 1.5rem;
+  }
+
+  .not-found-message {
+    padding: 4.5rem var(--gutter) 4rem;
   }
   .status-actions {
     flex-direction: column;
@@ -8759,7 +8840,7 @@ img {
 .about-page .ingredient-section {
   padding-top: 4.375rem;
   padding-bottom: 4.375rem;
-  background: var(--paper);
+  background: var(--sand);
 }
 
 .about-page .why-section .section-heading {
@@ -9178,7 +9259,7 @@ img {
   grid-template-columns: 0.32fr 1fr 0.7fr;
   gap: 2rem;
   padding: 7rem var(--gutter) 6rem;
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .about-hero h1,
@@ -9258,7 +9339,7 @@ img {
 }
 
 .about-difference {
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
 }
 
@@ -9313,8 +9394,13 @@ img {
 }
 
 .about-community {
-  padding: 5rem 0 4rem;
-  background: var(--paper);
+  padding: 7rem 0;
+  border-top: 1px solid var(--line);
+  background: var(--porcelain);
+}
+
+.about-community .about-community__intro {
+  margin-bottom: 0;
 }
 
 .about-community__intro {
@@ -9390,7 +9476,7 @@ img {
 
 @media (max-width: 780px) {
   .about-community {
-    padding: 4rem 0 3rem;
+    padding: 4.5rem 0;
   }
 
   .about-community__intro {
@@ -9590,7 +9676,7 @@ img {
 
 .philosophy-manifesto-section {
   grid-template-columns: 0.32fr 1.68fr;
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .philosophy-manifesto-section__copy {
@@ -9693,7 +9779,7 @@ img {
 }
 
 .ritual-products-section {
-  background: var(--paper);
+  background: var(--porcelain);
 }
 
 .ritual-products-section > h2 {
@@ -9771,7 +9857,7 @@ img {
 
 .difference-section {
   grid-template-columns: 0.32fr 0.78fr 0.9fr;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
 }
 
@@ -10070,7 +10156,7 @@ img {
   line-height: var(--leading-art-display);
 }
 
-.consultation-hero p {
+.consultation-hero > p {
   max-width: 38rem;
   margin: 0;
   font-size: var(--type-sans-ui);
@@ -10090,6 +10176,90 @@ img {
 
 .consultation-dialog__trigger {
   margin-top: 1rem;
+}
+
+/* The shop's concern tiles, as a second way in: each opens the form with that
+   concern already ticked. */
+.consultation-concerns {
+  justify-self: stretch;
+  margin-top: 2.5rem;
+  padding: 0;
+}
+
+.consultation-concerns > p {
+  margin: 0 0 1.25rem;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: var(--type-sans-label);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.consultation-concerns ul {
+  justify-content: center;
+}
+
+.consultation-concerns li:last-child .concern-tile {
+  margin-right: 0;
+}
+
+.consultation-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+  max-width: 68.75rem;
+  margin: 0 auto;
+  padding: 4.5rem var(--gutter) 7rem;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.consultation-steps span {
+  color: rgba(24, 32, 25, 0.5);
+  font-family: var(--serif);
+  font-size: var(--type-serif-label);
+}
+
+.consultation-steps h2 {
+  margin: 0.75rem 0 0.5rem;
+  font-family: var(--serif);
+  font-size: var(--type-serif-subsection);
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-compact);
+}
+
+.consultation-steps p {
+  margin: 0;
+  color: rgba(24, 32, 25, 0.72);
+  font-size: var(--type-sans-body);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 780px) {
+  /* One scrolling row, edge to edge, like the shop rail. */
+  .consultation-concerns {
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+  }
+
+  .consultation-concerns > p {
+    text-align: left;
+  }
+
+  .consultation-concerns ul {
+    justify-content: flex-start;
+  }
+
+  .consultation-concerns li:last-child .concern-tile {
+    margin-right: var(--gutter);
+  }
+
+  .consultation-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    padding: 3.5rem var(--gutter) 5rem;
+  }
 }
 
 .consultation-form {
@@ -10120,7 +10290,7 @@ img {
   gap: 1rem;
   align-content: start;
   padding: 2rem;
-  background: var(--forest);
+  background: var(--deep-forest);
   color: var(--porcelain);
 }
 
@@ -10144,48 +10314,44 @@ img {
     left: var(--gutter);
   }
 
+  /* Same dimmed photo as desktop. The image is a Next fill image, so its
+     inline size always covers the whole section; the tint has to as well, or
+     the copy lands on undimmed skin. */
   .home-hero--belief {
     display: flex;
     min-height: 100svh;
     flex-direction: column;
     justify-content: flex-end;
-    padding-top: min(58svh, 34rem);
-    background: var(--porcelain);
-    color: var(--ink);
+    background: var(--deep-forest);
+    color: var(--porcelain);
   }
 
   .home-hero--belief .hero-belief-image {
-    top: 0;
-    right: 0;
-    bottom: auto;
-    left: 0;
-    width: 100%;
-    height: min(62svh, 36rem);
     object-position: 70% center;
   }
 
   .home-hero--belief .hero-light-overlay {
-    inset: 0 0 auto;
-    height: min(62svh, 36rem);
     background: linear-gradient(
       to bottom,
-      transparent 68%,
-      var(--porcelain) 100%
+      rgba(17, 27, 21, 0.42) 0%,
+      rgba(17, 27, 21, 0.62) 45%,
+      rgba(17, 27, 21, 0.88) 100%
     );
   }
 
   .home-hero.home-hero--belief .site-header {
-    color: var(--ink);
+    color: var(--porcelain);
   }
 
   .home-hero.home-hero--belief .hero-copy {
     position: relative;
+    z-index: 2;
     bottom: auto;
     left: auto;
     width: auto;
     margin: 0;
     padding: 1.75rem var(--gutter) 2.5rem;
-    color: var(--ink);
+    color: var(--porcelain);
     text-align: left;
     transform: none;
   }

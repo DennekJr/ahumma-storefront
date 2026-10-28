@@ -35,7 +35,11 @@ export function DialogShell({
 
   useEffect(() => {
     previouslyFocused.current = document.activeElement as HTMLElement | null;
-    panelRef.current?.querySelector<HTMLElement>("[data-autofocus]")?.focus();
+    // preventScroll: the autofocus target can sit at the end of a long panel,
+    // and scrolling to it opened the agreement at its last line.
+    panelRef.current
+      ?.querySelector<HTMLElement>("[data-autofocus]")
+      ?.focus({ preventScroll: true });
 
     const { body } = document;
     const previousOverflow = body.style.overflow;

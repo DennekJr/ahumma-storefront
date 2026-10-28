@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CollectionCard } from "@/components/collection-card";
-import { FilterBar } from "@/components/filter-bar";
+import { FilterBar, SORT_ONLY_UP_TO } from "@/components/filter-bar";
 import { useFilteredCollection } from "@/components/use-filtered-collection";
 import type { ProductSummary } from "@/lib/store-types";
 
@@ -25,7 +25,12 @@ export function CategoryCollection({
 
   return (
     <>
-      <FilterBar facets={facets} total={shown.length} clientFiltering />
+      <FilterBar
+        facets={facets}
+        total={shown.length}
+        clientFiltering
+        sortOnly={products.length <= SORT_ONLY_UP_TO}
+      />
 
       {shown.length ? (
         <div className="collection-body">

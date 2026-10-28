@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { FileText } from "lucide-react";
 import { DialogShell } from "@/components/dialog-shell";
 import {
   SLA_BRAND_COMMITMENTS,
@@ -86,5 +89,33 @@ export function PartnerSlaDialog({ onClose }: Props) {
         Close
       </button>
     </DialogShell>
+  );
+}
+
+/**
+ * The page shows the turnaround table and escalation steps; the commitments in
+ * full open from here, in the same dialog the application form uses.
+ */
+export function PartnerSlaOpener() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        className="partner-sla-read"
+        type="button"
+        onClick={() => setOpen(true)}
+      >
+        <FileText size={15} aria-hidden="true" /> Read the full agreement
+      </button>
+      {/* Portalled: inside its section the overlay shared that section's
+          stacking context and sat under the floating Apply button. */}
+      {open
+        ? createPortal(
+            <PartnerSlaDialog onClose={() => setOpen(false)} />,
+            document.body,
+          )
+        : null}
+    </>
   );
 }

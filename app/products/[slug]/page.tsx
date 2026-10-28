@@ -209,15 +209,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </article>
       </section>
 
-      <section className="product-closing">
-        <p>
-          A ritual worth returning to.
-          <br />
-          Care for body and self.
-        </p>
-        <Link href="/shop">Shop the full collection</Link>
-      </section>
-
       {ritualPairings.length ? (
         <section className="saved-products related-products">
           <h2>Pairs well with</h2>
@@ -232,6 +223,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </section>
       ) : null}
+
+      {/* The closing note comes after the pairings, so the page ends here
+          rather than appearing to end before them. */}
+      <section className="product-closing">
+        <p>
+          A ritual worth returning to.
+          <br />
+          Care for body and self.
+        </p>
+        <Link href="/shop">Shop the full collection</Link>
+      </section>
       <SiteFooter />
     </main>
   );

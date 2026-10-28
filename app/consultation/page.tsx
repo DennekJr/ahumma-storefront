@@ -31,8 +31,28 @@ export default async function ConsultationPage({
           Tell us a little about your skin, your routine and what care should
           feel like. We&apos;ll help you explore the Ahumma essentials that fit.
         </p>
-        <ConsultationDialog initialConcerns={concern?.consultationLabels} />
+        <ConsultationDialog
+          initialConcerns={concern?.consultationLabels}
+          showConcerns
+        />
       </header>
+      <ol className="consultation-steps" aria-label="How the consultation works">
+        <li>
+          <span>01</span>
+          <h2>Tell us about your skin</h2>
+          <p>A few questions on your skin, your routine and how care should feel.</p>
+        </li>
+        <li>
+          <span>02</span>
+          <h2>We suggest a ritual</h2>
+          <p>We read every answer and come back with the Ahumma ritual that fits.</p>
+        </li>
+        <li>
+          <span>03</span>
+          <h2>Make it yours</h2>
+          <p>Shop the suggestion, or reply with anything you&apos;d like to ask.</p>
+        </li>
+      </ol>
       <SiteFooter />
     </main>
   );

@@ -11,6 +11,9 @@ import {
   type FacetId,
 } from "@/lib/shop-filters";
 
+/** Up to two rows of products, the range reads without filters. */
+export const SORT_ONLY_UP_TO = 8;
+
 /**
  * Filter chips and sort, as the reference lays them out: a left-aligned row of
  * chips that open panels, with sort pushed to the right.
@@ -24,15 +27,21 @@ import {
  * price bands and price sort depend on the shopper's currency and that only
  * exists client-side. The router-push path remains for any caller that
  * filters on the server, but a server-filtered view cannot be currency-aware.
+ *
+ * `sortOnly` keeps just the count and sort while the range is small enough to
+ * take in at a glance; facets over four products are clutter. A filter that
+ * arrives in the URL still shows its chips, so it can be cleared.
  */
 export function FilterBar({
   facets,
   total,
   clientFiltering = false,
+  sortOnly = false,
 }: {
   facets: Facet[];
   total: number;
   clientFiltering?: boolean;
+  sortOnly?: boolean;
 }) {
   const router = useRouter();
   const { currency } = useCart();
@@ -113,10 +122,12 @@ export function FilterBar({
 
   if (!facets.length) return null;
 
+  const showFacets = !sortOnly || activeCount > 0;
+
   return (
     <div className="filter-bar" ref={barRef}>
       <div className="filter-bar__chips">
-        {facets.map((facet) => {
+        {showFacets && facets.map((facet) => {
           const chosen = selected(facet.id);
           return (
             <div
@@ -160,52 +171,54 @@ export function FilterBar({
           );
         })}
 
-        <div className="filter-chip-wrap filter-chip-wrap--all">
-          <button
-            type="button"
-            className={`filter-chip${activeCount ? " is-active" : ""}`}
-            aria-expanded={openPanel === "all"}
-            onClick={() => setOpenPanel(openPanel === "all" ? null : "all")}
-          >
-            <SlidersHorizontal size={13} /> Filters
-            {activeCount ? <em>{activeCount}</em> : null}
-          </button>
-          {openPanel === "all" ? (
-            <div
-              className="filter-panel filter-panel--all"
-              role="group"
-              aria-label="All filters"
+        {showFacets ? (
+          <div className="filter-chip-wrap filter-chip-wrap--all">
+            <button
+              type="button"
+              className={`filter-chip${activeCount ? " is-active" : ""}`}
+              aria-expanded={openPanel === "all"}
+              onClick={() => setOpenPanel(openPanel === "all" ? null : "all")}
             >
-              {facets.map((facet) => (
-                <div className="filter-panel__group" key={facet.id}>
-                  <span>{facet.label}</span>
-                  {facet.options.map((option) => (
-                    <label className="filter-option" key={option.value}>
-                      <input
-                        type="checkbox"
-                        checked={selected(facet.id).includes(option.value)}
-                        onChange={() => toggle(facet.id, option.value)}
-                      />
-                      <span className="filter-option__box" aria-hidden="true">
-                        <Check size={12} />
-                      </span>
-                      <span>{option.label}</span>
-                    </label>
-                  ))}
-                </div>
-              ))}
-              {activeCount ? (
-                <button
-                  type="button"
-                  className="filter-clear"
-                  onClick={clearAll}
-                >
-                  Clear all <X size={13} />
-                </button>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
+              <SlidersHorizontal size={13} /> Filters
+              {activeCount ? <em>{activeCount}</em> : null}
+            </button>
+            {openPanel === "all" ? (
+              <div
+                className="filter-panel filter-panel--all"
+                role="group"
+                aria-label="All filters"
+              >
+                {facets.map((facet) => (
+                  <div className="filter-panel__group" key={facet.id}>
+                    <span>{facet.label}</span>
+                    {facet.options.map((option) => (
+                      <label className="filter-option" key={option.value}>
+                        <input
+                          type="checkbox"
+                          checked={selected(facet.id).includes(option.value)}
+                          onChange={() => toggle(facet.id, option.value)}
+                        />
+                        <span className="filter-option__box" aria-hidden="true">
+                          <Check size={12} />
+                        </span>
+                        <span>{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                ))}
+                {activeCount ? (
+                  <button
+                    type="button"
+                    className="filter-clear"
+                    onClick={clearAll}
+                  >
+                    Clear all <X size={13} />
+                  </button>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
 
         {activeCount ? (
           <button type="button" className="filter-reset" onClick={clearAll}>

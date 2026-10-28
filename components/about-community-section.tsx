@@ -62,6 +62,8 @@ export function AboutCommunityGallery() {
   );
 }
 
+// About ends on the invitation alone. The gallery is the partner page's
+// opening, and repeating it here showed the same four frames twice.
 export function AboutCommunitySection() {
   return (
     <section
@@ -78,7 +80,6 @@ export function AboutCommunitySection() {
           Explore the partner program
         </Link>
       </div>
-      <AboutCommunityGallery />
     </section>
   );
 }

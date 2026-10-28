@@ -6,6 +6,7 @@ import { AboutCommunityGallery } from "@/components/about-community-section";
 import { SiteFooter } from "@/components/site-footer";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { PartnerApplicationDialog } from "@/components/partner-application-dialog";
+import { PartnerSlaOpener } from "@/components/partner-sla-dialog";
 import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import {
@@ -14,9 +15,7 @@ import {
   PARTNER_GOALS,
   PARTNER_TIERS,
   QUALITY_CONTENT,
-  SLA_BRAND_COMMITMENTS,
   SLA_ESCALATION,
-  SLA_PARTNER_COMMITMENTS,
   SLA_PURPOSE,
   SLA_REVIEW,
   SLA_TURNAROUND,
@@ -222,31 +221,9 @@ export default function PartnerNetworkPage() {
           <span className="eyebrow">Service level agreement</span>
           <h2 id="sla-heading">What we owe each other.</h2>
           <p>{SLA_PURPOSE}</p>
-        </div>
-
-        <div className="sla-columns">
-          <div className="sla-column">
-            <h3>Ahumma commits to</h3>
-            <dl>
-              {SLA_BRAND_COMMITMENTS.map((item) => (
-                <div key={item.title}>
-                  <dt>{item.title}</dt>
-                  <dd>{item.body}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <div className="sla-column">
-            <h3>You commit to</h3>
-            <dl>
-              {SLA_PARTNER_COMMITMENTS.map((item) => (
-                <div key={item.title}>
-                  <dt>{item.title}</dt>
-                  <dd>{item.body}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+          {/* The commitments in full live in the dialog; laid out here they
+              were the longest stretch of the page. */}
+          <PartnerSlaOpener />
         </div>
 
         <div className="sla-lower">

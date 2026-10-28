@@ -34,7 +34,7 @@ export default function FaqPage() {
       <SiteHeader />
 
       <header className="faq-hero">
-        <h1>AHUMMA FAQs</h1>
+        <h1>Ahumma FAQs</h1>
         <p>{FAQ_INTRO}</p>
       </header>
 
