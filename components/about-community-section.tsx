@@ -21,14 +21,13 @@ const communityMedia: CommunityMedia[] = [
     type: "image",
   },
   {
-    src: "/videos/ingredients-video.webm",
-    alt: "A closer look at Ahumma's ingredients",
-    type: "video",
-    poster: "/images/sika-texture.jpg",
+    src: "/images/in-hand-dream-whip.jpg",
+    alt: "A hand holding a jar of Dream Whip body butter against a warm sky",
+    type: "image",
   },
   {
-    src: "/images/sika-ritual.jpg",
-    alt: "A woman holding Sika body butter",
+    src: "/images/in-hand-sika.jpg",
+    alt: "A hand holding a jar of Sika body butter against a warm sky",
     type: "image",
   },
 ];

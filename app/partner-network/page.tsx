@@ -207,8 +207,8 @@ export default function PartnerNetworkPage() {
           </div>
           <div className="partner-onboarding-visual">
             <Image
-              src="/images/sika-ritual.jpg"
-              alt="A woman holding Sika body butter"
+              src="/images/in-hand-baby-bloom.jpg"
+              alt="A hand holding a jar of Baby Bloom body butter against a warm sky"
               fill
               sizes="(max-width: 900px) 92vw, 40vw"
             />

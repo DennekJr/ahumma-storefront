@@ -114,15 +114,11 @@ export default async function AboutPage() {
 
       <section className="about-audience-section" id="black-brown-skin">
         <div className="about-audience-section__media">
-          <video
-            src="/videos/ingredients-video.webm"
-            poster="/images/sika-texture.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-hidden="true"
+          <Image
+            src="/images/in-hand-sika.jpg"
+            alt="A hand holding a jar of Sika body butter against a warm sky"
+            fill
+            sizes="(max-width: 900px) 100vw, 50vw"
           />
         </div>
         <div className="about-audience-section__copy">
