@@ -1062,13 +1062,13 @@ img {
 
 .about-belief-section__copy h2 {
   margin: 0;
-  font-size: clamp(2rem, 2.8vw, 2.5rem);
+  font-size: var(--type-serif-section);
   font-weight: 400;
   line-height: var(--leading-compact);
 }
 
 .about-belief-section__copy .about-mantra {
-  font-size: var(--type-serif-subsection) !important;
+  font-size: var(--type-serif-quote) !important;
   line-height: var(--leading-compact) !important;
 }
 
@@ -1219,10 +1219,6 @@ img {
 .ritual-shelf .product-grid.top-products-grid {
   grid-auto-columns: calc((100% - 1.5rem) / 3);
   margin-top: 0;
-}
-
-.ritual-shelf .product-card__details h3 {
-  font-size: var(--type-serif-card);
 }
 
 /* Home: the ingredients film, full bleed. The film carries its own title in
@@ -1544,7 +1540,7 @@ img {
 .product-card__details h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: var(--type-serif-body);
+  font-size: var(--type-serif-card);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -1656,7 +1652,7 @@ img {
 .product-card__details h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: var(--type-serif-body);
+  font-size: var(--type-serif-card);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -2541,9 +2537,8 @@ img {
   border-radius: 1.4rem;
   background: var(--deep-forest);
   color: var(--porcelain);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  letter-spacing: var(--tracking-heading);
+  font-family: var(--sans);
+  font-size: var(--type-sans-small);
   text-decoration: none;
 }
 
@@ -2630,7 +2625,7 @@ img {
 .purchase-price strong {
   color: var(--deep-forest);
   font-family: var(--sans);
-  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+  font-size: var(--type-sans-lead);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -2648,19 +2643,17 @@ img {
   margin-bottom: 0.5rem;
   padding: 1rem 0;
   border-block: 1px solid var(--line);
-  color: rgba(24, 32, 25, 0.62);
-  font-size: var(--type-sans-lead);
-  letter-spacing: var(--tracking-label);
+  color: rgba(24, 32, 25, 0.72);
+  font-size: var(--type-sans-body);
+  letter-spacing: -0.015em;
   line-height: var(--leading-compact);
   text-transform: var(--case-none);
 }
 
 .single-variant strong {
   color: var(--deep-forest);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  font-weight: 500;
-  letter-spacing: var(--tracking-heading);
+  font-size: var(--type-sans-lead);
+  font-weight: 400;
 }
 
 .variant-fieldset {
@@ -2752,7 +2745,7 @@ img {
 
 .purchase-quantity span {
   text-align: center;
-  font-size: var(--type-sans-lead);
+  font-size: var(--type-sans-ui);
   font-variant-numeric: tabular-nums;
 }
 
@@ -2779,7 +2772,7 @@ img {
   color: var(--deep-forest);
   cursor: pointer;
   font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-size: var(--type-serif-hero-action);
   font-weight: 400;
   letter-spacing: var(--tracking-normal);
   line-height: var(--leading-tight);
@@ -2846,7 +2839,7 @@ img {
 }
 
 .product-story h2 {
-  font-size: clamp(2.5rem, 4.4vw, 5rem);
+  font-size: var(--type-serif-section);
   margin: 0;
 }
 
@@ -2935,7 +2928,7 @@ img {
 .product-details-grid h3 {
   margin: 1.25rem 0 1.5rem;
   font-family: var(--serif);
-  font-size: var(--type-serif-section);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
 }
@@ -2979,9 +2972,8 @@ img {
 .product-details-grid dd {
   margin: 0;
   color: var(--deep-forest);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  letter-spacing: var(--tracking-heading);
+  font-size: var(--type-sans-lead);
+  letter-spacing: var(--tracking-copy);
   line-height: var(--leading-body);
   text-align: right;
   text-wrap: balance;
@@ -3041,7 +3033,7 @@ img {
 .product-closing p {
   margin: 1.75rem 0 2.5rem;
   font-family: var(--serif);
-  font-size: var(--type-serif-display);
+  font-size: var(--type-serif-section);
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
 }
@@ -3288,9 +3280,8 @@ img {
   border-radius: 1.4rem;
   background: var(--sand);
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: var(--type-serif-label);
-  letter-spacing: var(--tracking-heading);
+  font-family: var(--sans);
+  font-size: var(--type-sans-small);
   text-transform: var(--case-none);
   transition:
     background 220ms ease,
@@ -3982,7 +3973,7 @@ img {
 .partner-benefit-grid h3 {
   margin: 0 0 0.75rem;
   font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
 }
@@ -4043,7 +4034,7 @@ img {
 .partner-tier__head h3 {
   margin: 1rem 0 0.5rem;
   font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -4223,7 +4214,7 @@ img {
   margin: 0.75rem 0 0;
   color: rgba(24, 32, 25, 0.72);
   font-family: var(--sans);
-  font-size: var(--type-serif-body);
+  font-size: var(--type-sans-lead);
   letter-spacing: var(--tracking-copy);
   line-height: var(--leading-body);
   text-wrap: balance;
@@ -4281,7 +4272,7 @@ img {
 .partner-steps h3 {
   margin: 0 0 0.5rem;
   font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
 }
@@ -5794,7 +5785,7 @@ img {
 .collection-card__meta h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: var(--type-serif-body);
+  font-size: var(--type-serif-card);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -5804,7 +5795,7 @@ img {
   flex: none;
   margin: 0;
   color: var(--ink);
-  font-size: var(--type-sans-lead);
+  font-size: var(--type-sans-body);
   font-weight: 500;
   line-height: var(--leading-compact);
   white-space: nowrap;
@@ -5933,14 +5924,14 @@ img {
 
   .collection-head--intro h1 {
     margin-top: 1rem;
-    font-size: clamp(2rem, 8vw, 2.5rem);
+    font-size: var(--type-serif-display);
     line-height: 1.02;
   }
 
   .collection-head.collection-head--intro > p {
     max-width: 31ch;
     margin-top: 0.75rem;
-    font-size: 1rem;
+    font-size: var(--type-sans-lead);
   }
 
   .concern-rail {
@@ -5982,13 +5973,6 @@ img {
     margin: 0.65rem 0 0.75rem;
   }
 
-  .collection-card__meta h3 {
-    font-size: 0.95rem;
-  }
-
-  .collection-card__price {
-    font-size: 0.875rem;
-  }
 
   .collection-card__purchase {
     grid-template-columns: 2rem minmax(0, 1fr);
@@ -6009,7 +5993,6 @@ img {
     min-height: 2rem;
     margin-top: 0;
     padding: 0.375rem 0.375rem;
-    font-size: 0.8125rem;
     white-space: nowrap;
   }
 
@@ -6645,7 +6628,7 @@ img {
 
 .sla-lower h3 {
   margin: 0 0 1.25rem;
-  font-size: 0.6875rem;
+  font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -6697,7 +6680,7 @@ img {
   padding-top: 1.25rem;
   border-top: 1px solid var(--line);
   color: rgba(24, 32, 25, 0.55);
-  font-size: 0.8125rem;
+  font-size: var(--type-sans-label);
   line-height: 1.55;
 }
 
@@ -7401,10 +7384,10 @@ img {
 .legal-head h1 {
   margin: 1.5rem 0 0;
   font-family: var(--serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--type-serif-display);
   font-weight: 400;
-  letter-spacing: -0.045em;
-  line-height: 0.98;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-display);
 }
 
 .legal-meta {
@@ -7418,7 +7401,7 @@ img {
 
 .legal-meta dt {
   margin-bottom: 0.3125rem;
-  font-size: 0.6875rem;
+  font-size: var(--type-sans-label);
   font-weight: 650;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -7500,7 +7483,7 @@ img {
   align-items: baseline;
   margin: 0 0 1.125rem;
   font-family: var(--serif);
-  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -8267,8 +8250,9 @@ img {
 
 .not-found-message > span {
   margin-bottom: 1rem;
-  font-size: var(--type-sans-label);
-  letter-spacing: var(--tracking-wide);
+  font-size: var(--type-sans-micro);
+  font-weight: 650;
+  letter-spacing: var(--tracking-eyebrow);
 }
 
 .not-found-message p {
@@ -8284,7 +8268,9 @@ img {
   border-radius: 999px;
   background: var(--deep-forest);
   color: var(--porcelain);
-  font-size: var(--type-sans-small);
+  font-family: var(--serif);
+  font-size: var(--type-serif-hero-action);
+  letter-spacing: var(--tracking-heading);
   transition: background-color 180ms ease;
 }
 
@@ -8732,10 +8718,7 @@ img {
     padding: 5.9375rem 1.375rem;
   }
   .product-story h2 {
-    font-size: clamp(2.5rem, 4.4vw, 5rem);
-  }
-  .product-story__body > p {
-    font-size: var(--type-serif-label);
+    font-size: var(--type-serif-section);
   }
   .product-details-grid > * {
     min-height: 0;
@@ -8752,7 +8735,7 @@ img {
     padding: 6.5625rem 1.375rem;
   }
   .product-closing p {
-    font-size: var(--type-serif-display);
+    font-size: var(--type-serif-section);
   }
   .cart-drawer__header {
     padding: 1.4375rem 1.25rem;
@@ -8880,7 +8863,7 @@ img {
   padding-top: 1.125rem;
   border-top: 1px solid var(--line);
   font-family: var(--serif);
-  font-size: var(--type-serif-label);
+  font-size: var(--type-serif-subsection);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
 }
@@ -9422,7 +9405,7 @@ img {
 .about-community__intro h2 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-size: var(--type-serif-section);
   font-weight: 400;
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-compact);
@@ -9444,7 +9427,7 @@ img {
   border: 1px solid var(--deep-forest);
   border-radius: 999px;
   color: var(--deep-forest);
-  font-size: var(--type-sans-body);
+  font-size: var(--type-sans-small);
   text-decoration: none;
   transition:
     background 180ms ease,
@@ -9993,12 +9976,12 @@ img {
   }
 
   .home-hero--editorial .hero-copy h1 {
-    font-size: clamp(2.25rem, 8.5vw, 2.75rem);
+    font-size: var(--type-serif-display);
   }
 
   .home-hero--editorial .hero-lede {
     max-width: 25rem;
-    font-size: 1rem;
+    font-size: var(--type-sans-lead);
     line-height: var(--leading-body);
   }
 
@@ -10165,7 +10148,7 @@ img {
 .consultation-hero > p {
   max-width: 38rem;
   margin: 0;
-  font-size: var(--type-sans-ui);
+  font-size: var(--type-serif-body);
   line-height: var(--leading-body);
 }
 
@@ -10352,6 +10335,9 @@ img {
   .home-hero.home-hero--belief .hero-copy {
     position: relative;
     z-index: 2;
+    /* The editorial hero's top offset would push this copy down past the
+       band's bottom edge, clipping the button. */
+    top: auto;
     bottom: auto;
     left: auto;
     width: auto;
@@ -10365,7 +10351,7 @@ img {
   .home-hero--belief .hero-copy h1 {
     max-width: 18ch;
     margin: 0 0 1rem;
-    font-size: clamp(2.25rem, 9vw, 3rem);
+    font-size: var(--type-serif-display);
     line-height: 1.05;
   }
 
@@ -10373,7 +10359,7 @@ img {
     max-width: 34ch;
     margin: 0;
     font-family: var(--sans);
-    font-size: 1rem;
+    font-size: var(--type-sans-lead);
     line-height: 1.5;
   }
 
@@ -10384,6 +10370,9 @@ img {
 
   .home-hero.home-hero--belief .hero-link {
     margin: 0;
+    /* A deep-forest pill on the band's dark foot needs an edge to read as a
+       button. */
+    border-color: rgba(250, 248, 243, 0.55);
   }
 }
 
@@ -10405,4 +10394,13 @@ img {
 .about-community__image {
   overflow: hidden;
   border-radius: var(--radius-media);
+}
+
+/* Phones: the intro under every page title is one size, as on desktop. */
+@media (max-width: 780px) {
+  .about-page .about-intro p:last-child,
+  .consultation-hero > p,
+  .not-found-message p {
+    font-size: var(--type-sans-lead);
+  }
 }
