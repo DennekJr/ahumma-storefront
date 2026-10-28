@@ -108,6 +108,8 @@ const EDITORIAL: {
   match: string[];
   portrait: string;
   wide: string;
+  /** A 4:5 shot of the product in hand, closing the product page's strip. */
+  inHand: string;
   alt: string;
   /** Where to anchor the wide photo when its frame crops it. */
   widePosition?: string;
@@ -116,18 +118,21 @@ const EDITORIAL: {
     match: ["sika", "sike"],
     portrait: "/images/label-sika.jpg",
     wide: "/images/sika-texture.jpg",
+    inHand: "/images/in-hand-sika.jpg",
     alt: "Sika body butter on a stone plinth",
   },
   {
     match: ["dream"],
     portrait: "/images/label-dream-whip.jpg",
     wide: "/images/dream-whip.jpg",
+    inHand: "/images/in-hand-dream-whip.jpg",
     alt: "Dream Whip body butter on a stone plinth",
   },
   {
     match: ["ara"],
     portrait: "/images/ara-soap.jpg",
     wide: "/images/ara-ritual.jpg",
+    inHand: "/images/cleansing.jpg",
     alt: "Ara African black soap on a stone counter",
     // The bottle is on the left of this very wide shot.
     widePosition: "left center",

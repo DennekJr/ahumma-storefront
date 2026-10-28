@@ -35,7 +35,7 @@ export function EditorialRow({
           src={art.portrait}
           alt={art.alt}
           fill
-          sizes="(max-width: 700px) 100vw, 50vw"
+          sizes="(max-width: 700px) 50vw, 28vw"
         />
       </Link>
       <Link
@@ -46,10 +46,21 @@ export function EditorialRow({
           src={art.wide}
           alt=""
           fill
-          sizes="(max-width: 700px) 100vw, 50vw"
+          sizes="(max-width: 700px) 100vw, 44vw"
           style={
             art.widePosition ? { objectPosition: art.widePosition } : undefined
           }
+        />
+      </Link>
+      <Link
+        className="editorial-row__figure editorial-row__figure--in-hand"
+        href={`/products/${product.slug}`}
+      >
+        <Image
+          src={art.inHand}
+          alt=""
+          fill
+          sizes="(max-width: 700px) 50vw, 28vw"
         />
       </Link>
     </section>
