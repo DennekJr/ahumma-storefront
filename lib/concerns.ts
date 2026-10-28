@@ -112,15 +112,15 @@ const EDITORIAL: {
 }[] = [
   {
     match: ["sika", "sike"],
-    portrait: "/images/sika-ritual.jpg",
+    portrait: "/images/label-sika.jpg",
     wide: "/images/sika-texture.jpg",
-    alt: "Sika body butter held by a model",
+    alt: "Sika body butter on a stone plinth",
   },
   {
     match: ["dream"],
-    portrait: "/images/dream-texture.jpg",
+    portrait: "/images/label-dream-whip.jpg",
     wide: "/images/dream-whip.jpg",
-    alt: "Dream Whip body butter held by a model",
+    alt: "Dream Whip body butter on a stone plinth",
   },
   {
     match: ["ara"],
