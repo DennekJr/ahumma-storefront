@@ -652,20 +652,28 @@ img {
   line-height: var(--leading-tight);
 }
 
+/* The list fills the drawer down to the currency switch: each row grows to
+   share the height, up to a cap so tall screens don't spread it thin. */
 .menu-drawer__nav {
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
   padding: 0.8rem 2.4rem 2.4rem;
 }
 
-/* Pull-quote size, not section size: at section size the two longer
-   names wrapped in the drawer and the list outweighed every page. */
+/* Sized to the drawer, not a page heading: "Skin consultation" is the
+   longest name and must fit on one line with room for the hover nudge.
+   2.5rem does in the 28rem drawer; 10.5vw holds it on narrow phones. */
 .menu-drawer__nav a {
+  display: flex;
+  flex: 1 0 auto;
+  max-height: 7rem;
+  align-items: center;
   padding: 0.875rem 0;
   border-bottom: 1px solid var(--line);
   color: var(--ink);
   font-family: var(--serif);
-  font-size: var(--type-serif-quote);
+  font-size: min(2.5rem, 10.5vw);
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-display);
   opacity: 0.8;
