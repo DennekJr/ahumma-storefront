@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Bookmark, Pause, Play, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
+import { inHandFor } from "@/lib/concerns";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 
 import {
@@ -41,6 +42,7 @@ export function CollectionCard({
   const [saved, setSaved] = useState(false);
   const displayPrice = resolveSummaryPrice(product, currency);
   const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(product.coverUrl ?? "");
+  const hoverImage = inHandFor(product);
   const variants = product.variantCount ?? 0;
 
   useEffect(() => {
@@ -125,6 +127,15 @@ export function CollectionCard({
             priority={priority}
           />
         )}
+        {product.coverUrl && hoverImage ? (
+          <Image
+            className="card-hover-image"
+            src={hoverImage}
+            alt=""
+            fill
+            sizes="(max-width: 700px) 50vw, 33vw"
+          />
+        ) : null}
         {product.soldOut ? (
           <span className="collection-card__badge">Sold out</span>
         ) : product.preorderable ? (

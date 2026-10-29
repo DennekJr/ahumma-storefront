@@ -147,6 +147,18 @@ export function editorialFor(product: ProductSummary | undefined) {
   );
 }
 
+/**
+ * The product held in a hand: the last photo in a product page's strip, and
+ * what a product card shows on hover. Baby Bloom has no strip but has the
+ * shot, so it gets the hover too.
+ */
+export function inHandFor(product: ProductSummary | undefined) {
+  if (!product) return null;
+  if (product.name.toLowerCase().includes("baby bloom"))
+    return "/images/in-hand-baby-bloom.jpg";
+  return editorialFor(product)?.inHand ?? null;
+}
+
 /** The first product with editorial art, for the collection grid's break row. */
 export function firstEditorialProduct(products: ProductSummary[]) {
   return products.find((product) => editorialFor(product)) ?? undefined;

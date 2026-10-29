@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
+import { inHandFor } from "@/lib/concerns";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import type { ProductSummary } from "@/lib/store-types";
 
@@ -32,6 +33,7 @@ export function ProductCard({
       : "Available now";
   const displayPrice = resolveSummaryPrice(product, currency);
   const imageSrc = displayImage || product.coverUrl;
+  const hoverImage = inHandFor(product);
   const alternatePrices = Object.entries(product.pricesFrom ?? {}).map(
     ([priceCurrency, priceMinor]) => ({
       currency: priceCurrency,
@@ -77,6 +79,15 @@ export function ProductCard({
         ) : (
           <span className="product-image-placeholder">Ahumma</span>
         )}
+        {imageSrc && hoverImage ? (
+          <Image
+            className="card-hover-image"
+            src={hoverImage}
+            alt=""
+            fill
+            sizes="(max-width: 720px) 92vw, 33vw"
+          />
+        ) : null}
         {!hideStatus && (product.preorderable || product.soldOut) ? (
           <span className="product-card__status">{status}</span>
         ) : null}
