@@ -132,7 +132,7 @@ const EDITORIAL: {
     match: ["ara"],
     portrait: "/images/ara-soap.jpg",
     wide: "/images/ara-ritual.jpg",
-    inHand: "/images/cleansing.jpg",
+    inHand: "/images/in-hand-ara.jpg",
     alt: "Ara African black soap on a stone counter",
     // The bottle is on the left of this very wide shot.
     widePosition: "left center",
