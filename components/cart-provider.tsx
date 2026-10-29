@@ -25,6 +25,7 @@ import {
   resolvePrice,
   type StoreCurrency,
 } from "@/lib/format";
+import { ProductName } from "@/components/product-name";
 import { demoProductSummaries } from "@/lib/demo-products";
 import type {
   DeliveryZone,
@@ -497,7 +498,9 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                         </Link>
                         <div className="empty-cart-recommendation__details">
                           <Link href={`/products/${product.slug}`}>
-                            <h5>{product.name}</h5>
+                            <h5>
+                              <ProductName name={product.name} />
+                            </h5>
                           </Link>
                           <span>
                             {formatMoney(
@@ -547,7 +550,9 @@ function CartDrawer({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                     <Image src={item.imageUrl} alt="" fill sizes="96px" />
                   </div>
                   <div className="cart-line__content">
-                    <h3>{item.name}</h3>
+                    <h3>
+                      <ProductName name={item.name} />
+                    </h3>
 
                     <span>
                       {formatMoney(

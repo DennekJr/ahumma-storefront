@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Check, Leaf } from "lucide-react";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CollectionCard } from "@/components/collection-card";
 import { EditorialRow } from "@/components/editorial-row";
+import { ProductName } from "@/components/product-name";
 import { ProductDescriptionBlocks } from "@/components/product-description-blocks";
 
 import { ProductPurchase } from "@/components/product-purchase";
@@ -121,7 +122,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
 
         <aside className="product-summary">
-          <h1>{product.name}</h1>
+          <h1>
+            <ProductName name={product.name} />
+          </h1>
           {descriptionParagraphs.length ? (
             <div className="product-lede">
               {descriptionParagraphs.map((paragraph) => (

@@ -10609,3 +10609,145 @@ h2 {
     margin-top: 0.75rem;
   }
 }
+
+/* The pack size in a product name: smaller and quieter than the name, never
+   below the label size. */
+.product-name__size {
+  font-size: max(var(--type-sans-label), 0.55em);
+  letter-spacing: 0;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+/* Phones: the reviews. The quote at body size rather than pull-quote size
+   (it ran to eight lines), the title on its own line above the arrows, and
+   a little more padding inside each card. */
+@media (max-width: 780px) {
+  .testimonial-carousel__controls {
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-carousel__intro {
+    flex: 1 0 100%;
+  }
+
+  .testimonial-carousel__controls button {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .footer-testimonial {
+    padding: 1.25rem;
+  }
+
+  .footer-testimonial__quote-mark {
+    width: 1.75rem;
+  }
+
+  .testimonial-carousel .footer-testimonial p {
+    max-width: none;
+    font-size: var(--type-serif-body);
+    line-height: var(--leading-normal);
+  }
+}
+
+/* Phones: one type scale, stepped down. Each role keeps one size on every
+   page, and the larger roles shrink to suit a phone: intros 16px, serif copy
+   18px, pull quotes 22px, subheads 20px, primary buttons 17px. The UI size
+   stays at 16px because iOS zooms into any field set smaller. */
+@media (max-width: 600px) {
+  :root {
+    --type-sans-lead: 1rem;
+    --type-serif-label: 1.125rem;
+    --type-serif-body: 1.125rem;
+    --type-serif-quote: 1.375rem;
+    --type-serif-subsection: 1.25rem;
+    --type-serif-hero-action: 1.0625rem;
+  }
+
+  .footer-utility-links a,
+  .footer-legal {
+    font-size: var(--type-sans-small);
+  }
+
+  .partner-tier__commission {
+    font-size: var(--type-serif-display);
+  }
+}
+
+/* Phones: product cards are size containers and the name follows the
+   card's width, so a name and its pack size always sit on one line. The
+   longest name in the range ("Sika Body Butter (250g)") is about 9.8 times
+   its font size wide with the pack size at 0.7em, hence 9.8cqi; the
+   card-title size caps it on wider cards. */
+@media (max-width: 600px) {
+  .collection-card,
+  .product-card {
+    container-type: inline-size;
+  }
+
+  .product-grid.top-products-grid .product-card__details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+
+  .collection-card__meta h3,
+  .product-card__details h3 {
+    font-size: min(var(--type-serif-card), 9.8cqi);
+    white-space: nowrap;
+  }
+
+  .collection-card__meta .product-name__size,
+  .product-card__details .product-name__size {
+    font-size: 0.7em;
+  }
+}
+
+/* Phones: the ingredients button sizes to its words but never past the
+   column; on the narrowest screens its label wraps instead of running off
+   the edge. */
+@media (max-width: 600px) {
+  .ingredients-film__cta {
+    max-width: 100%;
+    padding-inline: 1.25rem;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* Phones: the hero is one screen (never under 43rem), so the model rises
+   into the copy instead of leaving a band of sky under the button. The top
+   of the photo fades out behind the text through a mask, at full size and
+   sharpness. 43rem keeps her hand, on the left, below the button. */
+@media (max-width: 600px) {
+  .home-hero--editorial {
+    min-height: max(43rem, calc(100svh - var(--announcement-height)));
+  }
+
+  .home-hero--editorial .hero-layer {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 28%, #000 54%);
+    mask-image: linear-gradient(to bottom, transparent 28%, #000 54%);
+  }
+
+  .ingredients-film__cta {
+    font-size: min(
+      var(--type-serif-hero-action),
+      calc((100vw - 6rem) / 13.8)
+    );
+    white-space: nowrap;
+  }
+
+  .purchase-actions {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .add-to-bag {
+    gap: 0.5rem;
+    padding: 0 1rem;
+    white-space: nowrap;
+  }
+}

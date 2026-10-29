@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Bookmark, Pause, Play, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
+import { ProductName } from "@/components/product-name";
 import { inHandFor } from "@/lib/concerns";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 
@@ -160,7 +161,9 @@ export function CollectionCard({
 
       <div className="collection-card__meta">
         <Link href={`/products/${product.slug}`}>
-          <h3>{product.name}</h3>
+          <h3>
+            <ProductName name={product.name} />
+          </h3>
         </Link>
         <p className="collection-card__price">
           {formatMoney(displayPrice.priceMinor, displayPrice.currency)}

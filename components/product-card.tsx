@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
+import { ProductName } from "@/components/product-name";
 import { inHandFor } from "@/lib/concerns";
 import { formatMoney, resolveSummaryPrice } from "@/lib/format";
 import type { ProductSummary } from "@/lib/store-types";
@@ -95,7 +96,9 @@ export function ProductCard({
       <div className="product-card__details">
         <div>
           <Link href={`/products/${product.slug}`}>
-            <h3>{displayName}</h3>
+            <h3>
+              <ProductName name={displayName} />
+            </h3>
           </Link>
         </div>
         {!hidePrice && (
