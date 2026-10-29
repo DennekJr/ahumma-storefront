@@ -4,6 +4,8 @@ import { Faculty_Glyphic } from "next/font/google";
 import Script from "next/script";
 import { CartProvider } from "@/components/cart-provider";
 import { CookieNotice } from "@/components/cookie-notice";
+import { FullStop } from "@/components/full-stop";
+import { PageMotion } from "@/components/page-motion";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import {
   GoogleTagManager,
@@ -86,6 +88,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         >
           {children}
         </CartProvider>
+        <FullStop />
+        <PageMotion />
         <CookieNotice />
         <PreviewNotice visible={!hasFrontdeskReads} />
         <GoogleTagManager />
