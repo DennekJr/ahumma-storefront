@@ -64,14 +64,14 @@
      > subsection (h3 that heads copy) > quote > body > card title. Section
      headings used to sit at 2.25rem beside 1.75–2.25rem quotes and subheads,
      so the page had no clear top of each section. */
-  --type-serif-card: 1.0625rem;
+  --type-serif-card: 0.875rem;
   --type-serif-label: 1.25rem;
   --type-serif-body: 1.3125rem;
   --type-serif-quote: 1.75rem;
   --type-serif-subsection: 1.5rem;
   --type-serif-section: clamp(1.875rem, 3.9vw, 3.5rem);
   --type-serif-display: clamp(2.5rem, 5.4vw, 6.2rem);
-  --type-serif-hero-action: 1.15rem;
+  --type-serif-hero-action: 0.9375rem;
 
   --tracking-normal: normal;
   --tracking-heading: -0.025em;
@@ -10655,7 +10655,7 @@ h2 {
 
 /* Phones: one type scale, stepped down. Each role keeps one size on every
    page, and the larger roles shrink to suit a phone: intros 16px, serif copy
-   18px, pull quotes 22px, subheads 20px, primary buttons 17px. The UI size
+   18px, pull quotes 22px, subheads 20px. The UI size
    stays at 16px because iOS zooms into any field set smaller. */
 @media (max-width: 600px) {
   :root {
@@ -10664,7 +10664,6 @@ h2 {
     --type-serif-body: 1.125rem;
     --type-serif-quote: 1.375rem;
     --type-serif-subsection: 1.25rem;
-    --type-serif-hero-action: 1.0625rem;
   }
 
   .footer-utility-links a,
@@ -10750,4 +10749,33 @@ h2 {
     padding: 0 1rem;
     white-space: nowrap;
   }
+}
+
+/* Interface text sits a step below reading text: header and drawer links,
+   the announcement bar, footer links and legal lines, card prices, small
+   pills and the newsletter button at 12-13px; card names at 14px and
+   primary buttons at 15px (the card-name and button tokens above). At
+   reading size (14-18px) they made every page feel large next to main. */
+:root {
+  --type-sans-caption: 0.8125rem;
+}
+
+.header-menu,
+.header-nav,
+.header-partner-link,
+.header-cart__label,
+.menu-drawer__header > span,
+.menu-drawer__close,
+.footer-utility-links a,
+.footer-legal,
+.footer-newsletter .circle-form button,
+.collection-card__price,
+.product-card__details strong,
+.product-card__action {
+  font-size: var(--type-sans-caption);
+}
+
+.announcement-bar,
+.announcement-bar span {
+  font-size: var(--type-sans-label);
 }
