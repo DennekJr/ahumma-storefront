@@ -10779,3 +10779,15 @@ h2 {
 .announcement-bar span {
   font-size: var(--type-sans-label);
 }
+
+/* About: the long paragraphs are body copy in the sans, a clear step below
+   the serif lines they sit with. In the serif at 21px they read almost the
+   same as the 28px mantra ("You are enough...") and the headings. */
+.about-belief-section__copy p:not(.about-mantra),
+.about-audience-section__copy p,
+.about-community__intro > p {
+  font-family: var(--sans);
+  font-size: var(--type-sans-lead);
+  letter-spacing: var(--tracking-copy);
+  line-height: var(--leading-body);
+}
